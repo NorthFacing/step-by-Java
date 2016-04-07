@@ -1,0 +1,14 @@
+/.idea
+target/
+*/temp
+.settings/
+.classpath
+.project
+*.iml
+
+
+*/target/
+*/.settings/
+*/.classpath
+*/.project
+*/*.iml
