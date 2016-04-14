@@ -1,5 +1,6 @@
 package com.bob.demo02.client;
 
+import com.bob.demo02.Utils.DateUtil;
 import com.bob.demo02.domain.msg.BaseMsg;
 import com.bob.demo02.domain.msg.LoginMsg;
 import com.bob.demo02.domain.msg.MsgType;
@@ -11,6 +12,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.ReferenceCountUtil;
+
+import java.util.Date;
 
 /**
  * Created by Bob on 2016/4/13.
@@ -25,7 +28,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<BaseMsg> {
         case WRITER_IDLE:
           PingMsg pingMsg = new PingMsg();
           ctx.writeAndFlush(pingMsg);
-          System.out.println("send ping to server----------");
+          System.out.println(DateUtil.getStrDate() + " send ping to server");
           break;
         default:
           break;
@@ -43,23 +46,25 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<BaseMsg> {
         loginMsg.setPassword("yao");
         loginMsg.setUserName("robin");
         channelHandlerContext.writeAndFlush(loginMsg);
+        System.out.println("receive login from server");
       }
       break;
       case PING: {
-        System.out.println("receive ping from server----------");
+        System.out.println("receive ping from server");
       }
       break;
       case ASK: {
-        ReplyClientBody replyClientBody = new ReplyClientBody("client info **** !!!");
+        ReplyClientBody replyClientBody = new ReplyClientBody("client replyMsg !!!");
         ReplyMsg replyMsg = new ReplyMsg();
         replyMsg.setBody(replyClientBody);
         channelHandlerContext.writeAndFlush(replyMsg);
+        System.out.println("receive ask from server");
       }
       break;
       case REPLY: {
         ReplyMsg replyMsg = (ReplyMsg) baseMsg;
         ReplyServerBody replyServerBody = (ReplyServerBody) replyMsg.getBody();
-        System.out.println("receive client msg: " + replyServerBody.getServerInfo());
+        System.out.println("receive server msg: " + replyServerBody.getServerInfo());
       }
       default:
         break;

@@ -45,16 +45,18 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<BaseMsg> {
         PingMsg pingMsg = (PingMsg) baseMsg;
         PingMsg replyPing = new PingMsg();
         NettyChannelMap.get(pingMsg.getClientId()).writeAndFlush(replyPing);
+        System.out.println("receive ping from server, and rePing to client");
       }
       break;
       case ASK: {
         //收到客户端的请求
         AskMsg askMsg = (AskMsg) baseMsg;
         if ("authToken".equals(askMsg.getParams().getAuth())) {
-          ReplyServerBody replyBody = new ReplyServerBody("server info $$$$ !!!");
+          ReplyServerBody replyBody = new ReplyServerBody("server replyMsg !!!");
           ReplyMsg replyMsg = new ReplyMsg();
           replyMsg.setBody(replyBody);
           NettyChannelMap.get(askMsg.getClientId()).writeAndFlush(replyMsg);
+          System.out.println("receive ask from client, and reply");
         }
       }
       break;

@@ -82,18 +82,14 @@ public class AsyncTimeClientHandler implements
                           readBuffer,
                           new CompletionHandler<Integer, ByteBuffer>() {
                             @Override
-                            public void completed(Integer result,
-                                                  ByteBuffer buffer) {
+                            public void completed(Integer result, ByteBuffer buffer) {
                               buffer.flip();
-                              byte[] bytes = new byte[buffer
-                                      .remaining()];
+                              byte[] bytes = new byte[buffer.remaining()];
                               buffer.get(bytes);
                               String body;
                               try {
-                                body = new String(bytes,
-                                        "UTF-8");
-                                System.out.println("Now is : "
-                                        + body);
+                                body = new String(bytes, "UTF-8");
+                                System.out.println("Now is : " + body);
                                 latch.countDown();
                               } catch (UnsupportedEncodingException e) {
                                 e.printStackTrace();
@@ -101,8 +97,7 @@ public class AsyncTimeClientHandler implements
                             }
 
                             @Override
-                            public void failed(Throwable exc,
-                                               ByteBuffer attachment) {
+                            public void failed(Throwable exc, ByteBuffer attachment) {
                               try {
                                 client.close();
                                 latch.countDown();
@@ -123,7 +118,8 @@ public class AsyncTimeClientHandler implements
                   // ingnore on close
                 }
               }
-            });
+            }
+    );
   }
 
   @Override

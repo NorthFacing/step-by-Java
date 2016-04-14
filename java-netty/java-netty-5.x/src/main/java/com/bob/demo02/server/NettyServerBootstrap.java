@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Bob on 2016/4/13.
  */
 public class NettyServerBootstrap {
+
   private int port;
   private SocketChannel socketChannel;
 
@@ -56,13 +57,13 @@ public class NettyServerBootstrap {
 
   public static void main(String[] args) throws InterruptedException {
     NettyServerBootstrap bootstrap = new NettyServerBootstrap(9999);
-    while (true) {
-      SocketChannel channel = (SocketChannel) NettyChannelMap.get("001");
-      if (channel != null) {
-        AskMsg askMsg = new AskMsg();
-        channel.writeAndFlush(askMsg);
-      }
-      TimeUnit.SECONDS.sleep(5);
-    }
+//    while (true) {
+//      SocketChannel channel = (SocketChannel) NettyChannelMap.get("001");
+//      if (channel != null) {
+//        AskMsg askMsg = new AskMsg();
+//        channel.writeAndFlush(askMsg);
+//      }
+//      TimeUnit.SECONDS.sleep(5);
+//    }
   }
 }
