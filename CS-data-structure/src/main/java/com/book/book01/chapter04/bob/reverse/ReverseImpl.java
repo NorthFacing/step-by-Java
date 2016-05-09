@@ -10,11 +10,14 @@ public class ReverseImpl {
   public String doReverse(String input) {
     StackImpl stack = new StackImpl(input.length());
     for (int i = 0; i < input.length(); i++) {
-      stack.push(input.charAt(i));
+      char c = input.charAt(i);
+      stack.push(c);
     }
+
     String output = "";
     while (!stack.isEmpty()) {
-      output += (char)stack.pop();
+      char c = (char) stack.pop();
+      output += c;
     }
     return output;
   }
