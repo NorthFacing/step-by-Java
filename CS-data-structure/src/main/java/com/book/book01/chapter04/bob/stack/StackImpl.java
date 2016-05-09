@@ -6,27 +6,27 @@ package com.book.book01.chapter04.bob.stack;
 public class StackImpl implements StackInterface {
 
   private int maxSize;
-  private long[] array;
+  private Object[] array;
   private int top;
 
-  StackImpl(int maxSize) {
+  public StackImpl(int maxSize) {
     this.maxSize = maxSize;
-    array = new long[maxSize];
+    array = new Object[maxSize];
     top = -1;
   }
 
   @Override
-  public void push(long j) {
+  public void push(Object j) {
     array[++top] = j;
   }
 
   @Override
-  public long peek() {
+  public Object peek() {
     return array[top];
   }
 
   @Override
-  public long pop() {
+  public Object pop() {
     return array[top--];
   }
 

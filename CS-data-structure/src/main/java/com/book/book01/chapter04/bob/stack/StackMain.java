@@ -16,11 +16,11 @@ public class StackMain {
 
 
     System.out.println("Test peek fun:");
-    long peek = stack.peek();
+    long peek = (long) stack.peek();
     System.out.println(peek);
 
     System.out.println("Test pop fun:");
-    while (!stack.isEmpty()){
+    while (!stack.isEmpty()) {
       System.out.println(stack.pop());
     }
 

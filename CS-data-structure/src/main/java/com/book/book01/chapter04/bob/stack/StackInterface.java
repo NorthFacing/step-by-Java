@@ -5,11 +5,11 @@ package com.book.book01.chapter04.bob.stack;
  */
 public interface StackInterface {
 
-  void push(long j);
+  void push(Object j);
 
-  long peek();
+  Object peek();
 
-  long pop();
+  Object pop();
 
   boolean isEmpty();
 
