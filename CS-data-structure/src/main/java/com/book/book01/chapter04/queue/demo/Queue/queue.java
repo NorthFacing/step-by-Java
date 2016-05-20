@@ -1,4 +1,4 @@
-package com.book.book01.chapter04.Queue;
+package com.book.book01.chapter04.queue.demo.Queue;
 
 // Queue.java
 // demonstrates queue
