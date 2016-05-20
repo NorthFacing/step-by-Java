@@ -1,4 +1,4 @@
-package com.book.book01.chapter04.Stack;
+package com.book.book01.chapter04.stack.demo.Stack;
 
 // stack.java
 // demonstrates stacks

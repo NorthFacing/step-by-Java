@@ -1,6 +1,6 @@
-package com.book.book01.chapter04.bob.reverse;
+package com.book.book01.chapter04.stack.bob.reverse;
 
-import com.book.book01.chapter04.bob.stack.StackImpl;
+import com.book.book01.chapter04.stack.bob.stack.StackImpl;
 
 /**
  * Created by Bob on 2016/5/9.

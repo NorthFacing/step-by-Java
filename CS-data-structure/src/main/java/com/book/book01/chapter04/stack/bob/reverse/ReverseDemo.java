@@ -1,4 +1,4 @@
-package com.book.book01.chapter04.bob.reverse;
+package com.book.book01.chapter04.stack.bob.reverse;
 
 /**
  * Created by Bob on 2016/5/9.

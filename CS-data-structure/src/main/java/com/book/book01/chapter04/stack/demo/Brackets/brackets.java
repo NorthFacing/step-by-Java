@@ -1,4 +1,4 @@
-package com.book.book01.chapter04.Brackets;// brackets.java
+package com.book.book01.chapter04.stack.demo.Brackets;// brackets.java
 // stacks used to check matching brackets
 // to run this program: C>java bracketsApp
 

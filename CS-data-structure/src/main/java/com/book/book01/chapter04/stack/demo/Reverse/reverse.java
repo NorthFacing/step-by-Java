@@ -1,4 +1,4 @@
-package com.book.book01.chapter04.Reverse;
+package com.book.book01.chapter04.stack.demo.Reverse;
 // reverse.java
 // stack used to reverse a string
 // to run this program: C>java ReverseApp

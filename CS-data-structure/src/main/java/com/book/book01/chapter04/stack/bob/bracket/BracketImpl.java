@@ -1,6 +1,6 @@
-package com.book.book01.chapter04.bob.bracket;
+package com.book.book01.chapter04.stack.bob.bracket;
 
-import com.book.book01.chapter04.bob.stack.StackImpl;
+import com.book.book01.chapter04.stack.bob.stack.StackImpl;
 
 /**
  * Created by Bob on 2016/5/9.
