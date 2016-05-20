@@ -3,7 +3,7 @@ package com.book.book01.chapter04.bob.stack;
 /**
  * Created by Bob on 2016/5/9.
  */
-public class StackMain {
+public class StackDemo {
   public static void main(String[] args) {
     StackImpl stack = new StackImpl(10);
     stack.push(10);
