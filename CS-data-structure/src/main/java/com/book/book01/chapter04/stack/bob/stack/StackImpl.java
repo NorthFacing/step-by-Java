@@ -3,7 +3,7 @@ package com.book.book01.chapter04.stack.bob.stack;
 /**
  * Created by Bob on 2016/5/9.
  */
-public class StackImpl implements StackInterface {
+public class StackImpl implements Stack {
 
   private int maxSize;
   private Object[] array;

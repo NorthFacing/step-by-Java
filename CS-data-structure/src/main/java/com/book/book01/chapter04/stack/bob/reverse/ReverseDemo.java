@@ -5,7 +5,7 @@ package com.book.book01.chapter04.stack.bob.reverse;
  */
 public class ReverseDemo {
   public static void main(String[] args) {
-    ReverseImpl reverse = new ReverseImpl();
+    ReverseService reverse = new ReverseService();
     String result = reverse.doReverse("reverseDemo");
     System.out.println(result);
   }

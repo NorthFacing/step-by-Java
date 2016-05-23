@@ -1,4 +1,4 @@
-package com.book.book01.chapter04.Postfix;
+package com.book.book01.chapter04.demo.Postfix;
 
 // postfix.java
 // parses postfix arithmetic expressions

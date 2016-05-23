@@ -3,7 +3,7 @@ package com.book.book01.chapter04.queue.bob.queue;
 /**
  * Created by Bob on 2016/5/20.
  */
-public interface QueueInterface {
+public interface Queue {
 
   void insert(Object j); // 增加数据到队尾
 

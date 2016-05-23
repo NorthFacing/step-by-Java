@@ -5,7 +5,7 @@ import com.book.book01.chapter04.stack.bob.stack.StackImpl;
 /**
  * Created by Bob on 2016/5/9.
  */
-public class BracketImpl {
+public class BracketService {
 
   public void bracketCheck(String input) {
 

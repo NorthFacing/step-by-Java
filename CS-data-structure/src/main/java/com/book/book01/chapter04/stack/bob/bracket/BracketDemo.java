@@ -6,7 +6,7 @@ package com.book.book01.chapter04.stack.bob.bracket;
 public class BracketDemo {
   public static void main(String[] args) {
     String input = "asdf{asdf}asdf{sdf[(asdf0)](}asdf";
-    BracketImpl bracket = new BracketImpl();
+    BracketService bracket = new BracketService();
     bracket.bracketCheck(input);
   }
 }

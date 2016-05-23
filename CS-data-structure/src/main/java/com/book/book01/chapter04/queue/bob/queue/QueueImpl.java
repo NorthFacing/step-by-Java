@@ -3,7 +3,7 @@ package com.book.book01.chapter04.queue.bob.queue;
 /**
  * Created by Bob on 2016/5/20.
  */
-public class QueueImpl implements QueueInterface {
+public class QueueImpl implements Queue {
 
   private Object[] queue;
   private int maxSize;
