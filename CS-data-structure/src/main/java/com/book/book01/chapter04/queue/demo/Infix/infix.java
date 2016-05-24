@@ -1,4 +1,4 @@
-package com.book.book01.chapter04.demo.Infix;
+package com.book.book01.chapter04.queue.demo.Infix;
 
 // infix.java
 // converts infix arithmetic expressions to postfix
