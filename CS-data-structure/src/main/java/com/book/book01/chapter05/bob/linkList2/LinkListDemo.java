@@ -7,7 +7,7 @@ import com.book.book01.chapter05.bob.linkList.Link;
  */
 public class LinkListDemo {
   public static void main(String[] args) {
-    LinkList theList = new LinkList();
+    LinkList2 theList = new LinkList2Impl();
 
     theList.insertFirst(222, 2.99);
     theList.insertFirst(444, 4.99);
