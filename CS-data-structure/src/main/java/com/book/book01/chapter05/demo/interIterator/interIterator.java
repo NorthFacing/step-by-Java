@@ -1,3 +1,5 @@
+package com.book.book01.chapter05.demo.interIterator;
+
 // interIterator.java
 // demonstrates iterators on a linked listListIterator
 // to run this program: C>java InterIterApp
