@@ -1,4 +1,4 @@
-package com.book.book01.chapter02.ClassData;
+package com.book.book01.chapter02.demo.ClassData;
 
 // classDataArray.java
 // data items as class objects

@@ -1,4 +1,4 @@
-package com.book.book01.chapter02.OrderedArray;
+package com.book.book01.chapter02.demo.OrderedArray;
 
 // orderedArray.java
 // demonstrates ordered array class

@@ -1,4 +1,4 @@
-package com.book.book01.chapter02.HighArray;
+package com.book.book01.chapter02.demo.HighArray;
 
 // highArray.java
 // demonstrates array class with high-level interface

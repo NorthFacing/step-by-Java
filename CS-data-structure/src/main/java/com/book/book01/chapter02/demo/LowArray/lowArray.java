@@ -1,4 +1,4 @@
-package com.book.book01.chapter02.LowArray;
+package com.book.book01.chapter02.demo.LowArray;
 
 // lowArray.java
 // demonstrates array class with low-level interface

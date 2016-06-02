@@ -1,4 +1,4 @@
-package com.book.book01.chapter02.Array;
+package com.book.book01.chapter02.demo.Array;
 
 // array.java
 // demonstrates Java arrays
