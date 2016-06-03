@@ -18,6 +18,13 @@ http://gameprogrammingpatterns.com/contents.html
 http://www.newthinktank.com/videos/design-patterns-tutorial/
 
 
+动态代理:
+http://blog.csdn.net/a596620989/article/details/6927487
+
+
+
+
+
 ## Q&A
 ### 1.静态代理类需要将被代理类的所有方法都覆写一遍吗？
 Thinking in Java 的代码范例中复用使用的代理是否具有普遍适用性？
