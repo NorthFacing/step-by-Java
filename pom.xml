@@ -13,6 +13,7 @@
         <module>CS-data-structure</module>
         <module>fra-smart4j</module>
         <module>fra-spring</module>
+        <module>fra-tomcat</module>
         <module>java-base</module>
         <module>java-design-patterns</module>
         <module>java-jvm</module>
