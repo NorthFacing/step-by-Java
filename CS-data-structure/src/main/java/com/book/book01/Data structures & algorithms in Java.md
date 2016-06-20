@@ -29,7 +29,57 @@ applet需要使用系统环境中配置java环境，
 * Applets:可视范例
 * Bob:范例练习
 
+# 总结对照
 
+<table>
+<tr>
+<td>数据结构名称</td>
+<td>辅助变量</td>
+<td>时间复杂度</td>
+<td>优点</td>
+<td>缺点</td>
+<td>备注</td>
+</tr>
+<tr>
+<td>数组</td>
+<td>
+long[]; len
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>排序数组</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
 
+<table>
+<tr>
+<td>算法名称</td>
+<td>容器</td>
+<td>辅助变量</td>
+<td>时间复杂度</td>
+<td>优点</td>
+<td>缺点</td>
+<td>备注</td>
+</tr>
+<tr></tr>
+<tr></tr>
+</table>
 
 
