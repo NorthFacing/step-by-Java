@@ -1,15 +1,15 @@
-package com.book.book01.chapter03.SelectSort;
+package com.book.book01.chapter03.demo.BubbleSort;
 
-// selectSort.java
-// demonstrates selection sort
-// to run this program: C>java SelectSortApp
+// bubbleSort.java
+// demonstrates bubble sort
+// to run this program: C>java BubbleSortApp
 ////////////////////////////////////////////////////////////////
-class ArraySel {
+class ArrayBub {
   private long[] a;                 // ref to array a
   private int nElems;               // number of data items
 
   //--------------------------------------------------------------
-  public ArraySel(int max)          // constructor
+  public ArrayBub(int max)          // constructor
   {
     a = new long[max];                 // create the array
     nElems = 0;                        // no items yet
@@ -31,18 +31,15 @@ class ArraySel {
   }
 
   //--------------------------------------------------------------
-  public void selectionSort() {
-    int out, in, min;
+  public void bubbleSort() {
+    int out, in;
 
-    for (out = 0; out < nElems - 1; out++)   // outer loop
-    {
-      min = out;                     // minimum
-      for (in = out + 1; in < nElems; in++) // inner loop
-        if (a[in] < a[min])         // if min greater,
-          min = in;               // we have a new min
-      swap(out, min);                // swap them
-    }  // end for(out)
-  }  // end selectionSort()
+    for (out = nElems - 1; out > 1; out--)   // outer loop (backward)
+      display();
+      for (in = 0; in < out; in++)        // inner loop (forward)
+        if (a[in] > a[in + 1])       // out of order?
+          swap(in, in + 1);          // swap them
+  }  // end bubbleSort()
 
   //--------------------------------------------------------------
   private void swap(int one, int two) {
@@ -51,14 +48,14 @@ class ArraySel {
     a[two] = temp;
   }
 //--------------------------------------------------------------
-}  // end class ArraySel
+}  // end class ArrayBub
 
 ////////////////////////////////////////////////////////////////
-class SelectSortApp {
+class BubbleSortApp {
   public static void main(String[] args) {
     int maxSize = 100;            // array size
-    ArraySel arr;                 // reference to array
-    arr = new ArraySel(maxSize);  // create the array
+    ArrayBub arr;                 // reference to array
+    arr = new ArrayBub(maxSize);  // create the array
 
     arr.insert(77);               // insert 10 items
     arr.insert(99);
@@ -73,9 +70,9 @@ class SelectSortApp {
 
     arr.display();                // display items
 
-    arr.selectionSort();          // selection-sort them
+    arr.bubbleSort();             // bubble sort them
 
     arr.display();                // display them again
   }  // end main()
-}  // end class SelectSortApp
+}  // end class BubbleSortApp
 ////////////////////////////////////////////////////////////////

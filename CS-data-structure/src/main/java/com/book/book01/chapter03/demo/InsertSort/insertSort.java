@@ -1,4 +1,4 @@
-package com.book.book01.chapter03.InsertSort;
+package com.book.book01.chapter03.demo.InsertSort;
 
 // insertSort.java
 // demonstrates insertion sort

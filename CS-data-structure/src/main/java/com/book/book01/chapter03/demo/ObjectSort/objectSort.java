@@ -1,4 +1,4 @@
-package com.book.book01.chapter03.ObjectSort;
+package com.book.book01.chapter03.demo.ObjectSort;
 
 // objectSort.java
 // demonstrates sorting objects (uses insertion sort)
