@@ -54,6 +54,8 @@ public class HighArrayImpl implements HighArray {
     return false;
   }
   // 本方法中出现这种问题的原因是？怎么避免？
+  // 第一：思路有问题，删除之后进行元素的前移的时候，应该从第temp个元素开始
+  // 第二：全局把我不够好，len--应该放在for循环外边，这个要仔细一点
 
   @Override
   public void display() {

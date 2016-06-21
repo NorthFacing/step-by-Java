@@ -48,15 +48,15 @@ long[]; len
 <td></td>
 <td></td>
 <td></td>
-<td></td>
+<td>1.新增和删除操作时，不要忘记len操作</td>
 </tr>
 <tr>
 <td>排序数组</td>
+<td>long[]; len</td>
 <td></td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
+<td>1.新增和删除操作时，不要忘记len操作</td>
 </tr>
 <tr>
 <td></td>
