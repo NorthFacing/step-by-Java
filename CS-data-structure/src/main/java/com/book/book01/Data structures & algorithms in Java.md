@@ -42,10 +42,8 @@ applet需要使用系统环境中配置java环境，
 </tr>
 <tr>
 <td>数组</td>
-<td>
-long[]; len
-</td>
-<td></td>
+<td>long[]; len</td>
+<td>新增：O(1);查找：O(N);删除：O(N)+O(1)</td>
 <td></td>
 <td></td>
 <td>1.新增和删除操作时，不要忘记len操作</td>
@@ -53,7 +51,7 @@ long[]; len
 <tr>
 <td>排序数组</td>
 <td>long[]; len</td>
-<td></td>
+<td>新增：O(N);查找：lg(N);删除：lg(N)+O(1)</td>
 <td></td>
 <td></td>
 <td>1.新增和删除操作时，不要忘记len操作</td>
