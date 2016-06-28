@@ -1,7 +1,5 @@
 package com.book.book01.chapter05.bob.linkList2;
 
-import com.book.book01.chapter05.bob.linkList.Link;
-
 /**
  * Created by Bob on 2016/5/26.
  */
