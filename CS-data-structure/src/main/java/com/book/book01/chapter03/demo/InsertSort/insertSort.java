@@ -38,6 +38,7 @@ class ArrayIns {
     {
       long temp = a[out];            // remove marked item
       in = out;                      // start shifts at out
+      System.out.println();
       while (in > 0 && a[in - 1] >= temp) // until one is smaller,
       {
         a[in] = a[in - 1];            // shift item to right

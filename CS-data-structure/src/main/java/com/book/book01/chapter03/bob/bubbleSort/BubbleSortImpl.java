@@ -21,7 +21,7 @@ public class BubbleSortImpl implements BubbleSort {
   @Override
   public void bubbleSort() {
     int out, in;
-    for (out = len - 1; out > 1; out--) { // 只有两项的时候就不用比较了，但是即便携程out>0，也没有问题
+    for (out = len - 1; out > 1; out--) { // 只有两项的时候就不用比较了，但是即便写成out>0，也没有问题
       for (in = 0; in < out; in++) {
         if (arr[in] > arr[in + 1]) // out of order ?
           swap(in, in + 1);
