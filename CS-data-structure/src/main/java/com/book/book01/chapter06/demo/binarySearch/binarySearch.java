@@ -1,3 +1,5 @@
+package com.book.book01.chapter06.demo.binarySearch;
+
 // binarySearch.java
 // demonstrates recursive binary search
 // to run this program: C>java BinarySearchApp
