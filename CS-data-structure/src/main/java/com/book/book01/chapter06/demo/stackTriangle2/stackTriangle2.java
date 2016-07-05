@@ -1,3 +1,5 @@
+package com.book.book01.chapter06.demo.stackTriangle2;
+
 // stackTriangle2.java
 // evaluates triangular numbers, stack replaces recursion
 // to run this program: C>java StackTriangle2App
