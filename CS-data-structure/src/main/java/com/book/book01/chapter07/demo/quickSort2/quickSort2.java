@@ -1,3 +1,5 @@
+package com.book.book01.chapter07.demo.quickSort2;
+
 // quickSort2.java
 // demonstrates quick sort with median-of-three partitioning
 // to run this program: C>java QuickSort2App

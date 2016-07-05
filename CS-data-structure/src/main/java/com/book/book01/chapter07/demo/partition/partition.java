@@ -1,3 +1,5 @@
+package com.book.book01.chapter07.demo.partition;
+
 // partition.java
 // demonstrates partitioning an array
 // to run this program: C>java PartitionApp
