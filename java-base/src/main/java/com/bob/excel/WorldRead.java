@@ -63,6 +63,8 @@ public class WorldRead {
           map = new TreeMap();
           total.put(length, map);
         }
+        if (map.containsValue(value))
+          continue;
         map.put(key, value);
       }
 
@@ -86,12 +88,11 @@ public class WorldRead {
       count += indexSet.size();
 
       for (Integer index : indexSet) {
-        System.out.println("[" + index + "]" + words.get(index));
+        System.out.println("[" + index + "]  " + words.get(index));
       }
     }
 
     System.out.println("单词共计：" + count + "个");
-
 
   }
 
