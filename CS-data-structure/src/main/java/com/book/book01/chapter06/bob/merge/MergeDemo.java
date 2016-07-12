@@ -14,9 +14,25 @@ public class MergeDemo {
 
   }
 
-  // TODO
   public static void merge(int[] arrayA, int sizeA, int[] arrayB, int sizeB, int[] arrayC) {
-
+    // 需要设置三个辅助变量
+    int aIndex = 0, bIndex = 0, cIndex = 0;
+    // 都不为空
+    while (aIndex < sizeA && bIndex < sizeB) {
+      if (arrayA[aIndex] < arrayB[bIndex]) {
+        arrayC[cIndex++] = arrayA[aIndex++];
+      } else {
+        arrayC[cIndex++] = arrayB[bIndex++];
+      }
+    }
+    // A是否遍历完成
+    while (aIndex < sizeA) {
+      arrayC[cIndex++] = arrayA[aIndex++];
+    }
+    // B是否遍历完成
+    while (bIndex < sizeB) {
+      arrayC[cIndex++] = arrayB[bIndex++];
+    }
   }
 
   public static void display(int[] theArray, int size) {

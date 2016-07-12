@@ -73,6 +73,15 @@ class DArray {
 
     for (j = 0; j < n; j++)
       theArray[lowerBound + j] = workSpace[j];
+
+    System.out.print("\ndisplay = ");
+    display();
+    int length = workSpace.length;
+    System.out.print("workSpa = ");
+    for (int i = 0; i < length; i++) {
+      System.out.print(workSpace[i] + " ");
+    }
+    System.out.println();
   } // end merge()
   // -----------------------------------------------------------
 } // end class DArray
@@ -97,10 +106,12 @@ class MergeSortApp {
     arr.insert(108);
     arr.insert(36);
 
+    System.out.println("原数组：");
     arr.display(); // display items
 
     arr.mergeSort(); // merge sort the array
 
+    System.out.println("\n\n排序后数组：");
     arr.display(); // display items again
   } // end main()
 } // end class MergeSortApp
