@@ -1,4 +1,4 @@
-package com.movie.movie01.m01_01_基本概念;
+package com.video.video01.v01_c01_基本概念;
 
 /**
  * Created by Bob on 2016/5/27.

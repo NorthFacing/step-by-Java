@@ -1,3 +1,8 @@
 /target/
 /.idea
+/.settings/
+/.classpath
+/.project
+
 /src/main/java/com/book/book01/Data structures & algorithms in Java.pdf
+/src/main/java/com/book/book02/数据结构 - 严蔚敏 - C语言版.pdf

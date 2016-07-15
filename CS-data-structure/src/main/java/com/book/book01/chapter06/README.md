@@ -57,9 +57,13 @@ towers
 
 # 06. 归并排序
 merge  
-
+mergeSort
 
 # 07. 消除递归
+stackTriangle
+stackTriangle2
+
+递归和栈之间有一种紧密的联系，事实上，大部分编译器都是使用栈来实现递归的。
 
 
 # 08. 一些有趣的递归应用
