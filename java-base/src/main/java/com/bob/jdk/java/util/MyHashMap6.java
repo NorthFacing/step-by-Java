@@ -14,64 +14,21 @@ import java.util.Set;
 
 public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cloneable, Serializable {
 
-	/**
-	 * The default initial capacity - MUST be a power of two.
-	 */
-	static final int DEFAULT_INITIAL_CAPACITY = 16;
+	static final int DEFAULT_INITIAL_CAPACITY = 16; // 默认初始空间大小：2^4 = 16
+	static final int MAXIMUM_CAPACITY = 1 << 30; // 默认最大存储空间：2的倍数 && 小于 1<<30
+	static final float DEFAULT_LOAD_FACTOR = 0.75f; // 默认负载因子
+
+	int threshold; // 下一次扩容的阈值
+	final float loadFactor; // table的实际负载因子
+
+	transient Entry[] table; // 底层数组容器
+	transient int size; // 当前元素个数
+	transient volatile int modCount; // 数组修改次数标志字段
 
 	/**
-	 * The maximum capacity, used if a higher value is implicitly specified
-	 * by either of the constructors with arguments.
-	 * MUST be a power of two <= 1<<30.
-	 */
-	static final int MAXIMUM_CAPACITY = 1 << 30;
-
-	/**
-	 * The load factor used when none specified in constructor.
-	 */
-	static final float DEFAULT_LOAD_FACTOR = 0.75f;
-
-	/**
-	 * The table, resized as necessary. Length MUST Always be a power of two.
-	 */
-	transient Entry[] table;
-
-	/**
-	 * The number of key-value mappings contained in this map.
-	 */
-	transient int size;
-
-	/**
-	 * The next size value at which to resize (capacity * load factor).
-	 *
-	 * @serial
-	 */
-	int threshold;
-
-	/**
-	 * The load factor for the hash table.
-	 *
-	 * @serial
-	 */
-	final float loadFactor;
-
-	/**
-	 * The number of times this HashMap has been structurally modified
-	 * Structural modifications are those that change the number of mappings in
-	 * the HashMap or otherwise modify its internal structure (e.g.,
-	 * rehash).  This field is used to make iterators on Collection-views of
-	 * the HashMap fail-fast.  (See ConcurrentModificationException).
-	 */
-	transient volatile int modCount;
-
-	/**
-	 * Constructs an empty <tt>HashMap</tt> with the specified initial
-	 * capacity and load factor.
-	 *
-	 * @param initialCapacity the initial capacity
-	 * @param loadFactor      the load factor
-	 * @throws IllegalArgumentException if the initial capacity is negative
-	 *                                  or the load factor is nonpositive
+	 * 构造方法
+	 * @param initialCapacity 初始容量
+	 * @param loadFactor      负载因子
 	 */
 	public MyHashMap6(int initialCapacity, float loadFactor) {
 		if (initialCapacity < 0)
@@ -80,8 +37,7 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		if (initialCapacity > MAXIMUM_CAPACITY)
 			initialCapacity = MAXIMUM_CAPACITY;
 		if (loadFactor <= 0 || Float.isNaN(loadFactor))
-			throw new IllegalArgumentException("Illegal load factor: " +
-				loadFactor);
+			throw new IllegalArgumentException("Illegal load factor: " + loadFactor);
 
 		// Find a power of 2 >= initialCapacity
 		int capacity = 1;
@@ -94,20 +50,12 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		init();
 	}
 
-	/**
-	 * Constructs an empty <tt>HashMap</tt> with the specified initial
-	 * capacity and the default load factor (0.75).
-	 *
-	 * @param initialCapacity the initial capacity.
-	 * @throws IllegalArgumentException if the initial capacity is negative.
-	 */
 	public MyHashMap6(int initialCapacity) {
 		this(initialCapacity, DEFAULT_LOAD_FACTOR);
 	}
 
 	/**
-	 * Constructs an empty <tt>HashMap</tt> with the default initial capacity
-	 * (16) and the default load factor (0.75).
+	 * 这里比较有意思，没有传入默认参数调用原始构造方法，而是直接进行赋值初始化
 	 */
 	public MyHashMap6() {
 		this.loadFactor = DEFAULT_LOAD_FACTOR;
@@ -116,44 +64,20 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		init();
 	}
 
-	/**
-	 * Constructs a new <tt>HashMap</tt> with the same mappings as the
-	 * specified <tt>Map</tt>.  The <tt>HashMap</tt> is created with
-	 * default load factor (0.75) and an initial capacity sufficient to
-	 * hold the mappings in the specified <tt>Map</tt>.
-	 *
-	 * @param m the map whose mappings are to be placed in this map
-	 * @throws NullPointerException if the specified map is null
-	 */
 	public MyHashMap6(Map<? extends K, ? extends V> m) {
-		this(Math.max((int) (m.size() / DEFAULT_LOAD_FACTOR) + 1,
-			DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);
+		this(Math.max((int) (m.size() / DEFAULT_LOAD_FACTOR) + 1, DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);
 		putAllForCreate(m);
 	}
 
 	// internal utilities
 
 	/**
-	 * Initialization hook for subclasses. This method is called
-	 * in all constructors and pseudo-constructors (clone, readObject)
-	 * after HashMap has been initialized but before any entries have
-	 * been inserted.  (In the absence of this method, readObject would
-	 * require explicit knowledge of subclasses.)
+	 * init方法，在初始化容器初始化之后，放入元素之前执行，继承了HashMap的子类可以腹泻此方法来进行额外的操作
 	 */
 	void init() {
 	}
 
-	/**
-	 * Applies a supplemental hash function to a given hashCode, which
-	 * defends against poor quality hash functions.  This is critical
-	 * because HashMap uses power-of-two length hash tables, that
-	 * otherwise encounter collisions for hashCodes that do not differ
-	 * in lower bits. Note: Null keys always map to hash 0, thus index 0.
-	 */
 	static int hash(int h) {
-		// This function ensures that hashCodes that differ only by
-		// constant multiples at each bit position have a bounded
-		// number of collisions (approximately 8 at default load factor).
 		h ^= (h >>> 20) ^ (h >>> 12);
 		return h ^ (h >>> 7) ^ (h >>> 4);
 	}
@@ -165,49 +89,21 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		return h & (length - 1);
 	}
 
-	/**
-	 * Returns the number of key-value mappings in this map.
-	 *
-	 * @return the number of key-value mappings in this map
-	 */
 	public int size() {
 		return size;
 	}
 
-	/**
-	 * Returns <tt>true</tt> if this map contains no key-value mappings.
-	 *
-	 * @return <tt>true</tt> if this map contains no key-value mappings
-	 */
 	public boolean isEmpty() {
 		return size == 0;
 	}
 
-	/**
-	 * Returns the value to which the specified key is mapped,
-	 * or {@code null} if this map contains no mapping for the key.
-	 * <p>
-	 * <p>More formally, if this map contains a mapping from a key
-	 * {@code k} to a value {@code v} such that {@code (key==null ? k==null :
-	 * key.equals(k))}, then this method returns {@code v}; otherwise
-	 * it returns {@code null}.  (There can be at most one such mapping.)
-	 * <p>
-	 * <p>A return value of {@code null} does not <i>necessarily</i>
-	 * indicate that the map contains no mapping for the key; it's also
-	 * possible that the map explicitly maps the key to {@code null}.
-	 * The {@link #containsKey containsKey} operation may be used to
-	 * distinguish these two cases.
-	 *
-	 * @see #put(Object, Object)
-	 */
 	public V get(Object key) {
 		if (key == null)
 			return getForNullKey();
 		int hash = hash(key.hashCode());
-		for (Entry<K, V> e = table[indexFor(hash, table.length)];
-		     e != null;
-		     e = e.next) {
+		for (Entry<K, V> e = table[indexFor(hash, table.length)]; e != null; e = e.next) {
 			Object k;
+			// hash值相等且 Key 相等（== || equals）就说明这是同一个对象
 			if (e.hash == hash && ((k = e.key) == key || key.equals(k)))
 				return e.value;
 		}
@@ -215,11 +111,7 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 	}
 
 	/**
-	 * Offloaded version of get() to look up null keys.  Null keys map
-	 * to index 0.  This null case is split out into separate methods
-	 * for the sake of performance in the two most commonly used
-	 * operations (get and put), but incorporated with conditionals in
-	 * others.
+	 * key为null的元素永远放在index为0的位置，但是index为0的位置不一定只有key为null的元素
 	 */
 	private V getForNullKey() {
 		for (Entry<K, V> e = table[0]; e != null; e = e.next) {
@@ -229,48 +121,22 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		return null;
 	}
 
-	/**
-	 * Returns <tt>true</tt> if this map contains a mapping for the
-	 * specified key.
-	 *
-	 * @param key The key whose presence in this map is to be tested
-	 * @return <tt>true</tt> if this map contains a mapping for the specified
-	 * key.
-	 */
 	public boolean containsKey(Object key) {
 		return getEntry(key) != null;
 	}
 
-	/**
-	 * Returns the entry associated with the specified key in the
-	 * HashMap.  Returns null if the HashMap contains no mapping
-	 * for the key.
-	 */
 	final Entry<K, V> getEntry(Object key) {
 		int hash = (key == null) ? 0 : hash(key.hashCode());
-		for (Entry<K, V> e = table[indexFor(hash, table.length)];
-		     e != null;
-		     e = e.next) {
+		for (Entry<K, V> e = table[indexFor(hash, table.length)]; e != null; e = e.next) {
 			Object k;
-			if (e.hash == hash &&
-				((k = e.key) == key || (key != null && key.equals(k))))
+			if (e.hash == hash && ((k = e.key) == key || (key != null && key.equals(k))))
 				return e;
 		}
 		return null;
 	}
 
-
 	/**
-	 * Associates the specified value with the specified key in this map.
-	 * If the map previously contained a mapping for the key, the old
-	 * value is replaced.
-	 *
-	 * @param key   key with which the specified value is to be associated
-	 * @param value value to be associated with the specified key
-	 * @return the previous value associated with <tt>key</tt>, or
-	 * <tt>null</tt> if there was no mapping for <tt>key</tt>.
-	 * (A <tt>null</tt> return can also indicate that the map
-	 * previously associated <tt>null</tt> with <tt>key</tt>.)
+	 * 已经存在放回原来的值，不存在返回空
 	 */
 	public V put(K key, V value) {
 		if (key == null)
@@ -293,7 +159,7 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 	}
 
 	/**
-	 * Offloaded version of put for null keys
+	 * null值特殊处理，永远放在index为0的位置
 	 */
 	private V putForNullKey(V value) {
 		for (Entry<K, V> e = table[0]; e != null; e = e.next) {
@@ -309,21 +175,10 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		return null;
 	}
 
-	/**
-	 * This method is used instead of put by constructors and
-	 * pseudoconstructors (clone, readObject).  It does not resize the table,
-	 * check for comodification, etc.  It calls createEntry rather than
-	 * addEntry.
-	 */
 	private void putForCreate(K key, V value) {
 		int hash = (key == null) ? 0 : hash(key.hashCode());
 		int i = indexFor(hash, table.length);
 
-		/**
-		 * Look for preexisting entry for key.  This will never happen for
-		 * clone or deserialize.  It will only happen for construction if the
-		 * input Map is a sorted map whose ordering is inconsistent w/ equals.
-		 */
 		for (Entry<K, V> e = table[i]; e != null; e = e.next) {
 			Object k;
 			if (e.hash == hash &&
@@ -343,20 +198,6 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		}
 	}
 
-	/**
-	 * Rehashes the contents of this map into a new array with a
-	 * larger capacity.  This method is called automatically when the
-	 * number of keys in this map reaches its threshold.
-	 * <p>
-	 * If current capacity is MAXIMUM_CAPACITY, this method does not
-	 * resize the map, but sets threshold to Integer.MAX_VALUE.
-	 * This has the effect of preventing future calls.
-	 *
-	 * @param newCapacity the new capacity, MUST be a power of two;
-	 *                    must be greater than current capacity unless current
-	 *                    capacity is MAXIMUM_CAPACITY (in which case value
-	 *                    is irrelevant).
-	 */
 	void resize(int newCapacity) {
 		Entry[] oldTable = table;
 		int oldCapacity = oldTable.length;
@@ -392,28 +233,11 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		}
 	}
 
-	/**
-	 * Copies all of the mappings from the specified map to this map.
-	 * These mappings will replace any mappings that this map had for
-	 * any of the keys currently in the specified map.
-	 *
-	 * @param m mappings to be stored in this map
-	 * @throws NullPointerException if the specified map is null
-	 */
 	public void putAll(Map<? extends K, ? extends V> m) {
 		int numKeysToBeAdded = m.size();
 		if (numKeysToBeAdded == 0)
 			return;
 
-        /*
-         * Expand the map if the map if the number of mappings to be added
-         * is greater than or equal to threshold.  This is conservative; the
-         * obvious condition is (m.size() + size) >= threshold, but this
-         * condition could result in a map with twice the appropriate capacity,
-         * if the keys to be added overlap with the keys already in this map.
-         * By using the conservative calculation, we subject ourself
-         * to at most one extra resize.
-         */
 		if (numKeysToBeAdded > threshold) {
 			int targetCapacity = (int) (numKeysToBeAdded / loadFactor + 1);
 			if (targetCapacity > MAXIMUM_CAPACITY)
@@ -431,25 +255,11 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		}
 	}
 
-	/**
-	 * Removes the mapping for the specified key from this map if present.
-	 *
-	 * @param key key whose mapping is to be removed from the map
-	 * @return the previous value associated with <tt>key</tt>, or
-	 * <tt>null</tt> if there was no mapping for <tt>key</tt>.
-	 * (A <tt>null</tt> return can also indicate that the map
-	 * previously associated <tt>null</tt> with <tt>key</tt>.)
-	 */
 	public V remove(Object key) {
 		Entry<K, V> e = removeEntryForKey(key);
 		return (e == null ? null : e.value);
 	}
 
-	/**
-	 * Removes and returns the entry associated with the specified key
-	 * in the HashMap.  Returns null if the HashMap contains no mapping
-	 * for this key.
-	 */
 	final Entry<K, V> removeEntryForKey(Object key) {
 		int hash = (key == null) ? 0 : hash(key.hashCode());
 		int i = indexFor(hash, table.length);
@@ -522,14 +332,6 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		size = 0;
 	}
 
-	/**
-	 * Returns <tt>true</tt> if this map maps one or more keys to the
-	 * specified value.
-	 *
-	 * @param value value whose presence in this map is to be tested
-	 * @return <tt>true</tt> if this map maps one or more keys to the
-	 * specified value
-	 */
 	public boolean containsValue(Object value) {
 		if (value == null)
 			return containsNullValue();
@@ -542,9 +344,6 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		return false;
 	}
 
-	/**
-	 * Special-case code for containsValue with null argument
-	 */
 	private boolean containsNullValue() {
 		Entry[] tab = table;
 		for (int i = 0; i < tab.length; i++)
@@ -554,12 +353,6 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		return false;
 	}
 
-	/**
-	 * Returns a shallow copy of this <tt>HashMap</tt> instance: the keys and
-	 * values themselves are not cloned.
-	 *
-	 * @return a shallow copy of this map
-	 */
 	public Object clone() {
 		MyHashMap6<K, V> result = null;
 		try {
@@ -580,13 +373,10 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 	static class Entry<K, V> implements Map.Entry<K, V> {
 		final K key;
 		V value;
-		Entry<K, V> next;
+		Entry<K, V> next; // 关联自身数据类型
 		final int hash;
 
-		/**
-		 * Creates new entry.
-		 */
-		Entry(int h, K k, V v, Entry<K, V> n) {
+		Entry(int h, K k, V v, Entry<K, V> n) { // 构造函数
 			value = v;
 			next = n;
 			key = k;
@@ -601,7 +391,7 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 			return value;
 		}
 
-		public final V setValue(V newValue) {
+		public final V setValue(V newValue) { // 赋新值，返旧值
 			V oldValue = value;
 			value = newValue;
 			return oldValue;
@@ -632,28 +422,18 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		}
 
 		/**
-		 * This method is invoked whenever the value in an entry is
-		 * overwritten by an invocation of put(k,v) for a key k that's already
-		 * in the HashMap.
+		 * 当放入一个在HashMap中已经存在的Key时调用此方法
 		 */
 		void recordAccess(MyHashMap6<K, V> m) {
 		}
 
 		/**
-		 * This method is invoked whenever the entry is
-		 * removed from the table.
+		 * 当移除一个在HashMap中的Key时调用此方法
 		 */
 		void recordRemoval(MyHashMap6<K, V> m) {
 		}
 	}
 
-	/**
-	 * Adds a new entry with the specified key, value and hash code to
-	 * the specified bucket.  It is the responsibility of this
-	 * method to resize the table if appropriate.
-	 * <p>
-	 * Subclass overrides this to alter the behavior of put method.
-	 */
 	void addEntry(int hash, K key, V value, int bucketIndex) {
 		Entry<K, V> e = table[bucketIndex];
 		table[bucketIndex] = new Entry<K, V>(hash, key, value, e);
@@ -661,19 +441,12 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 			resize(2 * table.length);
 	}
 
-	/**
-	 * Like addEntry except that this version is used when creating entries
-	 * as part of Map construction or "pseudo-construction" (cloning,
-	 * deserialization).  This version needn't worry about resizing the table.
-	 * <p>
-	 * Subclass overrides this to alter the behavior of HashMap(Map),
-	 * clone, and readObject.
-	 */
 	void createEntry(int hash, K key, V value, int bucketIndex) {
 		Entry<K, V> e = table[bucketIndex];
 		table[bucketIndex] = new Entry<K, V>(hash, key, value, e);
 		size++;
 	}
+
 
 	private abstract class HashIterator<E> implements Iterator<E> {
 		Entry<K, V> next;  // next entry to return
@@ -685,6 +458,7 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 			expectedModCount = modCount;
 			if (size > 0) { // advance to first entry
 				Entry[] t = table;
+				// map有元素,就定位数组索引到第一个不为null的位置,并赋给next
 				while (index < t.length && (next = t[index++]) == null)
 					;
 			}
@@ -701,6 +475,7 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 			if (e == null)
 				throw new NoSuchElementException();
 
+			// 判断下一个entry,如果为空,则继续搜索数组下一个索引位置
 			if ((next = e.next) == null) {
 				Entry[] t = table;
 				while (index < t.length && (next = t[index++]) == null)
@@ -710,6 +485,7 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 			return e;
 		}
 
+		// 用迭代器执行删除操作(不会引起快速失败)：什么时候需要删除？
 		public void remove() {
 			if (current == null)
 				throw new IllegalStateException();
@@ -723,6 +499,7 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 
 	}
 
+	// 为什么一个value一个是getKey？而没有统一使用get方法？
 	private final class ValueIterator extends HashIterator<V> {
 		public V next() {
 			return nextEntry().value;
@@ -757,27 +534,16 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 
 	// Views
 
-	private transient Set<Map.Entry<K, V>> entrySet = null;
+	// Bob: 从 AbstractMap 拷贝而来
+	transient volatile Set<K> keySet = null;
 
-	/**
-	 * Returns a {@link Set} view of the keys contained in this map.
-	 * The set is backed by the map, so changes to the map are
-	 * reflected in the set, and vice-versa.  If the map is modified
-	 * while an iteration over the set is in progress (except through
-	 * the iterator's own <tt>remove</tt> operation), the results of
-	 * the iteration are undefined.  The set supports element removal,
-	 * which removes the corresponding mapping from the map, via the
-	 * <tt>Iterator.remove</tt>, <tt>Set.remove</tt>,
-	 * <tt>removeAll</tt>, <tt>retainAll</tt>, and <tt>clear</tt>
-	 * operations.  It does not support the <tt>add</tt> or <tt>addAll</tt>
-	 * operations.
-	 */
 	public Set<K> keySet() {
 		Set<K> ks = keySet;
 		return (ks != null ? ks : (keySet = new KeySet()));
 	}
 
 	private final class KeySet extends AbstractSet<K> {
+
 		public Iterator<K> iterator() {
 			return newKeyIterator();
 		}
@@ -799,21 +565,9 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		}
 	}
 
-	/**
-	 * Returns a {@link Collection} view of the values contained in this map.
-	 * The collection is backed by the map, so changes to the map are
-	 * reflected in the collection, and vice-versa.  If the map is
-	 * modified while an iteration over the collection is in progress
-	 * (except through the iterator's own <tt>remove</tt> operation),
-	 * the results of the iteration are undefined.  The collection
-	 * supports element removal, which removes the corresponding
-	 * mapping from the map, via the <tt>Iterator.remove</tt>,
-	 * <tt>Collection.remove</tt>, <tt>removeAll</tt>,
-	 * <tt>retainAll</tt> and <tt>clear</tt> operations.  It does not
-	 * support the <tt>add</tt> or <tt>addAll</tt> operations.
-	 */
 	// Bob: 从 AbstractMap 拷贝而来
 	transient volatile Collection<V> values = null;
+
 	public Collection<V> values() {
 		Collection<V> vs = values;
 		return (vs != null ? vs : (values = new Values()));
@@ -837,24 +591,8 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		}
 	}
 
-	/**
-	 * Returns a {@link Set} view of the mappings contained in this map.
-	 * The set is backed by the map, so changes to the map are
-	 * reflected in the set, and vice-versa.  If the map is modified
-	 * while an iteration over the set is in progress (except through
-	 * the iterator's own <tt>remove</tt> operation, or through the
-	 * <tt>setValue</tt> operation on a map entry returned by the
-	 * iterator) the results of the iteration are undefined.  The set
-	 * supports element removal, which removes the corresponding
-	 * mapping from the map, via the <tt>Iterator.remove</tt>,
-	 * <tt>Set.remove</tt>, <tt>removeAll</tt>, <tt>retainAll</tt> and
-	 * <tt>clear</tt> operations.  It does not support the
-	 * <tt>add</tt> or <tt>addAll</tt> operations.
-	 *
-	 * @return a set view of the mappings contained in this map
-	 */
-	// Bob: 从 AbstractMap 拷贝而来
-	transient volatile Set<K> keySet = null;
+	private transient Set<Map.Entry<K, V>> entrySet = null;
+
 	public Set<Map.Entry<K, V>> entrySet() {
 		return entrySet0();
 	}
@@ -890,21 +628,8 @@ public class MyHashMap6<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		}
 	}
 
-	/**
-	 * Save the state of the <tt>HashMap</tt> instance to a stream (i.e.,
-	 * serialize it).
-	 *
-	 * @serialData The <i>capacity</i> of the HashMap (the length of the
-	 * bucket array) is emitted (int), followed by the
-	 * <i>size</i> (an int, the number of key-value
-	 * mappings), followed by the key (Object) and value (Object)
-	 * for each key-value mapping.  The key-value mappings are
-	 * emitted in no particular order.
-	 */
-	private void writeObject(java.io.ObjectOutputStream s)
-		throws IOException {
-		Iterator<Map.Entry<K, V>> i =
-			(size > 0) ? entrySet0().iterator() : null;
+	private void writeObject(java.io.ObjectOutputStream s) throws IOException {
+		Iterator<Map.Entry<K, V>> i = (size > 0) ? entrySet0().iterator() : null;
 
 		// Write out the threshold, loadfactor, and any hidden stuff
 		s.defaultWriteObject();
