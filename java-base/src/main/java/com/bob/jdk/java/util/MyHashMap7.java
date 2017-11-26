@@ -1,4 +1,6 @@
-package com.bob.jdk.util;
+package com.bob.jdk.java.util;
+
+import com.bob.jdk.sun.misc.Hashing7;
 
 import java.io.IOException;
 import java.io.InvalidObjectException;
@@ -193,7 +195,7 @@ public class MyHashMap7<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 		boolean switching = currentAltHashing ^ useAltHashing;
 		if (switching) {
 			hashSeed = useAltHashing
-				? sun.misc.Hashing.randomHashSeed(this)
+				? Hashing7.randomHashSeed(this)
 				: 0;
 		}
 		return switching;
@@ -209,7 +211,7 @@ public class MyHashMap7<K, V> extends AbstractMap<K, V> implements Map<K, V>, Cl
 	final int hash(Object k) {
 		int h = hashSeed;
 		if (0 != h && k instanceof String) {
-			return sun.misc.Hashing.stringHash32((String) k);
+			return Hashing7.stringHash32((String) k);
 		}
 
 		h ^= k.hashCode();

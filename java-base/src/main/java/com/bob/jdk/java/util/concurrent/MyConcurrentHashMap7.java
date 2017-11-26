@@ -1,4 +1,6 @@
-package com.bob.jdk.util.concurrent;
+package com.bob.jdk.java.util.concurrent;
+
+import com.bob.jdk.sun.misc.Hashing7;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -145,7 +147,7 @@ public class MyConcurrentHashMap7<K, V> extends AbstractMap<K, V> implements Con
 
 	private static int randomHashSeed(MyConcurrentHashMap7 instance) {
 		if (sun.misc.VM.isBooted() && Holder.ALTERNATIVE_HASHING) {
-			return sun.misc.Hashing.randomHashSeed(instance);
+			return Hashing7.randomHashSeed(instance);
 		}
 
 		return 0;
@@ -244,7 +246,7 @@ public class MyConcurrentHashMap7<K, V> extends AbstractMap<K, V> implements Con
 		int h = hashSeed;
 
 		if ((0 != h) && (k instanceof String)) {
-			return sun.misc.Hashing.stringHash32((String) k);
+			return Hashing7.stringHash32((String) k);
 		}
 
 		h ^= k.hashCode();

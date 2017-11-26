@@ -1,4 +1,4 @@
-package com.bob.jdk.util;
+package com.bob.jdk.java.util;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
