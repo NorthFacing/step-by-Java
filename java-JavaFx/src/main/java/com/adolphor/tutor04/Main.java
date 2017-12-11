@@ -1,4 +1,4 @@
-package com.adolphor;
+package com.adolphor.tutor04;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -18,7 +18,7 @@ public class Main extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) {
 		window = primaryStage;
 
 		Label label1 = new Label("Welcome to the first scene");
@@ -39,7 +39,7 @@ public class Main extends Application {
 
 		StackPane layout2 = new StackPane();
 		layout2.getChildren().add(button2);
-		scene2 = new Scene(layout2,600,300);
+		scene2 = new Scene(layout2, 600, 300);
 
 		window.setScene(scene1);
 		window.setTitle("Title here");
