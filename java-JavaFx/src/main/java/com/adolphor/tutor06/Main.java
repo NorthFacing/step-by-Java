@@ -1,4 +1,4 @@
-package com.adolphor.tutor05;
+package com.adolphor.tutor06;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -22,8 +22,9 @@ public class Main extends Application {
 		window.setTitle("the new boston");
 
 		button = new Button("Click me");
-		button.setOnAction(e->{
-			AlertBox.display("Title of the window","Wow, this alert box is awesome");
+		button.setOnAction(e -> {
+			boolean result = ConfirmBox.display("Title of the window", "Are you sure you want to send naked pics?");
+			System.out.println(result);
 		});
 
 		StackPane layout = new StackPane();
