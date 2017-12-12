@@ -44,6 +44,7 @@ public class Main extends Application {
 		Button loginButton = new Button("Log In");
 		GridPane.setConstraints(loginButton, 1, 2);
 
+		// 这些元素在什么时候会换行？
 		grid.getChildren().addAll(nameLabel, nameInput, passLabel, passInput, loginButton);
 
 		window.setScene(new Scene(grid, 300, 200));
