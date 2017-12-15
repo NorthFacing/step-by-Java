@@ -24,9 +24,9 @@ public class TopMenu extends Application {
 		menuBar.getMenus().addAll(menu1, menu2, menu3);
 		menuBar.setUseSystemMenuBar(true);
 
-		final String os = System.getProperty("os.name");
-		if (os != null && os.startsWith("Mac"))
-			menuBar.useSystemMenuBarProperty().set(true);
+//		final String os = System.getProperty("os.name");
+//		if (os != null && os.startsWith("Mac"))
+//			menuBar.useSystemMenuBarProperty().set(true);
 
 		BorderPane borderPane = new BorderPane();
 		borderPane.setTop(menuBar);
