@@ -1,4 +1,4 @@
-package com.adolphor.thenewboston.tutor21_22_Making_Menus;
+package com.adolphor.thenewboston.tutor21_22_23_24_Menus;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -6,7 +6,9 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -26,6 +28,7 @@ public class Main extends Application {
 
 		Menu fileMenu = new Menu("File");
 
+		// normal menu
 		MenuItem newfile = new MenuItem("New...");
 		newfile.setOnAction(e -> System.out.println("Create a new file..."));
 		fileMenu.getItems().add(newfile);
@@ -37,6 +40,7 @@ public class Main extends Application {
 		fileMenu.getItems().add(new SeparatorMenuItem());
 		fileMenu.getItems().add(new MenuItem("Exist..."));
 
+		// disable menu
 		Menu editMenu = new Menu("Edit");
 		editMenu.getItems().add(new MenuItem("Cut"));
 		editMenu.getItems().add(new MenuItem("Copy"));
@@ -46,6 +50,7 @@ public class Main extends Application {
 		paste.setDisable(true);
 		editMenu.getItems().add(paste);
 
+		// checkbox menu
 		Menu helpMenu = new Menu("Help");
 		CheckMenuItem showlines = new CheckMenuItem("Show line numbers");
 		showlines.setOnAction(e -> {
@@ -59,8 +64,21 @@ public class Main extends Application {
 		autoSave.setSelected(true);
 		helpMenu.getItems().addAll(showlines, autoSave);
 
+		// difficulty menu
+		Menu difficultyMenu = new Menu("Difficulty");
+		ToggleGroup difficultyToggle = new ToggleGroup();
+
+		RadioMenuItem easy = new RadioMenuItem("Easy");
+		RadioMenuItem medium = new RadioMenuItem("Medium");
+		RadioMenuItem hard = new RadioMenuItem("Hard");
+		easy.setToggleGroup(difficultyToggle);
+		medium.setToggleGroup(difficultyToggle);
+		hard.setToggleGroup(difficultyToggle);
+
+		difficultyMenu.getItems().addAll(easy, medium, hard);
+
 		MenuBar menuBar = new MenuBar();
-		menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
+		menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu, difficultyMenu);
 
 		layout = new BorderPane();
 		layout.setTop(menuBar);
