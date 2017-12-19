@@ -10,5 +10,18 @@
 .button {
   -fx-background-color: linear-gradient(#dc9656, #ab4642);
   -fx-text-fill: #FFFFFF;
+  -fx-min-width: 75;
   -fx-background-radius: 6;
+}
+
+/* 自定义 */
+.button-blue {
+  -fx-background-color: linear-gradient(#7CAFC2, #5034ab);
+  -fx-text-fill: #FFFFFF;
+  -fx-min-width: 75;
+  -fx-background-radius: 6;
+}
+
+#bold-label {
+  -fx-font-weight: bold;
 }
