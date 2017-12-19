@@ -29,6 +29,7 @@ public class Main extends Application {
 
 		Label nameLabel = new Label("UserName");
 //		nameLabel.setStyle("-fx-text-fill: #e8e8e8");
+		nameLabel.setId("bold-label"); // 根据节点ID进行样式调整
 		GridPane.setConstraints(nameLabel, 0, 0);
 
 		TextField nameInput = new TextField("Bucky");
@@ -43,10 +44,13 @@ public class Main extends Application {
 		GridPane.setConstraints(passInput, 1, 1);
 
 		Button loginButton = new Button("Log In");
-
 		GridPane.setConstraints(loginButton, 1, 2);
 
-		grid.getChildren().addAll(nameLabel, nameInput, passLabel, passInput, loginButton);
+		Button signUpBtn = new Button("Sign Up");
+		signUpBtn.getStyleClass().add("button-blue"); // 添加自定义样式
+		GridPane.setConstraints(signUpBtn, 1, 3);
+
+		grid.getChildren().addAll(nameLabel, nameInput, passLabel, passInput, loginButton, signUpBtn);
 
 		Scene scene = new Scene(grid, 300, 200);
 		scene.getStylesheets().addAll("tutor25_viper.css");
