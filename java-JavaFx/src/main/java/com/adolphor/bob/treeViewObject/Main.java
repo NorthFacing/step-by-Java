@@ -58,7 +58,7 @@ public class Main extends Application {
     root.setBottom(controls);
 
     Scene scene = new Scene(root, 600, 600);
-//    scene.getStylesheets().add(getClass().getResource("/ui/style/style.css").toExternalForm());
+    scene.getStylesheets().add(getClass().getResource("/bob-treeViewObject-style.css").toExternalForm());
     primaryStage.setScene(scene);
 
     primaryStage.show();
