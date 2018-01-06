@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.VBox?>
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.adolphor.thenewboston.tutor31_32_33_FXML.Controller">
+
+  <Label text="I love bacon" fx:id="firstLabel"/>
+  <!--绑定到 firstLabel -->
+  <Label text="${firstLabel.text}"/>
+
+  <Button text="Submit" fx:id="button" onAction="#handleButtonClicked"/>
+
+
+  <Label text="Difficulty"/>
+  <!--什么时候需要define ？-->
+  <fx:define>
+    <!--没有提示，怪怪的-->
+    <ToggleGroup fx:id="toggleGroup"></ToggleGroup>
+  </fx:define>
+  <RadioButton text="Easy" toggleGroup="$toggleGroup"/>
+  <RadioButton text="Medium" toggleGroup="$toggleGroup"/>
+  <RadioButton text="Hard" toggleGroup="$toggleGroup"/>
+
+
+</VBox>
