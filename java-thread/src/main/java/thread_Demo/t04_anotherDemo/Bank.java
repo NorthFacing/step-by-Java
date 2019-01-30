@@ -10,6 +10,7 @@ public class Bank {
    * 方法上的锁是 this 对象，就是每次调用这个方法的那个对象，
    * 这样的话，即便有多个线程执行，如果是同一个对象就不会执行多次；
    * 而如果是不同的对象，这个锁就不起租用，让别的对象顺利执行。
+   *
    * @param n
    */
   public synchronized void add(Integer n) {

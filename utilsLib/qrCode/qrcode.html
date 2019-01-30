@@ -1,45 +1,45 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>当前网站域名生成二维码</title>
-    <script src="jquery-1.7.2.js" type="text/javascript"></script>
-    <script src="jquery.qrcode.js" type="text/javascript"></script>
-    <script src="qrcode.js" type="text/javascript"></script>
-    <style type="text/css">
-        body {
-            margin: 0;
-            padding: 0;
-            background: #FFFFFF;
-            text-align: center
-        }
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>当前网站域名生成二维码</title>
+  <script src="jquery-1.7.2.js" type="text/javascript"></script>
+  <script src="jquery.qrcode.js" type="text/javascript"></script>
+  <script src="qrcode.js" type="text/javascript"></script>
+  <style type="text/css">
+    body {
+      margin: 0;
+      padding: 0;
+      background: #FFFFFF;
+      text-align: center
+    }
 
-        #output {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
-            margin-top: 10em;
-        }
+    #output {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+      margin-top: 10em;
+    }
 
-        #down {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
-            margin-top: 20px;
-            text-align: center
-        }
+    #down {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+      margin-top: 20px;
+      text-align: center
+    }
 
-        #down a {
-            color: #000;
-            text-decoration: none
-        }
+    #down a {
+      color: #000;
+      text-decoration: none
+    }
 
-        #down a:hover {
-            color: #f00;
-            text-decoration: underline
-        }
-    </style>
+    #down a:hover {
+      color: #f00;
+      text-decoration: underline
+    }
+  </style>
 </head>
 <body>
 <div id="output"></div>
@@ -104,6 +104,7 @@
             showPic();
         };
         img.src = logoImgsrc;
+
         function draw(obj) {
             CRC.drawImage(obj, 50, 50);
         }
@@ -123,6 +124,7 @@
             $("#qrcode").css({"width": "200px", "height": "200px", "margin": "0 auto", "margin-top": "10em"})
         }
     }
+
     //直接显示
     doconvas();
     showPic();

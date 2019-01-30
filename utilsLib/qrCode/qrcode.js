@@ -138,8 +138,8 @@ QRCode.prototype = {
 
                 if (col + c <= -1 || this.moduleCount <= col + c) continue;
 
-                if ((0 <= r && r <= 6 && (c == 0 || c == 6) )
-                    || (0 <= c && c <= 6 && (r == 0 || r == 6) )
+                if ((0 <= r && r <= 6 && (c == 0 || c == 6))
+                    || (0 <= c && c <= 6 && (r == 0 || r == 6))
                     || (2 <= r && r <= 4 && 2 <= c && c <= 4)) {
                     this.modules[row + r][col + c] = true;
                 } else {
@@ -252,12 +252,12 @@ QRCode.prototype = {
         var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
 
         for (var i = 0; i < 18; i++) {
-            var mod = (!test && ( (bits >> i) & 1) == 1);
+            var mod = (!test && ((bits >> i) & 1) == 1);
             this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
         }
 
         for (var i = 0; i < 18; i++) {
-            var mod = (!test && ( (bits >> i) & 1) == 1);
+            var mod = (!test && ((bits >> i) & 1) == 1);
             this.modules[i % 3 + this.moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
         }
     },
@@ -270,7 +270,7 @@ QRCode.prototype = {
         // vertical
         for (var i = 0; i < 15; i++) {
 
-            var mod = (!test && ( (bits >> i) & 1) == 1);
+            var mod = (!test && ((bits >> i) & 1) == 1);
 
             if (i < 6) {
                 this.modules[i][8] = mod;
@@ -284,7 +284,7 @@ QRCode.prototype = {
         // horizontal
         for (var i = 0; i < 15; i++) {
 
-            var mod = (!test && ( (bits >> i) & 1) == 1);
+            var mod = (!test && ((bits >> i) & 1) == 1);
 
             if (i < 8) {
                 this.modules[8][this.moduleCount - i - 1] = mod;
@@ -320,7 +320,7 @@ QRCode.prototype = {
                         var dark = false;
 
                         if (byteIndex < data.length) {
-                            dark = ( ( (data[byteIndex] >>> bitIndex) & 1) == 1);
+                            dark = (((data[byteIndex] >>> bitIndex) & 1) == 1);
                         }
 
                         var mask = QRUtil.getMask(maskPattern, row, col - c);
@@ -568,15 +568,15 @@ var QRUtil = {
     getBCHTypeInfo: function (data) {
         var d = data << 10;
         while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
-            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15)));
         }
-        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+        return ((data << 10) | d) ^ QRUtil.G15_MASK;
     },
 
     getBCHTypeNumber: function (data) {
         var d = data << 12;
         while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
-            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18)));
         }
         return (data << 12) | d;
     },
@@ -610,13 +610,13 @@ var QRUtil = {
             case QRMaskPattern.PATTERN011 :
                 return (i + j) % 3 == 0;
             case QRMaskPattern.PATTERN100 :
-                return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 == 0;
+                return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 == 0;
             case QRMaskPattern.PATTERN101 :
                 return (i * j) % 2 + (i * j) % 3 == 0;
             case QRMaskPattern.PATTERN110 :
-                return ( (i * j) % 2 + (i * j) % 3) % 2 == 0;
+                return ((i * j) % 2 + (i * j) % 3) % 2 == 0;
             case QRMaskPattern.PATTERN111 :
-                return ( (i * j) % 3 + (i + j) % 2) % 2 == 0;
+                return ((i * j) % 3 + (i + j) % 2) % 2 == 0;
 
             default :
                 throw new Error("bad maskPattern:" + maskPattern);
@@ -1229,12 +1229,12 @@ QRBitBuffer.prototype = {
 
     get: function (index) {
         var bufIndex = Math.floor(index / 8);
-        return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+        return ((this.buffer[bufIndex] >>> (7 - index % 8)) & 1) == 1;
     },
 
     put: function (num, length) {
         for (var i = 0; i < length; i++) {
-            this.putBit(( (num >>> (length - i - 1) ) & 1) == 1);
+            this.putBit(((num >>> (length - i - 1)) & 1) == 1);
         }
     },
 
@@ -1250,7 +1250,7 @@ QRBitBuffer.prototype = {
         }
 
         if (bit) {
-            this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+            this.buffer[bufIndex] |= (0x80 >>> (this.length % 8));
         }
 
         this.length++;
