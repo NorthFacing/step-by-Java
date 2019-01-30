@@ -1,6 +1,7 @@
 package ex13.pyrmont.startup;
 
 //Use engine
+
 import ex13.pyrmont.core.SimpleContextConfig;
 import org.apache.catalina.Connector;
 import org.apache.catalina.Context;
@@ -62,12 +63,11 @@ public final class Bootstrap2 {
       connector.initialize();
       ((Lifecycle) connector).start();
       ((Lifecycle) engine).start();
-  
+
       // make the application wait until we press a key.
       System.in.read();
       ((Lifecycle) engine).stop();
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

@@ -1,6 +1,7 @@
 package ex13.pyrmont.startup;
 
 //explain Host
+
 import ex13.pyrmont.core.SimpleContextConfig;
 import org.apache.catalina.Connector;
 import org.apache.catalina.Context;
@@ -56,12 +57,11 @@ public final class Bootstrap1 {
       connector.initialize();
       ((Lifecycle) connector).start();
       ((Lifecycle) host).start();
-  
+
       // make the application wait until we press a key.
       System.in.read();
       ((Lifecycle) host).stop();
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

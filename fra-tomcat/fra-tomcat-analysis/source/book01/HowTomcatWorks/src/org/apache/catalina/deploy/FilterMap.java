@@ -81,75 +81,75 @@ import org.apache.catalina.util.RequestUtil;
 public final class FilterMap {
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * The name of this filter to be executed when this mapping matches
-     * a particular request.
-     */
-    private String filterName = null;
+  /**
+   * The name of this filter to be executed when this mapping matches
+   * a particular request.
+   */
+  private String filterName = null;
 
-    public String getFilterName() {
-        return (this.filterName);
+  public String getFilterName() {
+    return (this.filterName);
+  }
+
+  public void setFilterName(String filterName) {
+    this.filterName = filterName;
+  }
+
+
+  /**
+   * The servlet name this mapping matches.
+   */
+  private String servletName = null;
+
+  public String getServletName() {
+    return (this.servletName);
+  }
+
+  public void setServletName(String servletName) {
+    this.servletName = servletName;
+  }
+
+
+  /**
+   * The URL pattern this mapping matches.
+   */
+  private String urlPattern = null;
+
+  public String getURLPattern() {
+    return (this.urlPattern);
+  }
+
+  public void setURLPattern(String urlPattern) {
+    this.urlPattern = RequestUtil.URLDecode(urlPattern);
+  }
+
+
+  // --------------------------------------------------------- Public Methods
+
+
+  /**
+   * Render a String representation of this object.
+   */
+  public String toString() {
+
+    StringBuffer sb = new StringBuffer("FilterMap[");
+    sb.append("filterName=");
+    sb.append(this.filterName);
+    if (servletName != null) {
+      sb.append(", servletName=");
+      sb.append(servletName);
     }
-
-    public void setFilterName(String filterName) {
-        this.filterName = filterName;
+    if (urlPattern != null) {
+      sb.append(", urlPattern=");
+      sb.append(urlPattern);
     }
+    sb.append("]");
+    return (sb.toString());
 
-
-    /**
-     * The servlet name this mapping matches.
-     */
-    private String servletName = null;
-
-    public String getServletName() {
-        return (this.servletName);
-    }
-
-    public void setServletName(String servletName) {
-        this.servletName = servletName;
-    }
-
-
-    /**
-     * The URL pattern this mapping matches.
-     */
-    private String urlPattern = null;
-
-    public String getURLPattern() {
-        return (this.urlPattern);
-    }
-
-    public void setURLPattern(String urlPattern) {
-        this.urlPattern = RequestUtil.URLDecode(urlPattern);
-    }
-
-
-    // --------------------------------------------------------- Public Methods
-
-
-    /**
-     * Render a String representation of this object.
-     */
-    public String toString() {
-
-        StringBuffer sb = new StringBuffer("FilterMap[");
-        sb.append("filterName=");
-        sb.append(this.filterName);
-        if (servletName != null) {
-            sb.append(", servletName=");
-            sb.append(servletName);
-        }
-        if (urlPattern != null) {
-            sb.append(", urlPattern=");
-            sb.append(urlPattern);
-        }
-        sb.append("]");
-        return (sb.toString());
-
-    }
+  }
 
 
 }

@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 
 public class SessionServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+      throws ServletException, IOException {
     System.out.println("SessionServlet -- service");
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
@@ -19,8 +19,8 @@ public class SessionServlet extends HttpServlet {
     out.println("<body>");
     String value = request.getParameter("value");
     HttpSession session = request.getSession(true);
-    out.println("<br>the previous value is " + 
-      (String) session.getAttribute("value"));
+    out.println("<br>the previous value is " +
+        (String) session.getAttribute("value"));
     out.println("<br>the current value is " + value);
     session.setAttribute("value", value);
     out.println("<br><hr>");

@@ -77,8 +77,7 @@ public final class Bootstrap {
         server.await();
         // the program waits until the await method returns,
         // i.e. until a shutdown command is received.
-      }
-      catch (LifecycleException e) {
+      } catch (LifecycleException e) {
         e.printStackTrace(System.out);
       }
     }
@@ -87,8 +86,7 @@ public final class Bootstrap {
     if (server instanceof Lifecycle) {
       try {
         ((Lifecycle) server).stop();
-      }
-      catch (LifecycleException e) {
+      } catch (LifecycleException e) {
         e.printStackTrace(System.out);
       }
     }

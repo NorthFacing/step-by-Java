@@ -79,90 +79,90 @@ import org.apache.catalina.UserDatabase;
 public abstract class AbstractRole implements Role {
 
 
-    // ----------------------------------------------------- Instance Variables
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * The description of this Role.
-     */
-    protected String description = null;
+  /**
+   * The description of this Role.
+   */
+  protected String description = null;
 
 
-    /**
-     * The role name of this Role.
-     */
-    protected String rolename = null;
+  /**
+   * The role name of this Role.
+   */
+  protected String rolename = null;
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * Return the description of this role.
-     */
-    public String getDescription() {
+  /**
+   * Return the description of this role.
+   */
+  public String getDescription() {
 
-        return (this.description);
+    return (this.description);
 
-    }
-
-
-    /**
-     * Set the description of this role.
-     *
-     * @param description The new description
-     */
-    public void setDescription(String description) {
-
-        this.description = description;
-
-    }
+  }
 
 
-    /**
-     * Return the role name of this role, which must be unique
-     * within the scope of a {@link UserDatabase}.
-     */
-    public String getRolename() {
+  /**
+   * Set the description of this role.
+   *
+   * @param description The new description
+   */
+  public void setDescription(String description) {
 
-        return (this.rolename);
+    this.description = description;
 
-    }
-
-
-    /**
-     * Set the role name of this role, which must be unique
-     * within the scope of a {@link UserDatabase}.
-     *
-     * @param rolename The new role name
-     */
-    public void setRolename(String rolename) {
-
-        this.rolename = rolename;
-
-    }
+  }
 
 
-    /**
-     * Return the {@link UserDatabase} within which this Role is defined.
-     */
-    public abstract UserDatabase getUserDatabase();
+  /**
+   * Return the role name of this role, which must be unique
+   * within the scope of a {@link UserDatabase}.
+   */
+  public String getRolename() {
+
+    return (this.rolename);
+
+  }
 
 
-    // --------------------------------------------------------- Public Methods
+  /**
+   * Set the role name of this role, which must be unique
+   * within the scope of a {@link UserDatabase}.
+   *
+   * @param rolename The new role name
+   */
+  public void setRolename(String rolename) {
+
+    this.rolename = rolename;
+
+  }
 
 
-    // ------------------------------------------------------ Principal Methods
+  /**
+   * Return the {@link UserDatabase} within which this Role is defined.
+   */
+  public abstract UserDatabase getUserDatabase();
 
 
-    /**
-     * Make the principal name the same as the role name.
-     */
-    public String getName() {
+  // --------------------------------------------------------- Public Methods
 
-        return (getRolename());
 
-    }
+  // ------------------------------------------------------ Principal Methods
+
+
+  /**
+   * Make the principal name the same as the role name.
+   */
+  public String getName() {
+
+    return (getRolename());
+
+  }
 
 
 }

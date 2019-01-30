@@ -48,7 +48,7 @@ public class SimplePipeline implements Pipeline, Lifecycle {
       ((Contained) valve).setContainer(this.container);
 
     synchronized (valves) {
-      Valve results[] = new Valve[valves.length +1];
+      Valve results[] = new Valve[valves.length + 1];
       System.arraycopy(valves, 0, results, 0, valves.length);
       results[valves.length] = valve;
       valves = results;
@@ -60,9 +60,9 @@ public class SimplePipeline implements Pipeline, Lifecycle {
   }
 
   public void invoke(Request request, Response response)
-    throws IOException, ServletException {
+      throws IOException, ServletException {
     // Invoke the first Valve in this pipeline for this request
-   (new StandardPipelineValveContext()).invokeNext(request, response);
+    (new StandardPipelineValveContext()).invokeNext(request, response);
   }
 
   public void removeValve(Valve valve) {
@@ -89,22 +89,21 @@ public class SimplePipeline implements Pipeline, Lifecycle {
   // StandardPipelineValveContext inner class.
   protected class StandardPipelineValveContext implements ValveContext {
     protected int stage = 0;
+
     public String getInfo() {
       return null;
     }
 
     public void invokeNext(Request request, Response response)
-      throws IOException, ServletException {
+        throws IOException, ServletException {
       int subscript = stage;
       stage = stage + 1;
       // Invoke the requested Valve for the current request thread
       if (subscript < valves.length) {
         valves[subscript].invoke(request, response, this);
-      }
-      else if ((subscript == valves.length) && (basic != null)) {
+      } else if ((subscript == valves.length) && (basic != null)) {
         basic.invoke(request, response, this);
-      }
-      else {
+      } else {
         throw new ServletException("No valve");
       }
     }

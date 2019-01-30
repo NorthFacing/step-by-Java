@@ -24,20 +24,18 @@ public class ServletProcessor2 {
       File classPath = new File(Constants.WEB_ROOT);
       // the forming of repository is taken from the createClassLoader method in
       // org.apache.catalina.startup.ClassLoaderFactory
-      String repository = (new URL("file", null, classPath.getCanonicalPath() + File.separator)).toString() ;
+      String repository = (new URL("file", null, classPath.getCanonicalPath() + File.separator)).toString();
       // the code for forming the URL is taken from the addRepository method in
       // org.apache.catalina.loader.StandardClassLoader class.
       urls[0] = new URL(null, repository, streamHandler);
       loader = new URLClassLoader(urls);
-    }
-    catch (IOException e) {
-      System.out.println(e.toString() );
+    } catch (IOException e) {
+      System.out.println(e.toString());
     }
     Class myClass = null;
     try {
       myClass = loader.loadClass(servletName);
-    }
-    catch (ClassNotFoundException e) {
+    } catch (ClassNotFoundException e) {
       System.out.println(e.toString());
     }
 
@@ -47,11 +45,9 @@ public class ServletProcessor2 {
     try {
       servlet = (Servlet) myClass.newInstance();
       servlet.service((ServletRequest) requestFacade, (ServletResponse) responseFacade);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       System.out.println(e.toString());
-    }
-    catch (Throwable e) {
+    } catch (Throwable e) {
       System.out.println(e.toString());
     }
 

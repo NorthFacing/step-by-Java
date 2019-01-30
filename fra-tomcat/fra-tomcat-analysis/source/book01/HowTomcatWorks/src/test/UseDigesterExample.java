@@ -1,6 +1,7 @@
 package test;
 
 import java.io.File;
+
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.Rule;
 import org.xml.sax.Attributes;
@@ -8,7 +9,7 @@ import org.xml.sax.Attributes;
 public class UseDigesterExample {
 
   public void parse() {
-    String path = System.getProperty("user.dir") + File.separator  + "etc";
+    String path = System.getProperty("user.dir") + File.separator + "etc";
     File file = new File(path, "MyDocument-1.xml");
 
     Digester digester = new Digester();
@@ -17,8 +18,7 @@ public class UseDigesterExample {
       digester.addRule("book", rule);
       //digester.addRule("a/b", rule);
       digester.parse(file);
-    }
-    catch(Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

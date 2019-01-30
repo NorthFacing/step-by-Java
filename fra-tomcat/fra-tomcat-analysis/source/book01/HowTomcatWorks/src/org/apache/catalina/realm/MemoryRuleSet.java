@@ -80,64 +80,64 @@ import org.xml.sax.Attributes;
 public class MemoryRuleSet extends RuleSetBase {
 
 
-    // ----------------------------------------------------- Instance Variables
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * The matching pattern prefix to use for recognizing our elements.
-     */
-    protected String prefix = null;
+  /**
+   * The matching pattern prefix to use for recognizing our elements.
+   */
+  protected String prefix = null;
 
 
-    // ------------------------------------------------------------ Constructor
+  // ------------------------------------------------------------ Constructor
 
 
-    /**
-     * Construct an instance of this <code>RuleSet</code> with the default
-     * matching pattern prefix.
-     */
-    public MemoryRuleSet() {
+  /**
+   * Construct an instance of this <code>RuleSet</code> with the default
+   * matching pattern prefix.
+   */
+  public MemoryRuleSet() {
 
-        this("tomcat-users/");
+    this("tomcat-users/");
 
-    }
-
-
-    /**
-     * Construct an instance of this <code>RuleSet</code> with the specified
-     * matching pattern prefix.
-     *
-     * @param prefix Prefix for matching pattern rules (including the
-     *  trailing slash character)
-     */
-    public MemoryRuleSet(String prefix) {
-
-        super();
-        this.namespaceURI = null;
-        this.prefix = prefix;
-
-    }
+  }
 
 
-    // --------------------------------------------------------- Public Methods
+  /**
+   * Construct an instance of this <code>RuleSet</code> with the specified
+   * matching pattern prefix.
+   *
+   * @param prefix Prefix for matching pattern rules (including the
+   *               trailing slash character)
+   */
+  public MemoryRuleSet(String prefix) {
+
+    super();
+    this.namespaceURI = null;
+    this.prefix = prefix;
+
+  }
 
 
-    /**
-     * <p>Add the set of Rule instances defined in this RuleSet to the
-     * specified <code>Digester</code> instance, associating them with
-     * our namespace URI (if any).  This method should only be called
-     * by a Digester instance.</p>
-     *
-     * @param digester Digester instance to which the new Rule instances
-     *  should be added.
-     */
-    public void addRuleInstances(Digester digester) {
+  // --------------------------------------------------------- Public Methods
 
-        digester.addRule
-            (prefix + "user",
-             new MemoryUserRule(digester));
 
-    }
+  /**
+   * <p>Add the set of Rule instances defined in this RuleSet to the
+   * specified <code>Digester</code> instance, associating them with
+   * our namespace URI (if any).  This method should only be called
+   * by a Digester instance.</p>
+   *
+   * @param digester Digester instance to which the new Rule instances
+   *                 should be added.
+   */
+  public void addRuleInstances(Digester digester) {
+
+    digester.addRule
+        (prefix + "user",
+            new MemoryUserRule(digester));
+
+  }
 
 
 }
@@ -149,37 +149,37 @@ public class MemoryRuleSet extends RuleSetBase {
 final class MemoryUserRule extends Rule {
 
 
-    /**
-     * Construct a new instance of this <code>Rule</code>.
-     *
-     * @param digester The <code>Digester</code> we are associated with.
-     */
-    public MemoryUserRule(Digester digester) {
+  /**
+   * Construct a new instance of this <code>Rule</code>.
+   *
+   * @param digester The <code>Digester</code> we are associated with.
+   */
+  public MemoryUserRule(Digester digester) {
 
-        super(digester);
+    super(digester);
 
+  }
+
+
+  /**
+   * Process a <code>&lt;user&gt;</code> element from the XML database file.
+   *
+   * @param attributes The attribute list for this element
+   */
+  public void begin(Attributes attributes) throws Exception {
+
+    String username = attributes.getValue("name");
+    if (username == null) {
+      username = attributes.getValue("username");
     }
+    String password = attributes.getValue("password");
+    String roles = attributes.getValue("roles");
 
+    MemoryRealm realm =
+        (MemoryRealm) digester.peek(digester.getCount() - 1);
+    realm.addUser(username, password, roles);
 
-    /**
-     * Process a <code>&lt;user&gt;</code> element from the XML database file.
-     *
-     * @param attributes The attribute list for this element
-     */
-    public void begin(Attributes attributes) throws Exception {
-
-        String username = attributes.getValue("name");
-        if (username == null) {
-            username = attributes.getValue("username");
-        }
-        String password = attributes.getValue("password");
-        String roles = attributes.getValue("roles");
-
-        MemoryRealm realm =
-            (MemoryRealm) digester.peek(digester.getCount() - 1);
-        realm.addUser(username, password, roles);
-
-    }
+  }
 
 
 }

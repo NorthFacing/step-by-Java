@@ -1,4 +1,5 @@
 package test;
+
 public class ShutdownHookDemo {
 
   public void start() {
@@ -12,8 +13,7 @@ public class ShutdownHookDemo {
     demo.start();
     try {
       System.in.read();
-    }
-    catch(Exception e) {
+    } catch (Exception e) {
     }
     System.out.println("Normal exit");
   }

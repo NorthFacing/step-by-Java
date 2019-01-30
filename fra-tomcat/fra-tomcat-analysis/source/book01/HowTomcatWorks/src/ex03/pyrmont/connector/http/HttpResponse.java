@@ -21,6 +21,7 @@ import java.util.Iterator;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.catalina.util.CookieTools;
 
 public class HttpResponse implements HttpServletResponse {
@@ -68,7 +69,7 @@ public class HttpResponse implements HttpServletResponse {
    * The date format we will use for creating date headers.
    */
   protected final SimpleDateFormat format =
-    new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz",Locale.US);
+      new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
   /**
    * The error message set by <code>sendError()</code>.
    */
@@ -77,7 +78,6 @@ public class HttpResponse implements HttpServletResponse {
    * The HTTP status code associated with this Response.
    */
   protected int status = HttpServletResponse.SC_OK;
-
 
 
   public HttpResponse(OutputStream output) {
@@ -210,6 +210,7 @@ public class HttpResponse implements HttpServletResponse {
   public OutputStream getStream() {
     return this.output;
   }
+
   /**
    * Send the HTTP response headers, if this has not already occurred.
    */
@@ -220,8 +221,7 @@ public class HttpResponse implements HttpServletResponse {
     OutputStreamWriter osr = null;
     try {
       osr = new OutputStreamWriter(getStream(), getCharacterEncoding());
-    }
-    catch (UnsupportedEncodingException e) {
+    } catch (UnsupportedEncodingException e) {
       osr = new OutputStreamWriter(getStream());
     }
     final PrintWriter outputWriter = new PrintWriter(osr);
@@ -316,21 +316,19 @@ public class HttpResponse implements HttpServletResponse {
          Status-Line = HTTP-Version SP Status-Code SP Reason-Phrase CRLF
       */
       int ch = fis.read(bytes, 0, BUFFER_SIZE);
-      while (ch!=-1) {
+      while (ch != -1) {
         output.write(bytes, 0, ch);
         ch = fis.read(bytes, 0, BUFFER_SIZE);
       }
-    }
-    catch (FileNotFoundException e) {
+    } catch (FileNotFoundException e) {
       String errorMessage = "HTTP/1.1 404 File Not Found\r\n" +
-        "Content-Type: text/html\r\n" +
-        "Content-Length: 23\r\n" +
-        "\r\n" +
-        "<h1>File Not Found</h1>";
+          "Content-Type: text/html\r\n" +
+          "Content-Length: 23\r\n" +
+          "\r\n" +
+          "<h1>File Not Found</h1>";
       output.write(errorMessage.getBytes());
-    }
-    finally {
-      if (fis!=null)
+    } finally {
+      if (fis != null)
         fis.close();
     }
   }
@@ -370,12 +368,14 @@ public class HttpResponse implements HttpServletResponse {
       write(b, off + leftoverStart, leftoverLen);
   }
 
-  /** implementation of HttpServletResponse  */
+  /**
+   * implementation of HttpServletResponse
+   */
 
   public void addCookie(Cookie cookie) {
     if (isCommitted())
       return;
-  //  if (included)
+    //  if (included)
     //        return;     // Ignore any call from an included servlet
     synchronized (cookies) {
       cookies.add(cookie);
@@ -386,7 +386,7 @@ public class HttpResponse implements HttpServletResponse {
     if (isCommitted())
       return;
 //    if (included)
-  //          return;     // Ignore any call from an included servlet
+    //          return;     // Ignore any call from an included servlet
     addHeader(name, format.format(new Date(value)));
   }
 
@@ -394,7 +394,7 @@ public class HttpResponse implements HttpServletResponse {
     if (isCommitted())
       return;
 //        if (included)
-  //          return;     // Ignore any call from an included servlet
+    //          return;     // Ignore any call from an included servlet
     synchronized (headers) {
       ArrayList values = (ArrayList) headers.get(name);
       if (values == null) {
@@ -410,13 +410,13 @@ public class HttpResponse implements HttpServletResponse {
     if (isCommitted())
       return;
 //    if (included)
-  //    return;     // Ignore any call from an included servlet
+    //    return;     // Ignore any call from an included servlet
     addHeader(name, "" + value);
   }
 
   public boolean containsHeader(String name) {
     synchronized (headers) {
-      return (headers.get(name)!=null);
+      return (headers.get(name) != null);
     }
   }
 
@@ -441,8 +441,7 @@ public class HttpResponse implements HttpServletResponse {
     if (bufferCount > 0) {
       try {
         output.write(buffer, 0, bufferCount);
-      }
-      finally {
+      } finally {
         bufferCount = 0;
       }
     }
@@ -471,7 +470,7 @@ public class HttpResponse implements HttpServletResponse {
     ResponseStream newStream = new ResponseStream(this);
     newStream.setCommit(false);
     OutputStreamWriter osr =
-      new OutputStreamWriter(newStream, getCharacterEncoding());
+        new OutputStreamWriter(newStream, getCharacterEncoding());
     writer = new ResponseWriter(osr);
     return writer;
   }
@@ -505,7 +504,7 @@ public class HttpResponse implements HttpServletResponse {
     if (isCommitted())
       return;
 //    if (included)
-  //     return;     // Ignore any call from an included servlet
+    //     return;     // Ignore any call from an included servlet
     this.contentLength = length;
   }
 
@@ -516,7 +515,7 @@ public class HttpResponse implements HttpServletResponse {
     if (isCommitted())
       return;
 //    if (included)
-  //    return;     // Ignore any call from an included servlet
+    //    return;     // Ignore any call from an included servlet
     setHeader(name, format.format(new Date(value)));
   }
 
@@ -524,7 +523,7 @@ public class HttpResponse implements HttpServletResponse {
     if (isCommitted())
       return;
 //    if (included)
-  //    return;     // Ignore any call from an included servlet
+    //    return;     // Ignore any call from an included servlet
     ArrayList values = new ArrayList();
     values.add(value);
     synchronized (headers) {
@@ -535,14 +534,12 @@ public class HttpResponse implements HttpServletResponse {
       int contentLength = -1;
       try {
         contentLength = Integer.parseInt(value);
-      }
-      catch (NumberFormatException e) {
+      } catch (NumberFormatException e) {
         ;
       }
       if (contentLength >= 0)
         setContentLength(contentLength);
-    }
-    else if (match.equals("content-type")) {
+    } else if (match.equals("content-type")) {
       setContentType(value);
     }
   }
@@ -551,7 +548,7 @@ public class HttpResponse implements HttpServletResponse {
     if (isCommitted())
       return;
     //if (included)
-      //return;     // Ignore any call from an included servlet
+    //return;     // Ignore any call from an included servlet
     setHeader(name, "" + value);
   }
 
@@ -559,9 +556,9 @@ public class HttpResponse implements HttpServletResponse {
     if (isCommitted())
       return;
     //if (included)
-      //return;     // Ignore any call from an included servlet
+    //return;     // Ignore any call from an included servlet
 
-   // super.setLocale(locale);
+    // super.setLocale(locale);
     String language = locale.getLanguage();
     if ((language != null) && (language.length() > 0)) {
       String country = locale.getCountry();

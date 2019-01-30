@@ -26,7 +26,7 @@ import org.apache.catalina.Response;
 public class SimpleContainer implements Container {
 
   public static final String WEB_ROOT =
-    System.getProperty("user.dir") + File.separator  + "webroot";
+      System.getProperty("user.dir") + File.separator + "webroot";
 
   public SimpleContainer() {
   }
@@ -131,27 +131,25 @@ public class SimpleContainer implements Container {
   }
 
   public void invoke(Request request, Response response)
-    throws IOException, ServletException {
+      throws IOException, ServletException {
 
-    String servletName = ( (HttpServletRequest) request).getRequestURI();
+    String servletName = ((HttpServletRequest) request).getRequestURI();
     servletName = servletName.substring(servletName.lastIndexOf("/") + 1);
     URLClassLoader loader = null;
     try {
       URL[] urls = new URL[1];
       URLStreamHandler streamHandler = null;
       File classPath = new File(WEB_ROOT);
-      String repository = (new URL("file", null, classPath.getCanonicalPath() + File.separator)).toString() ;
+      String repository = (new URL("file", null, classPath.getCanonicalPath() + File.separator)).toString();
       urls[0] = new URL(null, repository, streamHandler);
       loader = new URLClassLoader(urls);
-    }
-    catch (IOException e) {
-      System.out.println(e.toString() );
+    } catch (IOException e) {
+      System.out.println(e.toString());
     }
     Class myClass = null;
     try {
       myClass = loader.loadClass(servletName);
-    }
-    catch (ClassNotFoundException e) {
+    } catch (ClassNotFoundException e) {
       System.out.println(e.toString());
     }
 
@@ -160,14 +158,11 @@ public class SimpleContainer implements Container {
     try {
       servlet = (Servlet) myClass.newInstance();
       servlet.service((HttpServletRequest) request, (HttpServletResponse) response);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
+      System.out.println(e.toString());
+    } catch (Throwable e) {
       System.out.println(e.toString());
     }
-    catch (Throwable e) {
-      System.out.println(e.toString());
-    }
-
 
 
   }

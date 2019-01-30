@@ -85,84 +85,83 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 public class JAASCallbackHandler implements CallbackHandler {
 
 
-    // ------------------------------------------------------------ Constructor
+  // ------------------------------------------------------------ Constructor
 
 
-    /**
-     * Construct a callback handler configured with the specified values.
-     *
-     * @param realm Our associated JAASRealm instance
-     * @param username Username to be authenticated with
-     * @param password Password to be authenticated with
-     */
-    public JAASCallbackHandler(JAASRealm realm, String username,
-                               String password) {
+  /**
+   * Construct a callback handler configured with the specified values.
+   *
+   * @param realm    Our associated JAASRealm instance
+   * @param username Username to be authenticated with
+   * @param password Password to be authenticated with
+   */
+  public JAASCallbackHandler(JAASRealm realm, String username,
+                             String password) {
 
-        super();
-        this.realm = realm;
-        this.username = username;
-        this.password = password;
+    super();
+    this.realm = realm;
+    this.username = username;
+    this.password = password;
+
+  }
+
+
+  // ----------------------------------------------------- Instance Variables
+
+
+  /**
+   * The password to be authenticated with.
+   */
+  protected String password = null;
+
+
+  /**
+   * The associated <code>JAASRealm</code> instance.
+   */
+  protected JAASRealm realm = null;
+
+
+  /**
+   * The username to be authenticated with.
+   */
+  protected String username = null;
+
+
+  // --------------------------------------------------------- Public Methods
+
+
+  /**
+   * Retrieve the information requested in the provided Callbacks.  This
+   * implementation only recognizes <code>NameCallback</code> and
+   * <code>PasswordCallback</code> instances.
+   *
+   * @param callbacks The set of callbacks to be processed
+   * @throws IOException                  if an input/output error occurs
+   * @throws UnsupportedCallbackException if the login method requests
+   *                                      an unsupported callback type
+   */
+  public void handle(Callback callbacks[])
+      throws IOException, UnsupportedCallbackException {
+
+    for (int i = 0; i < callbacks.length; i++) {
+
+      if (callbacks[i] instanceof NameCallback) {
+        if (realm.getDebug() >= 3)
+          realm.log("Returning username " + username);
+        ((NameCallback) callbacks[i]).setName(username);
+      } else if (callbacks[i] instanceof PasswordCallback) {
+        if (realm.getDebug() >= 3)
+          realm.log("Returning password " + password);
+        ((PasswordCallback) callbacks[i]).setPassword
+            (password.toCharArray());
+      } else {
+        throw new UnsupportedCallbackException(callbacks[i]);
+      }
+
 
     }
 
-
-    // ----------------------------------------------------- Instance Variables
-
-
-    /**
-     * The password to be authenticated with.
-     */
-    protected String password = null;
-
-
-    /**
-     * The associated <code>JAASRealm</code> instance.
-     */
-    protected JAASRealm realm = null;
-
-
-    /**
-     * The username to be authenticated with.
-     */
-    protected String username = null;
-
-
-    // --------------------------------------------------------- Public Methods
-
-
-    /**
-     * Retrieve the information requested in the provided Callbacks.  This
-     * implementation only recognizes <code>NameCallback</code> and
-     * <code>PasswordCallback</code> instances.
-     *
-     * @param callbacks The set of callbacks to be processed
-     *
-     * @exception IOException if an input/output error occurs
-     * @exception UnsupportedCallbackException if the login method requests
-     *  an unsupported callback type
-     */
-    public void handle(Callback callbacks[])
-        throws IOException, UnsupportedCallbackException {
-
-        for (int i = 0; i < callbacks.length; i++) {
-
-            if (callbacks[i] instanceof NameCallback) {
-                if (realm.getDebug() >= 3)
-                    realm.log("Returning username " + username);
-                ((NameCallback) callbacks[i]).setName(username);
-            } else if (callbacks[i] instanceof PasswordCallback) {
-                if (realm.getDebug() >= 3)
-                    realm.log("Returning password " + password);
-                ((PasswordCallback) callbacks[i]).setPassword
-                    (password.toCharArray());
-            } else {
-                throw new UnsupportedCallbackException(callbacks[i]);
-            }
-
-
-        }
-
-    }
+  }
 
 
 }

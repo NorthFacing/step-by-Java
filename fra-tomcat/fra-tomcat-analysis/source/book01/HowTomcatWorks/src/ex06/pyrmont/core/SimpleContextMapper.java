@@ -1,6 +1,7 @@
 package ex06.pyrmont.core;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.catalina.Container;
 import org.apache.catalina.HttpRequest;
 import org.apache.catalina.Mapper;
@@ -21,7 +22,7 @@ public class SimpleContextMapper implements Mapper {
   public void setContainer(Container container) {
     if (!(container instanceof SimpleContext))
       throw new IllegalArgumentException
-        ("Illegal type of container");
+          ("Illegal type of container");
     context = (SimpleContext) container;
   }
 
@@ -39,10 +40,9 @@ public class SimpleContextMapper implements Mapper {
    * identified, return <code>null</code> instead.
    *
    * @param request Request being processed
-   * @param update Update the Request to reflect the mapping selection?
-   *
-   * @exception IllegalArgumentException if the relative portion of the
-   *  path cannot be URL decoded
+   * @param update  Update the Request to reflect the mapping selection?
+   * @throws IllegalArgumentException if the relative portion of the
+   *                                  path cannot be URL decoded
    */
   public Container map(Request request, boolean update) {
     // Has this request already been mapped?
@@ -50,7 +50,7 @@ public class SimpleContextMapper implements Mapper {
       return (request.getWrapper());
     // Identify the context-relative URI to be mapped
     String contextPath =
-      ((HttpServletRequest) request.getRequest()).getContextPath();
+        ((HttpServletRequest) request.getRequest()).getContextPath();
     String requestURI = ((HttpRequest) request).getDecodedRequestURI();
     String relativeURI = requestURI.substring(contextPath.length());
     // Apply the standard request URI mapping rules from the specification

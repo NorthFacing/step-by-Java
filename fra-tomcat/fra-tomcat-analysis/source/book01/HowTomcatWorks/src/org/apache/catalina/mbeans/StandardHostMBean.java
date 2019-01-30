@@ -67,6 +67,7 @@ package org.apache.catalina.mbeans;
 import javax.management.MBeanException;
 import javax.management.MBeanServer;
 import javax.management.RuntimeOperationsException;
+
 import org.apache.catalina.Valve;
 import org.apache.catalina.core.StandardHost;
 import org.apache.commons.modeler.BaseModelMBean;
@@ -84,112 +85,109 @@ import org.apache.commons.modeler.ManagedBean;
 
 public class StandardHostMBean extends BaseModelMBean {
 
-    /**
-     * The <code>MBeanServer</code> for this application.
-     */
-    private static MBeanServer mserver = MBeanUtils.createServer();
+  /**
+   * The <code>MBeanServer</code> for this application.
+   */
+  private static MBeanServer mserver = MBeanUtils.createServer();
 
-    // ----------------------------------------------------------- Constructors
+  // ----------------------------------------------------------- Constructors
 
 
-    /**
-     * Construct a <code>ModelMBean</code> with default
-     * <code>ModelMBeanInfo</code> information.
-     *
-     * @exception MBeanException if the initializer of an object
-     *  throws an exception
-     * @exception RuntimeOperationsException if an IllegalArgumentException
-     *  occurs
-     */
-    public StandardHostMBean()
-        throws MBeanException, RuntimeOperationsException {
+  /**
+   * Construct a <code>ModelMBean</code> with default
+   * <code>ModelMBeanInfo</code> information.
+   *
+   * @throws MBeanException             if the initializer of an object
+   *                                    throws an exception
+   * @throws RuntimeOperationsException if an IllegalArgumentException
+   *                                    occurs
+   */
+  public StandardHostMBean()
+      throws MBeanException, RuntimeOperationsException {
 
-        super();
+    super();
 
+  }
+
+
+  // ------------------------------------------------------------- Attributes
+
+
+  // ------------------------------------------------------------- Operations
+
+
+  /**
+   * Add an alias name that should be mapped to this Host
+   *
+   * @param alias The alias to be added
+   * @throws Exception if an MBean cannot be created or registered
+   */
+  public void addAlias(String alias)
+      throws Exception {
+
+    StandardHost host = (StandardHost) this.resource;
+    host.addAlias(alias);
+
+  }
+
+
+  /**
+   * Return the set of alias names for this Host
+   *
+   * @throws Exception if an MBean cannot be created or registered
+   */
+  public String[] findAliases()
+      throws Exception {
+
+    StandardHost host = (StandardHost) this.resource;
+    return host.findAliases();
+
+  }
+
+
+  /**
+   * Return the MBean Names of the Valves assoicated with this Host
+   *
+   * @throws Exception if an MBean cannot be created or registered
+   */
+  public String[] getValves()
+      throws Exception {
+
+    Registry registry = MBeanUtils.createRegistry();
+    StandardHost host = (StandardHost) this.resource;
+    String mname = MBeanUtils.createManagedName(host);
+    ManagedBean managed = registry.findManagedBean(mname);
+    String domain = null;
+    if (managed != null) {
+      domain = managed.getDomain();
+    }
+    if (domain == null)
+      domain = mserver.getDefaultDomain();
+    Valve[] valves = host.getValves();
+    String[] mbeanNames = new String[valves.length];
+    for (int i = 0; i < valves.length; i++) {
+      mbeanNames[i] =
+          MBeanUtils.createObjectName(domain, valves[i]).toString();
     }
 
+    return mbeanNames;
 
-    // ------------------------------------------------------------- Attributes
-
-
-
-    // ------------------------------------------------------------- Operations
+  }
 
 
-   /**
-     * Add an alias name that should be mapped to this Host
-     *
-     * @param alias The alias to be added
-     *
-     * @exception Exception if an MBean cannot be created or registered
-     */
-    public void addAlias(String alias)
-        throws Exception {
+  /**
+   * Return the specified alias name from the aliases for this Host
+   *
+   * @param alias Alias name to be removed
+   * @throws Exception if an MBean cannot be created or registered
+   */
+  public void removeAlias(String alias)
+      throws Exception {
 
-        StandardHost host = (StandardHost) this.resource;
-        host.addAlias(alias);
+    StandardHost host = (StandardHost) this.resource;
+    host.removeAlias(alias);
 
-    }
-
-
-   /**
-     * Return the set of alias names for this Host
-     *
-     * @exception Exception if an MBean cannot be created or registered
-     */
-    public String [] findAliases()
-        throws Exception {
-
-        StandardHost host = (StandardHost) this.resource;
-        return host.findAliases();
-
-    }
-
-
-   /**
-     * Return the MBean Names of the Valves assoicated with this Host
-     *
-     * @exception Exception if an MBean cannot be created or registered
-     */
-    public String [] getValves()
-        throws Exception {
-
-        Registry registry = MBeanUtils.createRegistry();
-        StandardHost host = (StandardHost) this.resource;
-        String mname = MBeanUtils.createManagedName(host);
-        ManagedBean managed = registry.findManagedBean(mname);
-        String domain = null;
-        if (managed != null) {
-            domain = managed.getDomain();
-        }
-        if (domain == null)
-            domain = mserver.getDefaultDomain();
-        Valve [] valves = host.getValves();
-        String [] mbeanNames = new String[valves.length];
-        for (int i = 0; i < valves.length; i++) {
-            mbeanNames[i] =
-                MBeanUtils.createObjectName(domain, valves[i]).toString();
-        }
-
-        return mbeanNames;
-
-    }
-
-
-   /**
-     * Return the specified alias name from the aliases for this Host
-     *
-     * @param alias Alias name to be removed
-     *
-     * @exception Exception if an MBean cannot be created or registered
-     */
-    public void removeAlias(String alias)
-        throws Exception {
-
-        StandardHost host = (StandardHost) this.resource;
-        host.removeAlias(alias);
-
-    }
+  }
 
 
 }

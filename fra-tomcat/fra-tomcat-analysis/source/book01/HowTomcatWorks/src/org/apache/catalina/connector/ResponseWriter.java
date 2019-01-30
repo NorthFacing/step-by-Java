@@ -21,363 +21,361 @@ import java.io.PrintWriter;
 public class ResponseWriter extends PrintWriter {
 
 
-    // ------------------------------------------------------------ Constructor
+  // ------------------------------------------------------------ Constructor
 
 
-    /**
-     * Construct a new ResponseWriter, wrapping the specified writer and
-     * attached to the specified response.
-     *
-     * @param writer OutputStreamWriter to which we are attached
-     * @param stream ResponseStream to which we are attached
-     */
-    public ResponseWriter(OutputStreamWriter writer, ResponseStream stream) {
+  /**
+   * Construct a new ResponseWriter, wrapping the specified writer and
+   * attached to the specified response.
+   *
+   * @param writer OutputStreamWriter to which we are attached
+   * @param stream ResponseStream to which we are attached
+   */
+  public ResponseWriter(OutputStreamWriter writer, ResponseStream stream) {
 
-        super(writer);
-        this.stream = stream;
-        this.stream.setCommit(false);
+    super(writer);
+    this.stream = stream;
+    this.stream.setCommit(false);
 
-    }
+  }
 
 
-    // ----------------------------------------------------- Instance Variables
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * The response stream to which we are attached.
-     */
-    protected ResponseStream stream = null;
+  /**
+   * The response stream to which we are attached.
+   */
+  protected ResponseStream stream = null;
 
 
-    // --------------------------------------------------------- Public Methods
+  // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Flush this stream, and cause the response to be committed.
-     */
-    public void flush() {
+  /**
+   * Flush this stream, and cause the response to be committed.
+   */
+  public void flush() {
 
-        stream.setCommit(true);
-        super.flush();
-        stream.setCommit(false);
+    stream.setCommit(true);
+    super.flush();
+    stream.setCommit(false);
 
-    }
+  }
 
 
-    /**
-     * Print a boolean value.
-     *
-     * @param b The value to be printed
-     */
-    public void print(boolean b) {
+  /**
+   * Print a boolean value.
+   *
+   * @param b The value to be printed
+   */
+  public void print(boolean b) {
 
-        super.print(b);
-        super.flush();
+    super.print(b);
+    super.flush();
 
-    }
+  }
 
 
-    /**
-     * Print a character value.
-     *
-     * @param c The value to be printed
-     */
-    public void print(char c) {
+  /**
+   * Print a character value.
+   *
+   * @param c The value to be printed
+   */
+  public void print(char c) {
 
-        super.print(c);
-        super.flush();
+    super.print(c);
+    super.flush();
 
-    }
+  }
 
 
-    /**
-     * Print a character array value.
-     *
-     * @param ca The value to be printed
-     */
-    public void print(char ca[]) {
+  /**
+   * Print a character array value.
+   *
+   * @param ca The value to be printed
+   */
+  public void print(char ca[]) {
 
-        super.print(ca);
-        super.flush();
+    super.print(ca);
+    super.flush();
 
-    }
+  }
 
 
-    /**
-     * Print a double value.
-     *
-     * @param d The value to be printed
-     */
-    public void print(double d) {
+  /**
+   * Print a double value.
+   *
+   * @param d The value to be printed
+   */
+  public void print(double d) {
 
-        super.print(d);
-        super.flush();
+    super.print(d);
+    super.flush();
 
-    }
+  }
 
 
-    /**
-     * Print a float value.
-     *
-     * @param f The value to be printed
-     */
-    public void print(float f) {
+  /**
+   * Print a float value.
+   *
+   * @param f The value to be printed
+   */
+  public void print(float f) {
 
-        super.print(f);
-        super.flush();
+    super.print(f);
+    super.flush();
 
-    }
+  }
 
 
-    /**
-     * Print an integer value.
-     *
-     * @param i The value to be printed.
-     */
-    public void print(int i) {
+  /**
+   * Print an integer value.
+   *
+   * @param i The value to be printed.
+   */
+  public void print(int i) {
 
-        super.print(i);
-        super.flush();
+    super.print(i);
+    super.flush();
 
-    }
+  }
 
 
+  /**
+   * Print a long value.
+   *
+   * @param l The value to be printed
+   */
+  public void print(long l) {
 
-    /**
-     * Print a long value.
-     *
-     * @param l The value to be printed
-     */
-    public void print(long l) {
+    super.print(l);
+    super.flush();
 
-        super.print(l);
-        super.flush();
+  }
 
-    }
 
+  /**
+   * Print an object value.
+   *
+   * @param o The value to be printed
+   */
+  public void print(Object o) {
 
-    /**
-     * Print an object value.
-     *
-     * @param o The value to be printed
-     */
-    public void print(Object o) {
+    super.print(o);
+    super.flush();
 
-        super.print(o);
-        super.flush();
+  }
 
-    }
 
+  /**
+   * Print a String value.
+   *
+   * @param s The value to be printed
+   */
+  public void print(String s) {
 
-    /**
-     * Print a String value.
-     *
-     * @param s The value to be printed
-     */
-    public void print(String s) {
+    super.print(s);
+    super.flush();
 
-        super.print(s);
-        super.flush();
+  }
 
-    }
 
+  /**
+   * Terminate the current line by writing the line separator string.
+   */
+  public void println() {
 
-    /**
-     * Terminate the current line by writing the line separator string.
-     */
-    public void println() {
+    super.println();
+    super.flush();
 
-        super.println();
-        super.flush();
+  }
 
-    }
 
+  /**
+   * Print a boolean value and terminate the current line.
+   *
+   * @param b The value to be printed
+   */
+  public void println(boolean b) {
 
-    /**
-     * Print a boolean value and terminate the current line.
-     *
-     * @param b The value to be printed
-     */
-    public void println(boolean b) {
+    super.println(b);
+    super.flush();
 
-        super.println(b);
-        super.flush();
+  }
 
-    }
 
+  /**
+   * Print a character value and terminate the current line.
+   *
+   * @param c The value to be printed
+   */
+  public void println(char c) {
 
-    /**
-     * Print a character value and terminate the current line.
-     *
-     * @param c The value to be printed
-     */
-    public void println(char c) {
+    super.println(c);
+    super.flush();
 
-        super.println(c);
-        super.flush();
+  }
 
-    }
 
+  /**
+   * Print a character array value and terminate the current line.
+   *
+   * @param ca The value to be printed
+   */
+  public void println(char ca[]) {
 
-    /**
-     * Print a character array value and terminate the current line.
-     *
-     * @param ca The value to be printed
-     */
-    public void println(char ca[]) {
+    super.println(ca);
+    super.flush();
 
-        super.println(ca);
-        super.flush();
+  }
 
-    }
 
+  /**
+   * Print a double value and terminate the current line.
+   *
+   * @param d The value to be printed
+   */
+  public void println(double d) {
 
-    /**
-     * Print a double value and terminate the current line.
-     *
-     * @param d The value to be printed
-     */
-    public void println(double d) {
+    super.println(d);
+    super.flush();
 
-        super.println(d);
-        super.flush();
+  }
 
-    }
 
+  /**
+   * Print a float value and terminate the current line.
+   *
+   * @param f The value to be printed
+   */
+  public void println(float f) {
 
-    /**
-     * Print a float value and terminate the current line.
-     *
-     * @param f The value to be printed
-     */
-    public void println(float f) {
+    super.println(f);
+    super.flush();
 
-        super.println(f);
-        super.flush();
+  }
 
-    }
 
+  /**
+   * Print an integer value and terminate the current line.
+   *
+   * @param i The value to be printed.
+   */
+  public void println(int i) {
 
-    /**
-     * Print an integer value and terminate the current line.
-     *
-     * @param i The value to be printed.
-     */
-    public void println(int i) {
+    super.println(i);
+    super.flush();
 
-        super.println(i);
-        super.flush();
+  }
 
-    }
 
+  /**
+   * Print a long value and terminate the current line.
+   *
+   * @param l The value to be printed
+   */
+  public void println(long l) {
 
+    super.println(l);
+    super.flush();
 
-    /**
-     * Print a long value and terminate the current line.
-     *
-     * @param l The value to be printed
-     */
-    public void println(long l) {
+  }
 
-        super.println(l);
-        super.flush();
 
-    }
+  /**
+   * Print an object value and terminate the current line.
+   *
+   * @param o The value to be printed
+   */
+  public void println(Object o) {
 
+    super.println(o);
+    super.flush();
 
-    /**
-     * Print an object value and terminate the current line.
-     *
-     * @param o The value to be printed
-     */
-    public void println(Object o) {
+  }
 
-        super.println(o);
-        super.flush();
 
-    }
+  /**
+   * Print a String value and terminate the current line.
+   *
+   * @param s The value to be printed
+   */
+  public void println(String s) {
 
+    super.println(s);
+    super.flush();
 
-    /**
-     * Print a String value and terminate the current line.
-     *
-     * @param s The value to be printed
-     */
-    public void println(String s) {
+  }
 
-        super.println(s);
-        super.flush();
 
-    }
+  /**
+   * Write a single character.
+   *
+   * @param c The value to be written
+   */
+  public void write(char c) {
 
+    super.write(c);
+    super.flush();
 
-    /**
-     * Write a single character.
-     *
-     * @param c The value to be written
-     */
-    public void write(char c) {
+  }
 
-        super.write(c);
-        super.flush();
 
-    }
+  /**
+   * Write an array of characters.
+   *
+   * @param ca The value to be written
+   */
+  public void write(char ca[]) {
 
+    super.write(ca);
+    super.flush();
 
-    /**
-     * Write an array of characters.
-     *
-     * @param ca The value to be written
-     */
-    public void write(char ca[]) {
+  }
 
-        super.write(ca);
-        super.flush();
 
-    }
+  /**
+   * Write a portion of an array of characters.
+   *
+   * @param ca  The array from which to write
+   * @param off Starting offset
+   * @param len Number of characters to write
+   */
+  public void write(char ca[], int off, int len) {
 
+    super.write(ca, off, len);
+    super.flush();
 
-    /**
-     * Write a portion of an array of characters.
-     *
-     * @param ca The array from which to write
-     * @param off Starting offset
-     * @param len Number of characters to write
-     */
-    public void write(char ca[], int off, int len) {
+  }
 
-        super.write(ca, off, len);
-        super.flush();
 
-    }
+  /**
+   * Write a String.
+   *
+   * @param s The value to be written
+   */
+  public void write(String s) {
 
+    super.write(s);
+    super.flush();
 
-    /**
-     * Write a String.
-     *
-     * @param s The value to be written
-     */
-    public void write(String s) {
+  }
 
-        super.write(s);
-        super.flush();
 
-    }
+  /**
+   * Write a portion of a String.
+   *
+   * @param s   The String from which to write
+   * @param off Starting offset
+   * @param len Number of characters to write
+   */
+  public void write(String s, int off, int len) {
 
+    super.write(s, off, len);
+    super.flush();
 
-    /**
-     * Write a portion of a String.
-     *
-     * @param s The String from which to write
-     * @param off Starting offset
-     * @param len Number of characters to write
-     */
-    public void write(String s, int off, int len) {
-
-        super.write(s, off, len);
-        super.flush();
-
-    }
+  }
 
 
 }

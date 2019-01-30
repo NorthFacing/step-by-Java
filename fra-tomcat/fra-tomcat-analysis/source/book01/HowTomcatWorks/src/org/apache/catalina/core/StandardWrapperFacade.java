@@ -80,54 +80,54 @@ public final class StandardWrapperFacade
     implements ServletConfig {
 
 
-    // ----------------------------------------------------------- Constructors
+  // ----------------------------------------------------------- Constructors
 
 
-    /**
-     * Create a new facede around a StandardWrapper.
-     */
-    public StandardWrapperFacade(StandardWrapper config) {
+  /**
+   * Create a new facede around a StandardWrapper.
+   */
+  public StandardWrapperFacade(StandardWrapper config) {
 
-        super();
-        this.config = (ServletConfig) config;
+    super();
+    this.config = (ServletConfig) config;
 
-    }
-
-
-    // ----------------------------------------------------- Instance Variables
+  }
 
 
-    /**
-     * Wrapped config.
-     */
-    private ServletConfig config = null;
+  // ----------------------------------------------------- Instance Variables
 
 
-    // -------------------------------------------------- ServletConfig Methods
+  /**
+   * Wrapped config.
+   */
+  private ServletConfig config = null;
 
 
-    public String getServletName() {
-        return config.getServletName();
-    }
+  // -------------------------------------------------- ServletConfig Methods
 
 
-    public ServletContext getServletContext() {
-        ServletContext theContext = config.getServletContext();
-        if ((theContext != null) &&
-            (theContext instanceof ApplicationContext))
-            theContext = ((ApplicationContext) theContext).getFacade();
-        return (theContext);
-    }
+  public String getServletName() {
+    return config.getServletName();
+  }
 
 
-    public String getInitParameter(String name) {
-        return config.getInitParameter(name);
-    }
+  public ServletContext getServletContext() {
+    ServletContext theContext = config.getServletContext();
+    if ((theContext != null) &&
+        (theContext instanceof ApplicationContext))
+      theContext = ((ApplicationContext) theContext).getFacade();
+    return (theContext);
+  }
 
 
-    public Enumeration getInitParameterNames() {
-        return config.getInitParameterNames();
-    }
+  public String getInitParameter(String name) {
+    return config.getInitParameter(name);
+  }
+
+
+  public Enumeration getInitParameterNames() {
+    return config.getInitParameterNames();
+  }
 
 
 }

@@ -24,9 +24,8 @@ public class HttpServer2 {
     ServerSocket serverSocket = null;
     int port = 8080;
     try {
-      serverSocket =  new ServerSocket(port, 1, InetAddress.getByName("127.0.0.1"));
-    }
-    catch (IOException e) {
+      serverSocket = new ServerSocket(port, 1, InetAddress.getByName("127.0.0.1"));
+    } catch (IOException e) {
       e.printStackTrace();
       System.exit(1);
     }
@@ -54,8 +53,7 @@ public class HttpServer2 {
         if (request.getUri().startsWith("/servlet/")) {
           ServletProcessor2 processor = new ServletProcessor2();
           processor.process(request, response);
-        }
-        else {
+        } else {
           StaticResourceProcessor processor = new StaticResourceProcessor();
           processor.process(request, response);
         }
@@ -64,8 +62,7 @@ public class HttpServer2 {
         socket.close();
         //check if the previous URI is a shutdown command
         shutdown = request.getUri().equals(SHUTDOWN_COMMAND);
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         e.printStackTrace();
         System.exit(1);
       }

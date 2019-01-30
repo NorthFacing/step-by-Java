@@ -77,19 +77,22 @@ import org.apache.commons.daemon.DaemonController;
  */
 
 public class BootstrapServiceContext implements DaemonContext {
-    DaemonController controller = null;
-    String[] args = null;
+  DaemonController controller = null;
+  String[] args = null;
 
-    public DaemonController getController() {
-        return controller;
-    }
-    public void setController(DaemonController controller) {
-        this.controller = controller;
-    }
-    public String[] getArguments() {
-        return args;
-    }
-    public void setArguments(String[] args) {
-        this.args = args;
-    }
+  public DaemonController getController() {
+    return controller;
+  }
+
+  public void setController(DaemonController controller) {
+    this.controller = controller;
+  }
+
+  public String[] getArguments() {
+    return args;
+  }
+
+  public void setArguments(String[] args) {
+    this.args = args;
+  }
 }

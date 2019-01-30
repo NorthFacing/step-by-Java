@@ -87,157 +87,157 @@ public final class ApplicationContextFacade
     implements ServletContext {
 
 
-    // ----------------------------------------------------------- Constructors
+  // ----------------------------------------------------------- Constructors
 
 
-    /**
-     * Construct a new instance of this class, associated with the specified
-     * Context instance.
-     *
-     * @param context The associated Context instance
-     */
-    public ApplicationContextFacade(ApplicationContext context) {
-        super();
-        this.context = context;
-    }
+  /**
+   * Construct a new instance of this class, associated with the specified
+   * Context instance.
+   *
+   * @param context The associated Context instance
+   */
+  public ApplicationContextFacade(ApplicationContext context) {
+    super();
+    this.context = context;
+  }
 
 
-    // ----------------------------------------------------- Instance Variables
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * Wrapped application context.
-     */
-    private ApplicationContext context = null;
+  /**
+   * Wrapped application context.
+   */
+  private ApplicationContext context = null;
 
 
-    // ------------------------------------------------- ServletContext Methods
+  // ------------------------------------------------- ServletContext Methods
 
 
-    public ServletContext getContext(String uripath) {
-        ServletContext theContext = context.getContext(uripath);
-        if ((theContext != null) &&
-            (theContext instanceof ApplicationContext))
-            theContext = ((ApplicationContext) theContext).getFacade();
-        return (theContext);
-    }
+  public ServletContext getContext(String uripath) {
+    ServletContext theContext = context.getContext(uripath);
+    if ((theContext != null) &&
+        (theContext instanceof ApplicationContext))
+      theContext = ((ApplicationContext) theContext).getFacade();
+    return (theContext);
+  }
 
 
-    public int getMajorVersion() {
-        return context.getMajorVersion();
-    }
+  public int getMajorVersion() {
+    return context.getMajorVersion();
+  }
 
 
-    public int getMinorVersion() {
-        return context.getMinorVersion();
-    }
+  public int getMinorVersion() {
+    return context.getMinorVersion();
+  }
 
 
-    public String getMimeType(String file) {
-        return context.getMimeType(file);
-    }
+  public String getMimeType(String file) {
+    return context.getMimeType(file);
+  }
 
 
-    public Set getResourcePaths(String path) {
-        return context.getResourcePaths(path);
-    }
+  public Set getResourcePaths(String path) {
+    return context.getResourcePaths(path);
+  }
 
 
-    public URL getResource(String path)
-        throws MalformedURLException {
-        return context.getResource(path);
-    }
+  public URL getResource(String path)
+      throws MalformedURLException {
+    return context.getResource(path);
+  }
 
 
-    public InputStream getResourceAsStream(String path) {
-        return context.getResourceAsStream(path);
-    }
+  public InputStream getResourceAsStream(String path) {
+    return context.getResourceAsStream(path);
+  }
 
 
-    public RequestDispatcher getRequestDispatcher(String path) {
-        return context.getRequestDispatcher(path);
-    }
+  public RequestDispatcher getRequestDispatcher(String path) {
+    return context.getRequestDispatcher(path);
+  }
 
 
-    public RequestDispatcher getNamedDispatcher(String name) {
-        return context.getNamedDispatcher(name);
-    }
+  public RequestDispatcher getNamedDispatcher(String name) {
+    return context.getNamedDispatcher(name);
+  }
 
 
-    public Servlet getServlet(String name)
-        throws ServletException {
-        return context.getServlet(name);
-    }
+  public Servlet getServlet(String name)
+      throws ServletException {
+    return context.getServlet(name);
+  }
 
 
-    public Enumeration getServlets() {
-        return context.getServlets();
-    }
+  public Enumeration getServlets() {
+    return context.getServlets();
+  }
 
 
-    public Enumeration getServletNames() {
-        return context.getServletNames();
-    }
+  public Enumeration getServletNames() {
+    return context.getServletNames();
+  }
 
 
-    public void log(String msg) {
-        context.log(msg);
-    }
+  public void log(String msg) {
+    context.log(msg);
+  }
 
 
-    public void log(Exception exception, String msg) {
-        context.log(exception, msg);
-    }
+  public void log(Exception exception, String msg) {
+    context.log(exception, msg);
+  }
 
 
-    public void log(String message, Throwable throwable) {
-        context.log(message, throwable);
-    }
+  public void log(String message, Throwable throwable) {
+    context.log(message, throwable);
+  }
 
 
-    public String getRealPath(String path) {
-        return context.getRealPath(path);
-    }
+  public String getRealPath(String path) {
+    return context.getRealPath(path);
+  }
 
 
-    public String getServerInfo() {
-        return context.getServerInfo();
-    }
+  public String getServerInfo() {
+    return context.getServerInfo();
+  }
 
 
-    public String getInitParameter(String name) {
-        return context.getInitParameter(name);
-    }
+  public String getInitParameter(String name) {
+    return context.getInitParameter(name);
+  }
 
 
-    public Enumeration getInitParameterNames() {
-        return context.getInitParameterNames();
-    }
+  public Enumeration getInitParameterNames() {
+    return context.getInitParameterNames();
+  }
 
 
-    public Object getAttribute(String name) {
-        return context.getAttribute(name);
-    }
+  public Object getAttribute(String name) {
+    return context.getAttribute(name);
+  }
 
 
-    public Enumeration getAttributeNames() {
-        return context.getAttributeNames();
-    }
+  public Enumeration getAttributeNames() {
+    return context.getAttributeNames();
+  }
 
 
-    public void setAttribute(String name, Object object) {
-        context.setAttribute(name, object);
-    }
+  public void setAttribute(String name, Object object) {
+    context.setAttribute(name, object);
+  }
 
 
-    public void removeAttribute(String name) {
-        context.removeAttribute(name);
-    }
+  public void removeAttribute(String name) {
+    context.removeAttribute(name);
+  }
 
 
-    public String getServletContextName() {
-        return context.getServletContextName();
-    }
+  public String getServletContextName() {
+    return context.getServletContextName();
+  }
 
 
 }

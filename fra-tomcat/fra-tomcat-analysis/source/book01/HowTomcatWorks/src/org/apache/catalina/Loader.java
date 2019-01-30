@@ -80,19 +80,19 @@ import java.beans.PropertyChangeListener;
  * must obey the following constraints:
  * <ul>
  * <li>Must implement <code>Lifecycle</code> so that the Context can indicate
- *     that a new class loader is required.
+ * that a new class loader is required.
  * <li>The <code>start()</code> method must unconditionally create a new
- *     <code>ClassLoader</code> implementation.
+ * <code>ClassLoader</code> implementation.
  * <li>The <code>stop()</code> method must throw away its reference to the
- *     <code>ClassLoader</code> previously utilized, so that the class loader,
- *     all classes loaded by it, and all objects of those classes, can be
- *     garbage collected.
+ * <code>ClassLoader</code> previously utilized, so that the class loader,
+ * all classes loaded by it, and all objects of those classes, can be
+ * garbage collected.
  * <li>Must allow a call to <code>stop()</code> to be followed by a call to
- *     <code>start()</code> on the same <code>Loader</code> instance.
+ * <code>start()</code> on the same <code>Loader</code> instance.
  * <li>Based on a policy chosen by the implementation, must call the
- *     <code>Context.reload()</code> method on the owning <code>Context</code>
- *     when a change to one or more of the class files loaded by this class
- *     loader is detected.
+ * <code>Context.reload()</code> method on the owning <code>Context</code>
+ * when a change to one or more of the class files loaded by this class
+ * loader is detected.
  * </ul>
  *
  * @author Craig R. McClanahan
@@ -102,120 +102,120 @@ import java.beans.PropertyChangeListener;
 public interface Loader {
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * Return the Java class loader to be used by this Container.
-     */
-    public ClassLoader getClassLoader();
+  /**
+   * Return the Java class loader to be used by this Container.
+   */
+  public ClassLoader getClassLoader();
 
 
-    /**
-     * Return the Container with which this Loader has been associated.
-     */
-    public Container getContainer();
+  /**
+   * Return the Container with which this Loader has been associated.
+   */
+  public Container getContainer();
 
 
-    /**
-     * Set the Container with which this Loader has been associated.
-     *
-     * @param container The associated Container
-     */
-    public void setContainer(Container container);
+  /**
+   * Set the Container with which this Loader has been associated.
+   *
+   * @param container The associated Container
+   */
+  public void setContainer(Container container);
 
 
-    /**
-     * Return the DefaultContext with which this Manager is associated.
-     */
-    public DefaultContext getDefaultContext();
+  /**
+   * Return the DefaultContext with which this Manager is associated.
+   */
+  public DefaultContext getDefaultContext();
 
 
-    /**
-     * Set the DefaultContext with which this Manager is associated.
-     *
-     * @param defaultContext The newly associated DefaultContext
-     */
-    public void setDefaultContext(DefaultContext defaultContext);
-    
-
-    /**
-     * Return the "follow standard delegation model" flag used to configure
-     * our ClassLoader.
-     */
-    public boolean getDelegate();
+  /**
+   * Set the DefaultContext with which this Manager is associated.
+   *
+   * @param defaultContext The newly associated DefaultContext
+   */
+  public void setDefaultContext(DefaultContext defaultContext);
 
 
-    /**
-     * Set the "follow standard delegation model" flag used to configure
-     * our ClassLoader.
-     *
-     * @param delegate The new flag
-     */
-    public void setDelegate(boolean delegate);
+  /**
+   * Return the "follow standard delegation model" flag used to configure
+   * our ClassLoader.
+   */
+  public boolean getDelegate();
 
 
-    /**
-     * Return descriptive information about this Loader implementation and
-     * the corresponding version number, in the format
-     * <code>&lt;description&gt;/&lt;version&gt;</code>.
-     */
-    public String getInfo();
+  /**
+   * Set the "follow standard delegation model" flag used to configure
+   * our ClassLoader.
+   *
+   * @param delegate The new flag
+   */
+  public void setDelegate(boolean delegate);
 
 
-    /**
-     * Return the reloadable flag for this Loader.
-     */
-    public boolean getReloadable();
+  /**
+   * Return descriptive information about this Loader implementation and
+   * the corresponding version number, in the format
+   * <code>&lt;description&gt;/&lt;version&gt;</code>.
+   */
+  public String getInfo();
 
 
-    /**
-     * Set the reloadable flag for this Loader.
-     *
-     * @param reloadable The new reloadable flag
-     */
-    public void setReloadable(boolean reloadable);
+  /**
+   * Return the reloadable flag for this Loader.
+   */
+  public boolean getReloadable();
 
 
-    // --------------------------------------------------------- Public Methods
+  /**
+   * Set the reloadable flag for this Loader.
+   *
+   * @param reloadable The new reloadable flag
+   */
+  public void setReloadable(boolean reloadable);
 
 
-    /**
-     * Add a property change listener to this component.
-     *
-     * @param listener The listener to add
-     */
-    public void addPropertyChangeListener(PropertyChangeListener listener);
+  // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Add a new repository to the set of repositories for this class loader.
-     *
-     * @param repository Repository to be added
-     */
-    public void addRepository(String repository);
+  /**
+   * Add a property change listener to this component.
+   *
+   * @param listener The listener to add
+   */
+  public void addPropertyChangeListener(PropertyChangeListener listener);
 
 
-    /**
-     * Return the set of repositories defined for this class loader.
-     * If none are defined, a zero-length array is returned.
-     */
-    public String[] findRepositories();
+  /**
+   * Add a new repository to the set of repositories for this class loader.
+   *
+   * @param repository Repository to be added
+   */
+  public void addRepository(String repository);
 
 
-    /**
-     * Has the internal repository associated with this Loader been modified,
-     * such that the loaded classes should be reloaded?
-     */
-    public boolean modified();
+  /**
+   * Return the set of repositories defined for this class loader.
+   * If none are defined, a zero-length array is returned.
+   */
+  public String[] findRepositories();
 
 
-    /**
-     * Remove a property change listener from this component.
-     *
-     * @param listener The listener to remove
-     */
-    public void removePropertyChangeListener(PropertyChangeListener listener);
+  /**
+   * Has the internal repository associated with this Loader been modified,
+   * such that the loaded classes should be reloaded?
+   */
+  public boolean modified();
+
+
+  /**
+   * Remove a property change listener from this component.
+   *
+   * @param listener The listener to remove
+   */
+  public void removePropertyChangeListener(PropertyChangeListener listener);
 
 
 }

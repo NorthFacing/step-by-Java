@@ -7,7 +7,7 @@
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999 The Apache Software Foundation.  All rights 
+ * Copyright (c) 1999 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -15,7 +15,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -23,15 +23,15 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution, if
- *    any, must include the following acknowlegement:  
- *       "This product includes software developed by the 
+ *    any, must include the following acknowlegement:
+ *       "This product includes software developed by the
  *        Apache Software Foundation (http://www.apache.org/)."
  *    Alternately, this acknowlegement may appear in the software itself,
  *    if and wherever such third-party acknowlegements normally appear.
  *
  * 4. The names "The Jakarta Project", "Tomcat", and "Apache Software
  *    Foundation" must not be used to endorse or promote products derived
- *    from this software without prior written permission. For written 
+ *    from this software without prior written permission. For written
  *    permission, please contact apache@apache.org.
  *
  * 5. Products derived from this software may not be called "Apache"
@@ -59,7 +59,7 @@
  *
  * [Additional notices, if required by prior licensing conditions]
  *
- */ 
+ */
 
 
 package org.apache.naming;
@@ -81,133 +81,133 @@ public class ResourceRef
     extends Reference {
 
 
-    // -------------------------------------------------------------- Constants
+  // -------------------------------------------------------------- Constants
 
 
-    /**
-     * Default factory for this reference.
-     */
-    public static final String DEFAULT_FACTORY = 
-        org.apache.naming.factory.Constants.DEFAULT_RESOURCE_FACTORY;
+  /**
+   * Default factory for this reference.
+   */
+  public static final String DEFAULT_FACTORY =
+      org.apache.naming.factory.Constants.DEFAULT_RESOURCE_FACTORY;
 
 
-    /**
-     * Description address type.
-     */
-    public static final String DESCRIPTION = "description";
+  /**
+   * Description address type.
+   */
+  public static final String DESCRIPTION = "description";
 
 
-    /**
-     * Scope address type.
-     */
-    public static final String SCOPE = "scope";
+  /**
+   * Scope address type.
+   */
+  public static final String SCOPE = "scope";
 
 
-    /**
-     * Auth address type.
-     */
-    public static final String AUTH = "auth";
+  /**
+   * Auth address type.
+   */
+  public static final String AUTH = "auth";
 
 
-    // ----------------------------------------------------------- Constructors
+  // ----------------------------------------------------------- Constructors
 
 
-    /**
-     * Resource Reference.
-     * 
-     * @param resourceClass Resource class
-     * @param scope Resource scope
-     * @param auth Resource authetication
-     */
-    public ResourceRef(String resourceClass, String description, 
-                       String scope, String auth) {
-        this(resourceClass, description, scope, auth, null, null);
+  /**
+   * Resource Reference.
+   *
+   * @param resourceClass Resource class
+   * @param scope         Resource scope
+   * @param auth          Resource authetication
+   */
+  public ResourceRef(String resourceClass, String description,
+                     String scope, String auth) {
+    this(resourceClass, description, scope, auth, null, null);
+  }
+
+
+  /**
+   * Resource Reference.
+   *
+   * @param resourceClass Resource class
+   * @param scope         Resource scope
+   * @param auth          Resource authetication
+   */
+  public ResourceRef(String resourceClass, String description,
+                     String scope, String auth, String factory,
+                     String factoryLocation) {
+    super(resourceClass, factory, factoryLocation);
+    StringRefAddr refAddr = null;
+    if (description != null) {
+      refAddr = new StringRefAddr(DESCRIPTION, description);
+      add(refAddr);
     }
-
-
-    /**
-     * Resource Reference.
-     * 
-     * @param resourceClass Resource class
-     * @param scope Resource scope
-     * @param auth Resource authetication
-     */
-    public ResourceRef(String resourceClass, String description, 
-                       String scope, String auth, String factory,
-                       String factoryLocation) {
-        super(resourceClass, factory, factoryLocation);
-        StringRefAddr refAddr = null;
-        if (description != null) {
-            refAddr = new StringRefAddr(DESCRIPTION, description);
-            add(refAddr);
-        }
-        if (scope != null) {
-            refAddr = new StringRefAddr(SCOPE, scope);
-            add(refAddr);
-        }
-        if (auth != null) {
-            refAddr = new StringRefAddr(AUTH, auth);
-            add(refAddr);
-        }
+    if (scope != null) {
+      refAddr = new StringRefAddr(SCOPE, scope);
+      add(refAddr);
     }
-
-
-    // ----------------------------------------------------- Instance Variables
-
-
-    // ------------------------------------------------------ Reference Methods
-
-
-    /**
-     * Retrieves the class name of the factory of the object to which this 
-     * reference refers.
-     */
-    public String getFactoryClassName() {
-        String factory = super.getFactoryClassName();
-        if (factory != null) {
-            return factory;
-        } else {
-            factory = System.getProperty(Context.OBJECT_FACTORIES);
-            if (factory != null) {
-                return null;
-            } else {
-                return DEFAULT_FACTORY;
-            }
-        }
+    if (auth != null) {
+      refAddr = new StringRefAddr(AUTH, auth);
+      add(refAddr);
     }
+  }
 
 
-    // --------------------------------------------------------- Public Methods
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * Return a String rendering of this object.
-     */
-    public String toString() {
+  // ------------------------------------------------------ Reference Methods
 
-        StringBuffer sb = new StringBuffer("ResourceRef[");
-        sb.append("className=");
-        sb.append(getClassName());
-        sb.append(",factoryClassLocation=");
-        sb.append(getFactoryClassLocation());
-        sb.append(",factoryClassName=");
-        sb.append(getFactoryClassName());
-        Enumeration refAddrs = getAll();
-        while (refAddrs.hasMoreElements()) {
-            RefAddr refAddr = (RefAddr) refAddrs.nextElement();
-            sb.append(",{type=");
-            sb.append(refAddr.getType());
-            sb.append(",content=");
-            sb.append(refAddr.getContent());
-            sb.append("}");
-        }
-        sb.append("]");
-        return (sb.toString());
 
+  /**
+   * Retrieves the class name of the factory of the object to which this
+   * reference refers.
+   */
+  public String getFactoryClassName() {
+    String factory = super.getFactoryClassName();
+    if (factory != null) {
+      return factory;
+    } else {
+      factory = System.getProperty(Context.OBJECT_FACTORIES);
+      if (factory != null) {
+        return null;
+      } else {
+        return DEFAULT_FACTORY;
+      }
     }
+  }
 
 
-    // ------------------------------------------------------------- Properties
+  // --------------------------------------------------------- Public Methods
+
+
+  /**
+   * Return a String rendering of this object.
+   */
+  public String toString() {
+
+    StringBuffer sb = new StringBuffer("ResourceRef[");
+    sb.append("className=");
+    sb.append(getClassName());
+    sb.append(",factoryClassLocation=");
+    sb.append(getFactoryClassLocation());
+    sb.append(",factoryClassName=");
+    sb.append(getFactoryClassName());
+    Enumeration refAddrs = getAll();
+    while (refAddrs.hasMoreElements()) {
+      RefAddr refAddr = (RefAddr) refAddrs.nextElement();
+      sb.append(",{type=");
+      sb.append(refAddr.getType());
+      sb.append(",content=");
+      sb.append(refAddr.getContent());
+      sb.append("}");
+    }
+    sb.append("]");
+    return (sb.toString());
+
+  }
+
+
+  // ------------------------------------------------------------- Properties
 
 
 }

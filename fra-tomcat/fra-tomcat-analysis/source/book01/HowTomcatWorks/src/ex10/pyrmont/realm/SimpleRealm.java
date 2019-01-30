@@ -5,6 +5,7 @@ import java.security.Principal;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import org.apache.catalina.Container;
 import org.apache.catalina.Realm;
 import org.apache.catalina.realm.GenericPrincipal;
@@ -36,10 +37,10 @@ public class SimpleRealm implements Realm {
 
   public Principal authenticate(String username, String credentials) {
     System.out.println("SimpleRealm.authenticate()");
-    if (username==null || credentials==null)
+    if (username == null || credentials == null)
       return null;
     User user = getUser(username, credentials);
-    if (user==null)
+    if (user == null)
       return null;
     return new GenericPrincipal(this, user.username, user.password, user.getRoles());
   }
@@ -49,7 +50,7 @@ public class SimpleRealm implements Realm {
   }
 
   public Principal authenticate(String username, String digest, String nonce,
-    String nc, String cnonce, String qop, String realm, String md5a2) {
+                                String nc, String cnonce, String qop, String realm, String md5a2) {
     return null;
   }
 
@@ -59,7 +60,7 @@ public class SimpleRealm implements Realm {
 
   public boolean hasRole(Principal principal, String role) {
     if ((principal == null) || (role == null) ||
-      !(principal instanceof GenericPrincipal))
+        !(principal instanceof GenericPrincipal))
       return (false);
     GenericPrincipal gp = (GenericPrincipal) principal;
     if (!(gp.getRealm() == this))
@@ -106,6 +107,7 @@ public class SimpleRealm implements Realm {
     public void addRole(String role) {
       roles.add(role);
     }
+
     public ArrayList getRoles() {
       return roles;
     }

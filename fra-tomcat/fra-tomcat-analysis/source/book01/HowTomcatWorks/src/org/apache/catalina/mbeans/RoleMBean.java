@@ -66,6 +66,7 @@ package org.apache.catalina.mbeans;
 import javax.management.MBeanException;
 import javax.management.MBeanServer;
 import javax.management.RuntimeOperationsException;
+
 import org.apache.commons.modeler.BaseModelMBean;
 import org.apache.commons.modeler.ManagedBean;
 import org.apache.commons.modeler.Registry;
@@ -82,52 +83,52 @@ import org.apache.commons.modeler.Registry;
 public class RoleMBean extends BaseModelMBean {
 
 
-    // ----------------------------------------------------------- Constructors
+  // ----------------------------------------------------------- Constructors
 
 
-    /**
-     * Construct a <code>ModelMBean</code> with default
-     * <code>ModelMBeanInfo</code> information.
-     *
-     * @exception MBeanException if the initializer of an object
-     *  throws an exception
-     * @exception RuntimeOperationsException if an IllegalArgumentException
-     *  occurs
-     */
-    public RoleMBean()
-        throws MBeanException, RuntimeOperationsException {
+  /**
+   * Construct a <code>ModelMBean</code> with default
+   * <code>ModelMBeanInfo</code> information.
+   *
+   * @throws MBeanException             if the initializer of an object
+   *                                    throws an exception
+   * @throws RuntimeOperationsException if an IllegalArgumentException
+   *                                    occurs
+   */
+  public RoleMBean()
+      throws MBeanException, RuntimeOperationsException {
 
-        super();
+    super();
 
-    }
-
-
-    // ----------------------------------------------------- Instance Variables
+  }
 
 
-    /**
-     * The configuration information registry for our managed beans.
-     */
-    protected Registry registry = MBeanUtils.createRegistry();
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * The <code>MBeanServer</code> in which we are registered.
-     */
-    protected MBeanServer mserver = MBeanUtils.createServer();
+  /**
+   * The configuration information registry for our managed beans.
+   */
+  protected Registry registry = MBeanUtils.createRegistry();
 
 
-    /**
-     * The <code>ManagedBean</code> information describing this MBean.
-     */
-    protected ManagedBean managed =
-        registry.findManagedBean("Role");
+  /**
+   * The <code>MBeanServer</code> in which we are registered.
+   */
+  protected MBeanServer mserver = MBeanUtils.createServer();
 
 
-    // ------------------------------------------------------------- Attributes
+  /**
+   * The <code>ManagedBean</code> information describing this MBean.
+   */
+  protected ManagedBean managed =
+      registry.findManagedBean("Role");
 
 
-    // ------------------------------------------------------------- Operations
+  // ------------------------------------------------------------- Attributes
+
+
+  // ------------------------------------------------------------- Operations
 
 
 }

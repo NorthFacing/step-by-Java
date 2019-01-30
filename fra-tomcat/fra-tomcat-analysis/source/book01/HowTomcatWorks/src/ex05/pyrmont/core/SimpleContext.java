@@ -567,10 +567,10 @@ public class SimpleContext implements Context, Pipeline {
     // the first mapper added becomes the default mapper
     mapper.setContainer((Container) this);      // May throw IAE
     this.mapper = mapper;
-    synchronized(mappers) {
+    synchronized (mappers) {
       if (mappers.get(mapper.getProtocol()) != null)
         throw new IllegalArgumentException("addMapper:  Protocol '" +
-          mapper.getProtocol() + "' is not unique");
+            mapper.getProtocol() + "' is not unique");
       mapper.setContainer((Container) this);      // May throw IAE
       mappers.put(mapper.getProtocol(), mapper);
       if (mappers.size() == 1)
@@ -618,7 +618,7 @@ public class SimpleContext implements Context, Pipeline {
   }
 
   public void invoke(Request request, Response response)
-    throws IOException, ServletException {
+      throws IOException, ServletException {
     pipeline.invoke(request, response);
   }
 

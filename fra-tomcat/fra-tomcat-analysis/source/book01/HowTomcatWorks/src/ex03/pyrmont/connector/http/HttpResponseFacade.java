@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class HttpResponseFacade implements HttpServletResponse {
   private HttpServletResponse response;
+
   public HttpResponseFacade(HttpResponse response) {
     this.response = response;
   }
 
-  /** implementation of HttpServletResponse  */
+  /**
+   * implementation of HttpServletResponse
+   */
   public void addCookie(Cookie cookie) {
     response.addCookie(cookie);
   }
@@ -51,7 +54,7 @@ public class HttpResponseFacade implements HttpServletResponse {
   }
 
   public void flushBuffer() throws IOException {
-     response.flushBuffer();
+    response.flushBuffer();
   }
 
   public int getBufferSize() {

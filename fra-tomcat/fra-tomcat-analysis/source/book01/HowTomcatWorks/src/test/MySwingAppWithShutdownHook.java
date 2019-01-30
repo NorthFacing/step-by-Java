@@ -26,7 +26,7 @@ public class MySwingAppWithShutdownHook extends JFrame {
     this.getContentPane().add(exitButton, null);
     this.getContentPane().add(jTextArea1, null);
     this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-    this.setBounds(0,0, 400, 330);
+    this.setBounds(0, 0, 400, 330);
     this.setVisible(true);
     initialize();
   }
@@ -41,8 +41,7 @@ public class MySwingAppWithShutdownHook extends JFrame {
     try {
       System.out.println("Creating temporary file");
       file.createNewFile();
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       System.out.println("Failed creating temporary file.");
     }
   }

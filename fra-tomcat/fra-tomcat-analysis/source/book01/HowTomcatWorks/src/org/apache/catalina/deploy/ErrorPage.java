@@ -80,137 +80,137 @@ import org.apache.catalina.util.RequestUtil;
 public final class ErrorPage {
 
 
-    // ----------------------------------------------------- Instance Variables
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * The error (status) code for which this error page is active.
-     */
-    private int errorCode = 0;
+  /**
+   * The error (status) code for which this error page is active.
+   */
+  private int errorCode = 0;
 
 
-    /**
-     * The exception type for which this error page is active.
-     */
-    private String exceptionType = null;
+  /**
+   * The exception type for which this error page is active.
+   */
+  private String exceptionType = null;
 
 
-    /**
-     * The context-relative location to handle this error or exception.
-     */
-    private String location = null;
+  /**
+   * The context-relative location to handle this error or exception.
+   */
+  private String location = null;
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * Return the error code.
-     */
-    public int getErrorCode() {
+  /**
+   * Return the error code.
+   */
+  public int getErrorCode() {
 
-        return (this.errorCode);
+    return (this.errorCode);
 
+  }
+
+
+  /**
+   * Set the error code.
+   *
+   * @param errorCode The new error code
+   */
+  public void setErrorCode(int errorCode) {
+
+    this.errorCode = errorCode;
+
+  }
+
+
+  /**
+   * Set the error code (hack for default XmlMapper data type).
+   *
+   * @param errorCode The new error code
+   */
+  public void setErrorCode(String errorCode) {
+
+    try {
+      this.errorCode = Integer.parseInt(errorCode);
+    } catch (Throwable t) {
+      this.errorCode = 0;
     }
 
+  }
 
-    /**
-     * Set the error code.
-     *
-     * @param errorCode The new error code
-     */
-    public void setErrorCode(int errorCode) {
 
-        this.errorCode = errorCode;
+  /**
+   * Return the exception type.
+   */
+  public String getExceptionType() {
 
+    return (this.exceptionType);
+
+  }
+
+
+  /**
+   * Set the exception type.
+   *
+   * @param exceptionType The new exception type
+   */
+  public void setExceptionType(String exceptionType) {
+
+    this.exceptionType = exceptionType;
+
+  }
+
+
+  /**
+   * Return the location.
+   */
+  public String getLocation() {
+
+    return (this.location);
+
+  }
+
+
+  /**
+   * Set the location.
+   *
+   * @param location The new location
+   */
+  public void setLocation(String location) {
+
+    //        if ((location == null) || !location.startsWith("/"))
+    //            throw new IllegalArgumentException
+    //                ("Error Page Location must start with a '/'");
+    this.location = RequestUtil.URLDecode(location);
+
+  }
+
+
+  // --------------------------------------------------------- Public Methods
+
+
+  /**
+   * Render a String representation of this object.
+   */
+  public String toString() {
+
+    StringBuffer sb = new StringBuffer("ErrorPage[");
+    if (exceptionType == null) {
+      sb.append("errorCode=");
+      sb.append(errorCode);
+    } else {
+      sb.append("exceptionType=");
+      sb.append(exceptionType);
     }
+    sb.append(", location=");
+    sb.append(location);
+    sb.append("]");
+    return (sb.toString());
 
-
-    /**
-     * Set the error code (hack for default XmlMapper data type).
-     *
-     * @param errorCode The new error code
-     */
-    public void setErrorCode(String errorCode) {
-
-        try {
-            this.errorCode = Integer.parseInt(errorCode);
-        } catch (Throwable t) {
-            this.errorCode = 0;
-        }
-
-    }
-
-
-    /**
-     * Return the exception type.
-     */
-    public String getExceptionType() {
-
-        return (this.exceptionType);
-
-    }
-
-
-    /**
-     * Set the exception type.
-     *
-     * @param exceptionType The new exception type
-     */
-    public void setExceptionType(String exceptionType) {
-
-        this.exceptionType = exceptionType;
-
-    }
-
-
-    /**
-     * Return the location.
-     */
-    public String getLocation() {
-
-        return (this.location);
-
-    }
-
-
-    /**
-     * Set the location.
-     *
-     * @param location The new location
-     */
-    public void setLocation(String location) {
-
-        //        if ((location == null) || !location.startsWith("/"))
-        //            throw new IllegalArgumentException
-        //                ("Error Page Location must start with a '/'");
-        this.location = RequestUtil.URLDecode(location);
-
-    }
-
-
-    // --------------------------------------------------------- Public Methods
-
-
-    /**
-     * Render a String representation of this object.
-     */
-    public String toString() {
-
-        StringBuffer sb = new StringBuffer("ErrorPage[");
-        if (exceptionType == null) {
-            sb.append("errorCode=");
-            sb.append(errorCode);
-        } else {
-            sb.append("exceptionType=");
-            sb.append(exceptionType);
-        }
-        sb.append(", location=");
-        sb.append(location);
-        sb.append("]");
-        return (sb.toString());
-
-    }
+  }
 
 
 }

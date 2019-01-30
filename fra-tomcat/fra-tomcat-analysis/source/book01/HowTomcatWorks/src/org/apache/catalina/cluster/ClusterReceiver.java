@@ -76,98 +76,98 @@ import org.apache.catalina.Logger;
 
 public interface ClusterReceiver extends Runnable {
 
-    // --------------------------------------------------------- Public Methods
+  // --------------------------------------------------------- Public Methods
 
-    /**
-     * The senderId is a identifier used to identify different
-     * packages being received in a Cluster. Each package received through
-     * the concrete implementation of this interface will have
-     * the senderId set at runtime. Usually the senderId is the
-     * name of the component that is using this <code>ClusterReceiver</code>
-     *
-     * @param senderId The senderId to use
-     */
-    public void setSenderId(String senderId);
+  /**
+   * The senderId is a identifier used to identify different
+   * packages being received in a Cluster. Each package received through
+   * the concrete implementation of this interface will have
+   * the senderId set at runtime. Usually the senderId is the
+   * name of the component that is using this <code>ClusterReceiver</code>
+   *
+   * @param senderId The senderId to use
+   */
+  public void setSenderId(String senderId);
 
-    /**
-     * get the senderId used to identify messages being received in a Cluster.
-     *
-     * @return The senderId for this ClusterReceiver
-     */
-    public String getSenderId();
+  /**
+   * get the senderId used to identify messages being received in a Cluster.
+   *
+   * @return The senderId for this ClusterReceiver
+   */
+  public String getSenderId();
 
-    /**
-     * Set the debug detail level for this component.
-     *
-     * @param debug The debug level
-     */
-    public void setDebug(int debug);
+  /**
+   * Set the debug detail level for this component.
+   *
+   * @param debug The debug level
+   */
+  public void setDebug(int debug);
 
-    /**
-     * Get the debug level for this component
-     *
-     * @return The debug level
-     */
-    public int getDebug();
+  /**
+   * Get the debug level for this component
+   *
+   * @return The debug level
+   */
+  public int getDebug();
 
-    /**
-     * Set the time in seconds for this component to
-     * Sleep before it checks for new received data in the Cluster
-     *
-     * @param checkInterval The time to sleep
-     */
-    public void setCheckInterval(int checkInterval);
+  /**
+   * Set the time in seconds for this component to
+   * Sleep before it checks for new received data in the Cluster
+   *
+   * @param checkInterval The time to sleep
+   */
+  public void setCheckInterval(int checkInterval);
 
-    /**
-     * Get the time in seconds this implementation sleeps
-     *
-     * @return The time in seconds this implementation sleeps
-     */
-    public int getCheckInterval();
+  /**
+   * Get the time in seconds this implementation sleeps
+   *
+   * @return The time in seconds this implementation sleeps
+   */
+  public int getCheckInterval();
 
-    /**
-     * Set the Logger for this component.
-     *
-     * @param debug The Logger to use with this component.
-     */
-    public void setLogger(Logger logger);
+  /**
+   * Set the Logger for this component.
+   *
+   * @param debug The Logger to use with this component.
+   */
+  public void setLogger(Logger logger);
 
-    /**
-     * Get the Logger for this component
-     *
-     * @return The Logger associated with this component.
-     */
-    public Logger getLogger();
+  /**
+   * Get the Logger for this component
+   *
+   * @return The Logger associated with this component.
+   */
+  public Logger getLogger();
 
-    /**
-     * The log method to use in the implementation
-     *
-     * @param message The message to be logged.
-     */
-    public void log(String message);
+  /**
+   * The log method to use in the implementation
+   *
+   * @param message The message to be logged.
+   */
+  public void log(String message);
 
-    /**
-     * Get an array of objects that has been received by this component.
-     * Only Objects which was received with the same senderId as the
-     * one specified for this <code>ClusterReceiver</code> is being returned.
-     *
-     * @return a value of type 'Object[]'
-     */
-    public Object[] getObjects();
+  /**
+   * Get an array of objects that has been received by this component.
+   * Only Objects which was received with the same senderId as the
+   * one specified for this <code>ClusterReceiver</code> is being returned.
+   *
+   * @return a value of type 'Object[]'
+   */
+  public Object[] getObjects();
 
-    /**
-     * Start this component, must be called before it can be used.
-     */
-    public void start();
+  /**
+   * Start this component, must be called before it can be used.
+   */
+  public void start();
 
-    /*
-     * The background thread.
-     */
-    public void run();
+  /*
+   * The background thread.
+   */
+  public void run();
 
-    /**
-     * The stop method for this component, should be called when closing
-     * down the Cluster.
-     */
-    public void stop();
+  /**
+   * The stop method for this component, should be called when closing
+   * down the Cluster.
+   */
+  public void stop();
 }

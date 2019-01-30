@@ -96,7 +96,7 @@ public class RequestFacade implements ServletRequest {
   }
 
   public String getScheme() {
-   return request.getScheme();
+    return request.getScheme();
   }
 
   public String getServerName() {
@@ -116,7 +116,7 @@ public class RequestFacade implements ServletRequest {
   }
 
   public void setCharacterEncoding(String encoding)
-    throws UnsupportedEncodingException {
+      throws UnsupportedEncodingException {
     request.setCharacterEncoding(encoding);
   }
 

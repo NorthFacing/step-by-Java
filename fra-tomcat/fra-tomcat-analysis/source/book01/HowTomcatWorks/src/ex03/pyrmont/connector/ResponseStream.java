@@ -1,6 +1,7 @@
 package ex03.pyrmont.connector;
 
 import ex03.pyrmont.connector.http.HttpResponse;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import javax.servlet.ServletOutputStream;
@@ -19,181 +20,180 @@ import javax.servlet.ServletOutputStream;
 public class ResponseStream extends ServletOutputStream {
 
 
-    // ----------------------------------------------------------- Constructors
+  // ----------------------------------------------------------- Constructors
 
 
-    /**
-     * Construct a servlet output stream associated with the specified Request.
-     *
-     * @param response The associated response
-     */
-    public ResponseStream(HttpResponse response) {
+  /**
+   * Construct a servlet output stream associated with the specified Request.
+   *
+   * @param response The associated response
+   */
+  public ResponseStream(HttpResponse response) {
 
-        super();
-        closed = false;
-        commit = false;
-        count = 0;
-        this.response = response;
-      //  this.stream = response.getStream();
+    super();
+    closed = false;
+    commit = false;
+    count = 0;
+    this.response = response;
+    //  this.stream = response.getStream();
 
-    }
-
-
-    // ----------------------------------------------------- Instance Variables
+  }
 
 
-    /**
-     * Has this stream been closed?
-     */
-    protected boolean closed = false;
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * Should we commit the response when we are flushed?
-     */
-    protected boolean commit = false;
+  /**
+   * Has this stream been closed?
+   */
+  protected boolean closed = false;
 
 
-    /**
-     * The number of bytes which have already been written to this stream.
-     */
-    protected int count = 0;
+  /**
+   * Should we commit the response when we are flushed?
+   */
+  protected boolean commit = false;
 
 
-    /**
-     * The content length past which we will not write, or -1 if there is
-     * no defined content length.
-     */
-    protected int length = -1;
+  /**
+   * The number of bytes which have already been written to this stream.
+   */
+  protected int count = 0;
 
 
-    /**
-     * The Response with which this input stream is associated.
-     */
-    protected HttpResponse response = null;
+  /**
+   * The content length past which we will not write, or -1 if there is
+   * no defined content length.
+   */
+  protected int length = -1;
 
 
-    /**
-     * The underlying output stream to which we should write data.
-     */
-    protected OutputStream stream = null;
+  /**
+   * The Response with which this input stream is associated.
+   */
+  protected HttpResponse response = null;
 
 
-    // ------------------------------------------------------------- Properties
+  /**
+   * The underlying output stream to which we should write data.
+   */
+  protected OutputStream stream = null;
 
 
-    /**
-     * [Package Private] Return the "commit response on flush" flag.
-     */
-    public boolean getCommit() {
-
-        return (this.commit);
-
-    }
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * [Package Private] Set the "commit response on flush" flag.
-     *
-     * @param commit The new commit flag
-     */
-    public void setCommit(boolean commit) {
+  /**
+   * [Package Private] Return the "commit response on flush" flag.
+   */
+  public boolean getCommit() {
 
-        this.commit = commit;
+    return (this.commit);
 
-    }
+  }
 
 
-    // --------------------------------------------------------- Public Methods
+  /**
+   * [Package Private] Set the "commit response on flush" flag.
+   *
+   * @param commit The new commit flag
+   */
+  public void setCommit(boolean commit) {
+
+    this.commit = commit;
+
+  }
 
 
-    /**
-     * Close this output stream, causing any buffered data to be flushed and
-     * any further output data to throw an IOException.
-     */
-    public void close() throws IOException {
-        if (closed)
-            throw new IOException("responseStream.close.closed");
-        response.flushBuffer();
-        closed = true;
-    }
+  // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Flush any buffered data for this output stream, which also causes the
-     * response to be committed.
-     */
+  /**
+   * Close this output stream, causing any buffered data to be flushed and
+   * any further output data to throw an IOException.
+   */
+  public void close() throws IOException {
+    if (closed)
+      throw new IOException("responseStream.close.closed");
+    response.flushBuffer();
+    closed = true;
+  }
+
+
+  /**
+   * Flush any buffered data for this output stream, which also causes the
+   * response to be committed.
+   */
   public void flush() throws IOException {
     if (closed)
-            throw new IOException("responseStream.flush.closed");
-       if (commit)
-            response.flushBuffer();
+      throw new IOException("responseStream.flush.closed");
+    if (commit)
+      response.flushBuffer();
 
-    }
-
-
-    /**
-     * Write the specified byte to our output stream.
-     *
-     * @param b The byte to be written
-     *
-     * @exception IOException if an input/output error occurs
-     */
-    public void write(int b) throws IOException {
-
-        if (closed)
-            throw new IOException("responseStream.write.closed");
-
-        if ((length > 0) && (count >= length))
-            throw new IOException("responseStream.write.count");
-
-        response.write(b);
-        count++;
-
-    }
+  }
 
 
-    public void write(byte b[]) throws IOException {
-        write(b, 0, b.length);
+  /**
+   * Write the specified byte to our output stream.
+   *
+   * @param b The byte to be written
+   * @throws IOException if an input/output error occurs
+   */
+  public void write(int b) throws IOException {
 
-    }
+    if (closed)
+      throw new IOException("responseStream.write.closed");
 
+    if ((length > 0) && (count >= length))
+      throw new IOException("responseStream.write.count");
 
-    public void write(byte b[], int off, int len) throws IOException {
-        if (closed)
-            throw new IOException("responseStream.write.closed");
+    response.write(b);
+    count++;
 
-        int actual = len;
-        if ((length > 0) && ((count + len) >= length))
-            actual = length - count;
-        response.write(b, off, actual);
-        count += actual;
-        if (actual < len)
-            throw new IOException("responseStream.write.count");
-
-    }
-
-
-    // -------------------------------------------------------- Package Methods
+  }
 
 
-    /**
-     * Has this response stream been closed?
-     */
-    boolean closed() {
-        return (this.closed);
+  public void write(byte b[]) throws IOException {
+    write(b, 0, b.length);
 
-    }
+  }
 
 
-    /**
-     * Reset the count of bytes written to this stream to zero.
-     */
-    void reset() {
+  public void write(byte b[], int off, int len) throws IOException {
+    if (closed)
+      throw new IOException("responseStream.write.closed");
 
-        count = 0;
+    int actual = len;
+    if ((length > 0) && ((count + len) >= length))
+      actual = length - count;
+    response.write(b, off, actual);
+    count += actual;
+    if (actual < len)
+      throw new IOException("responseStream.write.count");
 
-    }
+  }
+
+
+  // -------------------------------------------------------- Package Methods
+
+
+  /**
+   * Has this response stream been closed?
+   */
+  boolean closed() {
+    return (this.closed);
+
+  }
+
+
+  /**
+   * Reset the count of bytes written to this stream to zero.
+   */
+  void reset() {
+
+    count = 0;
+
+  }
 
 
 }

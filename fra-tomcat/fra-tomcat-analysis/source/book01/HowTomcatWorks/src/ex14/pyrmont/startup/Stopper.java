@@ -20,8 +20,7 @@ public class Stopper {
       stream.close();
       socket.close();
       System.out.println("The server was successfully shut down.");
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       System.out.println("Error. The server has not been started.");
     }
   }

@@ -48,14 +48,12 @@ public class SimpleWrapper implements Wrapper, Pipeline, Lifecycle {
 
   public Servlet allocate() throws ServletException {
     // Load and initialize our instance if necessary
-    if (instance==null) {
+    if (instance == null) {
       try {
         instance = loadServlet();
-      }
-      catch (ServletException e) {
+      } catch (ServletException e) {
         throw e;
-      }
-      catch (Throwable e) {
+      } catch (Throwable e) {
         throw new ServletException("Cannot allocate a servlet instance", e);
       }
     }
@@ -63,7 +61,7 @@ public class SimpleWrapper implements Wrapper, Pipeline, Lifecycle {
   }
 
   public Servlet loadServlet() throws ServletException {
-    if (instance!=null)
+    if (instance != null)
       return instance;
 
     Servlet servlet = null;
@@ -74,7 +72,7 @@ public class SimpleWrapper implements Wrapper, Pipeline, Lifecycle {
 
     Loader loader = getLoader();
     // Acquire an instance of the class loader to be used
-    if (loader==null) {
+    if (loader == null) {
       throw new ServletException("No loader.");
     }
     ClassLoader classLoader = loader.getClassLoader();
@@ -82,26 +80,23 @@ public class SimpleWrapper implements Wrapper, Pipeline, Lifecycle {
     // Load the specified servlet class from the appropriate class loader
     Class classClass = null;
     try {
-      if (classLoader!=null) {
+      if (classLoader != null) {
         classClass = classLoader.loadClass(actualClass);
       }
-    }
-    catch (ClassNotFoundException e) {
+    } catch (ClassNotFoundException e) {
       throw new ServletException("Servlet class not found");
     }
     // Instantiate and initialize an instance of the servlet class itself
     try {
       servlet = (Servlet) classClass.newInstance();
-    }
-    catch (Throwable e) {
+    } catch (Throwable e) {
       throw new ServletException("Failed to instantiate servlet");
     }
 
     // Call the initialization method of this servlet
     try {
       servlet.init(null);
-    }
-    catch (Throwable f) {
+    } catch (Throwable f) {
       throw new ServletException("Failed initialize servlet.");
     }
     return servlet;
@@ -196,7 +191,7 @@ public class SimpleWrapper implements Wrapper, Pipeline, Lifecycle {
   }
 
   public int getLoadOnStartup() {
-   return 0;
+    return 0;
   }
 
   public void setLoadOnStartup(int value) {
@@ -278,7 +273,7 @@ public class SimpleWrapper implements Wrapper, Pipeline, Lifecycle {
   }
 
   public void invoke(Request request, Response response)
-    throws IOException, ServletException {
+      throws IOException, ServletException {
     pipeline.invoke(request, response);
   }
 
@@ -376,8 +371,7 @@ public class SimpleWrapper implements Wrapper, Pipeline, Lifecycle {
     // Shut down our servlet instance (if it has been initialized)
     try {
       instance.destroy();
-    }
-    catch (Throwable t) {
+    } catch (Throwable t) {
     }
     instance = null;
     if (!started)

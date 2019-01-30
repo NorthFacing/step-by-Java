@@ -73,6 +73,7 @@ import javax.security.auth.login.CredentialExpiredException;
 import javax.security.auth.login.FailedLoginException;
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
+
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.util.StringManager;
 
@@ -101,31 +102,31 @@ import org.apache.catalina.util.StringManager;
  * this Realm:</p>
  * <ul>
  * <li>The JAAS <code>LoginModule</code> is assumed to return a
- *     <code>Subject with at least one <code>Principal</code> instance
- *     representing the user himself or herself, and zero or more separate
- *     <code>Principals</code> representing the security roles authorized
- *     for this user.</li>
+ * <code>Subject with at least one <code>Principal</code> instance
+ * representing the user himself or herself, and zero or more separate
+ * <code>Principals</code> representing the security roles authorized
+ * for this user.</li>
  * <li>On the <code>Principal</code> representing the user, the Principal
- *     name is an appropriate value to return via the Servlet API method
- *     <code>HttpServletRequest.getRemoteUser()</code>.</li>
+ * name is an appropriate value to return via the Servlet API method
+ * <code>HttpServletRequest.getRemoteUser()</code>.</li>
  * <li>On the <code>Principals</code> representing the security roles, the
- *     name is the name of the authorized security role.</li>
+ * name is the name of the authorized security role.</li>
  * <li>This Realm will be configured with two lists of fully qualified Java
- *     class names of classes that implement
- *     <code>java.security.Principal</code> - one that identifies class(es)
- *     representing a user, and one that identifies class(es) representing
- *     a security role.</li>
+ * class names of classes that implement
+ * <code>java.security.Principal</code> - one that identifies class(es)
+ * representing a user, and one that identifies class(es) representing
+ * a security role.</li>
  * <li>As this Realm iterates over the <code>Principals</code> returned by
- *     <code>Subject.getPrincipals()</code>, it will identify the first
- *     <code>Principal</code> that matches the "user classes" list as the
- *     <code>Principal</code> for this user.</li>
+ * <code>Subject.getPrincipals()</code>, it will identify the first
+ * <code>Principal</code> that matches the "user classes" list as the
+ * <code>Principal</code> for this user.</li>
  * <li>As this Realm iterates over the <code>Princpals</code> returned by
- *     <code>Subject.getPrincipals()</code>, it will accumulate the set of
- *     all <code>Principals</code> matching the "role classes" list as
- *     identifying the security roles for this user.</li>
+ * <code>Subject.getPrincipals()</code>, it will accumulate the set of
+ * all <code>Principals</code> matching the "role classes" list as
+ * identifying the security roles for this user.</li>
  * <li>It is a configuration error for the JAAS login method to return a
- *     validated <code>Subject</code> without a <code>Principal</code> that
- *     matches the "user classes" list.</li>
+ * validated <code>Subject</code> without a <code>Principal</code> that
+ * matches the "user classes" list.</li>
  * </ul>
  *
  * @author Craig R. McClanahan
@@ -136,301 +137,300 @@ public class JAASRealm
     extends RealmBase {
 
 
-    // ----------------------------------------------------- Instance Variables
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * The application name passed to the JAAS <code>LoginContext</code>,
-     * which uses it to select the set of relevant <code>LoginModules</code>.
-     */
-    protected String appName = "Tomcat";
+  /**
+   * The application name passed to the JAAS <code>LoginContext</code>,
+   * which uses it to select the set of relevant <code>LoginModules</code>.
+   */
+  protected String appName = "Tomcat";
 
 
-    /**
-     * Descriptive information about this Realm implementation.
-     */
-    protected static final String info =
-        "org.apache.catalina.realm.JAASRealm/1.0";
+  /**
+   * Descriptive information about this Realm implementation.
+   */
+  protected static final String info =
+      "org.apache.catalina.realm.JAASRealm/1.0";
 
 
-    /**
-     * Descriptive information about this Realm implementation.
-     */
-    protected static final String name = "JAASRealm";
+  /**
+   * Descriptive information about this Realm implementation.
+   */
+  protected static final String name = "JAASRealm";
 
 
-    /**
-     * The list of role class names, split out for easy processing.
-     */
-    protected ArrayList roleClasses = new ArrayList();
+  /**
+   * The list of role class names, split out for easy processing.
+   */
+  protected ArrayList roleClasses = new ArrayList();
 
 
-    /**
-     * The string manager for this package.
-     */
-    protected static final StringManager sm =
-        StringManager.getManager(Constants.Package);
+  /**
+   * The string manager for this package.
+   */
+  protected static final StringManager sm =
+      StringManager.getManager(Constants.Package);
 
 
-    /**
-     * The set of user class names, split out for easy processing.
-     */
-    protected ArrayList userClasses = new ArrayList();
+  /**
+   * The set of user class names, split out for easy processing.
+   */
+  protected ArrayList userClasses = new ArrayList();
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
-    
-    /**
-     * setter for the appName member variable
-     */
-    public void setAppName(String name) {
-        appName = name;
+
+  /**
+   * setter for the appName member variable
+   */
+  public void setAppName(String name) {
+    appName = name;
+  }
+
+  /**
+   * getter for the appName member variable
+   */
+  public String getAppName() {
+    return appName;
+  }
+
+  /**
+   * Comma-delimited list of <code>javax.security.Principal</code> classes
+   * that represent security roles.
+   */
+  protected String roleClassNames = null;
+
+  public String getRoleClassNames() {
+    return (this.roleClassNames);
+  }
+
+  public void setRoleClassNames(String roleClassNames) {
+    this.roleClassNames = roleClassNames;
+    roleClasses.clear();
+    String temp = this.roleClassNames;
+    if (temp == null) {
+      return;
     }
-    
-    /**
-     * getter for the appName member variable
-     */
-    public String getAppName() {
-        return appName;
+    while (true) {
+      int comma = temp.indexOf(',');
+      if (comma < 0) {
+        break;
+      }
+      roleClasses.add(temp.substring(0, comma).trim());
+      temp = temp.substring(comma + 1);
     }
-
-    /**
-     * Comma-delimited list of <code>javax.security.Principal</code> classes
-     * that represent security roles.
-     */
-    protected String roleClassNames = null;
-
-    public String getRoleClassNames() {
-        return (this.roleClassNames);
+    temp = temp.trim();
+    if (temp.length() > 0) {
+      roleClasses.add(temp);
     }
+  }
 
-    public void setRoleClassNames(String roleClassNames) {
-        this.roleClassNames = roleClassNames;
-        roleClasses.clear();
-        String temp = this.roleClassNames;
-        if (temp == null) {
-            return;
-        }
-        while (true) {
-            int comma = temp.indexOf(',');
-            if (comma < 0) {
-                break;
-            }
-            roleClasses.add(temp.substring(0, comma).trim());
-            temp = temp.substring(comma + 1);
-        }
-        temp = temp.trim();
-        if (temp.length() > 0) {
-            roleClasses.add(temp);
-        }
+
+  /**
+   * Comma-delimited list of <code>javax.security.Principal</code> classes
+   * that represent individual users.
+   */
+  protected String userClassNames = null;
+
+  public String getUserClassNames() {
+    return (this.userClassNames);
+  }
+
+  public void setUserClassNames(String userClassNames) {
+    this.userClassNames = userClassNames;
+    userClasses.clear();
+    String temp = this.userClassNames;
+    if (temp == null) {
+      return;
     }
-
-
-    /**
-     * Comma-delimited list of <code>javax.security.Principal</code> classes
-     * that represent individual users.
-     */
-    protected String userClassNames = null;
-
-    public String getUserClassNames() {
-        return (this.userClassNames);
+    while (true) {
+      int comma = temp.indexOf(',');
+      if (comma < 0) {
+        break;
+      }
+      userClasses.add(temp.substring(0, comma).trim());
+      temp = temp.substring(comma + 1);
     }
-
-    public void setUserClassNames(String userClassNames) {
-        this.userClassNames = userClassNames;
-        userClasses.clear();
-        String temp = this.userClassNames;
-        if (temp == null) {
-            return;
-        }
-        while (true) {
-            int comma = temp.indexOf(',');
-            if (comma < 0) {
-                break;
-            }
-            userClasses.add(temp.substring(0, comma).trim());
-            temp = temp.substring(comma + 1);
-        }
-        temp = temp.trim();
-        if (temp.length() > 0) {
-            userClasses.add(temp);
-        }
+    temp = temp.trim();
+    if (temp.length() > 0) {
+      userClasses.add(temp);
     }
+  }
 
 
-    // --------------------------------------------------------- Public Methods
+  // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Return the Principal associated with the specified username and
-     * credentials, if there is one; otherwise return <code>null</code>.
-     *
-     * If there are any errors with the JDBC connection, executing
-     * the query or anything we return null (don't authenticate). This
-     * event is also logged, and the connection will be closed so that
-     * a subsequent request will automatically re-open it.
-     *
-     * @param username Username of the Principal to look up
-     * @param credentials Password or other credentials to use in
-     *  authenticating this username
-     */
-    public Principal authenticate(String username, String credentials) {
+  /**
+   * Return the Principal associated with the specified username and
+   * credentials, if there is one; otherwise return <code>null</code>.
+   * <p>
+   * If there are any errors with the JDBC connection, executing
+   * the query or anything we return null (don't authenticate). This
+   * event is also logged, and the connection will be closed so that
+   * a subsequent request will automatically re-open it.
+   *
+   * @param username    Username of the Principal to look up
+   * @param credentials Password or other credentials to use in
+   *                    authenticating this username
+   */
+  public Principal authenticate(String username, String credentials) {
 
-        // Establish a LoginContext to use for authentication
-        LoginContext loginContext = null;
-        try {
-            loginContext = new LoginContext
-                (appName, new JAASCallbackHandler(this, username,
-                                                  credentials));
-        } catch (LoginException e) {
-            log(sm.getString("jaasRealm.loginException", username), e);
-            return (null);
-        }
-
-        // Negotiate a login via this LoginContext
-        Subject subject = null;
-        try {
-            loginContext.login();
-            subject = loginContext.getSubject();
-            if (subject == null) {
-                if (debug >= 2)
-                    log(sm.getString("jaasRealm.failedLogin", username));
-                return (null);
-            }
-        } catch (AccountExpiredException e) {
-            if (debug >= 2)
-                log(sm.getString("jaasRealm.accountExpired", username));
-            return (null);
-        } catch (CredentialExpiredException e) {
-            if (debug >= 2)
-                log(sm.getString("jaasRealm.credentialExpired", username));
-            return (null);
-        } catch (FailedLoginException e) {
-            if (debug >= 2)
-                log(sm.getString("jaasRealm.failedLogin", username));
-            return (null);
-        } catch (LoginException e) {
-            log(sm.getString("jaasRealm.loginException", username), e);
-            return (null);
-        }
-
-        // Return the appropriate Principal for this authenticated Subject
-        Principal principal = createPrincipal(subject);
-        if (principal == null) {
-            log(sm.getString("jaasRealm.authenticateError", username));
-            return (null);
-        }
-        if (debug >= 2) {
-            log(sm.getString("jaasRealm.authenticateSuccess", username));
-        }
-        return (principal);
-
+    // Establish a LoginContext to use for authentication
+    LoginContext loginContext = null;
+    try {
+      loginContext = new LoginContext
+          (appName, new JAASCallbackHandler(this, username,
+              credentials));
+    } catch (LoginException e) {
+      log(sm.getString("jaasRealm.loginException", username), e);
+      return (null);
     }
 
-
-    // -------------------------------------------------------- Package Methods
-
-
-    // ------------------------------------------------------ Protected Methods
-
-
-    /**
-     * Return a short name for this Realm implementation.
-     */
-    protected String getName() {
-
-        return (this.name);
-
-    }
-
-
-    /**
-     * Return the password associated with the given principal's user name.
-     */
-    protected String getPassword(String username) {
-
+    // Negotiate a login via this LoginContext
+    Subject subject = null;
+    try {
+      loginContext.login();
+      subject = loginContext.getSubject();
+      if (subject == null) {
+        if (debug >= 2)
+          log(sm.getString("jaasRealm.failedLogin", username));
         return (null);
-
+      }
+    } catch (AccountExpiredException e) {
+      if (debug >= 2)
+        log(sm.getString("jaasRealm.accountExpired", username));
+      return (null);
+    } catch (CredentialExpiredException e) {
+      if (debug >= 2)
+        log(sm.getString("jaasRealm.credentialExpired", username));
+      return (null);
+    } catch (FailedLoginException e) {
+      if (debug >= 2)
+        log(sm.getString("jaasRealm.failedLogin", username));
+      return (null);
+    } catch (LoginException e) {
+      log(sm.getString("jaasRealm.loginException", username), e);
+      return (null);
     }
 
+    // Return the appropriate Principal for this authenticated Subject
+    Principal principal = createPrincipal(subject);
+    if (principal == null) {
+      log(sm.getString("jaasRealm.authenticateError", username));
+      return (null);
+    }
+    if (debug >= 2) {
+      log(sm.getString("jaasRealm.authenticateSuccess", username));
+    }
+    return (principal);
 
-    /**
-     * Return the Principal associated with the given user name.
-     */
-    protected Principal getPrincipal(String username) {
+  }
 
-        return (null);
 
+  // -------------------------------------------------------- Package Methods
+
+
+  // ------------------------------------------------------ Protected Methods
+
+
+  /**
+   * Return a short name for this Realm implementation.
+   */
+  protected String getName() {
+
+    return (this.name);
+
+  }
+
+
+  /**
+   * Return the password associated with the given principal's user name.
+   */
+  protected String getPassword(String username) {
+
+    return (null);
+
+  }
+
+
+  /**
+   * Return the Principal associated with the given user name.
+   */
+  protected Principal getPrincipal(String username) {
+
+    return (null);
+
+  }
+
+
+  /**
+   * Construct and return a <code>java.security.Principal</code> instance
+   * representing the authenticated user for the specified Subject.  If no
+   * such Principal can be constructed, return <code>null</code>.
+   *
+   * @param subject The Subject representing the logged in user
+   */
+  protected Principal createPrincipal(Subject subject) {
+    // Prepare to scan the Principals for this Subject
+    String username = null;
+    String password = null; // Will not be carried forward
+    ArrayList roles = new ArrayList();
+
+    // Scan the Principals for this Subject
+    Iterator principals = subject.getPrincipals().iterator();
+    while (principals.hasNext()) {
+      Principal principal = (Principal) principals.next();
+      String principalClass = principal.getClass().getName();
+      if ((username == null) && userClasses.contains(principalClass)) {
+        username = principal.getName();
+      }
+      if (roleClasses.contains(principalClass)) {
+        roles.add(principal.getName());
+      }
     }
 
-
-    /**
-     * Construct and return a <code>java.security.Principal</code> instance
-     * representing the authenticated user for the specified Subject.  If no
-     * such Principal can be constructed, return <code>null</code>.
-     *
-     * @param subject The Subject representing the logged in user
-     */
-    protected Principal createPrincipal(Subject subject) {
-        // Prepare to scan the Principals for this Subject
-        String username = null;
-        String password = null; // Will not be carried forward
-        ArrayList roles = new ArrayList();
-
-        // Scan the Principals for this Subject
-        Iterator principals = subject.getPrincipals().iterator();
-        while (principals.hasNext()) {
-            Principal principal = (Principal) principals.next();
-            String principalClass = principal.getClass().getName();
-            if ((username == null) && userClasses.contains(principalClass)) {
-                username = principal.getName();
-            }
-            if (roleClasses.contains(principalClass)) {
-                roles.add(principal.getName());
-            }
-        }
-
-        // Create the resulting Principal for our authenticated user
-        if (username != null) {
-            return (new GenericPrincipal(this, username, password, roles));
-        } else {
-            return (null);
-        }
-
+    // Create the resulting Principal for our authenticated user
+    if (username != null) {
+      return (new GenericPrincipal(this, username, password, roles));
+    } else {
+      return (null);
     }
 
-
-    // ------------------------------------------------------ Lifecycle Methods
-
-
-    /**
-     *
-     * Prepare for active use of the public methods of this Component.
-     *
-     * @exception LifecycleException if this component detects a fatal error
-     *  that prevents it from being started
-     */
-    public void start() throws LifecycleException {
-
-        // Perform normal superclass initialization
-        super.start();
-
-    }
+  }
 
 
-    /**
-     * Gracefully shut down active use of the public methods of this Component.
-     *
-     * @exception LifecycleException if this component detects a fatal error
-     *  that needs to be reported
-     */
-    public void stop() throws LifecycleException {
+  // ------------------------------------------------------ Lifecycle Methods
 
-        // Perform normal superclass finalization
-        super.stop();
 
-    }
+  /**
+   * Prepare for active use of the public methods of this Component.
+   *
+   * @throws LifecycleException if this component detects a fatal error
+   *                            that prevents it from being started
+   */
+  public void start() throws LifecycleException {
+
+    // Perform normal superclass initialization
+    super.start();
+
+  }
+
+
+  /**
+   * Gracefully shut down active use of the public methods of this Component.
+   *
+   * @throws LifecycleException if this component detects a fatal error
+   *                            that needs to be reported
+   */
+  public void stop() throws LifecycleException {
+
+    // Perform normal superclass finalization
+    super.stop();
+
+  }
 
 
 }

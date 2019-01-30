@@ -9,7 +9,7 @@ public class PrimitiveServlet implements Servlet {
   }
 
   public void service(ServletRequest request, ServletResponse response)
-    throws ServletException, IOException {
+      throws ServletException, IOException {
     System.out.println("from service");
     PrintWriter out = response.getWriter();
     out.println("Hello. Roses are red.");
@@ -23,6 +23,7 @@ public class PrimitiveServlet implements Servlet {
   public String getServletInfo() {
     return null;
   }
+
   public ServletConfig getServletConfig() {
     return null;
   }

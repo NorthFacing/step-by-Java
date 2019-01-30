@@ -84,97 +84,97 @@ public abstract class HttpResponseWrapper
     implements HttpResponse {
 
 
-    // ----------------------------------------------------------- Constructors
+  // ----------------------------------------------------------- Constructors
 
 
-    /**
-     * Construct a wrapper for the specified response.
-     *
-     * @param response The response to be wrapped
-     */
-    public HttpResponseWrapper(HttpResponse response) {
+  /**
+   * Construct a wrapper for the specified response.
+   *
+   * @param response The response to be wrapped
+   */
+  public HttpResponseWrapper(HttpResponse response) {
 
-        super(response);
+    super(response);
 
-    }
-
-
-    // --------------------------------------------------------- Public Methods
+  }
 
 
-    /**
-     * Return the value for the specified header, or <code>null</code> if this
-     * header has not been set.  If more than one value was added for this
-     * name, only the first is returned; use getHeaderValues() to retrieve all
-     * of them.
-     *
-     * @param name Header name to look up
-     */
-    public String getHeader(String name) {
-
-        return (((HttpResponse) response).getHeader(name));
-
-    }
+  // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Return an array of all the header names set for this response, or
-     * a zero-length array if no headers have been set.
-     */
-    public String[] getHeaderNames() {
+  /**
+   * Return the value for the specified header, or <code>null</code> if this
+   * header has not been set.  If more than one value was added for this
+   * name, only the first is returned; use getHeaderValues() to retrieve all
+   * of them.
+   *
+   * @param name Header name to look up
+   */
+  public String getHeader(String name) {
 
-        return (((HttpResponse) response).getHeaderNames());
+    return (((HttpResponse) response).getHeader(name));
 
-    }
-
-
-    /**
-     * Return an array of all the header values associated with the
-     * specified header name, or an zero-length array if there are no such
-     * header values.
-     *
-     * @param name Header name to look up
-     */
-    public String[] getHeaderValues(String name) {
-
-        return (((HttpResponse) response).getHeaderValues(name));
-
-    }
+  }
 
 
-    /**
-     * Return the error message that was set with <code>sendError()</code>
-     * for this response.
-     */
-    public String getMessage() {
+  /**
+   * Return an array of all the header names set for this response, or
+   * a zero-length array if no headers have been set.
+   */
+  public String[] getHeaderNames() {
 
-        return (((HttpResponse) response).getMessage());
+    return (((HttpResponse) response).getHeaderNames());
 
-    }
-
-
-    /**
-     * Return the HTTP status code associated with this Response.
-     */
-    public int getStatus() {
-
-        return (((HttpResponse) response).getStatus());
-
-    }
+  }
 
 
-    /**
-     * Reset this response, and specify the values for the HTTP status code
-     * and corresponding message.
-     *
-     * @exception IllegalStateException if this response has already been
-     *  committed
-     */
-    public void reset(int status, String message) {
+  /**
+   * Return an array of all the header values associated with the
+   * specified header name, or an zero-length array if there are no such
+   * header values.
+   *
+   * @param name Header name to look up
+   */
+  public String[] getHeaderValues(String name) {
 
-        ((HttpResponse) response).reset(status, message);
+    return (((HttpResponse) response).getHeaderValues(name));
 
-    }
+  }
+
+
+  /**
+   * Return the error message that was set with <code>sendError()</code>
+   * for this response.
+   */
+  public String getMessage() {
+
+    return (((HttpResponse) response).getMessage());
+
+  }
+
+
+  /**
+   * Return the HTTP status code associated with this Response.
+   */
+  public int getStatus() {
+
+    return (((HttpResponse) response).getStatus());
+
+  }
+
+
+  /**
+   * Reset this response, and specify the values for the HTTP status code
+   * and corresponding message.
+   *
+   * @throws IllegalStateException if this response has already been
+   *                               committed
+   */
+  public void reset(int status, String message) {
+
+    ((HttpResponse) response).reset(status, message);
+
+  }
 
 
 }

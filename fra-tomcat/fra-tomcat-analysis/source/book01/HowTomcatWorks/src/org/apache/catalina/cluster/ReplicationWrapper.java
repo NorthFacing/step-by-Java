@@ -77,59 +77,58 @@ import java.io.Serializable;
  */
 public final class ReplicationWrapper implements Serializable {
 
-    /**
-     * Our buffer to hold the stream
-     */
-    private byte[] _buf = null;
+  /**
+   * Our buffer to hold the stream
+   */
+  private byte[] _buf = null;
 
-    /**
-     * Our sender Id
-     */
-    private String senderId = null;
+  /**
+   * Our sender Id
+   */
+  private String senderId = null;
 
-    /**
-     * Construct a new ReplicationWrapper
-     *
-     */
-    public ReplicationWrapper(byte[] b, String senderId) {
-        this.senderId = senderId;
-        _buf = b;
-    }
+  /**
+   * Construct a new ReplicationWrapper
+   */
+  public ReplicationWrapper(byte[] b, String senderId) {
+    this.senderId = senderId;
+    _buf = b;
+  }
 
-    /**
-     * Write our stream to the <code>OutputStream</code> provided.
-     *
-     * @param out the OutputStream to write this stream to
-     * @exception IOException if an input/output error occurs
-     */
-    public final void writeTo(OutputStream out) throws IOException {
-        out.write(_buf);
-    }
+  /**
+   * Write our stream to the <code>OutputStream</code> provided.
+   *
+   * @param out the OutputStream to write this stream to
+   * @throws IOException if an input/output error occurs
+   */
+  public final void writeTo(OutputStream out) throws IOException {
+    out.write(_buf);
+  }
 
-    /**
-     * return our internal data as a array of bytes
-     *
-     * @return a our data
-     */
-    public final byte[] getDataStream() {
-        return(_buf);
-    }
+  /**
+   * return our internal data as a array of bytes
+   *
+   * @return a our data
+   */
+  public final byte[] getDataStream() {
+    return (_buf);
+  }
 
-    /**
-     * Set the sender id for this wrapper
-     *
-     * @param senderId The sender id
-     */
-    public final void setSenderId(String senderId) {
-        this.senderId = senderId;
-    }
+  /**
+   * Set the sender id for this wrapper
+   *
+   * @param senderId The sender id
+   */
+  public final void setSenderId(String senderId) {
+    this.senderId = senderId;
+  }
 
-    /**
-     * get the sender id for this wrapper
-     *
-     * @return The sender Id associated with this wrapper
-     */
-    public final String getSenderId() {
-        return(this.senderId);
-    }
+  /**
+   * get the sender id for this wrapper
+   *
+   * @return The sender Id associated with this wrapper
+   */
+  public final String getSenderId() {
+    return (this.senderId);
+  }
 }

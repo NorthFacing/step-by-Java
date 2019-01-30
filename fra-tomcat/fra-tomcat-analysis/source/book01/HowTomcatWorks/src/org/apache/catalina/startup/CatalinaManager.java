@@ -85,184 +85,184 @@ public final class CatalinaManager
     implements CatalinaManagerMBean, MBeanRegistration {
 
 
-    // ----------------------------------------------------- Instance Variables
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * Status of the Slide domain.
-     */
-    private int state = STOPPED;
+  /**
+   * Status of the Slide domain.
+   */
+  private int state = STOPPED;
 
 
-    /**
-     * Notification sequence number.
-     */
-    private long sequenceNumber = 0;
+  /**
+   * Notification sequence number.
+   */
+  private long sequenceNumber = 0;
 
 
-    // ---------------------------------------------- MBeanRegistration Methods
+  // ---------------------------------------------- MBeanRegistration Methods
 
 
-    public ObjectName preRegister(MBeanServer server, ObjectName name)
-        throws Exception {
-        return new ObjectName(OBJECT_NAME);
+  public ObjectName preRegister(MBeanServer server, ObjectName name)
+      throws Exception {
+    return new ObjectName(OBJECT_NAME);
+  }
+
+
+  public void postRegister(Boolean registrationDone) {
+    if (!registrationDone.booleanValue())
+      destroy();
+  }
+
+
+  public void preDeregister()
+      throws Exception {
+  }
+
+
+  public void postDeregister() {
+    destroy();
+  }
+
+
+  // ----------------------------------------------------- SlideMBean Methods
+
+
+  /**
+   * Retruns the Catalina component name.
+   */
+  public String getName() {
+    return NAME;
+  }
+
+
+  /**
+   * Returns the state.
+   */
+  public int getState() {
+    return state;
+  }
+
+
+  /**
+   * Returns a String representation of the state.
+   */
+  public String getStateString() {
+    return states[state];
+  }
+
+
+  /**
+   * Path accessor.
+   */
+  public String getPath() {
+    return System.getProperty("catalina.home");
+  }
+
+
+  /**
+   * Config file path mutator.
+   */
+  public void setPath(String path) {
+    System.setProperty("catalina.home", path);
+  }
+
+
+  /**
+   * Start the servlet container.
+   */
+  public void start()
+      throws Exception {
+
+    Notification notification = null;
+
+    if (state != STOPPED)
+      return;
+
+    state = STARTING;
+
+    // Notifying the MBEan server that we're starting
+
+    notification = new AttributeChangeNotification
+        (this, sequenceNumber++, System.currentTimeMillis(),
+            "Starting " + NAME, "State", "java.lang.Integer",
+            new Integer(STOPPED), new Integer(STARTING));
+    sendNotification(notification);
+
+    try {
+
+      String[] args = {"start"};
+      Bootstrap.main(args);
+
+    } catch (Throwable t) {
+      state = STOPPED;
+      notification = new AttributeChangeNotification
+          (this, sequenceNumber++, System.currentTimeMillis(),
+              "Stopped " + NAME, "State", "java.lang.Integer",
+              new Integer(STARTING), new Integer(STOPPED));
+      sendNotification(notification);
     }
 
+    state = STARTED;
+    notification = new AttributeChangeNotification
+        (this, sequenceNumber++, System.currentTimeMillis(),
+            "Started " + NAME, "State", "java.lang.Integer",
+            new Integer(STARTING), new Integer(STARTED));
+    sendNotification(notification);
 
-    public void postRegister(Boolean registrationDone) {
-        if (!registrationDone.booleanValue())
-            destroy();
-    }
-
-
-    public void preDeregister()
-        throws Exception {
-    }
+  }
 
 
-    public void postDeregister() {
-        destroy();
-    }
+  /**
+   * Stop the servlet container.
+   */
+  public void stop() {
 
+    Notification notification = null;
 
-    // ----------------------------------------------------- SlideMBean Methods
+    if (state != STARTED)
+      return;
 
+    state = STOPPING;
 
-    /**
-     * Retruns the Catalina component name.
-     */
-    public String getName() {
-        return NAME;
-    }
+    notification = new AttributeChangeNotification
+        (this, sequenceNumber++, System.currentTimeMillis(),
+            "Stopping " + NAME, "State", "java.lang.Integer",
+            new Integer(STARTED), new Integer(STOPPING));
+    sendNotification(notification);
 
+    try {
 
-    /**
-     * Returns the state.
-     */
-    public int getState() {
-        return state;
-    }
+      String[] args = {"stop"};
+      Bootstrap.main(args);
 
+    } catch (Throwable t) {
 
-    /**
-     * Returns a String representation of the state.
-     */
-    public String getStateString() {
-        return states[state];
-    }
-
-
-    /**
-     * Path accessor.
-     */
-    public String getPath() {
-        return System.getProperty("catalina.home");
-    }
-
-
-    /**
-     * Config file path mutator.
-     */
-    public void setPath(String path) {
-        System.setProperty("catalina.home", path);
-    }
-
-
-    /**
-     * Start the servlet container.
-     */
-    public void start()
-        throws Exception {
-
-        Notification notification = null;
-
-        if (state != STOPPED)
-            return;
-
-        state = STARTING;
-
-        // Notifying the MBEan server that we're starting
-
-        notification = new AttributeChangeNotification
-            (this, sequenceNumber++, System.currentTimeMillis(),
-             "Starting " + NAME, "State", "java.lang.Integer",
-             new Integer(STOPPED), new Integer(STARTING));
-        sendNotification(notification);
-
-        try {
-
-            String[] args = { "start" };
-            Bootstrap.main(args);
-
-        } catch (Throwable t) {
-            state = STOPPED;
-            notification = new AttributeChangeNotification
-                (this, sequenceNumber++, System.currentTimeMillis(),
-                 "Stopped " + NAME, "State", "java.lang.Integer",
-                 new Integer(STARTING), new Integer(STOPPED));
-            sendNotification(notification);
-        }
-
-        state = STARTED;
-        notification = new AttributeChangeNotification
-            (this, sequenceNumber++, System.currentTimeMillis(),
-             "Started " + NAME, "State", "java.lang.Integer",
-             new Integer(STARTING), new Integer(STARTED));
-        sendNotification(notification);
-
-    }
-
-
-    /**
-     * Stop the servlet container.
-     */
-    public void stop() {
-
-        Notification notification = null;
-
-        if (state != STARTED)
-            return;
-
-        state = STOPPING;
-
-        notification = new AttributeChangeNotification
-            (this, sequenceNumber++, System.currentTimeMillis(),
-             "Stopping " + NAME, "State", "java.lang.Integer",
-             new Integer(STARTED), new Integer(STOPPING));
-        sendNotification(notification);
-
-        try {
-
-            String[] args = { "stop" };
-            Bootstrap.main(args);
-
-        } catch (Throwable t) {
-
-            // FIXME
-            t.printStackTrace();
-
-        }
-
-        state = STOPPED;
-
-        notification = new AttributeChangeNotification
-            (this, sequenceNumber++, System.currentTimeMillis(),
-             "Stopped " + NAME, "State", "java.lang.Integer",
-             new Integer(STOPPING), new Integer(STOPPED));
-        sendNotification(notification);
+      // FIXME
+      t.printStackTrace();
 
     }
 
+    state = STOPPED;
 
-    /**
-     * Destroy servlet container (if any is running).
-     */
-    public void destroy() {
+    notification = new AttributeChangeNotification
+        (this, sequenceNumber++, System.currentTimeMillis(),
+            "Stopped " + NAME, "State", "java.lang.Integer",
+            new Integer(STOPPING), new Integer(STOPPED));
+    sendNotification(notification);
 
-        if (getState() != STOPPED)
-            stop();
+  }
 
-    }
+
+  /**
+   * Destroy servlet container (if any is running).
+   */
+  public void destroy() {
+
+    if (getState() != STOPPED)
+      stop();
+
+  }
 
 
 }

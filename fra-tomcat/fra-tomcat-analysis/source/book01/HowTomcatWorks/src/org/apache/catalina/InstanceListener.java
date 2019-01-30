@@ -77,12 +77,12 @@ package org.apache.catalina;
 public interface InstanceListener {
 
 
-    /**
-     * Acknowledge the occurrence of the specified event.
-     *
-     * @param event InstanceEvent that has occurred
-     */
-    public void instanceEvent(InstanceEvent event);
+  /**
+   * Acknowledge the occurrence of the specified event.
+   *
+   * @param event InstanceEvent that has occurred
+   */
+  public void instanceEvent(InstanceEvent event);
 
 
 }

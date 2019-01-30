@@ -80,9 +80,9 @@ import java.io.IOException;
  * must obey the following constraints:
  * <ul>
  * <li>Must implement <code>Lifecycle</code> so that the Context can indicate
- *     that a restart is required.
+ * that a restart is required.
  * <li>Must allow a call to <code>stop()</code> to be followed by a call to
- *     <code>start()</code> on the same <code>Manager</code> instance.
+ * <code>start()</code> on the same <code>Manager</code> instance.
  * </ul>
  *
  * @author Craig R. McClanahan
@@ -92,168 +92,166 @@ import java.io.IOException;
 public interface Manager {
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * Return the Container with which this Manager is associated.
-     */
-    public Container getContainer();
+  /**
+   * Return the Container with which this Manager is associated.
+   */
+  public Container getContainer();
 
 
-    /**
-     * Set the Container with which this Manager is associated.
-     *
-     * @param container The newly associated Container
-     */
-    public void setContainer(Container container);
+  /**
+   * Set the Container with which this Manager is associated.
+   *
+   * @param container The newly associated Container
+   */
+  public void setContainer(Container container);
 
 
-    /**
-     * Return the DefaultContext with which this Manager is associated.
-     */
-    public DefaultContext getDefaultContext();
+  /**
+   * Return the DefaultContext with which this Manager is associated.
+   */
+  public DefaultContext getDefaultContext();
 
 
-    /**
-     * Set the DefaultContext with which this Manager is associated.
-     *
-     * @param defaultContext The newly associated DefaultContext
-     */
-    public void setDefaultContext(DefaultContext defaultContext);
+  /**
+   * Set the DefaultContext with which this Manager is associated.
+   *
+   * @param defaultContext The newly associated DefaultContext
+   */
+  public void setDefaultContext(DefaultContext defaultContext);
 
 
-
-    /**
-     * Return the distributable flag for the sessions supported by
-     * this Manager.
-     */
-    public boolean getDistributable();
-
-
-    /**
-     * Set the distributable flag for the sessions supported by this
-     * Manager.  If this flag is set, all user data objects added to
-     * sessions associated with this manager must implement Serializable.
-     *
-     * @param distributable The new distributable flag
-     */
-    public void setDistributable(boolean distributable);
+  /**
+   * Return the distributable flag for the sessions supported by
+   * this Manager.
+   */
+  public boolean getDistributable();
 
 
-    /**
-     * Return descriptive information about this Manager implementation and
-     * the corresponding version number, in the format
-     * <code>&lt;description&gt;/&lt;version&gt;</code>.
-     */
-    public String getInfo();
+  /**
+   * Set the distributable flag for the sessions supported by this
+   * Manager.  If this flag is set, all user data objects added to
+   * sessions associated with this manager must implement Serializable.
+   *
+   * @param distributable The new distributable flag
+   */
+  public void setDistributable(boolean distributable);
 
 
-    /**
-     * Return the default maximum inactive interval (in seconds)
-     * for Sessions created by this Manager.
-     */
-    public int getMaxInactiveInterval();
+  /**
+   * Return descriptive information about this Manager implementation and
+   * the corresponding version number, in the format
+   * <code>&lt;description&gt;/&lt;version&gt;</code>.
+   */
+  public String getInfo();
 
 
-    /**
-     * Set the default maximum inactive interval (in seconds)
-     * for Sessions created by this Manager.
-     *
-     * @param interval The new default value
-     */
-    public void setMaxInactiveInterval(int interval);
+  /**
+   * Return the default maximum inactive interval (in seconds)
+   * for Sessions created by this Manager.
+   */
+  public int getMaxInactiveInterval();
 
 
-    // --------------------------------------------------------- Public Methods
+  /**
+   * Set the default maximum inactive interval (in seconds)
+   * for Sessions created by this Manager.
+   *
+   * @param interval The new default value
+   */
+  public void setMaxInactiveInterval(int interval);
 
 
-    /**
-     * Add this Session to the set of active Sessions for this Manager.
-     *
-     * @param session Session to be added
-     */
-    public void add(Session session);
+  // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Add a property change listener to this component.
-     *
-     * @param listener The listener to add
-     */
-    public void addPropertyChangeListener(PropertyChangeListener listener);
+  /**
+   * Add this Session to the set of active Sessions for this Manager.
+   *
+   * @param session Session to be added
+   */
+  public void add(Session session);
 
 
-    /**
-     * Construct and return a new session object, based on the default
-     * settings specified by this Manager's properties.  The session
-     * id will be assigned by this method, and available via the getId()
-     * method of the returned session.  If a new session cannot be created
-     * for any reason, return <code>null</code>.
-     *
-     * @exception IllegalStateException if a new session cannot be
-     *  instantiated for any reason
-     */
-    public Session createSession();
+  /**
+   * Add a property change listener to this component.
+   *
+   * @param listener The listener to add
+   */
+  public void addPropertyChangeListener(PropertyChangeListener listener);
 
 
-    /**
-     * Return the active Session, associated with this Manager, with the
-     * specified session id (if any); otherwise return <code>null</code>.
-     *
-     * @param id The session id for the session to be returned
-     *
-     * @exception IllegalStateException if a new session cannot be
-     *  instantiated for any reason
-     * @exception IOException if an input/output error occurs while
-     *  processing this request
-     */
-    public Session findSession(String id) throws IOException;
+  /**
+   * Construct and return a new session object, based on the default
+   * settings specified by this Manager's properties.  The session
+   * id will be assigned by this method, and available via the getId()
+   * method of the returned session.  If a new session cannot be created
+   * for any reason, return <code>null</code>.
+   *
+   * @throws IllegalStateException if a new session cannot be
+   *                               instantiated for any reason
+   */
+  public Session createSession();
 
 
-    /**
-     * Return the set of active Sessions associated with this Manager.
-     * If this Manager has no active Sessions, a zero-length array is returned.
-     */
-    public Session[] findSessions();
+  /**
+   * Return the active Session, associated with this Manager, with the
+   * specified session id (if any); otherwise return <code>null</code>.
+   *
+   * @param id The session id for the session to be returned
+   * @throws IllegalStateException if a new session cannot be
+   *                               instantiated for any reason
+   * @throws IOException           if an input/output error occurs while
+   *                               processing this request
+   */
+  public Session findSession(String id) throws IOException;
 
 
-    /**
-     * Load any currently active sessions that were previously unloaded
-     * to the appropriate persistence mechanism, if any.  If persistence is not
-     * supported, this method returns without doing anything.
-     *
-     * @exception ClassNotFoundException if a serialized class cannot be
-     *  found during the reload
-     * @exception IOException if an input/output error occurs
-     */
-    public void load() throws ClassNotFoundException, IOException;
+  /**
+   * Return the set of active Sessions associated with this Manager.
+   * If this Manager has no active Sessions, a zero-length array is returned.
+   */
+  public Session[] findSessions();
 
 
-    /**
-     * Remove this Session from the active Sessions for this Manager.
-     *
-     * @param session Session to be removed
-     */
-    public void remove(Session session);
+  /**
+   * Load any currently active sessions that were previously unloaded
+   * to the appropriate persistence mechanism, if any.  If persistence is not
+   * supported, this method returns without doing anything.
+   *
+   * @throws ClassNotFoundException if a serialized class cannot be
+   *                                found during the reload
+   * @throws IOException            if an input/output error occurs
+   */
+  public void load() throws ClassNotFoundException, IOException;
 
 
-    /**
-     * Remove a property change listener from this component.
-     *
-     * @param listener The listener to remove
-     */
-    public void removePropertyChangeListener(PropertyChangeListener listener);
+  /**
+   * Remove this Session from the active Sessions for this Manager.
+   *
+   * @param session Session to be removed
+   */
+  public void remove(Session session);
 
 
-    /**
-     * Save any currently active sessions in the appropriate persistence
-     * mechanism, if any.  If persistence is not supported, this method
-     * returns without doing anything.
-     *
-     * @exception IOException if an input/output error occurs
-     */
-    public void unload() throws IOException;
+  /**
+   * Remove a property change listener from this component.
+   *
+   * @param listener The listener to remove
+   */
+  public void removePropertyChangeListener(PropertyChangeListener listener);
+
+
+  /**
+   * Save any currently active sessions in the appropriate persistence
+   * mechanism, if any.  If persistence is not supported, this method
+   * returns without doing anything.
+   *
+   * @throws IOException if an input/output error occurs
+   */
+  public void unload() throws IOException;
 
 
 }

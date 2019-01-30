@@ -11,6 +11,7 @@ import java.net.Socket;
  * Description:
  * Copyright:    Copyright (c) 2002
  * Company:      Brainy Software
+ *
  * @author Budi Kurniawan
  * @version 1.0
  */
@@ -29,17 +30,18 @@ public class HttpSniffer extends JFrame {
   public HttpSniffer() {
     try {
       jbInit();
-    }
-    catch(Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
+
   public static void main(String[] args) {
     HttpSniffer frame = new HttpSniffer();
     frame.setBounds(0, 0, 600, 400);
     frame.setVisible(true);
 
   }
+
   private void jbInit() throws Exception {
     this.getContentPane().setLayout(null);
     address.setText("127.0.0.1");
@@ -82,8 +84,7 @@ public class HttpSniffer extends JFrame {
     try {
       host = address.getText();
       portNumber = Integer.parseInt(port.getText());
-    }
-    catch (Exception ex) {
+    } catch (Exception ex) {
       ok = false;
     }
 
@@ -93,20 +94,20 @@ public class HttpSniffer extends JFrame {
         Socket socket = new Socket(host, portNumber);
         OutputStream os = socket.getOutputStream();
         boolean autoflush = true;
-        PrintWriter out = new PrintWriter( socket.getOutputStream(), autoflush);
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), autoflush);
         String message = command.getText();
         out.println(message);
         out.println("Host: localhost:8080");
         out.println("Connection: Close");
         out.println();
         BufferedReader in = new BufferedReader(
-          new InputStreamReader( socket.getInputStream() ) );
+            new InputStreamReader(socket.getInputStream()));
         boolean loop = true;
         StringBuffer sb = new StringBuffer(8096);
         while (loop) {
-          if ( in.ready() ) {
-            int i=0;
-            while (i!=-1) {
+          if (in.ready()) {
+            int i = 0;
+            while (i != -1) {
               i = in.read();
               sb.append((char) i);
             }
@@ -116,8 +117,7 @@ public class HttpSniffer extends JFrame {
         }
         response.setText(sb.toString());
         socket.close();
-      }
-      catch (Exception ex) {
+      } catch (Exception ex) {
         ex.printStackTrace();
       }
     }

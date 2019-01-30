@@ -65,6 +65,7 @@ package org.apache.catalina.users;
 
 
 import java.util.Iterator;
+
 import org.apache.catalina.Group;
 import org.apache.catalina.Role;
 import org.apache.catalina.User;
@@ -81,190 +82,190 @@ import org.apache.catalina.User;
 public abstract class AbstractUser implements User {
 
 
-    // ----------------------------------------------------- Instance Variables
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * The full name of this user.
-     */
-    protected String fullName = null;
+  /**
+   * The full name of this user.
+   */
+  protected String fullName = null;
 
 
-    /**
-     * The logon password of this user.
-     */
-    protected String password = null;
+  /**
+   * The logon password of this user.
+   */
+  protected String password = null;
 
 
-    /**
-     * The logon username of this user.
-     */
-    protected String username = null;
+  /**
+   * The logon username of this user.
+   */
+  protected String username = null;
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * Return the full name of this user.
-     */
-    public String getFullName() {
+  /**
+   * Return the full name of this user.
+   */
+  public String getFullName() {
 
-        return (this.fullName);
+    return (this.fullName);
 
-    }
-
-
-    /**
-     * Set the full name of this user.
-     *
-     * @param fullName The new full name
-     */
-    public void setFullName(String fullName) {
-
-        this.fullName = fullName;
-
-    }
+  }
 
 
-    /**
-     * Return the set of {@link Group}s to which this user belongs.
-     */
-    public abstract Iterator getGroups();
+  /**
+   * Set the full name of this user.
+   *
+   * @param fullName The new full name
+   */
+  public void setFullName(String fullName) {
+
+    this.fullName = fullName;
+
+  }
 
 
-    /**
-     * Return the logon password of this user, optionally prefixed with the
-     * identifier of an encoding scheme surrounded by curly braces, such as
-     * <code>{md5}xxxxx</code>.
-     */
-    public String getPassword() {
-
-        return (this.password);
-
-    }
+  /**
+   * Return the set of {@link Group}s to which this user belongs.
+   */
+  public abstract Iterator getGroups();
 
 
-    /**
-     * Set the logon password of this user, optionally prefixed with the
-     * identifier of an encoding scheme surrounded by curly braces, such as
-     * <code>{md5}xxxxx</code>.
-     *
-     * @param password The new logon password
-     */
-    public void setPassword(String password) {
+  /**
+   * Return the logon password of this user, optionally prefixed with the
+   * identifier of an encoding scheme surrounded by curly braces, such as
+   * <code>{md5}xxxxx</code>.
+   */
+  public String getPassword() {
 
-        this.password = password;
+    return (this.password);
 
-    }
+  }
 
 
-    /**
-     * Return the set of {@link Role}s assigned specifically to this user.
-     */
-    public abstract Iterator getRoles();
+  /**
+   * Set the logon password of this user, optionally prefixed with the
+   * identifier of an encoding scheme surrounded by curly braces, such as
+   * <code>{md5}xxxxx</code>.
+   *
+   * @param password The new logon password
+   */
+  public void setPassword(String password) {
+
+    this.password = password;
+
+  }
 
 
-    /**
-     * Return the logon username of this user, which must be unique
-     * within the scope of a {@link UserDatabase}.
-     */
-    public String getUsername() {
-
-        return (this.username);
-
-    }
+  /**
+   * Return the set of {@link Role}s assigned specifically to this user.
+   */
+  public abstract Iterator getRoles();
 
 
-    /**
-     * Set the logon username of this user, which must be unique within
-     * the scope of a {@link UserDatabase}.
-     *
-     * @param username The new logon username
-     */
-    public void setUsername(String username) {
+  /**
+   * Return the logon username of this user, which must be unique
+   * within the scope of a {@link UserDatabase}.
+   */
+  public String getUsername() {
 
-        this.username = username;
+    return (this.username);
 
-    }
+  }
 
 
-    // --------------------------------------------------------- Public Methods
+  /**
+   * Set the logon username of this user, which must be unique within
+   * the scope of a {@link UserDatabase}.
+   *
+   * @param username The new logon username
+   */
+  public void setUsername(String username) {
+
+    this.username = username;
+
+  }
 
 
-    /**
-     * Add a new {@link Group} to those this user belongs to.
-     *
-     * @param group The new group
-     */
-    public abstract void addGroup(Group group);
+  // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Add a new {@link Role} to those assigned specifically to this user.
-     *
-     * @param role The new role
-     */
-    public abstract void addRole(Role role);
+  /**
+   * Add a new {@link Group} to those this user belongs to.
+   *
+   * @param group The new group
+   */
+  public abstract void addGroup(Group group);
 
 
-    /**
-     * Is this user in the specified {@link Group}?
-     *
-     * @param group The group to check
-     */
-    public abstract boolean isInGroup(Group group);
+  /**
+   * Add a new {@link Role} to those assigned specifically to this user.
+   *
+   * @param role The new role
+   */
+  public abstract void addRole(Role role);
 
 
-    /**
-     * Is this user specifically assigned the specified {@link Role}?  This
-     * method does <strong>NOT</strong> check for roles inherited based on
-     * {@link Group} membership.
-     *
-     * @param role The role to check
-     */
-    public abstract boolean isInRole(Role role);
+  /**
+   * Is this user in the specified {@link Group}?
+   *
+   * @param group The group to check
+   */
+  public abstract boolean isInGroup(Group group);
 
 
-    /**
-     * Remove a {@link Group} from those this user belongs to.
-     *
-     * @param group The old group
-     */
-    public abstract void removeGroup(Group group);
+  /**
+   * Is this user specifically assigned the specified {@link Role}?  This
+   * method does <strong>NOT</strong> check for roles inherited based on
+   * {@link Group} membership.
+   *
+   * @param role The role to check
+   */
+  public abstract boolean isInRole(Role role);
 
 
-    /**
-     * Remove all {@link Group}s from those this user belongs to.
-     */
-    public abstract void removeGroups();
+  /**
+   * Remove a {@link Group} from those this user belongs to.
+   *
+   * @param group The old group
+   */
+  public abstract void removeGroup(Group group);
 
 
-    /**
-     * Remove a {@link Role} from those assigned to this user.
-     *
-     * @param role The old role
-     */
-    public abstract void removeRole(Role role);
+  /**
+   * Remove all {@link Group}s from those this user belongs to.
+   */
+  public abstract void removeGroups();
 
 
-    /**
-     * Remove all {@link Role}s from those assigned to this user.
-     */
-    public abstract void removeRoles();
+  /**
+   * Remove a {@link Role} from those assigned to this user.
+   *
+   * @param role The old role
+   */
+  public abstract void removeRole(Role role);
 
 
-    // ------------------------------------------------------ Principal Methods
+  /**
+   * Remove all {@link Role}s from those assigned to this user.
+   */
+  public abstract void removeRoles();
 
 
-    /**
-     * Make the principal name the same as the group name.
-     */
-    public String getName() {
+  // ------------------------------------------------------ Principal Methods
 
-        return (getUsername());
 
-    }
+  /**
+   * Make the principal name the same as the group name.
+   */
+  public String getName() {
+
+    return (getUsername());
+
+  }
 
 
 }

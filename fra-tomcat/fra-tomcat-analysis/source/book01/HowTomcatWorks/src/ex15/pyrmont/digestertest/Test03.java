@@ -3,12 +3,13 @@ package ex15.pyrmont.digestertest;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import org.apache.commons.digester.Digester;
 
 public class Test03 {
 
   public static void main(String[] args) {
-    String path = System.getProperty("user.dir") + File.separator  + "etc";
+    String path = System.getProperty("user.dir") + File.separator + "etc";
     File file = new File(path, "employee2.xml");
     Digester digester = new Digester();
     digester.addRuleSet(new EmployeeRuleSet());
@@ -21,13 +22,12 @@ public class Test03 {
         Office office = (Office) iterator.next();
         Address address = office.getAddress();
         System.out.println(office.getDescription());
-        System.out.println("Address : " + 
-          address.getStreetNumber() + " " + address.getStreetName());
+        System.out.println("Address : " +
+            address.getStreetNumber() + " " + address.getStreetName());
         System.out.println("--------------------------------");
       }
-      
-    }
-    catch(Exception e) {
+
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

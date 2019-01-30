@@ -66,6 +66,7 @@ package org.apache.catalina.connector.http10;
 
 
 import java.net.InetAddress;
+
 import org.apache.catalina.connector.HttpRequestBase;
 
 
@@ -81,105 +82,105 @@ final class HttpRequestImpl
     extends HttpRequestBase {
 
 
-    // ----------------------------------------------------- Instance Variables
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * The InetAddress of the remote client of ths request.
-     */
-    protected InetAddress inet = null;
+  /**
+   * The InetAddress of the remote client of ths request.
+   */
+  protected InetAddress inet = null;
 
 
-    /**
-     * Descriptive information about this Request implementation.
-     */
-    protected static final String info =
-        "org.apache.catalina.connector.http10.HttpRequestImpl/1.0";
+  /**
+   * Descriptive information about this Request implementation.
+   */
+  protected static final String info =
+      "org.apache.catalina.connector.http10.HttpRequestImpl/1.0";
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * [Package Private] Return the InetAddress of the remote client of
-     * this request.
-     */
-    InetAddress getInet() {
+  /**
+   * [Package Private] Return the InetAddress of the remote client of
+   * this request.
+   */
+  InetAddress getInet() {
 
-        return (inet);
+    return (inet);
 
-    }
-
-
-    /**
-     * [Package Private] Set the InetAddress of the remote client of
-     * this request.
-     *
-     * @param inet The new InetAddress
-     */
-    void setInet(InetAddress inet) {
-
-        this.inet = inet;
-
-    }
+  }
 
 
-    /**
-     * Return descriptive information about this Request implementation and
-     * the corresponding version number, in the format
-     * <code>&lt;description&gt;/&lt;version&gt;</code>.
-     */
-    public String getInfo() {
+  /**
+   * [Package Private] Set the InetAddress of the remote client of
+   * this request.
+   *
+   * @param inet The new InetAddress
+   */
+  void setInet(InetAddress inet) {
 
-        return (info);
+    this.inet = inet;
 
-    }
-
-
-    // --------------------------------------------------------- Public Methods
+  }
 
 
-    /**
-     * Release all object references, and initialize instance variables, in
-     * preparation for reuse of this object.
-     */
-    public void recycle() {
+  /**
+   * Return descriptive information about this Request implementation and
+   * the corresponding version number, in the format
+   * <code>&lt;description&gt;/&lt;version&gt;</code>.
+   */
+  public String getInfo() {
 
-        super.recycle();
-        inet = null;
+    return (info);
 
-    }
-
-
-    // ------------------------------------------------- ServletRequest Methods
+  }
 
 
-    /**
-     * Return the Internet Protocol (IP) address of the client that sent
-     * this request.
-     */
-    public String getRemoteAddr() {
-
-        return (inet.getHostAddress());
-
-    }
+  // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Return the fully qualified name of the client that sent this request,
-     * or the IP address of the client if the name cannot be determined.
-     */
-    public String getRemoteHost() {
+  /**
+   * Release all object references, and initialize instance variables, in
+   * preparation for reuse of this object.
+   */
+  public void recycle() {
 
-        if (connector.getEnableLookups())
-            return (inet.getHostName());
-        else
-            return (getRemoteAddr());
+    super.recycle();
+    inet = null;
 
-    }
+  }
 
 
-    // --------------------------------------------- HttpServletRequest Methods
+  // ------------------------------------------------- ServletRequest Methods
+
+
+  /**
+   * Return the Internet Protocol (IP) address of the client that sent
+   * this request.
+   */
+  public String getRemoteAddr() {
+
+    return (inet.getHostAddress());
+
+  }
+
+
+  /**
+   * Return the fully qualified name of the client that sent this request,
+   * or the IP address of the client if the name cannot be determined.
+   */
+  public String getRemoteHost() {
+
+    if (connector.getEnableLookups())
+      return (inet.getHostName());
+    else
+      return (getRemoteAddr());
+
+  }
+
+
+  // --------------------------------------------- HttpServletRequest Methods
 
 
 }

@@ -69,9 +69,9 @@ package org.apache.catalina;
  * engine.  It is useful in the following types of scenarios:
  * <ul>
  * <li>You wish to use Interceptors that see every single request processed
- *     by the entire engine.
+ * by the entire engine.
  * <li>You wish to run Catalina in with a standalone HTTP connector, but still
- *     want support for multiple virtual hosts.
+ * want support for multiple virtual hosts.
  * </ul>
  * In general, you would not use an Engine when deploying Catalina connected
  * to a web server (such as Apache), because the Connector will have
@@ -93,76 +93,76 @@ package org.apache.catalina;
 public interface Engine extends Container {
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * Return the default hostname for this Engine.
-     */
-    public String getDefaultHost();
+  /**
+   * Return the default hostname for this Engine.
+   */
+  public String getDefaultHost();
 
 
-    /**
-     * Set the default hostname for this Engine.
-     *
-     * @param defaultHost The new default host
-     */
-    public void setDefaultHost(String defaultHost);
+  /**
+   * Set the default hostname for this Engine.
+   *
+   * @param defaultHost The new default host
+   */
+  public void setDefaultHost(String defaultHost);
 
 
-    /**
-     * Retrieve the JvmRouteId for this engine.
-     */
-    public String getJvmRoute();
+  /**
+   * Retrieve the JvmRouteId for this engine.
+   */
+  public String getJvmRoute();
 
 
-    /**
-     * Set the JvmRouteId for this engine.
-     *
-     * @param jvmRouteId the (new) JVM Route ID. Each Engine within a cluster
-     *        must have a unique JVM Route ID.
-     */
-    public void setJvmRoute(String jvmRouteId);
+  /**
+   * Set the JvmRouteId for this engine.
+   *
+   * @param jvmRouteId the (new) JVM Route ID. Each Engine within a cluster
+   *                   must have a unique JVM Route ID.
+   */
+  public void setJvmRoute(String jvmRouteId);
 
 
-    /**
-     * Return the <code>Service</code> with which we are associated (if any).
-     */
-    public Service getService();
+  /**
+   * Return the <code>Service</code> with which we are associated (if any).
+   */
+  public Service getService();
 
 
-    /**
-     * Set the <code>Service</code> with which we are associated (if any).
-     *
-     * @param service The service that owns this Engine
-     */
-    public void setService(Service service);
+  /**
+   * Set the <code>Service</code> with which we are associated (if any).
+   *
+   * @param service The service that owns this Engine
+   */
+  public void setService(Service service);
 
 
-    /**
-     * Set the DefaultContext
-     * for new web applications.
-     *
-     * @param defaultContext The new DefaultContext
-     */
-    public void addDefaultContext(DefaultContext defaultContext);
+  /**
+   * Set the DefaultContext
+   * for new web applications.
+   *
+   * @param defaultContext The new DefaultContext
+   */
+  public void addDefaultContext(DefaultContext defaultContext);
 
 
-    /**
-     * Retrieve the DefaultContext for new web applications.
-     */
-    public DefaultContext getDefaultContext();
+  /**
+   * Retrieve the DefaultContext for new web applications.
+   */
+  public DefaultContext getDefaultContext();
 
 
-    // --------------------------------------------------------- Public Methods
+  // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Import the DefaultContext config into a web application context.
-     *
-     * @param context web application context to import default context
-     */
-    public void importDefaultContext(Context context);
+  /**
+   * Import the DefaultContext config into a web application context.
+   *
+   * @param context web application context to import default context
+   */
+  public void importDefaultContext(Context context);
 
 
 }

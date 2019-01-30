@@ -3,7 +3,7 @@
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999 The Apache Software Foundation.  All rights 
+ * Copyright (c) 1999 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -11,7 +11,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -19,15 +19,15 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution, if
- *    any, must include the following acknowlegement:  
- *       "This product includes software developed by the 
+ *    any, must include the following acknowlegement:
+ *       "This product includes software developed by the
  *        Apache Software Foundation (http://www.apache.org/)."
  *    Alternately, this acknowlegement may appear in the software itself,
  *    if and wherever such third-party acknowlegements normally appear.
  *
  * 4. The names "The Jakarta Project", "Tomcat", and "Apache Software
  *    Foundation" must not be used to endorse or promote products derived
- *    from this software without prior written permission. For written 
+ *    from this software without prior written permission. For written
  *    permission, please contact apache@apache.org.
  *
  * 5. Products derived from this software may not be called "Apache"
@@ -55,7 +55,7 @@
  *
  * [Additional notices, if required by prior licensing conditions]
  *
- */ 
+ */
 
 package org.apache.catalina.util;
 
@@ -67,90 +67,90 @@ import java.text.SimpleDateFormat;
 
 /**
  * Utility class to generate HTTP dates.
- * 
+ *
  * @author Remy Maucherat
  */
 public final class FastHttpDateFormat {
 
 
-    // -------------------------------------------------------------- Variables
+  // -------------------------------------------------------------- Variables
 
 
-    /**
-     * HTTP date format.
-     */
-    protected static SimpleDateFormat format = 
-        new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
+  /**
+   * HTTP date format.
+   */
+  protected static SimpleDateFormat format =
+      new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
 
 
-    protected final static TimeZone gmtZone = TimeZone.getTimeZone("GMT");
+  protected final static TimeZone gmtZone = TimeZone.getTimeZone("GMT");
 
 
-    /**
-     * GMT timezone - all HTTP dates are on GMT
-     */
-    static {
-        format.setTimeZone(gmtZone);
-    }
+  /**
+   * GMT timezone - all HTTP dates are on GMT
+   */
+  static {
+    format.setTimeZone(gmtZone);
+  }
 
 
-    /**
-     * Instant on which the currentDate object was generated.
-     */
-    protected static long currentDateGenerated = 0L;
+  /**
+   * Instant on which the currentDate object was generated.
+   */
+  protected static long currentDateGenerated = 0L;
 
 
-    /**
-     * Current formatted date.
-     */
-    protected static String currentDate = null;
+  /**
+   * Current formatted date.
+   */
+  protected static String currentDate = null;
 
 
-    /**
-     * Date cache.
-     */
-    protected static HashMap dateCache = new HashMap();
+  /**
+   * Date cache.
+   */
+  protected static HashMap dateCache = new HashMap();
 
 
-    // --------------------------------------------------------- Public Methods
+  // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Get the current date in HTTP format.
-     */
-    public static String getCurrentDate() {
+  /**
+   * Get the current date in HTTP format.
+   */
+  public static String getCurrentDate() {
 
-        long now = System.currentTimeMillis();
+    long now = System.currentTimeMillis();
+    if ((now - currentDateGenerated) > 1000) {
+      synchronized (format) {
         if ((now - currentDateGenerated) > 1000) {
-            synchronized (format) {
-                if ((now - currentDateGenerated) > 1000) {
-                    currentDateGenerated = now;
-                    currentDate = format.format(new Date(now));
-                }
-            }
+          currentDateGenerated = now;
+          currentDate = format.format(new Date(now));
         }
-        return currentDate;
-
+      }
     }
+    return currentDate;
+
+  }
 
 
-    /**
-     * Get the HTTP format of the specified date.
-     */
-    public static String getDate(Date date) {
+  /**
+   * Get the HTTP format of the specified date.
+   */
+  public static String getDate(Date date) {
 
-        String cachedDate = (String) dateCache.get(date);
-        if (cachedDate != null)
-            return cachedDate;
+    String cachedDate = (String) dateCache.get(date);
+    if (cachedDate != null)
+      return cachedDate;
 
-        String newDate = null;
-        synchronized (format) {
-            newDate = format.format(date);
-            dateCache.put(date, newDate);
-        }
-        return newDate;
-
+    String newDate = null;
+    synchronized (format) {
+      newDate = format.format(date);
+      dateCache.put(date, newDate);
     }
+    return newDate;
+
+  }
 
 
 }

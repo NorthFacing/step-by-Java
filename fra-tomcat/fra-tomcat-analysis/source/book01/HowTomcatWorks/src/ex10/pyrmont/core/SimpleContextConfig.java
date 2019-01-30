@@ -15,6 +15,7 @@ import org.apache.catalina.deploy.LoginConfig;
 public class SimpleContextConfig implements LifecycleListener {
 
   private Context context;
+
   public void lifecycleEvent(LifecycleEvent event) {
     if (Lifecycle.START_EVENT.equals(event.getType())) {
       context = (Context) event.getLifecycle();
@@ -43,10 +44,9 @@ public class SimpleContextConfig implements LifecycleListener {
       Valve valves[] = pipeline.getValves();
       for (int i = 0; i < valves.length; i++) {
         if (valves[i] instanceof Authenticator)
-        return;
+          return;
       }
-    }
-    else { // no Pipeline, cannot install authenticator valve
+    } else { // no Pipeline, cannot install authenticator valve
       return;
     }
 
@@ -64,8 +64,7 @@ public class SimpleContextConfig implements LifecycleListener {
       authenticator = (Valve) authenticatorClass.newInstance();
       ((StandardContext) context).addValve(authenticator);
       System.out.println("Added authenticator valve to Context");
-    }
-    catch (Throwable t) {
+    } catch (Throwable t) {
     }
   }
 }

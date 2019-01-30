@@ -18,9 +18,8 @@ public class HttpConnector implements Runnable {
     ServerSocket serverSocket = null;
     int port = 8080;
     try {
-      serverSocket =  new ServerSocket(port, 1, InetAddress.getByName("127.0.0.1"));
-    }
-    catch (IOException e) {
+      serverSocket = new ServerSocket(port, 1, InetAddress.getByName("127.0.0.1"));
+    } catch (IOException e) {
       e.printStackTrace();
       System.exit(1);
     }
@@ -29,8 +28,7 @@ public class HttpConnector implements Runnable {
       Socket socket = null;
       try {
         socket = serverSocket.accept();
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         continue;
       }
       // Hand this socket off to an HttpProcessor

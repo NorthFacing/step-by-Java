@@ -21,7 +21,7 @@ import org.apache.catalina.loader.WebappLoader;
 public final class Bootstrap2 {
   public static void main(String[] args) {
 
-  //invoke: http://localhost:8080/Modern or  http://localhost:8080/Primitive
+    //invoke: http://localhost:8080/Modern or  http://localhost:8080/Primitive
 
     System.setProperty("catalina.base", System.getProperty("user.dir"));
     Connector connector = new HttpConnector();
@@ -80,8 +80,7 @@ public final class Bootstrap2 {
       // make the application wait until we press a key.
       System.in.read();
       ((Lifecycle) context).stop();
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

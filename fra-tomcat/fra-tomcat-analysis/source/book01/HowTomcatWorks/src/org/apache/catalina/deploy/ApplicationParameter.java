@@ -79,88 +79,88 @@ package org.apache.catalina.deploy;
 public final class ApplicationParameter {
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * The description of this environment entry.
-     */
-    private String description = null;
+  /**
+   * The description of this environment entry.
+   */
+  private String description = null;
 
-    public String getDescription() {
-        return (this.description);
+  public String getDescription() {
+    return (this.description);
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+
+  /**
+   * The name of this application parameter.
+   */
+  private String name = null;
+
+  public String getName() {
+    return (this.name);
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
+  /**
+   * Does this application parameter allow overrides by the application
+   * deployment descriptor?
+   */
+  private boolean override = true;
+
+  public boolean getOverride() {
+    return (this.override);
+  }
+
+  public void setOverride(boolean override) {
+    this.override = override;
+  }
+
+
+  /**
+   * The value of this application parameter.
+   */
+  private String value = null;
+
+  public String getValue() {
+    return (this.value);
+  }
+
+  public void setValue(String value) {
+    this.value = value;
+  }
+
+  // --------------------------------------------------------- Public Methods
+
+
+  /**
+   * Return a String representation of this object.
+   */
+  public String toString() {
+
+    StringBuffer sb = new StringBuffer("ApplicationParameter[");
+    sb.append("name=");
+    sb.append(name);
+    if (description != null) {
+      sb.append(", description=");
+      sb.append(description);
     }
+    sb.append(", value=");
+    sb.append(value);
+    sb.append(", override=");
+    sb.append(override);
+    sb.append("]");
+    return (sb.toString());
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
-    /**
-     * The name of this application parameter.
-     */
-    private String name = null;
-
-    public String getName() {
-        return (this.name);
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-    /**
-     * Does this application parameter allow overrides by the application
-     * deployment descriptor?
-     */
-    private boolean override = true;
-
-    public boolean getOverride() {
-        return (this.override);
-    }
-
-    public void setOverride(boolean override) {
-        this.override = override;
-    }
-
-
-    /**
-     * The value of this application parameter.
-     */
-    private String value = null;
-
-    public String getValue() {
-        return (this.value);
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    // --------------------------------------------------------- Public Methods
-
-
-    /**
-     * Return a String representation of this object.
-     */
-    public String toString() {
-
-        StringBuffer sb = new StringBuffer("ApplicationParameter[");
-        sb.append("name=");
-        sb.append(name);
-        if (description != null) {
-            sb.append(", description=");
-            sb.append(description);
-        }
-        sb.append(", value=");
-        sb.append(value);
-        sb.append(", override=");
-        sb.append(override);
-        sb.append("]");
-        return (sb.toString());
-
-    }
+  }
 
 
 }

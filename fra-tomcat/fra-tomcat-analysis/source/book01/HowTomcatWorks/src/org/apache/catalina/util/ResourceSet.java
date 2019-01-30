@@ -82,149 +82,147 @@ import java.util.HashSet;
 public final class ResourceSet extends HashSet {
 
 
-    // ----------------------------------------------------------- Constructors
+  // ----------------------------------------------------------- Constructors
 
 
-    /**
-     * Construct a new, empty set with the default initial capacity and
-     * load factor.
-     */
-    public ResourceSet() {
+  /**
+   * Construct a new, empty set with the default initial capacity and
+   * load factor.
+   */
+  public ResourceSet() {
 
-        super();
+    super();
 
-    }
-
-
-    /**
-     * Construct a new, empty set with the specified initial capacity and
-     * default load factor.
-     *
-     * @param initialCapacity The initial capacity of this set
-     */
-    public ResourceSet(int initialCapacity) {
-
-        super(initialCapacity);
-
-    }
+  }
 
 
-    /**
-     * Construct a new, empty set with the specified initial capacity and
-     * load factor.
-     *
-     * @param initialCapacity The initial capacity of this set
-     * @param loadFactor The load factor of this set
-     */
-    public ResourceSet(int initialCapacity, float loadFactor) {
+  /**
+   * Construct a new, empty set with the specified initial capacity and
+   * default load factor.
+   *
+   * @param initialCapacity The initial capacity of this set
+   */
+  public ResourceSet(int initialCapacity) {
 
-        super(initialCapacity, loadFactor);
+    super(initialCapacity);
 
-    }
-
-
-    /**
-     * Construct a new set with the same contents as the existing collection.
-     *
-     * @param coll The collection whose contents we should copy
-     */
-    public ResourceSet(Collection coll) {
-
-        super(coll);
-
-    }
+  }
 
 
-    // ------------------------------------------------------------- Properties
+  /**
+   * Construct a new, empty set with the specified initial capacity and
+   * load factor.
+   *
+   * @param initialCapacity The initial capacity of this set
+   * @param loadFactor      The load factor of this set
+   */
+  public ResourceSet(int initialCapacity, float loadFactor) {
+
+    super(initialCapacity, loadFactor);
+
+  }
 
 
-    /**
-     * The current lock state of this parameter map.
-     */
-    private boolean locked = false;
+  /**
+   * Construct a new set with the same contents as the existing collection.
+   *
+   * @param coll The collection whose contents we should copy
+   */
+  public ResourceSet(Collection coll) {
+
+    super(coll);
+
+  }
 
 
-    /**
-     * Return the locked state of this parameter map.
-     */
-    public boolean isLocked() {
-
-        return (this.locked);
-
-    }
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * Set the locked state of this parameter map.
-     *
-     * @param locked The new locked state
-     */
-    public void setLocked(boolean locked) {
-
-        this.locked = locked;
-
-    }
+  /**
+   * The current lock state of this parameter map.
+   */
+  private boolean locked = false;
 
 
-    /**
-     * The string manager for this package.
-     */
-    private static final StringManager sm =
-        StringManager.getManager("org.apache.catalina.util");
+  /**
+   * Return the locked state of this parameter map.
+   */
+  public boolean isLocked() {
+
+    return (this.locked);
+
+  }
 
 
-    // --------------------------------------------------------- Public Methods
+  /**
+   * Set the locked state of this parameter map.
+   *
+   * @param locked The new locked state
+   */
+  public void setLocked(boolean locked) {
+
+    this.locked = locked;
+
+  }
 
 
-    /**
-     * Add the specified element to this set if it is not already present.
-     * Return <code>true</code> if the element was added.
-     *
-     * @param o The object to be added
-     *
-     * @exception IllegalStateException if this ResourceSet is locked
-     */
-    public boolean add(Object o) {
-
-        if (locked)
-            throw new IllegalStateException
-              (sm.getString("resourceSet.locked"));
-        return (super.add(o));
-
-    }
+  /**
+   * The string manager for this package.
+   */
+  private static final StringManager sm =
+      StringManager.getManager("org.apache.catalina.util");
 
 
-    /**
-     * Remove all of the elements from this set.
-     *
-     * @exception IllegalStateException if this ResourceSet is locked
-     */
-    public void clear() {
-
-        if (locked)
-            throw new IllegalStateException
-              (sm.getString("resourceSet.locked"));
-        super.clear();
-
-    }
+  // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Remove the given element from this set if it is present.
-     * Return <code>true</code> if the element was removed.
-     *
-     * @param o The object to be removed
-     *
-     * @exception IllegalStateException if this ResourceSet is locked
-     */
-    public boolean remove(Object o) {
+  /**
+   * Add the specified element to this set if it is not already present.
+   * Return <code>true</code> if the element was added.
+   *
+   * @param o The object to be added
+   * @throws IllegalStateException if this ResourceSet is locked
+   */
+  public boolean add(Object o) {
 
-        if (locked)
-            throw new IllegalStateException
-              (sm.getString("resourceSet.locked"));
-        return (super.remove(o));
+    if (locked)
+      throw new IllegalStateException
+          (sm.getString("resourceSet.locked"));
+    return (super.add(o));
 
-    }
+  }
+
+
+  /**
+   * Remove all of the elements from this set.
+   *
+   * @throws IllegalStateException if this ResourceSet is locked
+   */
+  public void clear() {
+
+    if (locked)
+      throw new IllegalStateException
+          (sm.getString("resourceSet.locked"));
+    super.clear();
+
+  }
+
+
+  /**
+   * Remove the given element from this set if it is present.
+   * Return <code>true</code> if the element was removed.
+   *
+   * @param o The object to be removed
+   * @throws IllegalStateException if this ResourceSet is locked
+   */
+  public boolean remove(Object o) {
+
+    if (locked)
+      throw new IllegalStateException
+          (sm.getString("resourceSet.locked"));
+    return (super.remove(o));
+
+  }
 
 
 }

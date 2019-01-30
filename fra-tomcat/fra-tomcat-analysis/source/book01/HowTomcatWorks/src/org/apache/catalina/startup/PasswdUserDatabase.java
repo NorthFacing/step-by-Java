@@ -84,157 +84,157 @@ public final class PasswdUserDatabase
     implements UserDatabase {
 
 
-    // --------------------------------------------------------- Constructors
+  // --------------------------------------------------------- Constructors
 
 
-    /**
-     * Initialize a new instance of this user database component.
-     */
-    public PasswdUserDatabase() {
+  /**
+   * Initialize a new instance of this user database component.
+   */
+  public PasswdUserDatabase() {
 
-        super();
+    super();
 
-    }
-
-
-    // --------------------------------------------------- Instance Variables
+  }
 
 
-    /**
-     * The pathname of the Unix password file.
-     */
-    private static final String PASSWORD_FILE = "/etc/passwd";
+  // --------------------------------------------------- Instance Variables
 
 
-    /**
-     * The set of home directories for all defined users, keyed by username.
-     */
-    private Hashtable homes = new Hashtable();
+  /**
+   * The pathname of the Unix password file.
+   */
+  private static final String PASSWORD_FILE = "/etc/passwd";
 
 
-    /**
-     * The UserConfig listener with which we are associated.
-     */
-    private UserConfig userConfig = null;
+  /**
+   * The set of home directories for all defined users, keyed by username.
+   */
+  private Hashtable homes = new Hashtable();
 
 
-    // ----------------------------------------------------------- Properties
+  /**
+   * The UserConfig listener with which we are associated.
+   */
+  private UserConfig userConfig = null;
 
 
-    /**
-     * Return the UserConfig listener with which we are associated.
-     */
-    public UserConfig getUserConfig() {
-
-        return (this.userConfig);
-
-    }
+  // ----------------------------------------------------------- Properties
 
 
-    /**
-     * Set the UserConfig listener with which we are associated.
-     *
-     * @param userConfig The new UserConfig listener
-     */
-    public void setUserConfig(UserConfig userConfig) {
+  /**
+   * Return the UserConfig listener with which we are associated.
+   */
+  public UserConfig getUserConfig() {
 
-        this.userConfig = userConfig;
-        init();
+    return (this.userConfig);
 
-    }
+  }
 
 
-    // ------------------------------------------------------- Public Methods
+  /**
+   * Set the UserConfig listener with which we are associated.
+   *
+   * @param userConfig The new UserConfig listener
+   */
+  public void setUserConfig(UserConfig userConfig) {
+
+    this.userConfig = userConfig;
+    init();
+
+  }
 
 
-    /**
-     * Return an absolute pathname to the home directory for the specified user.
-     *
-     * @param user User for which a home directory should be retrieved
-     */
-    public String getHome(String user) {
-
-        return ((String) homes.get(user));
-
-    }
+  // ------------------------------------------------------- Public Methods
 
 
-    /**
-     * Return an enumeration of the usernames defined on this server.
-     */
-    public Enumeration getUsers() {
+  /**
+   * Return an absolute pathname to the home directory for the specified user.
+   *
+   * @param user User for which a home directory should be retrieved
+   */
+  public String getHome(String user) {
 
-        return (homes.keys());
+    return ((String) homes.get(user));
 
-    }
-
-
-    // ------------------------------------------------------ Private Methods
+  }
 
 
-    /**
-     * Initialize our set of users and home directories.
-     */
-    private void init() {
+  /**
+   * Return an enumeration of the usernames defined on this server.
+   */
+  public Enumeration getUsers() {
 
-        BufferedReader reader = null;
-        try {
+    return (homes.keys());
 
-            reader = new BufferedReader(new FileReader(PASSWORD_FILE));
+  }
 
-            while (true) {
 
-                // Accumulate the next line
-                StringBuffer buffer = new StringBuffer();
-                while (true) {
-                    int ch = reader.read();
-                    if ((ch < 0) || (ch == '\n'))
-                        break;
-                    buffer.append((char) ch);
-                }
-                String line = buffer.toString();
-                if (line.length() < 1)
-                    break;
+  // ------------------------------------------------------ Private Methods
 
-                // Parse the line into constituent elements
-                int n = 0;
-                String tokens[] = new String[7];
-                for (int i = 0; i < tokens.length; i++)
-                    tokens[i] = null;
-                while (n < tokens.length) {
-                    String token = null;
-                    int colon = line.indexOf(':');
-                    if (colon >= 0) {
-                        token = line.substring(0, colon);
-                        line = line.substring(colon + 1);
-                    } else {
-                        token = line;
-                        line = "";
-                    }
-                    tokens[n++] = token;
-                }
 
-                // Add this user and corresponding directory
-                if ((tokens[0] != null) && (tokens[5] != null))
-                    homes.put(tokens[0], tokens[5]);
+  /**
+   * Initialize our set of users and home directories.
+   */
+  private void init() {
 
-            }
+    BufferedReader reader = null;
+    try {
 
-            reader.close();
-            reader = null;
+      reader = new BufferedReader(new FileReader(PASSWORD_FILE));
 
-        } catch (Exception e) {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException f) {
-                    ;
-                }
-                reader = null;
-            }
+      while (true) {
+
+        // Accumulate the next line
+        StringBuffer buffer = new StringBuffer();
+        while (true) {
+          int ch = reader.read();
+          if ((ch < 0) || (ch == '\n'))
+            break;
+          buffer.append((char) ch);
+        }
+        String line = buffer.toString();
+        if (line.length() < 1)
+          break;
+
+        // Parse the line into constituent elements
+        int n = 0;
+        String tokens[] = new String[7];
+        for (int i = 0; i < tokens.length; i++)
+          tokens[i] = null;
+        while (n < tokens.length) {
+          String token = null;
+          int colon = line.indexOf(':');
+          if (colon >= 0) {
+            token = line.substring(0, colon);
+            line = line.substring(colon + 1);
+          } else {
+            token = line;
+            line = "";
+          }
+          tokens[n++] = token;
         }
 
+        // Add this user and corresponding directory
+        if ((tokens[0] != null) && (tokens[5] != null))
+          homes.put(tokens[0], tokens[5]);
+
+      }
+
+      reader.close();
+      reader = null;
+
+    } catch (Exception e) {
+      if (reader != null) {
+        try {
+          reader.close();
+        } catch (IOException f) {
+          ;
+        }
+        reader = null;
+      }
     }
+
+  }
 
 
 }

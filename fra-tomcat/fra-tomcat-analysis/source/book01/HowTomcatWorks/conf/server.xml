@@ -29,7 +29,7 @@
          UserDatabaseRealm to authenticate users -->
     <Resource name="UserDatabase" auth="Container"
               type="org.apache.catalina.UserDatabase"
-       description="User database that can be updated and saved">
+              description="User database that can be updated and saved">
     </Resource>
     <ResourceParams name="UserDatabase">
       <parameter>
@@ -83,13 +83,14 @@
     -->
 
     <!-- Define a non-SSL Coyote HTTP/1.1 Connector on port 8080 -->
-<!--
-    <Connector className="org.apache.coyote.tomcat4.CoyoteConnector"
-               port="8080" minProcessors="5" maxProcessors="75"
-               enableLookups="true" redirectPort="8443"
-               acceptCount="10" debug="0" connectionTimeout="20000"
-               useURIValidationHack="false" />
--->
+    <!--
+        <Connector className="org.apache.coyote.tomcat4.CoyoteConnector"
+                   port="8080" minProcessors="5" maxProcessors="75"
+                   enableLookups="true" redirectPort="8443"
+                   acceptCount="10" debug="0" connectionTimeout="20000"
+                   useURIValidationHack="false" />
+
+    -->
 
     <!-- Note : To disable connection timeouts, set connectionTimeout value 
      to -1 -->
@@ -107,14 +108,14 @@
     -->
 
     <!-- Define a Coyote/JK2 AJP 1.3 Connector on port 8009 -->
-<!--
-    <Connector className="org.apache.coyote.tomcat4.CoyoteConnector"
-               port="8009" minProcessors="5" maxProcessors="75"
-               enableLookups="true" redirectPort="8443"
-               acceptCount="10" debug="0" connectionTimeout="20000"
-               useURIValidationHack="false"
-               protocolHandlerClassName="org.apache.jk.server.JkCoyoteHandler"/>
--->
+    <!--
+        <Connector className="org.apache.coyote.tomcat4.CoyoteConnector"
+                   port="8009" minProcessors="5" maxProcessors="75"
+                   enableLookups="true" redirectPort="8443"
+                   acceptCount="10" debug="0" connectionTimeout="20000"
+                   useURIValidationHack="false"
+                   protocolHandlerClassName="org.apache.jk.server.JkCoyoteHandler"/>
+    -->
     <!-- Define an AJP 1.3 Connector on port 8009 -->
     <!--
     <Connector className="org.apache.ajp.tomcat4.Ajp13Connector"
@@ -136,7 +137,7 @@
     <Connector className="org.apache.catalina.connector.http.HttpConnector"
                port="8080" minProcessors="5" maxProcessors="75"
                enableLookups="true" redirectPort="8443"
-               acceptCount="10" debug="0" />
+               acceptCount="10" debug="0"/>
 
     <!-- Define a non-SSL HTTP/1.0 Test Connector on port 8084 -->
     <!--
@@ -184,7 +185,7 @@
            that are performed against this UserDatabase are immediately
            available for use by the Realm.  -->
       <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
-                 debug="0" resourceName="UserDatabase"/>
+             debug="0" resourceName="UserDatabase"/>
 
       <!-- Comment out the old realm but leave here for now in case we
            need to go back quickly -->
@@ -222,8 +223,8 @@
       -->
 
       <!-- Define the default virtual host -->
-      <Host name="localhost" debug="0" appBase="webapps" 
-       unpackWARs="true" autoDeploy="true">
+      <Host name="localhost" debug="0" appBase="webapps"
+            unpackWARs="true" autoDeploy="true">
 
         <!-- Normally, users must authenticate themselves to each web app
              individually.  Uncomment the following entry if you would like
@@ -255,8 +256,8 @@
              relative (to $CATALINA_HOME) or absolute path to the desired
              directory.-->
         <Logger className="org.apache.catalina.logger.FileLogger"
-                 directory="logs"  prefix="localhost_log." suffix=".txt"
-	        timestamp="true"/>
+                directory="logs" prefix="localhost_log." suffix=".txt"
+                timestamp="true"/>
 
         <!-- Define properties for each web application.  This is only needed
              if you want to set non-default properties, or have web application
@@ -289,26 +290,26 @@
   -->
 
   <!-- Define an Apache-Connector Service -->
-<!--
-  <Service name="Tomcat-Apache">
+  <!--
+    <Service name="Tomcat-Apache">
 
-    <Connector className="org.apache.catalina.connector.warp.WarpConnector"
-     port="8008" minProcessors="5" maxProcessors="75"
-     enableLookups="true" appBase="webapps"
-     acceptCount="10" debug="0"/>
+      <Connector className="org.apache.catalina.connector.warp.WarpConnector"
+       port="8008" minProcessors="5" maxProcessors="75"
+       enableLookups="true" appBase="webapps"
+       acceptCount="10" debug="0"/>
 
-    <Engine className="org.apache.catalina.connector.warp.WarpEngine"
-     name="Apache" debug="0">
+      <Engine className="org.apache.catalina.connector.warp.WarpEngine"
+       name="Apache" debug="0">
 
-      <Logger className="org.apache.catalina.logger.FileLogger"
-              prefix="apache_log." suffix=".txt"
-              timestamp="true"/>
+        <Logger className="org.apache.catalina.logger.FileLogger"
+                prefix="apache_log." suffix=".txt"
+                timestamp="true"/>
 
-      <Realm className="org.apache.catalina.realm.MemoryRealm" />
+        <Realm className="org.apache.catalina.realm.MemoryRealm" />
 
-    </Engine>
+      </Engine>
 
-  </Service>
--->
+    </Service>
+  -->
 
 </Server>

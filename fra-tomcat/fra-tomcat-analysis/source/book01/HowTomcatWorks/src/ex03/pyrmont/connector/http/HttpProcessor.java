@@ -18,6 +18,7 @@ public class HttpProcessor {
   public HttpProcessor(HttpConnector connector) {
     this.connector = connector;
   }
+
   /**
    * The HttpConnector with which this processor is associated.
    */
@@ -33,7 +34,7 @@ public class HttpProcessor {
    * The string manager for this package.
    */
   protected StringManager sm =
-    StringManager.getManager("ex03.pyrmont.connector.http");
+      StringManager.getManager("ex03.pyrmont.connector.http");
 
   public void process(Socket socket) {
     SocketInputStream input = null;
@@ -59,8 +60,7 @@ public class HttpProcessor {
       if (request.getRequestURI().startsWith("/servlet/")) {
         ServletProcessor processor = new ServletProcessor();
         processor.process(request, response);
-      }
-      else {
+      } else {
         StaticResourceProcessor processor = new StaticResourceProcessor();
         processor.process(request, response);
       }
@@ -68,8 +68,7 @@ public class HttpProcessor {
       // Close the socket
       socket.close();
       // no shutdown for this application
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -79,25 +78,25 @@ public class HttpProcessor {
    * org.apache.catalina.connector.http.HttpProcessor.
    * However, this method only parses some "easy" headers, such as
    * "cookie", "content-length", and "content-type", and ignore other headers.
-   * @param input The input stream connected to our socket
    *
-   * @exception IOException if an input/output error occurs
-   * @exception ServletException if a parsing error occurs
+   * @param input The input stream connected to our socket
+   * @throws IOException      if an input/output error occurs
+   * @throws ServletException if a parsing error occurs
    */
   private void parseHeaders(SocketInputStream input)
-    throws IOException, ServletException {
+      throws IOException, ServletException {
     while (true) {
-      HttpHeader header = new HttpHeader();;
+      HttpHeader header = new HttpHeader();
+      ;
 
       // Read the next header
       input.readHeader(header);
       if (header.nameEnd == 0) {
         if (header.valueEnd == 0) {
           return;
-        }
-        else {
+        } else {
           throw new ServletException
-            (sm.getString("httpProcessor.parseHeaders.colon"));
+              (sm.getString("httpProcessor.parseHeaders.colon"));
         }
       }
 
@@ -119,18 +118,15 @@ public class HttpProcessor {
           }
           request.addCookie(cookies[i]);
         }
-      }
-      else if (name.equals("content-length")) {
+      } else if (name.equals("content-length")) {
         int n = -1;
         try {
           n = Integer.parseInt(value);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
           throw new ServletException(sm.getString("httpProcessor.parseHeaders.contentLength"));
         }
         request.setContentLength(n);
-      }
-      else if (name.equals("content-type")) {
+      } else if (name.equals("content-type")) {
         request.setContentType(value);
       }
     } //end while
@@ -138,30 +134,28 @@ public class HttpProcessor {
 
 
   private void parseRequest(SocketInputStream input, OutputStream output)
-    throws IOException, ServletException {
+      throws IOException, ServletException {
 
     // Parse the incoming request line
     input.readRequestLine(requestLine);
     String method =
-      new String(requestLine.method, 0, requestLine.methodEnd);
+        new String(requestLine.method, 0, requestLine.methodEnd);
     String uri = null;
     String protocol = new String(requestLine.protocol, 0, requestLine.protocolEnd);
 
     // Validate the incoming request line
     if (method.length() < 1) {
       throw new ServletException("Missing HTTP request method");
-    }
-    else if (requestLine.uriEnd < 1) {
+    } else if (requestLine.uriEnd < 1) {
       throw new ServletException("Missing HTTP request URI");
     }
     // Parse any query parameters out of the request URI
     int question = requestLine.indexOf("?");
     if (question >= 0) {
       request.setQueryString(new String(requestLine.uri, question + 1,
-        requestLine.uriEnd - question - 1));
+          requestLine.uriEnd - question - 1));
       uri = new String(requestLine.uri, 0, question);
-    }
-    else {
+    } else {
       request.setQueryString(null);
       uri = new String(requestLine.uri, 0, requestLine.uriEnd);
     }
@@ -175,8 +169,7 @@ public class HttpProcessor {
         pos = uri.indexOf('/', pos + 3);
         if (pos == -1) {
           uri = "";
-        }
-        else {
+        } else {
           uri = uri.substring(pos);
         }
       }
@@ -191,15 +184,13 @@ public class HttpProcessor {
       if (semicolon2 >= 0) {
         request.setRequestedSessionId(rest.substring(0, semicolon2));
         rest = rest.substring(semicolon2);
-      }
-      else {
+      } else {
         request.setRequestedSessionId(rest);
         rest = "";
       }
       request.setRequestedSessionURL(true);
       uri = uri.substring(0, semicolon) + rest;
-    }
-    else {
+    } else {
       request.setRequestedSessionId(null);
       request.setRequestedSessionURL(false);
     }
@@ -212,8 +203,7 @@ public class HttpProcessor {
     request.setProtocol(protocol);
     if (normalizedUri != null) {
       ((HttpRequest) request).setRequestURI(normalizedUri);
-    }
-    else {
+    } else {
       ((HttpRequest) request).setRequestURI(uri);
     }
 
@@ -244,12 +234,12 @@ public class HttpProcessor {
     // Prevent encoding '%', '/', '.' and '\', which are special reserved
     // characters
     if ((normalized.indexOf("%25") >= 0)
-      || (normalized.indexOf("%2F") >= 0)
-      || (normalized.indexOf("%2E") >= 0)
-      || (normalized.indexOf("%5C") >= 0)
-      || (normalized.indexOf("%2f") >= 0)
-      || (normalized.indexOf("%2e") >= 0)
-      || (normalized.indexOf("%5c") >= 0)) {
+        || (normalized.indexOf("%2F") >= 0)
+        || (normalized.indexOf("%2E") >= 0)
+        || (normalized.indexOf("%5C") >= 0)
+        || (normalized.indexOf("%2f") >= 0)
+        || (normalized.indexOf("%2e") >= 0)
+        || (normalized.indexOf("%5c") >= 0)) {
       return null;
     }
 
@@ -268,7 +258,7 @@ public class HttpProcessor {
       if (index < 0)
         break;
       normalized = normalized.substring(0, index) +
-        normalized.substring(index + 1);
+          normalized.substring(index + 1);
     }
 
     // Resolve occurrences of "/./" in the normalized path
@@ -277,7 +267,7 @@ public class HttpProcessor {
       if (index < 0)
         break;
       normalized = normalized.substring(0, index) +
-        normalized.substring(index + 2);
+          normalized.substring(index + 2);
     }
 
     // Resolve occurrences of "/../" in the normalized path
@@ -289,7 +279,7 @@ public class HttpProcessor {
         return (null);  // Trying to go outside our context
       int index2 = normalized.lastIndexOf('/', index - 1);
       normalized = normalized.substring(0, index2) +
-        normalized.substring(index + 3);
+          normalized.substring(index + 3);
     }
 
     // Declare occurrences of "/..." (three or more dots) to be invalid

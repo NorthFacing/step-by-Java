@@ -48,7 +48,7 @@ public final class Bootstrap {
       ((Lifecycle) host).start();
       Container[] c = context.findChildren();
       int length = c.length;
-      for (int i=0; i<length; i++) {
+      for (int i = 0; i < length; i++) {
         Container child = c[i];
         System.out.println(child.getName());
       }
@@ -56,8 +56,7 @@ public final class Bootstrap {
       // make the application wait until we press a key.
       System.in.read();
       ((Lifecycle) host).stop();
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

@@ -79,42 +79,42 @@ package org.apache.catalina;
 public class ServerFactory {
 
 
-    // ------------------------------------------------------- Static Variables
+  // ------------------------------------------------------- Static Variables
 
 
-    /**
-     * The singleton <code>Server</code> instance for this JVM.
-     */
-    private static Server server = null;
+  /**
+   * The singleton <code>Server</code> instance for this JVM.
+   */
+  private static Server server = null;
 
 
-    // --------------------------------------------------------- Public Methods
+  // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Return the singleton <code>Server</code> instance for this JVM.
-     */
-    public static Server getServer() {
+  /**
+   * Return the singleton <code>Server</code> instance for this JVM.
+   */
+  public static Server getServer() {
 
-        return (server);
+    return (server);
 
-    }
+  }
 
 
-    /**
-     * Set the singleton <code>Server</code> instance for this JVM.  This
-     * method must <strong>only</strong> be called from a constructor of
-     * the (singleton) <code>Server</code> instance that is created for
-     * this execution of Catalina.
-     *
-     * @param theServer The new singleton instance
-     */
-    public static void setServer(Server theServer) {
+  /**
+   * Set the singleton <code>Server</code> instance for this JVM.  This
+   * method must <strong>only</strong> be called from a constructor of
+   * the (singleton) <code>Server</code> instance that is created for
+   * this execution of Catalina.
+   *
+   * @param theServer The new singleton instance
+   */
+  public static void setServer(Server theServer) {
 
-        if (server == null)
-            server = theServer;
+    if (server == null)
+      server = theServer;
 
-    }
+  }
 
 
 }

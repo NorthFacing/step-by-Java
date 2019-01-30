@@ -19,12 +19,11 @@ public class Request {
     byte[] buffer = new byte[2048];
     try {
       i = input.read(buffer);
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
       i = -1;
     }
-    for (int j=0; j<i; j++) {
+    for (int j = 0; j < i; j++) {
       request.append((char) buffer[j]);
     }
     System.out.print(request.toString());

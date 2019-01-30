@@ -77,145 +77,145 @@ package org.apache.catalina.deploy;
 public final class ContextEjb {
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * The description of this EJB.
-     */
-    private String description = null;
+  /**
+   * The description of this EJB.
+   */
+  private String description = null;
 
-    public String getDescription() {
-        return (this.description);
+  public String getDescription() {
+    return (this.description);
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+
+  /**
+   * The name of the EJB home implementation class.
+   */
+  private String home = null;
+
+  public String getHome() {
+    return (this.home);
+  }
+
+  public void setHome(String home) {
+    this.home = home;
+  }
+
+
+  /**
+   * The link to a J2EE EJB definition.
+   */
+  private String link = null;
+
+  public String getLink() {
+    return (this.link);
+  }
+
+  public void setLink(String link) {
+    this.link = link;
+  }
+
+
+  /**
+   * The name of this EJB.
+   */
+  private String name = null;
+
+  public String getName() {
+    return (this.name);
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
+  /**
+   * The name of the EJB remote implementation class.
+   */
+  private String remote = null;
+
+  public String getRemote() {
+    return (this.remote);
+  }
+
+  public void setRemote(String remote) {
+    this.remote = remote;
+  }
+
+
+  /**
+   * The name of the EJB bean implementation class.
+   */
+  private String type = null;
+
+  public String getType() {
+    return (this.type);
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+
+  // --------------------------------------------------------- Public Methods
+
+
+  /**
+   * Return a String representation of this object.
+   */
+  public String toString() {
+
+    StringBuffer sb = new StringBuffer("ContextEjb[");
+    sb.append("name=");
+    sb.append(name);
+    if (description != null) {
+      sb.append(", description=");
+      sb.append(description);
     }
-
-    public void setDescription(String description) {
-        this.description = description;
+    if (type != null) {
+      sb.append(", type=");
+      sb.append(type);
     }
-
-
-    /**
-     * The name of the EJB home implementation class.
-     */
-    private String home = null;
-
-    public String getHome() {
-        return (this.home);
+    if (home != null) {
+      sb.append(", home=");
+      sb.append(home);
     }
-
-    public void setHome(String home) {
-        this.home = home;
+    if (remote != null) {
+      sb.append(", remote=");
+      sb.append(remote);
     }
-
-
-    /**
-     * The link to a J2EE EJB definition.
-     */
-    private String link = null;
-
-    public String getLink() {
-        return (this.link);
+    if (link != null) {
+      sb.append(", link=");
+      sb.append(link);
     }
+    sb.append("]");
+    return (sb.toString());
 
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-
-    /**
-     * The name of this EJB.
-     */
-    private String name = null;
-
-    public String getName() {
-        return (this.name);
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+  }
 
 
-    /**
-     * The name of the EJB remote implementation class.
-     */
-    private String remote = null;
-
-    public String getRemote() {
-        return (this.remote);
-    }
-
-    public void setRemote(String remote) {
-        this.remote = remote;
-    }
+  // -------------------------------------------------------- Package Methods
 
 
-    /**
-     * The name of the EJB bean implementation class.
-     */
-    private String type = null;
+  /**
+   * The NamingResources with which we are associated (if any).
+   */
+  protected NamingResources resources = null;
 
-    public String getType() {
-        return (this.type);
-    }
+  public NamingResources getNamingResources() {
+    return (this.resources);
+  }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-
-    // --------------------------------------------------------- Public Methods
-
-
-    /**
-     * Return a String representation of this object.
-     */
-    public String toString() {
-
-        StringBuffer sb = new StringBuffer("ContextEjb[");
-        sb.append("name=");
-        sb.append(name);
-        if (description != null) {
-            sb.append(", description=");
-            sb.append(description);
-        }
-        if (type != null) {
-            sb.append(", type=");
-            sb.append(type);
-        }
-        if (home != null) {
-            sb.append(", home=");
-            sb.append(home);
-        }
-        if (remote != null) {
-            sb.append(", remote=");
-            sb.append(remote);
-        }
-        if (link != null) {
-            sb.append(", link=");
-            sb.append(link);
-        }
-        sb.append("]");
-        return (sb.toString());
-
-    }
-
-
-    // -------------------------------------------------------- Package Methods
-
-
-    /**
-     * The NamingResources with which we are associated (if any).
-     */
-    protected NamingResources resources = null;
-
-    public NamingResources getNamingResources() {
-        return (this.resources);
-    }
-
-    void setNamingResources(NamingResources resources) {
-        this.resources = resources;
-    }
+  void setNamingResources(NamingResources resources) {
+    this.resources = resources;
+  }
 
 
 }

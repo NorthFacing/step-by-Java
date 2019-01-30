@@ -77,102 +77,102 @@ import org.apache.catalina.util.StringManager;
 
 public abstract class ClusterSessionBase {
 
-    // ----------------------------------------------------- Instance Variables
+  // ----------------------------------------------------- Instance Variables
 
-    /**
-     * The senderId associated with this component
-     */
-    private String senderId = null;
+  /**
+   * The senderId associated with this component
+   */
+  private String senderId = null;
 
-    /**
-     * The debug level for this component
-     */
-    private int debug = 0;
+  /**
+   * The debug level for this component
+   */
+  private int debug = 0;
 
-    /**
-     * The Logger associated with this component.
-     */
-    private Logger logger = null;
+  /**
+   * The Logger associated with this component.
+   */
+  private Logger logger = null;
 
-    /**
-     * The string manager for this package.
-     */
-    protected StringManager sm = StringManager.getManager(Constants.Package);
+  /**
+   * The string manager for this package.
+   */
+  protected StringManager sm = StringManager.getManager(Constants.Package);
 
-    // --------------------------------------------------------- Public Methods
+  // --------------------------------------------------------- Public Methods
 
-    /**
-     * The senderId is a identifier used to identify different
-     * packagesin a Cluster. Each package received or send through
-     * the concrete implementation of this interface will have
-     * the senderId set at runtime. Usually the senderId is the
-     * name of the component that is using this component.
-     *
-     * @param senderId The senderId to use
-     */
-    public void setSenderId(String senderId) {
-        this.senderId = senderId;
-    }
+  /**
+   * The senderId is a identifier used to identify different
+   * packagesin a Cluster. Each package received or send through
+   * the concrete implementation of this interface will have
+   * the senderId set at runtime. Usually the senderId is the
+   * name of the component that is using this component.
+   *
+   * @param senderId The senderId to use
+   */
+  public void setSenderId(String senderId) {
+    this.senderId = senderId;
+  }
 
-    /**
-     * get the senderId used to identify messages being
-     * send or received in a Cluster.
-     *
-     * @return The senderId for this component
-     */
-    public String getSenderId() {
-        return(this.senderId);
-    }
+  /**
+   * get the senderId used to identify messages being
+   * send or received in a Cluster.
+   *
+   * @return The senderId for this component
+   */
+  public String getSenderId() {
+    return (this.senderId);
+  }
 
-    /**
-     * Set the debug detail level for this component.
-     *
-     * @param debug The debug level
-     */
-    public void setDebug(int debug) {
-        this.debug = debug;
-    }
+  /**
+   * Set the debug detail level for this component.
+   *
+   * @param debug The debug level
+   */
+  public void setDebug(int debug) {
+    this.debug = debug;
+  }
 
-    /**
-     * Get the debug level for this component
-     *
-     * @return The debug level
-     */
-    public int getDebug() {
-        return(this.debug);
-    }
+  /**
+   * Get the debug level for this component
+   *
+   * @return The debug level
+   */
+  public int getDebug() {
+    return (this.debug);
+  }
 
-    /**
-     * Set the Logger for this component.
-     *
-     * @param debug The Logger to use with this component.
-     */
-    public void setLogger(Logger logger) {
-        this.logger = logger;
-    }
+  /**
+   * Set the Logger for this component.
+   *
+   * @param debug The Logger to use with this component.
+   */
+  public void setLogger(Logger logger) {
+    this.logger = logger;
+  }
 
-    /**
-     * Get the Logger for this component
-     *
-     * @return The Logger associated with this component.
-     */
-    public Logger getLogger() {
-        return(this.logger);
-    }
+  /**
+   * Get the Logger for this component
+   *
+   * @return The Logger associated with this component.
+   */
+  public Logger getLogger() {
+    return (this.logger);
+  }
 
-    public abstract String getName();
+  public abstract String getName();
 
-    /**
-     * The log method to use in the implementation
-     *
-     * @param message The message to be logged.
-     */
-    public void log(String message) {
-        Logger logger = getLogger();
+  /**
+   * The log method to use in the implementation
+   *
+   * @param message The message to be logged.
+   */
+  public void log(String message) {
+    Logger logger = getLogger();
 
-        if(logger != null)
-            logger.log("[Cluster/"+getName()+"]: "+message);
-        else
-            System.out.println("[Cluster/"+getName()+"]: "+message);
-    }
+    if (logger != null)
+      logger.log("[Cluster/" + getName() + "]: " + message);
+    else
+      System.out.println("[Cluster/" + getName() + "]: " + message);
+  }
 }

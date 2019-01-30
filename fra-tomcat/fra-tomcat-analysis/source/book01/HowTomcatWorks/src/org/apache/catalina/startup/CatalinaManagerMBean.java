@@ -76,84 +76,84 @@ package org.apache.catalina.startup;
 public interface CatalinaManagerMBean {
 
 
-    // -------------------------------------------------------------- Constants
+  // -------------------------------------------------------------- Constants
 
 
-    /**
-     * Status constants.
-     */
-    public static final String[] states =
-    {"Stopped", "Stopping", "Starting", "Started"};
+  /**
+   * Status constants.
+   */
+  public static final String[] states =
+      {"Stopped", "Stopping", "Starting", "Started"};
 
 
-    public static final int STOPPED  = 0;
-    public static final int STOPPING = 1;
-    public static final int STARTING = 2;
-    public static final int STARTED  = 3;
+  public static final int STOPPED = 0;
+  public static final int STOPPING = 1;
+  public static final int STARTING = 2;
+  public static final int STARTED = 3;
 
 
-    /**
-     * Component name.
-     */
-    public static final String NAME = "Catalina servlet container";
+  /**
+   * Component name.
+   */
+  public static final String NAME = "Catalina servlet container";
 
 
-    /**
-     * Object name.
-     */
-    public static final String OBJECT_NAME = ":service=Catalina";
+  /**
+   * Object name.
+   */
+  public static final String OBJECT_NAME = ":service=Catalina";
 
 
-    // ------------------------------------------------------ Interface Methods
+  // ------------------------------------------------------ Interface Methods
 
 
-    /**
-     * Retruns the Catalina component name.
-     */
-    public String getName();
+  /**
+   * Retruns the Catalina component name.
+   */
+  public String getName();
 
 
-    /**
-     * Returns the state.
-     */
-    public int getState();
+  /**
+   * Returns the state.
+   */
+  public int getState();
 
 
-    /**
-     * Returns a String representation of the state.
-     */
-    public String getStateString();
+  /**
+   * Returns a String representation of the state.
+   */
+  public String getStateString();
 
 
-    /**
-     * Path accessor.
-     */
-    public String getPath();
+  /**
+   * Path accessor.
+   */
+  public String getPath();
 
 
-    /**
-     * Path mutator.
-     */
-    public void setPath(String Path);
+  /**
+   * Path mutator.
+   */
+  public void setPath(String Path);
 
 
-    /**
-     * Start the servlet container.
-     */
-    public void start()
-        throws Exception;
+  /**
+   * Start the servlet container.
+   */
+  public void start()
+      throws Exception;
 
 
-    /**
-     * Stop the servlet container.
-     */
-    public void stop();
+  /**
+   * Stop the servlet container.
+   */
+  public void stop();
 
 
-    /**
-     * Destroy servlet container (if any is running).
-     */
-    public void destroy();
+  /**
+   * Destroy servlet container (if any is running).
+   */
+  public void destroy();
 
 
 }

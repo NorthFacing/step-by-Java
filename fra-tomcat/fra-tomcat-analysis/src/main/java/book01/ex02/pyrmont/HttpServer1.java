@@ -9,11 +9,12 @@ import java.io.IOException;
 
 public class HttpServer1 {
 
-  /** WEB_ROOT is the directory where our HTML and other files reside.
-   *  For this package, WEB_ROOT is the "webroot" directory under the working
-   *  directory.
-   *  The working directory is the location in the file system
-   *  from where the java command was invoked.
+  /**
+   * WEB_ROOT is the directory where our HTML and other files reside.
+   * For this package, WEB_ROOT is the "webroot" directory under the working
+   * directory.
+   * The working directory is the location in the file system
+   * from where the java command was invoked.
    */
   // shutdown command
   private static final String SHUTDOWN_COMMAND = "/SHUTDOWN";
@@ -30,9 +31,8 @@ public class HttpServer1 {
     ServerSocket serverSocket = null;
     int port = 8080;
     try {
-      serverSocket =  new ServerSocket(port, 1, InetAddress.getByName("127.0.0.1"));
-    }
-    catch (IOException e) {
+      serverSocket = new ServerSocket(port, 1, InetAddress.getByName("127.0.0.1"));
+    } catch (IOException e) {
       e.printStackTrace();
       System.exit(1);
     }
@@ -60,8 +60,7 @@ public class HttpServer1 {
         if (request.getUri().startsWith("/servlet/")) {
           ServletProcessor1 processor = new ServletProcessor1();
           processor.process(request, response);
-        }
-        else {
+        } else {
           StaticResourceProcessor processor = new StaticResourceProcessor();
           processor.process(request, response);
         }
@@ -70,8 +69,7 @@ public class HttpServer1 {
         socket.close();
         //check if the previous URI is a shutdown command
         shutdown = request.getUri().equals(SHUTDOWN_COMMAND);
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         e.printStackTrace();
         System.exit(1);
       }

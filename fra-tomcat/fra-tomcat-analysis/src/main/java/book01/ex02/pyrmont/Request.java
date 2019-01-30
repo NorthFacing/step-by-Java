@@ -42,12 +42,11 @@ public class Request implements ServletRequest {
     byte[] buffer = new byte[2048];
     try {
       i = input.read(buffer);
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
       i = -1;
     }
-    for (int j=0; j<i; j++) {
+    for (int j = 0; j < i; j++) {
       request.append((char) buffer[j]);
     }
     System.out.print(request.toString());
@@ -132,7 +131,7 @@ public class Request implements ServletRequest {
   }
 
   public String getScheme() {
-   return null;
+    return null;
   }
 
   public String getServerName() {
@@ -150,7 +149,7 @@ public class Request implements ServletRequest {
   }
 
   public void setCharacterEncoding(String encoding)
-    throws UnsupportedEncodingException {
+      throws UnsupportedEncodingException {
   }
 
 }

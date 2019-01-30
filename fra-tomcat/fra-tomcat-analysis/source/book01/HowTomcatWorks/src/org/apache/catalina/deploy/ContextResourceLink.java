@@ -77,91 +77,91 @@ package org.apache.catalina.deploy;
 public final class ContextResourceLink {
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * The name of this resource.
-     */
-    private String name = null;
+  /**
+   * The name of this resource.
+   */
+  private String name = null;
 
-    public String getName() {
-        return (this.name);
+  public String getName() {
+    return (this.name);
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
+  /**
+   * The type of this resource.
+   */
+  private String type = null;
+
+  public String getType() {
+    return (this.type);
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+
+  /**
+   * The global name of this resource.
+   */
+  private String global = null;
+
+  public String getGlobal() {
+    return (this.global);
+  }
+
+  public void setGlobal(String global) {
+    this.global = global;
+  }
+
+
+  // --------------------------------------------------------- Public Methods
+
+
+  /**
+   * Return a String representation of this object.
+   */
+  public String toString() {
+
+    StringBuffer sb = new StringBuffer("ContextResourceLink[");
+    sb.append("name=");
+    sb.append(name);
+    if (type != null) {
+      sb.append(", type=");
+      sb.append(type);
     }
-
-    public void setName(String name) {
-        this.name = name;
+    if (global != null) {
+      sb.append(", global=");
+      sb.append(global);
     }
+    sb.append("]");
+    return (sb.toString());
+
+  }
 
 
-    /**
-     * The type of this resource.
-     */
-    private String type = null;
-
-    public String getType() {
-        return (this.type);
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+  // -------------------------------------------------------- Package Methods
 
 
-    /**
-     * The global name of this resource.
-     */
-    private String global = null;
+  /**
+   * The NamingResources with which we are associated (if any).
+   */
+  protected NamingResources resources = null;
 
-    public String getGlobal() {
-        return (this.global);
-    }
+  public NamingResources getNamingResources() {
+    return (this.resources);
+  }
 
-    public void setGlobal(String global) {
-        this.global = global;
-    }
-
-
-    // --------------------------------------------------------- Public Methods
-
-
-    /**
-     * Return a String representation of this object.
-     */
-    public String toString() {
-
-        StringBuffer sb = new StringBuffer("ContextResourceLink[");
-        sb.append("name=");
-        sb.append(name);
-        if (type != null) {
-            sb.append(", type=");
-            sb.append(type);
-        }
-        if (global != null) {
-            sb.append(", global=");
-            sb.append(global);
-        }
-        sb.append("]");
-        return (sb.toString());
-
-    }
-
-
-    // -------------------------------------------------------- Package Methods
-
-
-    /**
-     * The NamingResources with which we are associated (if any).
-     */
-    protected NamingResources resources = null;
-
-    public NamingResources getNamingResources() {
-        return (this.resources);
-    }
-
-    void setNamingResources(NamingResources resources) {
-        this.resources = resources;
-    }
+  void setNamingResources(NamingResources resources) {
+    this.resources = resources;
+  }
 
 
 }

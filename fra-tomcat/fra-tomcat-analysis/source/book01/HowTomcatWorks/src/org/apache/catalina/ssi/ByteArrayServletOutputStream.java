@@ -76,35 +76,34 @@ import javax.servlet.ServletOutputStream;
  * @see ServletOutputStream and ByteArrayOutputStream
  */
 public class ByteArrayServletOutputStream extends ServletOutputStream {
-    /**
-     * Our buffer to hold the stream
-     */
-    protected ByteArrayOutputStream _buf = null;
+  /**
+   * Our buffer to hold the stream
+   */
+  protected ByteArrayOutputStream _buf = null;
 
-    /**
-     * Construct a new ServletOutputStream
-     *
-     */
-    public ByteArrayServletOutputStream() {
-        _buf = new ByteArrayOutputStream();
-    }
+  /**
+   * Construct a new ServletOutputStream
+   */
+  public ByteArrayServletOutputStream() {
+    _buf = new ByteArrayOutputStream();
+  }
 
-    /**
-     * Write our stream to the <code>OutputStream</code> provided.
-     *
-     * @param out the OutputStream to write this stream to
-     * @exception IOException if an input/output error occurs
-     */
-    public byte[] toByteArray() {
-        return _buf.toByteArray();
-    }
+  /**
+   * Write our stream to the <code>OutputStream</code> provided.
+   *
+   * @param out the OutputStream to write this stream to
+   * @throws IOException if an input/output error occurs
+   */
+  public byte[] toByteArray() {
+    return _buf.toByteArray();
+  }
 
-    /**
-     * Write to our buffer
-     *
-     * @param b The parameter to write
-     */
-    public void write(int b) {
-        _buf.write(b);
-    }
+  /**
+   * Write to our buffer
+   *
+   * @param b The parameter to write
+   */
+  public void write(int b) {
+    _buf.write(b);
+  }
 }

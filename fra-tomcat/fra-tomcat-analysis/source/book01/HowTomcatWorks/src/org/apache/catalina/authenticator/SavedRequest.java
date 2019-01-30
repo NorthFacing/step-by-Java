@@ -93,125 +93,124 @@ import javax.servlet.http.Cookie;
 public final class SavedRequest {
 
 
-    /**
-     * The set of Cookies associated with this Request.
-     */
-    private ArrayList cookies = new ArrayList();
+  /**
+   * The set of Cookies associated with this Request.
+   */
+  private ArrayList cookies = new ArrayList();
 
-    public void addCookie(Cookie cookie) {
-        cookies.add(cookie);
+  public void addCookie(Cookie cookie) {
+    cookies.add(cookie);
+  }
+
+  public Iterator getCookies() {
+    return (cookies.iterator());
+  }
+
+
+  /**
+   * The set of Headers associated with this Request.  Each key is a header
+   * name, while the value is a ArrayList containing one or more actual
+   * values for this header.  The values are returned as an Iterator when
+   * you ask for them.
+   */
+  private HashMap headers = new HashMap();
+
+  public void addHeader(String name, String value) {
+    ArrayList values = (ArrayList) headers.get(name);
+    if (values == null) {
+      values = new ArrayList();
+      headers.put(name, values);
     }
+    values.add(value);
+  }
 
-    public Iterator getCookies() {
-        return (cookies.iterator());
-    }
+  public Iterator getHeaderNames() {
+    return (headers.keySet().iterator());
+  }
 
-
-    /**
-     * The set of Headers associated with this Request.  Each key is a header
-     * name, while the value is a ArrayList containing one or more actual
-     * values for this header.  The values are returned as an Iterator when
-     * you ask for them.
-     */
-    private HashMap headers = new HashMap();
-
-    public void addHeader(String name, String value) {
-        ArrayList values = (ArrayList) headers.get(name);
-        if (values == null) {
-            values = new ArrayList();
-            headers.put(name, values);
-        }
-        values.add(value);
-    }
-
-    public Iterator getHeaderNames() {
-        return (headers.keySet().iterator());
-    }
-
-    public Iterator getHeaderValues(String name) {
-        ArrayList values = (ArrayList) headers.get(name);
-        if (values == null)
-            return ((new ArrayList()).iterator());
-        else
-            return (values.iterator());
-    }
+  public Iterator getHeaderValues(String name) {
+    ArrayList values = (ArrayList) headers.get(name);
+    if (values == null)
+      return ((new ArrayList()).iterator());
+    else
+      return (values.iterator());
+  }
 
 
-    /**
-     * The set of Locales associated with this Request.
-     */
-    private ArrayList locales = new ArrayList();
+  /**
+   * The set of Locales associated with this Request.
+   */
+  private ArrayList locales = new ArrayList();
 
-    public void addLocale(Locale locale) {
-        locales.add(locale);
-    }
+  public void addLocale(Locale locale) {
+    locales.add(locale);
+  }
 
-    public Iterator getLocales() {
-        return (locales.iterator());
-    }
-
-
-    /**
-     * The request method used on this Request.
-     */
-    private String method = null;
-
-    public String getMethod() {
-        return (this.method);
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
+  public Iterator getLocales() {
+    return (locales.iterator());
+  }
 
 
+  /**
+   * The request method used on this Request.
+   */
+  private String method = null;
 
-    /**
-     * The set of request parameters associated with this Request.  Each
-     * entry is keyed by the parameter name, pointing at a String array of
-     * the corresponding values.
-     */
-    private HashMap parameters = new HashMap();
+  public String getMethod() {
+    return (this.method);
+  }
 
-    public void addParameter(String name, String values[]) {
-        parameters.put(name, values);
-    }
-
-    public Iterator getParameterNames() {
-        return (parameters.keySet().iterator());
-    }
-
-    public String[] getParameterValues(String name) {
-        return ((String[]) parameters.get(name));
-    }
+  public void setMethod(String method) {
+    this.method = method;
+  }
 
 
-    /**
-     * The query string associated with this Request.
-     */
-    private String queryString = null;
+  /**
+   * The set of request parameters associated with this Request.  Each
+   * entry is keyed by the parameter name, pointing at a String array of
+   * the corresponding values.
+   */
+  private HashMap parameters = new HashMap();
 
-    public String getQueryString() {
-        return (this.queryString);
-    }
+  public void addParameter(String name, String values[]) {
+    parameters.put(name, values);
+  }
 
-    public void setQueryString(String queryString) {
-        this.queryString = queryString;
-    }
+  public Iterator getParameterNames() {
+    return (parameters.keySet().iterator());
+  }
+
+  public String[] getParameterValues(String name) {
+    return ((String[]) parameters.get(name));
+  }
 
 
-    /**
-     * The request URI associated with this Request.
-     */
-    private String requestURI = null;
+  /**
+   * The query string associated with this Request.
+   */
+  private String queryString = null;
 
-    public String getRequestURI() {
-        return (this.requestURI);
-    }
+  public String getQueryString() {
+    return (this.queryString);
+  }
 
-    public void setRequestURI(String requestURI) {
-        this.requestURI = requestURI;
-    }
+  public void setQueryString(String queryString) {
+    this.queryString = queryString;
+  }
+
+
+  /**
+   * The request URI associated with this Request.
+   */
+  private String requestURI = null;
+
+  public String getRequestURI() {
+    return (this.requestURI);
+  }
+
+  public void setRequestURI(String requestURI) {
+    this.requestURI = requestURI;
+  }
 
 
 }

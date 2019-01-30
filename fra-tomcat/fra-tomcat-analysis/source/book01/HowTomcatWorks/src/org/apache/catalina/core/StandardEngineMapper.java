@@ -88,144 +88,143 @@ public class StandardEngineMapper
     implements Mapper {
 
 
-    // ----------------------------------------------------- Instance Variables
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * The Container with which this Mapper is associated.
-     */
-    private StandardEngine engine = null;
+  /**
+   * The Container with which this Mapper is associated.
+   */
+  private StandardEngine engine = null;
 
 
-    /**
-     * The protocol with which this Mapper is associated.
-     */
-    private String protocol = null;
+  /**
+   * The protocol with which this Mapper is associated.
+   */
+  private String protocol = null;
 
 
-    /**
-     * The string manager for this package.
-     */
-    private static final StringManager sm =
-        StringManager.getManager(Constants.Package);
+  /**
+   * The string manager for this package.
+   */
+  private static final StringManager sm =
+      StringManager.getManager(Constants.Package);
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * Return the Container with which this Mapper is associated.
-     */
-    public Container getContainer() {
+  /**
+   * Return the Container with which this Mapper is associated.
+   */
+  public Container getContainer() {
 
-        return (engine);
+    return (engine);
 
+  }
+
+
+  /**
+   * Set the Container with which this Mapper is associated.
+   *
+   * @param container The newly associated Container
+   * @throws IllegalArgumentException if this Container is not
+   *                                  acceptable to this Mapper
+   */
+  public void setContainer(Container container) {
+
+    if (!(container instanceof StandardEngine))
+      throw new IllegalArgumentException
+          (sm.getString("httpEngineMapper.container"));
+    engine = (StandardEngine) container;
+
+  }
+
+
+  /**
+   * Return the protocol for which this Mapper is responsible.
+   */
+  public String getProtocol() {
+
+    return (this.protocol);
+
+  }
+
+
+  /**
+   * Set the protocol for which this Mapper is responsible.
+   *
+   * @param protocol The newly associated protocol
+   */
+  public void setProtocol(String protocol) {
+
+    this.protocol = protocol;
+
+  }
+
+
+  // --------------------------------------------------------- Public Methods
+
+
+  /**
+   * Return the child Container that should be used to process this Request,
+   * based upon its characteristics.  If no such child Container can be
+   * identified, return <code>null</code> instead.
+   *
+   * @param request Request being processed
+   * @param update  Update the Request to reflect the mapping selection?
+   */
+  public Container map(Request request, boolean update) {
+
+    int debug = engine.getDebug();
+
+    // Extract the requested server name
+    String server = request.getRequest().getServerName();
+    if (server == null) {
+      server = engine.getDefaultHost();
+      if (update)
+        request.setServerName(server);
     }
+    if (server == null)
+      return (null);
+    server = server.toLowerCase();
+    if (debug >= 1)
+      engine.log("Mapping server name '" + server + "'");
 
+    // Find the matching child Host directly
+    if (debug >= 2)
+      engine.log(" Trying a direct match");
+    Host host = (Host) engine.findChild(server);
 
-    /**
-     * Set the Container with which this Mapper is associated.
-     *
-     * @param container The newly associated Container
-     *
-     * @exception IllegalArgumentException if this Container is not
-     *  acceptable to this Mapper
-     */
-    public void setContainer(Container container) {
-
-        if (!(container instanceof StandardEngine))
-            throw new IllegalArgumentException
-                (sm.getString("httpEngineMapper.container"));
-        engine = (StandardEngine) container;
-
-    }
-
-
-    /**
-     * Return the protocol for which this Mapper is responsible.
-     */
-    public String getProtocol() {
-
-        return (this.protocol);
-
-    }
-
-
-    /**
-     * Set the protocol for which this Mapper is responsible.
-     *
-     * @param protocol The newly associated protocol
-     */
-    public void setProtocol(String protocol) {
-
-        this.protocol = protocol;
-
-    }
-
-
-    // --------------------------------------------------------- Public Methods
-
-
-    /**
-     * Return the child Container that should be used to process this Request,
-     * based upon its characteristics.  If no such child Container can be
-     * identified, return <code>null</code> instead.
-     *
-     * @param request Request being processed
-     * @param update Update the Request to reflect the mapping selection?
-     */
-    public Container map(Request request, boolean update) {
-
-        int debug = engine.getDebug();
-
-        // Extract the requested server name
-        String server = request.getRequest().getServerName();
-        if (server == null) {
-            server = engine.getDefaultHost();
-            if (update)
-                request.setServerName(server);
+    // Find a matching Host by alias.  FIXME - Optimize this!
+    if (host == null) {
+      if (debug >= 2)
+        engine.log(" Trying an alias match");
+      Container children[] = engine.findChildren();
+      for (int i = 0; i < children.length; i++) {
+        String aliases[] = ((Host) children[i]).findAliases();
+        for (int j = 0; j < aliases.length; j++) {
+          if (server.equals(aliases[j])) {
+            host = (Host) children[i];
+            break;
+          }
         }
-        if (server == null)
-            return (null);
-        server = server.toLowerCase();
-        if (debug >= 1)
-            engine.log("Mapping server name '" + server + "'");
-
-        // Find the matching child Host directly
-        if (debug >= 2)
-            engine.log(" Trying a direct match");
-        Host host = (Host) engine.findChild(server);
-
-        // Find a matching Host by alias.  FIXME - Optimize this!
-        if (host == null) {
-            if (debug >= 2)
-                engine.log(" Trying an alias match");
-            Container children[] = engine.findChildren();
-            for (int i = 0; i < children.length; i++) {
-                String aliases[] = ((Host) children[i]).findAliases();
-                for (int j = 0; j < aliases.length; j++) {
-                    if (server.equals(aliases[j])) {
-                        host = (Host) children[i];
-                        break;
-                    }
-                }
-                if (host != null)
-                    break;
-            }
-        }
-
-        // Trying the "default" host if any
-        if (host == null) {
-            if (debug >= 2)
-                engine.log(" Trying the default host");
-            host = (Host) engine.findChild(engine.getDefaultHost());
-        }
-
-        // Update the Request if requested, and return the selected Host
-        ;       // No update to the Request is required
-        return (host);
-
+        if (host != null)
+          break;
+      }
     }
+
+    // Trying the "default" host if any
+    if (host == null) {
+      if (debug >= 2)
+        engine.log(" Trying the default host");
+      host = (Host) engine.findChild(engine.getDefaultHost());
+    }
+
+    // Update the Request if requested, and return the selected Host
+    ;       // No update to the Request is required
+    return (host);
+
+  }
 
 
 }

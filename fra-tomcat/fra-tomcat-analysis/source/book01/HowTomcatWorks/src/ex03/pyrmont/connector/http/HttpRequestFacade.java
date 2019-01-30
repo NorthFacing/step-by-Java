@@ -159,7 +159,7 @@ public class HttpRequestFacade implements HttpServletRequest {
   }
 
   public String getScheme() {
-   return request.getScheme();
+    return request.getScheme();
   }
 
   public String getServerName() {

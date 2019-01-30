@@ -83,108 +83,108 @@ public final class HomesUserDatabase
     implements UserDatabase {
 
 
-    // --------------------------------------------------------- Constructors
+  // --------------------------------------------------------- Constructors
 
 
-    /**
-     * Initialize a new instance of this user database component.
-     */
-    public HomesUserDatabase() {
+  /**
+   * Initialize a new instance of this user database component.
+   */
+  public HomesUserDatabase() {
 
-        super();
+    super();
 
+  }
+
+
+  // --------------------------------------------------- Instance Variables
+
+
+  /**
+   * The set of home directories for all defined users, keyed by username.
+   */
+  private Hashtable homes = new Hashtable();
+
+
+  /**
+   * The UserConfig listener with which we are associated.
+   */
+  private UserConfig userConfig = null;
+
+
+  // ----------------------------------------------------------- Properties
+
+
+  /**
+   * Return the UserConfig listener with which we are associated.
+   */
+  public UserConfig getUserConfig() {
+
+    return (this.userConfig);
+
+  }
+
+
+  /**
+   * Set the UserConfig listener with which we are associated.
+   *
+   * @param userConfig The new UserConfig listener
+   */
+  public void setUserConfig(UserConfig userConfig) {
+
+    this.userConfig = userConfig;
+    init();
+
+  }
+
+
+  // ------------------------------------------------------- Public Methods
+
+
+  /**
+   * Return an absolute pathname to the home directory for the specified user.
+   *
+   * @param user User for which a home directory should be retrieved
+   */
+  public String getHome(String user) {
+
+    return ((String) homes.get(user));
+
+  }
+
+
+  /**
+   * Return an enumeration of the usernames defined on this server.
+   */
+  public Enumeration getUsers() {
+
+    return (homes.keys());
+
+  }
+
+
+  // ------------------------------------------------------ Private Methods
+
+
+  /**
+   * Initialize our set of users and home directories.
+   */
+  private void init() {
+
+    String homeBase = userConfig.getHomeBase();
+    File homeBaseDir = new File(homeBase);
+    if (!homeBaseDir.exists() || !homeBaseDir.isDirectory())
+      return;
+    String homeBaseFiles[] = homeBaseDir.list();
+
+    for (int i = 0; i < homeBaseFiles.length; i++) {
+      File homeDir = new File(homeBaseDir, homeBaseFiles[i]);
+      if (!homeDir.isDirectory() || !homeDir.canRead())
+        continue;
+      homes.put(homeBaseFiles[i], homeDir.toString());
     }
 
 
-    // --------------------------------------------------- Instance Variables
-
-
-    /**
-     * The set of home directories for all defined users, keyed by username.
-     */
-    private Hashtable homes = new Hashtable();
-
-
-    /**
-     * The UserConfig listener with which we are associated.
-     */
-    private UserConfig userConfig = null;
-
-
-    // ----------------------------------------------------------- Properties
-
-
-    /**
-     * Return the UserConfig listener with which we are associated.
-     */
-    public UserConfig getUserConfig() {
-
-        return (this.userConfig);
-
-    }
-
-
-    /**
-     * Set the UserConfig listener with which we are associated.
-     *
-     * @param userConfig The new UserConfig listener
-     */
-    public void setUserConfig(UserConfig userConfig) {
-
-        this.userConfig = userConfig;
-        init();
-
-    }
-
-
-    // ------------------------------------------------------- Public Methods
-
-
-    /**
-     * Return an absolute pathname to the home directory for the specified user.
-     *
-     * @param user User for which a home directory should be retrieved
-     */
-    public String getHome(String user) {
-
-        return ((String) homes.get(user));
-
-    }
-
-
-    /**
-     * Return an enumeration of the usernames defined on this server.
-     */
-    public Enumeration getUsers() {
-
-        return (homes.keys());
-
-    }
-
-
-    // ------------------------------------------------------ Private Methods
-
-
-    /**
-     * Initialize our set of users and home directories.
-     */
-    private void init() {
-
-        String homeBase = userConfig.getHomeBase();
-        File homeBaseDir = new File(homeBase);
-        if (!homeBaseDir.exists() || !homeBaseDir.isDirectory())
-            return;
-        String homeBaseFiles[] = homeBaseDir.list();
-
-        for (int i = 0; i < homeBaseFiles.length; i++) {
-            File homeDir = new File(homeBaseDir, homeBaseFiles[i]);
-            if (!homeDir.isDirectory() || !homeDir.canRead())
-                continue;
-            homes.put(homeBaseFiles[i], homeDir.toString());
-        }
-
-
-    }
+  }
 
 
 }

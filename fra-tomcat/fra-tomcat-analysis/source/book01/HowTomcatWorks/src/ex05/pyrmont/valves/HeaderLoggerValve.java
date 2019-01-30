@@ -5,6 +5,7 @@ import java.util.Enumeration;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.catalina.Request;
 import org.apache.catalina.Response;
 import org.apache.catalina.Valve;
@@ -18,7 +19,7 @@ public class HeaderLoggerValve implements Valve, Contained {
   protected Container container;
 
   public void invoke(Request request, Response response, ValveContext valveContext)
-    throws IOException, ServletException {
+      throws IOException, ServletException {
 
     // Pass this request on to the next valve in our pipeline
     valveContext.invokeNext(request, response);
@@ -34,8 +35,7 @@ public class HeaderLoggerValve implements Valve, Contained {
         System.out.println(headerName + ":" + headerValue);
       }
 
-    }
-    else
+    } else
       System.out.println("Not an HTTP Request");
 
     System.out.println("------------------------------------");

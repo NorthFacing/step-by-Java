@@ -581,10 +581,10 @@ public class SimpleContext implements Context, Pipeline, Lifecycle {
     // the first mapper added becomes the default mapper
     mapper.setContainer((Container) this);      // May throw IAE
     this.mapper = mapper;
-    synchronized(mappers) {
+    synchronized (mappers) {
       if (mappers.get(mapper.getProtocol()) != null)
         throw new IllegalArgumentException("addMapper:  Protocol '" +
-          mapper.getProtocol() + "' is not unique");
+            mapper.getProtocol() + "' is not unique");
       mapper.setContainer((Container) this);      // May throw IAE
       mappers.put(mapper.getProtocol(), mapper);
       if (mappers.size() == 1)
@@ -632,7 +632,7 @@ public class SimpleContext implements Context, Pipeline, Lifecycle {
   }
 
   public void invoke(Request request, Response response)
-    throws IOException, ServletException {
+      throws IOException, ServletException {
     pipeline.invoke(request, response);
   }
 
@@ -720,8 +720,7 @@ public class SimpleContext implements Context, Pipeline, Lifecycle {
         ((Lifecycle) pipeline).start();
       // Notify our interested LifecycleListeners
       lifecycle.fireLifecycleEvent(START_EVENT, null);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
 
@@ -753,8 +752,7 @@ public class SimpleContext implements Context, Pipeline, Lifecycle {
       if ((loader != null) && (loader instanceof Lifecycle)) {
         ((Lifecycle) loader).stop();
       }
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
     // Notify our interested LifecycleListeners
@@ -764,7 +762,7 @@ public class SimpleContext implements Context, Pipeline, Lifecycle {
 
   private void log(String message) {
     Logger logger = this.getLogger();
-    if (logger!=null)
+    if (logger != null)
       logger.log(message);
   }
 }

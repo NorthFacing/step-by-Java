@@ -67,6 +67,7 @@ package org.apache.catalina.servlets;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+
 import org.apache.catalina.util.StringManager;
 
 
@@ -83,171 +84,170 @@ import org.apache.catalina.util.StringManager;
 class InvokerHttpRequest extends HttpServletRequestWrapper {
 
 
-    // ----------------------------------------------------------- Constructors
+  // ----------------------------------------------------------- Constructors
 
 
-    /**
-     * Construct a new wrapped request around the specified servlet request.
-     *
-     * @param request The servlet request being wrapped
-     */
-    public InvokerHttpRequest(HttpServletRequest request) {
+  /**
+   * Construct a new wrapped request around the specified servlet request.
+   *
+   * @param request The servlet request being wrapped
+   */
+  public InvokerHttpRequest(HttpServletRequest request) {
 
-        super(request);
-        this.pathInfo = request.getPathInfo();
-        this.pathTranslated = request.getPathTranslated();
-        this.requestURI = request.getRequestURI();
-        this.servletPath = request.getServletPath();
+    super(request);
+    this.pathInfo = request.getPathInfo();
+    this.pathTranslated = request.getPathTranslated();
+    this.requestURI = request.getRequestURI();
+    this.servletPath = request.getServletPath();
 
-    }
-
-
-    // ----------------------------------------------------- Instance Variables
+  }
 
 
-    /**
-     * Descriptive information about this implementation.
-     */
-    protected static final String info =
-        "org.apache.catalina.servlets.InvokerHttpRequest/1.0";
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * The path information for this request.
-     */
-    protected String pathInfo = null;
+  /**
+   * Descriptive information about this implementation.
+   */
+  protected static final String info =
+      "org.apache.catalina.servlets.InvokerHttpRequest/1.0";
 
 
-    /**
-     * The translated path information for this request.
-     */
-    protected String pathTranslated = null;
+  /**
+   * The path information for this request.
+   */
+  protected String pathInfo = null;
 
 
-    /**
-     * The request URI for this request.
-     */
-    protected String requestURI = null;
+  /**
+   * The translated path information for this request.
+   */
+  protected String pathTranslated = null;
 
 
-    /**
-     * The servlet path for this request.
-     */
-    protected String servletPath = null;
+  /**
+   * The request URI for this request.
+   */
+  protected String requestURI = null;
 
 
-    /**
-     * The string manager for this package.
-     */
-    protected static StringManager sm =
-        StringManager.getManager(Constants.Package);
+  /**
+   * The servlet path for this request.
+   */
+  protected String servletPath = null;
 
 
-    // --------------------------------------------- HttpServletRequest Methods
+  /**
+   * The string manager for this package.
+   */
+  protected static StringManager sm =
+      StringManager.getManager(Constants.Package);
 
 
-    /**
-     * Override the <code>getPathInfo()</code> method of the wrapped request.
-     */
-    public String getPathInfo() {
-
-        return (this.pathInfo);
-
-    }
+  // --------------------------------------------- HttpServletRequest Methods
 
 
-    /**
-     * Override the <code>getPathTranslated()</code> method of the
-     * wrapped request.
-     */
-    public String getPathTranslated() {
+  /**
+   * Override the <code>getPathInfo()</code> method of the wrapped request.
+   */
+  public String getPathInfo() {
 
-        return (this.pathTranslated);
+    return (this.pathInfo);
 
-    }
-
-
-    /**
-     * Override the <code>getRequestURI()</code> method of the wrapped request.
-     */
-    public String getRequestURI() {
-
-        return (this.requestURI);
-
-    }
+  }
 
 
-    /**
-     * Override the <code>getServletPath()</code> method of the wrapped
-     * request.
-     */
-    public String getServletPath() {
+  /**
+   * Override the <code>getPathTranslated()</code> method of the
+   * wrapped request.
+   */
+  public String getPathTranslated() {
 
-        return (this.servletPath);
+    return (this.pathTranslated);
 
-    }
-
-
-    // -------------------------------------------------------- Package Methods
+  }
 
 
+  /**
+   * Override the <code>getRequestURI()</code> method of the wrapped request.
+   */
+  public String getRequestURI() {
 
-    /**
-     * Return descriptive information about this implementation.
-     */
-    public String getInfo() {
+    return (this.requestURI);
 
-        return (this.info);
-
-    }
-
-
-    /**
-     * Set the path information for this request.
-     *
-     * @param pathInfo The new path info
-     */
-    void setPathInfo(String pathInfo) {
-
-        this.pathInfo = pathInfo;
-
-    }
+  }
 
 
-    /**
-     * Set the translated path info for this request.
-     *
-     * @param pathTranslated The new translated path info
-     */
-    void setPathTranslated(String pathTranslated) {
+  /**
+   * Override the <code>getServletPath()</code> method of the wrapped
+   * request.
+   */
+  public String getServletPath() {
 
-        this.pathTranslated = pathTranslated;
+    return (this.servletPath);
 
-    }
-
-
-    /**
-     * Set the request URI for this request.
-     *
-     * @param requestURI The new request URI
-     */
-    void setRequestURI(String requestURI) {
-
-        this.requestURI = requestURI;
-
-    }
+  }
 
 
-    /**
-     * Set the servlet path for this request.
-     *
-     * @param servletPath The new servlet path
-     */
-    void setServletPath(String servletPath) {
+  // -------------------------------------------------------- Package Methods
 
-        this.servletPath = servletPath;
 
-    }
+  /**
+   * Return descriptive information about this implementation.
+   */
+  public String getInfo() {
+
+    return (this.info);
+
+  }
+
+
+  /**
+   * Set the path information for this request.
+   *
+   * @param pathInfo The new path info
+   */
+  void setPathInfo(String pathInfo) {
+
+    this.pathInfo = pathInfo;
+
+  }
+
+
+  /**
+   * Set the translated path info for this request.
+   *
+   * @param pathTranslated The new translated path info
+   */
+  void setPathTranslated(String pathTranslated) {
+
+    this.pathTranslated = pathTranslated;
+
+  }
+
+
+  /**
+   * Set the request URI for this request.
+   *
+   * @param requestURI The new request URI
+   */
+  void setRequestURI(String requestURI) {
+
+    this.requestURI = requestURI;
+
+  }
+
+
+  /**
+   * Set the servlet path for this request.
+   *
+   * @param servletPath The new servlet path
+   */
+  void setServletPath(String servletPath) {
+
+    this.servletPath = servletPath;
+
+  }
 
 
 }

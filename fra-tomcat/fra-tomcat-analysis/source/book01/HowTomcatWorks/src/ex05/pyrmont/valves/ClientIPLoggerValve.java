@@ -3,6 +3,7 @@ package ex05.pyrmont.valves;
 import java.io.IOException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletException;
+
 import org.apache.catalina.Request;
 import org.apache.catalina.Response;
 import org.apache.catalina.Valve;
@@ -16,7 +17,7 @@ public class ClientIPLoggerValve implements Valve, Contained {
   protected Container container;
 
   public void invoke(Request request, Response response, ValveContext valveContext)
-    throws IOException, ServletException {
+      throws IOException, ServletException {
 
     // Pass this request on to the next valve in our pipeline
     valveContext.invokeNext(request, response);

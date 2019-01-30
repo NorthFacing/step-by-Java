@@ -1,11 +1,14 @@
 package ex03.pyrmont.connector.http;
 
-/** this class copies methods from org.apache.catalina.connector.HttpRequestBase
- *  and org.apache.catalina.connector.http.HttpRequestImpl.
- *  The HttpRequestImpl class employs a pool of HttpHeader objects for performance
- *  These two classes will be explained in Chapter 4.
+/**
+ * this class copies methods from org.apache.catalina.connector.HttpRequestBase
+ * and org.apache.catalina.connector.http.HttpRequestImpl.
+ * The HttpRequestImpl class employs a pool of HttpHeader objects for performance
+ * These two classes will be explained in Chapter 4.
  */
+
 import ex03.pyrmont.connector.RequestStream;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Cookie;
@@ -27,6 +30,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
 import org.apache.catalina.util.Enumerator;
 import org.apache.catalina.util.ParameterMap;
 import org.apache.catalina.util.RequestUtil;
@@ -73,9 +77,9 @@ public class HttpRequest implements HttpServletRequest {
    * The set of SimpleDateFormat formats to use in getDateHeader().
    */
   protected SimpleDateFormat formats[] = {
-    new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US),
-    new SimpleDateFormat("EEEEEE, dd-MMM-yy HH:mm:ss zzz", Locale.US),
-    new SimpleDateFormat("EEE MMMM d HH:mm:ss yyyy", Locale.US)
+      new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US),
+      new SimpleDateFormat("EEEEEE, dd-MMM-yy HH:mm:ss zzz", Locale.US),
+      new SimpleDateFormat("EEE MMMM d HH:mm:ss yyyy", Locale.US)
   };
 
   /**
@@ -150,8 +154,7 @@ public class HttpRequest implements HttpServletRequest {
     String queryString = getQueryString();
     try {
       RequestUtil.parseParameters(results, queryString, encoding);
-    }
-    catch (UnsupportedEncodingException e) {
+    } catch (UnsupportedEncodingException e) {
       ;
     }
 
@@ -162,12 +165,11 @@ public class HttpRequest implements HttpServletRequest {
     int semicolon = contentType.indexOf(';');
     if (semicolon >= 0) {
       contentType = contentType.substring(0, semicolon).trim();
-    }
-    else {
+    } else {
       contentType = contentType.trim();
     }
     if ("POST".equals(getMethod()) && (getContentLength() > 0)
-      && "application/x-www-form-urlencoded".equals(contentType)) {
+        && "application/x-www-form-urlencoded".equals(contentType)) {
       try {
         int max = getContentLength();
         int len = 0;
@@ -175,7 +177,7 @@ public class HttpRequest implements HttpServletRequest {
         ServletInputStream is = getInputStream();
         while (len < max) {
           int next = is.read(buf, len, max - len);
-          if (next < 0 ) {
+          if (next < 0) {
             break;
           }
           len += next;
@@ -185,11 +187,9 @@ public class HttpRequest implements HttpServletRequest {
           throw new RuntimeException("Content length mismatch");
         }
         RequestUtil.parseParameters(results, buf, encoding);
-      }
-      catch (UnsupportedEncodingException ue) {
+      } catch (UnsupportedEncodingException ue) {
         ;
-      }
-      catch (IOException e) {
+      } catch (IOException e) {
         throw new RuntimeException("Content read fail");
       }
     }
@@ -221,6 +221,7 @@ public class HttpRequest implements HttpServletRequest {
   public InputStream getStream() {
     return input;
   }
+
   public void setContentLength(int length) {
     this.contentLength = length;
   }
@@ -259,6 +260,7 @@ public class HttpRequest implements HttpServletRequest {
   public void setRequestURI(String requestURI) {
     this.requestURI = requestURI;
   }
+
   /**
    * Set the name of the server (virtual host) to process this request.
    *
@@ -267,6 +269,7 @@ public class HttpRequest implements HttpServletRequest {
   public void setServerName(String name) {
     this.serverName = name;
   }
+
   /**
    * Set the port number of the server to process this request.
    *
@@ -321,7 +324,7 @@ public class HttpRequest implements HttpServletRequest {
   }
 
   public int getContentLength() {
-    return contentLength ;
+    return contentLength;
   }
 
   public String getContentType() {
@@ -355,8 +358,7 @@ public class HttpRequest implements HttpServletRequest {
       try {
         Date date = formats[i].parse(value);
         return (date.getTime());
-      }
-      catch (ParseException e) {
+      } catch (ParseException e) {
         ;
       }
     }
@@ -472,8 +474,8 @@ public class HttpRequest implements HttpServletRequest {
       if (encoding == null)
         encoding = "ISO-8859-1";
       InputStreamReader isr =
-        new InputStreamReader(createInputStream(), encoding);
-        reader = new BufferedReader(isr);
+          new InputStreamReader(createInputStream(), encoding);
+      reader = new BufferedReader(isr);
     }
     return (reader);
   }
@@ -499,7 +501,7 @@ public class HttpRequest implements HttpServletRequest {
   }
 
   public String getScheme() {
-   return null;
+    return null;
   }
 
   public String getServerName() {

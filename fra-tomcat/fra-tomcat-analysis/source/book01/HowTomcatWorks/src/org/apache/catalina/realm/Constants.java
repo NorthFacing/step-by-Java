@@ -68,13 +68,12 @@ package org.apache.catalina.realm;
 /**
  * Manifest constants for this Java package.
  *
- *
  * @author Craig R. McClanahan
  * @version $Revision: 1.2 $ $Date: 2001/07/22 20:25:11 $
  */
 
 public final class Constants {
 
-    public static final String Package = "org.apache.catalina.realm";
+  public static final String Package = "org.apache.catalina.realm";
 
 }

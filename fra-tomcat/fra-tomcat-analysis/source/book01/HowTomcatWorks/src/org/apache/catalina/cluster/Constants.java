@@ -73,5 +73,5 @@ package org.apache.catalina.cluster;
  */
 
 public final class Constants {
-    public static final String Package = "org.apache.catalina.cluster";
+  public static final String Package = "org.apache.catalina.cluster";
 }

@@ -76,32 +76,32 @@ public class SystemErrLogger
     extends LoggerBase {
 
 
-    // ----------------------------------------------------- Instance Variables
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * The descriptive information about this implementation.
-     */
-    protected static final String info =
-        "org.apache.catalina.logger.SystemErrLogger/1.0";
+  /**
+   * The descriptive information about this implementation.
+   */
+  protected static final String info =
+      "org.apache.catalina.logger.SystemErrLogger/1.0";
 
 
-    // --------------------------------------------------------- Public Methods
+  // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Writes the specified message to a servlet log file, usually an event
-     * log.  The name and type of the servlet log is specific to the
-     * servlet container.
-     *
-     * @param msg A <code>String</code> specifying the message to be written
-     *  to the log file
-     */
-    public void log(String msg) {
+  /**
+   * Writes the specified message to a servlet log file, usually an event
+   * log.  The name and type of the servlet log is specific to the
+   * servlet container.
+   *
+   * @param msg A <code>String</code> specifying the message to be written
+   *            to the log file
+   */
+  public void log(String msg) {
 
-        System.err.println(msg);
+    System.err.println(msg);
 
-    }
+  }
 
 
 }

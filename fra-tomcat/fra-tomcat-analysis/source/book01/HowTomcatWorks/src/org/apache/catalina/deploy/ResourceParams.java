@@ -77,67 +77,67 @@ import java.util.Hashtable;
 public final class ResourceParams {
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * The name of this resource parameters. Must be the name of the resource
-     * in the java: namespace.
-     */
-    private String name = null;
+  /**
+   * The name of this resource parameters. Must be the name of the resource
+   * in the java: namespace.
+   */
+  private String name = null;
 
-    public String getName() {
-        return (this.name);
-    }
+  public String getName() {
+    return (this.name);
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    private Hashtable resourceParams = new Hashtable();
+  private Hashtable resourceParams = new Hashtable();
 
-    public void addParameter(String name, String value) {
-        resourceParams.put(name, value);
-    }
+  public void addParameter(String name, String value) {
+    resourceParams.put(name, value);
+  }
 
-    public Hashtable getParameters() {
-        return resourceParams;
-    }
+  public Hashtable getParameters() {
+    return resourceParams;
+  }
 
-    // --------------------------------------------------------- Public Methods
-
-
-    /**
-     * Return a String representation of this object.
-     */
-    public String toString() {
-
-        StringBuffer sb = new StringBuffer("ResourceParams[");
-        sb.append("name=");
-        sb.append(name);
-        sb.append(", parameters=");
-        sb.append(resourceParams.toString());
-        sb.append("]");
-        return (sb.toString());
-
-    }
+  // --------------------------------------------------------- Public Methods
 
 
-    // -------------------------------------------------------- Package Methods
+  /**
+   * Return a String representation of this object.
+   */
+  public String toString() {
+
+    StringBuffer sb = new StringBuffer("ResourceParams[");
+    sb.append("name=");
+    sb.append(name);
+    sb.append(", parameters=");
+    sb.append(resourceParams.toString());
+    sb.append("]");
+    return (sb.toString());
+
+  }
 
 
-    /**
-     * The NamingResources with which we are associated (if any).
-     */
-    protected NamingResources resources = null;
+  // -------------------------------------------------------- Package Methods
 
-    public NamingResources getNamingResources() {
-        return (this.resources);
-    }
 
-    void setNamingResources(NamingResources resources) {
-        this.resources = resources;
-    }
+  /**
+   * The NamingResources with which we are associated (if any).
+   */
+  protected NamingResources resources = null;
+
+  public NamingResources getNamingResources() {
+    return (this.resources);
+  }
+
+  void setNamingResources(NamingResources resources) {
+    this.resources = resources;
+  }
 
 
 }

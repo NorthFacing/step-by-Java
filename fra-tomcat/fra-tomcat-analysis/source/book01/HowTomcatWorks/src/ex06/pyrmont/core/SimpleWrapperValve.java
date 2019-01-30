@@ -7,6 +7,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.catalina.Request;
 import org.apache.catalina.Response;
 import org.apache.catalina.Valve;
@@ -20,7 +21,7 @@ public class SimpleWrapperValve implements Valve, Contained {
   protected Container container;
 
   public void invoke(Request request, Response response, ValveContext valveContext)
-    throws IOException, ServletException {
+      throws IOException, ServletException {
 
     SimpleWrapper wrapper = (SimpleWrapper) getContainer();
     ServletRequest sreq = request.getRequest();
@@ -36,14 +37,12 @@ public class SimpleWrapperValve implements Valve, Contained {
     // Allocate a servlet instance to process this request
     try {
       servlet = wrapper.allocate();
-      if (hres!=null && hreq!=null) {
+      if (hres != null && hreq != null) {
         servlet.service(hreq, hres);
-      }
-      else {
+      } else {
         servlet.service(sreq, sres);
       }
-    }
-    catch (ServletException e) {
+    } catch (ServletException e) {
     }
   }
 

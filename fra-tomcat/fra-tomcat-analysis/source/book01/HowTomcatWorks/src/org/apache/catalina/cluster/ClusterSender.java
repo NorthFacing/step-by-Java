@@ -76,80 +76,80 @@ import org.apache.catalina.Logger;
 
 public interface ClusterSender {
 
-    // --------------------------------------------------------- Public Methods
+  // --------------------------------------------------------- Public Methods
 
-    /**
-     * The senderId is a identifier used to identify different
-     * packages being sent in a Cluster. Each package sent through
-     * the concrete implementation of this interface will have
-     * the senderId set at runtime. Usually the senderId is the
-     * name of the component that is using this <code>ClusterSender</code>
-     *
-     * @param senderId The senderId to use
-     */
-    public void setSenderId(String senderId);
+  /**
+   * The senderId is a identifier used to identify different
+   * packages being sent in a Cluster. Each package sent through
+   * the concrete implementation of this interface will have
+   * the senderId set at runtime. Usually the senderId is the
+   * name of the component that is using this <code>ClusterSender</code>
+   *
+   * @param senderId The senderId to use
+   */
+  public void setSenderId(String senderId);
 
-    /**
-     * get the senderId used to identify messages being sent in a Cluster.
-     *
-     * @return The senderId for this ClusterSender
-     */
-    public String getSenderId();
+  /**
+   * get the senderId used to identify messages being sent in a Cluster.
+   *
+   * @return The senderId for this ClusterSender
+   */
+  public String getSenderId();
 
-    /**
-     * Set the debug detail level for this component.
-     *
-     * @param debug The debug level
-     */
-    public void setDebug(int debug);
+  /**
+   * Set the debug detail level for this component.
+   *
+   * @param debug The debug level
+   */
+  public void setDebug(int debug);
 
-    /**
-     * Get the debug level for this component
-     *
-     * @return The debug level
-     */
-    public int getDebug();
+  /**
+   * Get the debug level for this component
+   *
+   * @return The debug level
+   */
+  public int getDebug();
 
-    /**
-     * Set the Logger for this component.
-     *
-     * @param debug The Logger to use with this component.
-     */
-    public void setLogger(Logger logger);
+  /**
+   * Set the Logger for this component.
+   *
+   * @param debug The Logger to use with this component.
+   */
+  public void setLogger(Logger logger);
 
-    /**
-     * Get the Logger for this component
-     *
-     * @return The Logger associated with this component.
-     */
-    public Logger getLogger();
+  /**
+   * Get the Logger for this component
+   *
+   * @return The Logger associated with this component.
+   */
+  public Logger getLogger();
 
-    /**
-     * The log method to use in the implementation
-     *
-     * @param message The message to be logged.
-     */
-    public void log(String message);
+  /**
+   * The log method to use in the implementation
+   *
+   * @param message The message to be logged.
+   */
+  public void log(String message);
 
-    /**
-     * Send an array of bytes, the implementation of this
-     * <code>ClusterSender</code> is responsible for modifying
-     * the bytearray to something that it can use. Before anything
-     * is sent it is transformed into a ReplicationWrapper object
-     * and the right senderId is set.
-     *
-     * @param b the bytearray to send
-     */
-    public void send(byte[] b);
+  /**
+   * Send an array of bytes, the implementation of this
+   * <code>ClusterSender</code> is responsible for modifying
+   * the bytearray to something that it can use. Before anything
+   * is sent it is transformed into a ReplicationWrapper object
+   * and the right senderId is set.
+   *
+   * @param b the bytearray to send
+   */
+  public void send(byte[] b);
 
-    /**
-     * Send an object, the implementation of this
-     * <code>ClusterSender</code> is responsible for modifying
-     * the Object to something that it can use. Before anything
-     * is sent it is transformed into a ReplicationWrapper object
-     * and the right senderId is set.
-     *
-     * @param o The object to send
-     */
-    public void send(Object o);
+  /**
+   * Send an object, the implementation of this
+   * <code>ClusterSender</code> is responsible for modifying
+   * the Object to something that it can use. Before anything
+   * is sent it is transformed into a ReplicationWrapper object
+   * and the right senderId is set.
+   *
+   * @param o The object to send
+   */
+  public void send(Object o);
 }

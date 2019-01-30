@@ -19,20 +19,18 @@ public class StandardAgent {
 
   public ObjectName createObjectName(String name) {
     ObjectName objectName = null;
-    try { 
-      objectName = new ObjectName(name); 
-    }
-    catch (Exception e) {
+    try {
+      objectName = new ObjectName(name);
+    } catch (Exception e) {
     }
     return objectName;
   }
-  
+
 
   private void createStandardBean(ObjectName objectName, String managedResourceClassName) {
     try {
       mBeanServer.createMBean(managedResourceClassName, objectName);
-    } 
-    catch(Exception e) {
+    } catch (Exception e) {
     }
   }
 
@@ -41,23 +39,22 @@ public class StandardAgent {
     MBeanServer mBeanServer = agent.getMBeanServer();
     String domain = mBeanServer.getDefaultDomain();
     String managedResourceClassName = "ex20.pyrmont.standardmbeantest.Car";
-    ObjectName objectName = agent.createObjectName(domain + ":type=" + 
-      managedResourceClassName);
+    ObjectName objectName = agent.createObjectName(domain + ":type=" +
+        managedResourceClassName);
     agent.createStandardBean(objectName, managedResourceClassName);
 
 
     // manage MBean
     try {
-      Attribute colorAttribute = new Attribute("Color","blue");
+      Attribute colorAttribute = new Attribute("Color", "blue");
       mBeanServer.setAttribute(objectName, colorAttribute);
       System.out.println(mBeanServer.getAttribute(objectName, "Color"));
-      mBeanServer.invoke(objectName,"drive",null,null);
-    } 
-    catch (Exception e) {
+      mBeanServer.invoke(objectName, "drive", null, null);
+    } catch (Exception e) {
       e.printStackTrace();
     }
 
   }
-    
-    
+
+
 }

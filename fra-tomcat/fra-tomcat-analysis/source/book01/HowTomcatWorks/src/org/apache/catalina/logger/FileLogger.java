@@ -70,6 +70,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+
 import org.apache.catalina.Lifecycle;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.LifecycleListener;
@@ -91,332 +92,332 @@ public class FileLogger
     implements Lifecycle {
 
 
-    // ----------------------------------------------------- Instance Variables
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * The as-of date for the currently open log file, or a zero-length
-     * string if there is no open log file.
-     */
-    private String date = "";
+  /**
+   * The as-of date for the currently open log file, or a zero-length
+   * string if there is no open log file.
+   */
+  private String date = "";
 
 
-    /**
-     * The directory in which log files are created.
-     */
-    private String directory = "logs";
+  /**
+   * The directory in which log files are created.
+   */
+  private String directory = "logs";
 
 
-    /**
-     * The descriptive information about this implementation.
-     */
-    protected static final String info =
-        "org.apache.catalina.logger.FileLogger/1.0";
+  /**
+   * The descriptive information about this implementation.
+   */
+  protected static final String info =
+      "org.apache.catalina.logger.FileLogger/1.0";
 
 
-    /**
-     * The lifecycle event support for this component.
-     */
-    protected LifecycleSupport lifecycle = new LifecycleSupport(this);
+  /**
+   * The lifecycle event support for this component.
+   */
+  protected LifecycleSupport lifecycle = new LifecycleSupport(this);
 
 
-    /**
-     * The prefix that is added to log file filenames.
-     */
-    private String prefix = "catalina.";
+  /**
+   * The prefix that is added to log file filenames.
+   */
+  private String prefix = "catalina.";
 
 
-    /**
-     * The string manager for this package.
-     */
-    private StringManager sm =
-        StringManager.getManager(Constants.Package);
+  /**
+   * The string manager for this package.
+   */
+  private StringManager sm =
+      StringManager.getManager(Constants.Package);
 
 
-    /**
-     * Has this component been started?
-     */
-    private boolean started = false;
+  /**
+   * Has this component been started?
+   */
+  private boolean started = false;
 
 
-    /**
-     * The suffix that is added to log file filenames.
-     */
-    private String suffix = ".log";
+  /**
+   * The suffix that is added to log file filenames.
+   */
+  private String suffix = ".log";
 
 
-    /**
-     * Should logged messages be date/time stamped?
-     */
-    private boolean timestamp = false;
+  /**
+   * Should logged messages be date/time stamped?
+   */
+  private boolean timestamp = false;
 
 
-    /**
-     * The PrintWriter to which we are currently logging, if any.
-     */
-    private PrintWriter writer = null;
+  /**
+   * The PrintWriter to which we are currently logging, if any.
+   */
+  private PrintWriter writer = null;
 
 
-    // ------------------------------------------------------------- Properties
+  // ------------------------------------------------------------- Properties
 
 
-    /**
-     * Return the directory in which we create log files.
-     */
-    public String getDirectory() {
+  /**
+   * Return the directory in which we create log files.
+   */
+  public String getDirectory() {
 
-        return (directory);
+    return (directory);
 
-    }
-
-
-    /**
-     * Set the directory in which we create log files.
-     *
-     * @param directory The new log file directory
-     */
-    public void setDirectory(String directory) {
-
-        String oldDirectory = this.directory;
-        this.directory = directory;
-        support.firePropertyChange("directory", oldDirectory, this.directory);
-
-    }
+  }
 
 
-    /**
-     * Return the log file prefix.
-     */
-    public String getPrefix() {
+  /**
+   * Set the directory in which we create log files.
+   *
+   * @param directory The new log file directory
+   */
+  public void setDirectory(String directory) {
 
-        return (prefix);
+    String oldDirectory = this.directory;
+    this.directory = directory;
+    support.firePropertyChange("directory", oldDirectory, this.directory);
 
-    }
-
-
-    /**
-     * Set the log file prefix.
-     *
-     * @param prefix The new log file prefix
-     */
-    public void setPrefix(String prefix) {
-
-        String oldPrefix = this.prefix;
-        this.prefix = prefix;
-        support.firePropertyChange("prefix", oldPrefix, this.prefix);
-
-    }
+  }
 
 
-    /**
-     * Return the log file suffix.
-     */
-    public String getSuffix() {
+  /**
+   * Return the log file prefix.
+   */
+  public String getPrefix() {
 
-        return (suffix);
+    return (prefix);
 
-    }
-
-
-    /**
-     * Set the log file suffix.
-     *
-     * @param suffix The new log file suffix
-     */
-    public void setSuffix(String suffix) {
-
-        String oldSuffix = this.suffix;
-        this.suffix = suffix;
-        support.firePropertyChange("suffix", oldSuffix, this.suffix);
-
-    }
+  }
 
 
-    /**
-     * Return the timestamp flag.
-     */
-    public boolean getTimestamp() {
+  /**
+   * Set the log file prefix.
+   *
+   * @param prefix The new log file prefix
+   */
+  public void setPrefix(String prefix) {
 
-        return (timestamp);
+    String oldPrefix = this.prefix;
+    this.prefix = prefix;
+    support.firePropertyChange("prefix", oldPrefix, this.prefix);
 
-    }
-
-
-    /**
-     * Set the timestamp flag.
-     *
-     * @param timestamp The new timestamp flag
-     */
-    public void setTimestamp(boolean timestamp) {
-
-        boolean oldTimestamp = this.timestamp;
-        this.timestamp = timestamp;
-        support.firePropertyChange("timestamp", new Boolean(oldTimestamp),
-                                   new Boolean(this.timestamp));
-
-    }
+  }
 
 
-    // --------------------------------------------------------- Public Methods
+  /**
+   * Return the log file suffix.
+   */
+  public String getSuffix() {
+
+    return (suffix);
+
+  }
 
 
-    /**
-     * Writes the specified message to a servlet log file, usually an event
-     * log.  The name and type of the servlet log is specific to the
-     * servlet container.
-     *
-     * @param msg A <code>String</code> specifying the message to be written
-     *  to the log file
-     */
-    public void log(String msg) {
+  /**
+   * Set the log file suffix.
+   *
+   * @param suffix The new log file suffix
+   */
+  public void setSuffix(String suffix) {
 
-        // Construct the timestamp we will use, if requested
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        String tsString = ts.toString().substring(0, 19);
-        String tsDate = tsString.substring(0, 10);
+    String oldSuffix = this.suffix;
+    this.suffix = suffix;
+    support.firePropertyChange("suffix", oldSuffix, this.suffix);
 
-        // If the date has changed, switch log files
+  }
+
+
+  /**
+   * Return the timestamp flag.
+   */
+  public boolean getTimestamp() {
+
+    return (timestamp);
+
+  }
+
+
+  /**
+   * Set the timestamp flag.
+   *
+   * @param timestamp The new timestamp flag
+   */
+  public void setTimestamp(boolean timestamp) {
+
+    boolean oldTimestamp = this.timestamp;
+    this.timestamp = timestamp;
+    support.firePropertyChange("timestamp", new Boolean(oldTimestamp),
+        new Boolean(this.timestamp));
+
+  }
+
+
+  // --------------------------------------------------------- Public Methods
+
+
+  /**
+   * Writes the specified message to a servlet log file, usually an event
+   * log.  The name and type of the servlet log is specific to the
+   * servlet container.
+   *
+   * @param msg A <code>String</code> specifying the message to be written
+   *            to the log file
+   */
+  public void log(String msg) {
+
+    // Construct the timestamp we will use, if requested
+    Timestamp ts = new Timestamp(System.currentTimeMillis());
+    String tsString = ts.toString().substring(0, 19);
+    String tsDate = tsString.substring(0, 10);
+
+    // If the date has changed, switch log files
+    if (!date.equals(tsDate)) {
+      synchronized (this) {
         if (!date.equals(tsDate)) {
-            synchronized (this) {
-                if (!date.equals(tsDate)) {
-                    close();
-                    date = tsDate;
-                    open();
-                }
-            }
+          close();
+          date = tsDate;
+          open();
         }
-
-        // Log this message, timestamped if necessary
-        if (writer != null) {
-            if (timestamp) {
-                writer.println(tsString + " " + msg);
-            } else {
-                writer.println(msg);
-            }
-        }
-
+      }
     }
 
-
-    // -------------------------------------------------------- Private Methods
-
-
-    /**
-     * Close the currently open log file (if any)
-     */
-    private void close() {
-
-        if (writer == null)
-            return;
-        writer.flush();
-        writer.close();
-        writer = null;
-        date = "";
-
+    // Log this message, timestamped if necessary
+    if (writer != null) {
+      if (timestamp) {
+        writer.println(tsString + " " + msg);
+      } else {
+        writer.println(msg);
+      }
     }
 
+  }
 
-    /**
-     * Open the new log file for the date specified by <code>date</code>.
-     */
-    private void open() {
 
-        // Create the directory if necessary
-        File dir = new File(directory);
-        if (!dir.isAbsolute())
-            dir = new File(System.getProperty("catalina.base"), directory);
-        dir.mkdirs();
+  // -------------------------------------------------------- Private Methods
 
-        // Open the current log file
-        try {
-            String pathname = dir.getAbsolutePath() + File.separator +
-                prefix + date + suffix;
-            writer = new PrintWriter(new FileWriter(pathname, true), true);
-        } catch (IOException e) {
-            writer = null;
-        }
 
+  /**
+   * Close the currently open log file (if any)
+   */
+  private void close() {
+
+    if (writer == null)
+      return;
+    writer.flush();
+    writer.close();
+    writer = null;
+    date = "";
+
+  }
+
+
+  /**
+   * Open the new log file for the date specified by <code>date</code>.
+   */
+  private void open() {
+
+    // Create the directory if necessary
+    File dir = new File(directory);
+    if (!dir.isAbsolute())
+      dir = new File(System.getProperty("catalina.base"), directory);
+    dir.mkdirs();
+
+    // Open the current log file
+    try {
+      String pathname = dir.getAbsolutePath() + File.separator +
+          prefix + date + suffix;
+      writer = new PrintWriter(new FileWriter(pathname, true), true);
+    } catch (IOException e) {
+      writer = null;
     }
 
-
-    // ------------------------------------------------------ Lifecycle Methods
-
-
-    /**
-     * Add a lifecycle event listener to this component.
-     *
-     * @param listener The listener to add
-     */
-    public void addLifecycleListener(LifecycleListener listener) {
-
-        lifecycle.addLifecycleListener(listener);
-
-    }
+  }
 
 
-    /**
-     * Get the lifecycle listeners associated with this lifecycle. If this
-     * Lifecycle has no listeners registered, a zero-length array is returned.
-     */
-    public LifecycleListener[] findLifecycleListeners() {
-
-        return lifecycle.findLifecycleListeners();
-
-    }
+  // ------------------------------------------------------ Lifecycle Methods
 
 
-    /**
-     * Remove a lifecycle event listener from this component.
-     *
-     * @param listener The listener to add
-     */
-    public void removeLifecycleListener(LifecycleListener listener) {
+  /**
+   * Add a lifecycle event listener to this component.
+   *
+   * @param listener The listener to add
+   */
+  public void addLifecycleListener(LifecycleListener listener) {
 
-        lifecycle.removeLifecycleListener(listener);
+    lifecycle.addLifecycleListener(listener);
 
-    }
-
-
-    /**
-     * Prepare for the beginning of active use of the public methods of this
-     * component.  This method should be called after <code>configure()</code>,
-     * and before any of the public methods of the component are utilized.
-     *
-     * @exception LifecycleException if this component detects a fatal error
-     *  that prevents this component from being used
-     */
-    public void start() throws LifecycleException {
-
-        // Validate and update our current component state
-        if (started)
-            throw new LifecycleException
-                (sm.getString("fileLogger.alreadyStarted"));
-        lifecycle.fireLifecycleEvent(START_EVENT, null);
-        started = true;
-
-    }
+  }
 
 
-    /**
-     * Gracefully terminate the active use of the public methods of this
-     * component.  This method should be the last one called on a given
-     * instance of this component.
-     *
-     * @exception LifecycleException if this component detects a fatal error
-     *  that needs to be reported
-     */
-    public void stop() throws LifecycleException {
+  /**
+   * Get the lifecycle listeners associated with this lifecycle. If this
+   * Lifecycle has no listeners registered, a zero-length array is returned.
+   */
+  public LifecycleListener[] findLifecycleListeners() {
 
-        // Validate and update our current component state
-        if (!started)
-            throw new LifecycleException
-                (sm.getString("fileLogger.notStarted"));
-        lifecycle.fireLifecycleEvent(STOP_EVENT, null);
-        started = false;
+    return lifecycle.findLifecycleListeners();
 
-        close();
+  }
 
-    }
+
+  /**
+   * Remove a lifecycle event listener from this component.
+   *
+   * @param listener The listener to add
+   */
+  public void removeLifecycleListener(LifecycleListener listener) {
+
+    lifecycle.removeLifecycleListener(listener);
+
+  }
+
+
+  /**
+   * Prepare for the beginning of active use of the public methods of this
+   * component.  This method should be called after <code>configure()</code>,
+   * and before any of the public methods of the component are utilized.
+   *
+   * @throws LifecycleException if this component detects a fatal error
+   *                            that prevents this component from being used
+   */
+  public void start() throws LifecycleException {
+
+    // Validate and update our current component state
+    if (started)
+      throw new LifecycleException
+          (sm.getString("fileLogger.alreadyStarted"));
+    lifecycle.fireLifecycleEvent(START_EVENT, null);
+    started = true;
+
+  }
+
+
+  /**
+   * Gracefully terminate the active use of the public methods of this
+   * component.  This method should be the last one called on a given
+   * instance of this component.
+   *
+   * @throws LifecycleException if this component detects a fatal error
+   *                            that needs to be reported
+   */
+  public void stop() throws LifecycleException {
+
+    // Validate and update our current component state
+    if (!started)
+      throw new LifecycleException
+          (sm.getString("fileLogger.notStarted"));
+    lifecycle.fireLifecycleEvent(STOP_EVENT, null);
+    started = false;
+
+    close();
+
+  }
 
 
 }

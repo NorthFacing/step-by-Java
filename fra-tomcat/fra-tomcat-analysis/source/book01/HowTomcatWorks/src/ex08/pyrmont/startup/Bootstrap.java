@@ -58,17 +58,16 @@ public final class Bootstrap {
       ((Lifecycle) context).start();
       // now we want to know some details about WebappLoader
       WebappClassLoader classLoader = (WebappClassLoader) loader.getClassLoader();
-      System.out.println("Resources' docBase: " + ((ProxyDirContext)classLoader.getResources()).getDocBase());
+      System.out.println("Resources' docBase: " + ((ProxyDirContext) classLoader.getResources()).getDocBase());
       String[] repositories = classLoader.findRepositories();
-      for (int i=0; i<repositories.length; i++) {
+      for (int i = 0; i < repositories.length; i++) {
         System.out.println("  repository: " + repositories[i]);
       }
 
       // make the application wait until we press a key.
       System.in.read();
       ((Lifecycle) context).stop();
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

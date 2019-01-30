@@ -65,7 +65,6 @@
 package org.apache.catalina;
 
 
-
 /**
  * Interface defining a listener for significant Session generated events.
  *
@@ -76,12 +75,12 @@ package org.apache.catalina;
 public interface SessionListener {
 
 
-    /**
-     * Acknowledge the occurrence of the specified event.
-     *
-     * @param event SessionEvent that has occurred
-     */
-    public void sessionEvent(SessionEvent event);
+  /**
+   * Acknowledge the occurrence of the specified event.
+   *
+   * @param event SessionEvent that has occurred
+   */
+  public void sessionEvent(SessionEvent event);
 
 
 }

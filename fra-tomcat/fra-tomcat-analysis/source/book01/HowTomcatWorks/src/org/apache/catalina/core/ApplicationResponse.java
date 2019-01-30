@@ -67,6 +67,7 @@ package org.apache.catalina.core;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.ServletResponseWrapper;
+
 import org.apache.catalina.util.StringManager;
 
 
@@ -89,135 +90,135 @@ import org.apache.catalina.util.StringManager;
 class ApplicationResponse extends ServletResponseWrapper {
 
 
-    // ----------------------------------------------------------- Constructors
+  // ----------------------------------------------------------- Constructors
 
 
-    /**
-     * Construct a new wrapped response around the specified servlet response.
-     *
-     * @param response The servlet response being wrapped
-     */
-    public ApplicationResponse(ServletResponse response) {
+  /**
+   * Construct a new wrapped response around the specified servlet response.
+   *
+   * @param response The servlet response being wrapped
+   */
+  public ApplicationResponse(ServletResponse response) {
 
-        this(response, false);
+    this(response, false);
 
-    }
-
-
-    /**
-     * Construct a new wrapped response around the specified servlet response.
-     *
-     * @param response The servlet response being wrapped
-     * @param included <code>true</code> if this response is being processed
-     *  by a <code>RequestDispatcher.include()</code> call
-     */
-    public ApplicationResponse(ServletResponse response, boolean included) {
-
-        super(response);
-        setIncluded(included);
-
-    }
+  }
 
 
-    // ----------------------------------------------------- Instance Variables
+  /**
+   * Construct a new wrapped response around the specified servlet response.
+   *
+   * @param response The servlet response being wrapped
+   * @param included <code>true</code> if this response is being processed
+   *                 by a <code>RequestDispatcher.include()</code> call
+   */
+  public ApplicationResponse(ServletResponse response, boolean included) {
+
+    super(response);
+    setIncluded(included);
+
+  }
 
 
-    /**
-     * Is this wrapped response the subject of an <code>include()</code>
-     * call?
-     */
-    protected boolean included = false;
+  // ----------------------------------------------------- Instance Variables
 
 
-    /**
-     * The string manager for this package.
-     */
-    protected static StringManager sm =
-        StringManager.getManager(Constants.Package);
+  /**
+   * Is this wrapped response the subject of an <code>include()</code>
+   * call?
+   */
+  protected boolean included = false;
 
 
-    // ------------------------------------------------ ServletResponse Methods
+  /**
+   * The string manager for this package.
+   */
+  protected static StringManager sm =
+      StringManager.getManager(Constants.Package);
 
 
-    /**
-     * Disallow <code>reset()</code> calls on a included response.
-     *
-     * @exception IllegalStateException if the response has already
-     *  been committed
-     */
-    public void reset() {
-
-        // If already committed, the wrapped response will throw ISE
-        if (!included || getResponse().isCommitted())
-            getResponse().reset();
-
-    }
+  // ------------------------------------------------ ServletResponse Methods
 
 
-    /**
-     * Disallow <code>setContentLength()</code> calls on an included response.
-     *
-     * @param len The new content length
-     */
-    public void setContentLength(int len) {
+  /**
+   * Disallow <code>reset()</code> calls on a included response.
+   *
+   * @throws IllegalStateException if the response has already
+   *                               been committed
+   */
+  public void reset() {
 
-        if (!included)
-            getResponse().setContentLength(len);
+    // If already committed, the wrapped response will throw ISE
+    if (!included || getResponse().isCommitted())
+      getResponse().reset();
 
-    }
-
-
-    /**
-     * Disallow <code>setContentType()</code> calls on an included response.
-     *
-     * @param type The new content type
-     */
-    public void setContentType(String type) {
-
-        if (!included)
-            getResponse().setContentType(type);
-
-    }
+  }
 
 
-    // ----------------------------------------- ServletResponseWrapper Methods
+  /**
+   * Disallow <code>setContentLength()</code> calls on an included response.
+   *
+   * @param len The new content length
+   */
+  public void setContentLength(int len) {
+
+    if (!included)
+      getResponse().setContentLength(len);
+
+  }
 
 
-    /**
-     * Set the response that we are wrapping.
-     *
-     * @param response The new wrapped response
-     */
-    public void setResponse(ServletResponse response) {
+  /**
+   * Disallow <code>setContentType()</code> calls on an included response.
+   *
+   * @param type The new content type
+   */
+  public void setContentType(String type) {
 
-        super.setResponse(response);
+    if (!included)
+      getResponse().setContentType(type);
 
-    }
-
-
-    // -------------------------------------------------------- Package Methods
+  }
 
 
-    /**
-     * Return the included flag for this response.
-     */
-    boolean isIncluded() {
-
-        return (this.included);
-
-    }
+  // ----------------------------------------- ServletResponseWrapper Methods
 
 
-    /**
-     * Set the included flag for this response.
-     *
-     * @param included The new included flag
-     */
-    void setIncluded(boolean included) {
+  /**
+   * Set the response that we are wrapping.
+   *
+   * @param response The new wrapped response
+   */
+  public void setResponse(ServletResponse response) {
 
-        this.included = included;
+    super.setResponse(response);
 
-    }
+  }
+
+
+  // -------------------------------------------------------- Package Methods
+
+
+  /**
+   * Return the included flag for this response.
+   */
+  boolean isIncluded() {
+
+    return (this.included);
+
+  }
+
+
+  /**
+   * Set the included flag for this response.
+   *
+   * @param included The new included flag
+   */
+  void setIncluded(boolean included) {
+
+    this.included = included;
+
+  }
 
 
 }

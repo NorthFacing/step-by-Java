@@ -49,8 +49,7 @@ public final class Bootstrap2 {
 
       // make the application wait until we press a key.
       System.in.read();
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

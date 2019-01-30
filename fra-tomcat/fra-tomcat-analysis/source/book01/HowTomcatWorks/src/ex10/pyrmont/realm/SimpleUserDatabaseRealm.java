@@ -4,6 +4,7 @@ package ex10.pyrmont.realm;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import org.apache.catalina.Group;
 import org.apache.catalina.Role;
 import org.apache.catalina.User;
@@ -32,8 +33,7 @@ public class SimpleUserDatabaseRealm extends RealmBase {
     if (hasMessageDigest()) {
       // Hex hashes should be compared case-insensitive
       validated = (digest(credentials).equalsIgnoreCase(user.getPassword()));
-    }
-    else {
+    } else {
       validated = (digest(credentials).equals(user.getPassword()));
     }
     if (!validated) {
@@ -62,18 +62,18 @@ public class SimpleUserDatabaseRealm extends RealmBase {
       }
     }
     return (new GenericPrincipal(this, user.getUsername(),
-      user.getPassword(), combined));
+        user.getPassword(), combined));
   }
 
   // ------------------------------------------------------ Lifecycle Methods
 
 
-    /**
-     * Prepare for active use of the public methods of this Component.
-     *
-     * @exception LifecycleException if this component detects a fatal error
-     *  that prevents it from being started
-     */
+  /**
+   * Prepare for active use of the public methods of this Component.
+   *
+   * @throws LifecycleException if this component detects a fatal error
+   *                            that prevents it from being started
+   */
   protected Principal getPrincipal(String username) {
     return (null);
   }
@@ -91,8 +91,7 @@ public class SimpleUserDatabaseRealm extends RealmBase {
     ((MemoryUserDatabase) database).setPathname(path);
     try {
       database.open();
-    }
-    catch (Exception e)  {
+    } catch (Exception e) {
     }
   }
 }

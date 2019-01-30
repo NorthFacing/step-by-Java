@@ -72,7 +72,6 @@ import java.util.Locale;
 import java.util.Properties;
 
 
-
 /**
  * Utility class that attempts to map from a Locale to the corresponding
  * character set to be used for interpreting input text (or generating
@@ -88,88 +87,85 @@ import java.util.Properties;
 public class CharsetMapper {
 
 
-    // ---------------------------------------------------- Manifest Constants
+  // ---------------------------------------------------- Manifest Constants
 
 
-    /**
-     * Default properties resource name.
-     */
-    public static final String DEFAULT_RESOURCE =
+  /**
+   * Default properties resource name.
+   */
+  public static final String DEFAULT_RESOURCE =
       "/org/apache/catalina/util/CharsetMapperDefault.properties";
 
 
-    // ---------------------------------------------------------- Constructors
+  // ---------------------------------------------------------- Constructors
 
 
-    /**
-     * Construct a new CharsetMapper using the default properties resource.
-     */
-    public CharsetMapper() {
+  /**
+   * Construct a new CharsetMapper using the default properties resource.
+   */
+  public CharsetMapper() {
 
-        this(DEFAULT_RESOURCE);
+    this(DEFAULT_RESOURCE);
 
+  }
+
+
+  /**
+   * Construct a new CharsetMapper using the specified properties resource.
+   *
+   * @param name Name of a properties resource to be loaded
+   * @throws IllegalArgumentException if the specified properties
+   *                                  resource could not be loaded for any reason.
+   */
+  public CharsetMapper(String name) {
+
+    try {
+      InputStream stream =
+          this.getClass().getResourceAsStream(name);
+      map.load(stream);
+      stream.close();
+    } catch (Throwable t) {
+      throw new IllegalArgumentException(t.toString());
     }
 
 
-    /**
-     * Construct a new CharsetMapper using the specified properties resource.
-     *
-     * @param name Name of a properties resource to be loaded
-     *
-     * @exception IllegalArgumentException if the specified properties
-     *  resource could not be loaded for any reason.
-     */
-    public CharsetMapper(String name) {
-
-        try {
-            InputStream stream =
-              this.getClass().getResourceAsStream(name);
-            map.load(stream);
-            stream.close();
-        } catch (Throwable t) {
-            throw new IllegalArgumentException(t.toString());
-        }
+  }
 
 
-    }
+  // ---------------------------------------------------- Instance Variables
 
 
-    // ---------------------------------------------------- Instance Variables
+  /**
+   * The mapping properties that have been initialized from the specified or
+   * default properties resource.
+   */
+  private Properties map = new Properties();
 
 
-    /**
-     * The mapping properties that have been initialized from the specified or
-     * default properties resource.
-     */
-    private Properties map = new Properties();
+  // ------------------------------------------------------- Public Methods
 
 
+  /**
+   * Calculate the name of a character set to be assumed, given the specified
+   * Locale and the absence of a character set specified as part of the
+   * content type header.
+   *
+   * @param locale The locale for which to calculate a character set
+   */
+  public String getCharset(Locale locale) {
 
+    String charset = null;
 
-    // ------------------------------------------------------- Public Methods
+    // First, try a full name match (language and country)
+    charset = map.getProperty(locale.toString());
+    if (charset != null)
+      return (charset);
 
+    // Second, try to match just the language
+    charset = map.getProperty(locale.getLanguage());
+    return (charset);
 
-    /**
-     * Calculate the name of a character set to be assumed, given the specified
-     * Locale and the absence of a character set specified as part of the
-     * content type header.
-     *
-     * @param locale The locale for which to calculate a character set
-     */
-    public String getCharset(Locale locale) {
-
-        String charset = null;
-
-        // First, try a full name match (language and country)
-        charset = map.getProperty(locale.toString());
-        if (charset != null)
-            return (charset);
-
-        // Second, try to match just the language
-        charset = map.getProperty(locale.getLanguage());
-        return (charset);
-
-    }
+  }
 
 
 }
