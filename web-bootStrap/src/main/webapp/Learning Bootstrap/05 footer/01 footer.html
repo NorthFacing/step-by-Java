@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>header demo</title>
-    <link href="../../ext/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../resource/common.css" rel="stylesheet">
-    <style type="text/css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>header demo</title>
+  <link href="../../ext/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../resource/common.css" rel="stylesheet">
+  <style type="text/css">
 
-        .site-footer {
-            background-color: #222;
-            color: #fff;
-            margin-top: 30px;
-            padding-top: 30px;
-        }
+    .site-footer {
+      background-color: #222;
+      color: #fff;
+      margin-top: 30px;
+      padding-top: 30px;
+    }
 
-        .bottom-footer {
-            border-top: 1px solid #b2b2b2;
-            margin-top: 10px;
-            padding-top: 10px;
-            color: #b2b2b2;
-        }
+    .bottom-footer {
+      border-top: 1px solid #b2b2b2;
+      margin-top: 10px;
+      padding-top: 10px;
+      color: #b2b2b2;
+    }
 
-        .footer-nav {
-            text-align: right;
-            list-style: none; /* li显示样式，去掉圆点(在使用了下面的display: inline之后，这里可以省略)*/
-        }
+    .footer-nav {
+      text-align: right;
+      list-style: none; /* li显示样式，去掉圆点(在使用了下面的display: inline之后，这里可以省略)*/
+    }
 
-        .footer-nav li {
-            display: inline; /* li显示样式，同一行显示 */
-        }
+    .footer-nav li {
+      display: inline; /* li显示样式，同一行显示 */
+    }
 
-        .footer-nav li:not(:first-child):before { /* 剔除第一个 */
-            content: '|';
-            padding: 0px 10px;
-        }
+    .footer-nav li:not(:first-child):before { /* 剔除第一个 */
+      content: '|';
+      padding: 0px 10px;
+    }
 
-        .footer-nav a {
-            color: #b2b2b2;
-        }
+    .footer-nav a {
+      color: #b2b2b2;
+    }
 
-        .footer-nav a:hover {
-            color: #fff;
-            text-decoration: none; /* 去掉hover时候显示的下划线 */
-        }
-    </style>
+    .footer-nav a:hover {
+      color: #fff;
+      text-decoration: none; /* 去掉hover时候显示的下划线 */
+    }
+  </style>
 </head>
 <body>
 
@@ -52,102 +52,102 @@
 <!--navbar-static-top: 去掉导航条四个边角位原型的样式-->
 <!--no-margin: Bob - 为了取消margin-botton下面的20px-->
 <nav class="navbar navbar-default navbar-static-top no-margin" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">
-                Brand
-            </a>
-        </div>
-
-        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html">About</a></li>
-                <li><a href="index.html">Contact</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">WDM Dropdown<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Link1</a></li>
-                        <li><a href="#">Link2</a></li>
-                        <li><a href="#">Link3</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One More separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        Brand
+      </a>
     </div>
+
+    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html">About</a></li>
+        <li><a href="index.html">Contact</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">WDM Dropdown<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Link1</a></li>
+            <li><a href="#">Link2</a></li>
+            <li><a href="#">Link3</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One More separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
 
 <!--非全屏-->
 <div class="container-fluid">
-    <div class="jumbotron">
-        <h1>非全屏范例</h1>
-        <img src="bootstrap.png" class="pull-right" style="height: 300px;margin-left: 10px">
-        <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
-            content orinformation.
-            This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
-            content orinformation.
-            This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
-            content orinformation.
-            This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
-            content orinformation.
-        </p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-    </div>
+  <div class="jumbotron">
+    <h1>非全屏范例</h1>
+    <img src="bootstrap.png" class="pull-right" style="height: 300px;margin-left: 10px">
+    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
+      content orinformation.
+      This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
+      content orinformation.
+      This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
+      content orinformation.
+      This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
+      content orinformation.
+    </p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+  </div>
 </div>
 
 <!--全屏-->
 <div class="jumbotron">
-    <div class="container">
-        <h1>全屏范例</h1>
-        <img src="bootstrap.png" class="pull-left" style="height: 300px;margin-right: 10px">
-        <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
-            content orinformation.
-            This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
-            content orinformation.
-            This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
-            content orinformation.
-            This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
-            content orinformation.
-        </p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-    </div>
+  <div class="container">
+    <h1>全屏范例</h1>
+    <img src="bootstrap.png" class="pull-left" style="height: 300px;margin-right: 10px">
+    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
+      content orinformation.
+      This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
+      content orinformation.
+      This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
+      content orinformation.
+      This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured
+      content orinformation.
+    </p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+  </div>
 </div>
 
 <footer class="site-footer">
-    <div class="container">
-        <div class="row">
-            <h4>Contact Address</h4>
-            <address>
-                #999,Street of place,<br>
-                City of place,<br>
-                Country.<br>
-            </address>
-        </div>
-        <div class="bottom-footer">
-            <div class="col-md-5">
-                @ Copyright BobZhu 2016.
-            </div>
-            <div class="col-md-7">
-                <ul class="footer-nav">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Link</a></li>
-                </ul>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <h4>Contact Address</h4>
+      <address>
+        #999,Street of place,<br>
+        City of place,<br>
+        Country.<br>
+      </address>
     </div>
+    <div class="bottom-footer">
+      <div class="col-md-5">
+        @ Copyright BobZhu 2016.
+      </div>
+      <div class="col-md-7">
+        <ul class="footer-nav">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Link</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </footer>
 
 <script src="../../ext/jQuery/jquery-2.2.0.min.js"></script>
