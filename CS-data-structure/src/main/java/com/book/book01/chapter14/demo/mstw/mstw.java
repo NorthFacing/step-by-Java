@@ -207,7 +207,7 @@ class Graph {
       {
         thePQ.removeN(queueIndex);  // remove old edge
         Edge theEdge =
-                new Edge(currentVert, newVert, newDist);
+            new Edge(currentVert, newVert, newDist);
         thePQ.insert(theEdge);      // insert new edge
       }
       // else no action; just leave the old vertex there

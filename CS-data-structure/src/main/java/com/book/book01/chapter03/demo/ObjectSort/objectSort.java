@@ -65,7 +65,7 @@ class ArrayInOb {
       in = out;                   // start shifting at out
 
       while (in > 0 &&               // until smaller one found,
-              a[in - 1].getLast().compareTo(temp.getLast()) > 0) {
+          a[in - 1].getLast().compareTo(temp.getLast()) > 0) {
         a[in] = a[in - 1];         // shift item to the right
         --in;                    // go left one position
       }

@@ -58,6 +58,7 @@ class HighArray {
       System.out.print(a[j] + " ");  // display it
     System.out.println("");
   }
+
   //-----------------------------------------------------------
   public long getMax() {
     long temp = -1;
@@ -67,8 +68,9 @@ class HighArray {
     }
     return temp;
   }
+
   //-----------------------------------------------------------
-  public long removeMax(){
+  public long removeMax() {
     long max = getMax();
     delete(max);
     return max;
@@ -112,8 +114,6 @@ class HighArrayApp {
     System.out.println(max);
 
     arr.display();
-
-
 
 
   }  // end main()

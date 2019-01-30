@@ -96,7 +96,7 @@ public class SortedLinkedQueue {
     return linkListQueue.delete();
   }
 
-  public void displayQueue(){
+  public void displayQueue() {
     linkListQueue.displayList();
   }
 

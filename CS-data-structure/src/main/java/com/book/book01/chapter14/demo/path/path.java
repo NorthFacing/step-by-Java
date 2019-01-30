@@ -117,7 +117,7 @@ class Graph {
     for (int j = 1; j < nVerts; j++)    // for each vertex,
     {                           // if it's in tree and
       if (!vertexList[j].isInTree &&  // smaller than old one
-              sPath[j].distance < minDist) {
+          sPath[j].distance < minDist) {
         minDist = sPath[j].distance;
         indexMin = j;            // update minimum
       }

@@ -112,7 +112,7 @@ class Tree {
 
     // if no children, simply delete it
     if (current.leftChild == null &&
-            current.rightChild == null) {
+        current.rightChild == null) {
       if (current == root)             // if root,
         root = null;                 // tree is empty
       else if (isLeftChild)
@@ -234,7 +234,7 @@ class Tree {
     int nBlanks = 32;
     boolean isRowEmpty = false;
     System.out.println(
-            "......................................................");
+        "......................................................");
     while (isRowEmpty == false) {
       Stack localStack = new Stack();
       isRowEmpty = true;
@@ -250,7 +250,7 @@ class Tree {
           localStack.push(temp.rightChild);
 
           if (temp.leftChild != null ||
-                  temp.rightChild != null)
+              temp.rightChild != null)
             isRowEmpty = false;
         } else {
           System.out.print("--");
@@ -266,7 +266,7 @@ class Tree {
         globalStack.push(localStack.pop());
     }  // end while isRowEmpty is false
     System.out.println(
-            "......................................................");
+        "......................................................");
   }  // end displayTree()
 // -------------------------------------------------------------
 }  // end class Tree

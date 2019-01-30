@@ -50,7 +50,7 @@ public class ShellSortServiceImpl implements ShellSortService {
 
   @Override
   public void shellSort() {
-int cur;
+    int cur;
     int inner, outer;
     long temp;
 

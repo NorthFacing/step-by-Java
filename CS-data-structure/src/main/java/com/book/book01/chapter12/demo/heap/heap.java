@@ -63,7 +63,7 @@ class Heap {
     Node bottom = heapArray[index];
 
     while (index > 0 &&
-            heapArray[parent].getKey() < bottom.getKey()) {
+        heapArray[parent].getKey() < bottom.getKey()) {
       heapArray[index] = heapArray[parent];  // move it down
       index = parent;
       parent = (parent - 1) / 2;
@@ -90,8 +90,8 @@ class Heap {
       int rightChild = leftChild + 1;
       // find larger child
       if (rightChild < currentSize &&  // (rightChild exists?)
-              heapArray[leftChild].getKey() <
-                      heapArray[rightChild].getKey())
+          heapArray[leftChild].getKey() <
+              heapArray[rightChild].getKey())
         largerChild = rightChild;
       else
         largerChild = leftChild;

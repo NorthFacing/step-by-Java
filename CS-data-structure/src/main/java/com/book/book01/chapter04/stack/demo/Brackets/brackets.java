@@ -76,8 +76,8 @@ class BracketChecker {
           {
             char chx = theStack.pop();  // pop and check
             if ((ch == '}' && chx != '{') ||
-                    (ch == ']' && chx != '[') ||
-                    (ch == ')' && chx != '('))
+                (ch == ']' && chx != '[') ||
+                (ch == ')' && chx != '('))
               System.out.println("Error: " + ch + " at " + j);
           } else                        // prematurely empty
             System.out.println("Error: " + ch + " at " + j);

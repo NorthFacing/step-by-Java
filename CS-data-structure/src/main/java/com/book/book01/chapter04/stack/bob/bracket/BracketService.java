@@ -29,8 +29,8 @@ public class BracketService {
           } else {
             char pop = (char) stack.pop();
             if ((ch == '}' && pop != '{')
-                    || (ch == ']' && pop != '[')
-                    || (ch == ')' && pop != '(')) {
+                || (ch == ']' && pop != '[')
+                || (ch == ')' && pop != '(')) {
               System.err.println("括号不匹配");
             }
           }
@@ -39,7 +39,7 @@ public class BracketService {
           break;
       }// end switch
     }// end for
-    if(!stack.isEmpty()){
+    if (!stack.isEmpty()) {
       System.err.println("缺失右括号");
     }
   }
