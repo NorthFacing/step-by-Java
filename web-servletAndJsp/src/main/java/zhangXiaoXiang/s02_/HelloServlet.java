@@ -19,17 +19,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class HelloServlet extends HttpServlet {
 
-    private static final long serialVersionUID = -2264760525610612443L;
+  private static final long serialVersionUID = -2264760525610612443L;
 
-    /**
-     * servlet
-     */
-    public void service(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        PrintWriter pw = response.getWriter();
-        pw.println("<html>");
-        pw.println("<font size = 30 color=red>Hello servlet !</font><br>");
-        pw.println("<marquee>" + new java.util.Date() + "</marquee>");
-        pw.println("</html>");
-    }
+  /**
+   * servlet
+   */
+  public void service(HttpServletRequest request, HttpServletResponse response)
+      throws IOException {
+    PrintWriter pw = response.getWriter();
+    pw.println("<html>");
+    pw.println("<font size = 30 color=red>Hello servlet !</font><br>");
+    pw.println("<marquee>" + new java.util.Date() + "</marquee>");
+    pw.println("</html>");
+  }
 }

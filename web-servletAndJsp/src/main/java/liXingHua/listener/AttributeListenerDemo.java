@@ -10,19 +10,19 @@ import javax.servlet.ServletContextAttributeListener;
  */
 public class AttributeListenerDemo implements ServletContextAttributeListener {
 
-    @Override
-    public void attributeAdded(ServletContextAttributeEvent scab) {
-        System.out.println("增加属性：name->" + scab.getName() + ", value->" + scab.getValue());
-    }
+  @Override
+  public void attributeAdded(ServletContextAttributeEvent scab) {
+    System.out.println("增加属性：name->" + scab.getName() + ", value->" + scab.getValue());
+  }
 
-    @Override
-    public void attributeRemoved(ServletContextAttributeEvent scab) {
-        System.out.println("删除属性：name->" + scab.getName() + ", value->" + scab.getValue());
-    }
+  @Override
+  public void attributeRemoved(ServletContextAttributeEvent scab) {
+    System.out.println("删除属性：name->" + scab.getName() + ", value->" + scab.getValue());
+  }
 
-    @Override
-    public void attributeReplaced(ServletContextAttributeEvent scab) {
-        System.out.println("重置属性：name->" + scab.getName() + ", value->" + scab.getValue());
-    }
+  @Override
+  public void attributeReplaced(ServletContextAttributeEvent scab) {
+    System.out.println("重置属性：name->" + scab.getName() + ", value->" + scab.getValue());
+  }
 
 }

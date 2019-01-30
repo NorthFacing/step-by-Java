@@ -18,30 +18,30 @@ import javax.servlet.ServletResponse;
  */
 public class LoginFilter implements Filter {
 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("登录验证过滤器初始化");
-    }
+  @Override
+  public void init(FilterConfig filterConfig) throws ServletException {
+    System.out.println("登录验证过滤器初始化");
+  }
 
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
-            ServletException {
-        System.out.println("执行登录验证方法之前");
-        // HttpServletRequest req = (HttpServletRequest) request;
-        // HttpSession session = req.getSession();
-        // Object userName = session.getAttribute("userName");
-        // 如果没有登录跳转到登录页面，这里为了程序中其他测试范例的测试方便，就注释掉了，需要的时候参考这个范例即可
-        // if (userName != null) {
-        chain.doFilter(request, response);
-        // } else {
-        // request.getRequestDispatcher("login.jsp").forward(request, response);
-        // }
-        System.out.println("执行登录验证方法之后");
-    }
+  @Override
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+      ServletException {
+    System.out.println("执行登录验证方法之前");
+    // HttpServletRequest req = (HttpServletRequest) request;
+    // HttpSession session = req.getSession();
+    // Object userName = session.getAttribute("userName");
+    // 如果没有登录跳转到登录页面，这里为了程序中其他测试范例的测试方便，就注释掉了，需要的时候参考这个范例即可
+    // if (userName != null) {
+    chain.doFilter(request, response);
+    // } else {
+    // request.getRequestDispatcher("login.jsp").forward(request, response);
+    // }
+    System.out.println("执行登录验证方法之后");
+  }
 
-    @Override
-    public void destroy() {
-        System.out.println("登录验证过滤器销毁");
-    }
+  @Override
+  public void destroy() {
+    System.out.println("登录验证过滤器销毁");
+  }
 
 }

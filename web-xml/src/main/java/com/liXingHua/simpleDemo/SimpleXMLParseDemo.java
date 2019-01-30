@@ -13,22 +13,22 @@ import org.xml.sax.SAXException;
 
 public class SimpleXMLParseDemo {
 
-    public static void main(String[] args) {
-        String path = System.getProperty("user.dir");
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        try {
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(path + File.separator + "src" + File.separator + "main" + File.separator
-                    + "java" + File.separator + "com" + File.separator + "liXingHua" + File.separator + "simpleDemo"
-                    + File.separator + "xmlParseDemo.xml");
-            NodeList nl = doc.getElementsByTagName("name");
-            System.out.println("姓名：" + nl.item(0).getFirstChild().getNodeValue());
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+  public static void main(String[] args) {
+    String path = System.getProperty("user.dir");
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    try {
+      DocumentBuilder builder = factory.newDocumentBuilder();
+      Document doc = builder.parse(path + File.separator + "src" + File.separator + "main" + File.separator
+          + "java" + File.separator + "com" + File.separator + "liXingHua" + File.separator + "simpleDemo"
+          + File.separator + "xmlParseDemo.xml");
+      NodeList nl = doc.getElementsByTagName("name");
+      System.out.println("姓名：" + nl.item(0).getFirstChild().getNodeValue());
+    } catch (ParserConfigurationException e) {
+      e.printStackTrace();
+    } catch (SAXException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 }
