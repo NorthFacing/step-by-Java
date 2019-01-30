@@ -2,41 +2,43 @@
 package org.effectivejava.examples.chapter04.Item20.taggedclass;
 
 class Figure {
-	enum Shape {
-		RECTANGLE, CIRCLE
-	};
+  enum Shape {
+    RECTANGLE, CIRCLE
+  }
 
-	// Tag field - the shape of this figure
-	final Shape shape;
+  ;
 
-	// These fields are used only if shape is RECTANGLE
-	double length;
-	double width;
+  // Tag field - the shape of this figure
+  final Shape shape;
 
-	// This field is used only if shape is CIRCLE
-	double radius;
+  // These fields are used only if shape is RECTANGLE
+  double length;
+  double width;
 
-	// Constructor for circle
-	Figure(double radius) {
-		shape = Shape.CIRCLE;
-		this.radius = radius;
-	}
+  // This field is used only if shape is CIRCLE
+  double radius;
 
-	// Constructor for rectangle
-	Figure(double length, double width) {
-		shape = Shape.RECTANGLE;
-		this.length = length;
-		this.width = width;
-	}
+  // Constructor for circle
+  Figure(double radius) {
+    shape = Shape.CIRCLE;
+    this.radius = radius;
+  }
 
-	double area() {
-		switch (shape) {
-		case RECTANGLE:
-			return length * width;
-		case CIRCLE:
-			return Math.PI * (radius * radius);
-		default:
-			throw new AssertionError();
-		}
-	}
+  // Constructor for rectangle
+  Figure(double length, double width) {
+    shape = Shape.RECTANGLE;
+    this.length = length;
+    this.width = width;
+  }
+
+  double area() {
+    switch (shape) {
+      case RECTANGLE:
+        return length * width;
+      case CIRCLE:
+        return Math.PI * (radius * radius);
+      default:
+        throw new AssertionError();
+    }
+  }
 }

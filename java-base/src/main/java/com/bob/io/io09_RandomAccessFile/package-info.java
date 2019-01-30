@@ -7,6 +7,7 @@
  * 通过构造函数可以看出，此类只能操作文件，并且只有四种模式："r","rw","rws","rwd"
  *
  * @author Bob
+ * @author Bob
  */
 /**
  * @author Bob

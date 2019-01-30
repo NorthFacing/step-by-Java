@@ -12,14 +12,14 @@ import java.util.Vector;
  * @author Bob
  */
 public class list03_Vector {
-    public static void main(String[] args) {
-        Vector<String> v = new Vector<String>();
-        v.add("v01");
-        v.add("v02");
-        v.add("v03");
-        Enumeration<String> en = v.elements();
-        while (en.hasMoreElements()) {
-            System.out.println(en.nextElement());
-        }
+  public static void main(String[] args) {
+    Vector<String> v = new Vector<String>();
+    v.add("v01");
+    v.add("v02");
+    v.add("v03");
+    Enumeration<String> en = v.elements();
+    while (en.hasMoreElements()) {
+      System.out.println(en.nextElement());
     }
+  }
 }

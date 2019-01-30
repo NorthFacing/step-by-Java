@@ -12,79 +12,79 @@ import java.util.concurrent.TimeUnit;
 import static com.books.book03.net.mindview.util.Print.print;
 
 class SleepBlocked implements Runnable {
-    public void run() {
-        try {
-            TimeUnit.SECONDS.sleep(100);
-        } catch (InterruptedException e) {
-            print("InterruptedException");
-        }
-        print("Exiting SleepBlocked.run()");
+  public void run() {
+    try {
+      TimeUnit.SECONDS.sleep(100);
+    } catch (InterruptedException e) {
+      print("InterruptedException");
     }
+    print("Exiting SleepBlocked.run()");
+  }
 }
 
 class IOBlocked implements Runnable {
-    private InputStream in;
+  private InputStream in;
 
-    public IOBlocked(InputStream is) {
-        in = is;
-    }
+  public IOBlocked(InputStream is) {
+    in = is;
+  }
 
-    public void run() {
-        try {
-            print("Waiting for read():");
-            in.read();
-        } catch (IOException e) {
-            if (Thread.currentThread().isInterrupted()) {
-                print("Interrupted from blocked I/O");
-            } else {
-                throw new RuntimeException(e);
-            }
-        }
-        print("Exiting IOBlocked.run()");
+  public void run() {
+    try {
+      print("Waiting for read():");
+      in.read();
+    } catch (IOException e) {
+      if (Thread.currentThread().isInterrupted()) {
+        print("Interrupted from blocked I/O");
+      } else {
+        throw new RuntimeException(e);
+      }
     }
+    print("Exiting IOBlocked.run()");
+  }
 }
 
 class SynchronizedBlocked implements Runnable {
-    public SynchronizedBlocked() {
-        new Thread() {
-            public void run() {
-                f(); // Lock acquired by this thread
-            }
-        }.start();
-    }
+  public SynchronizedBlocked() {
+    new Thread() {
+      public void run() {
+        f(); // Lock acquired by this thread
+      }
+    }.start();
+  }
 
-    public synchronized void f() {
-        while (true) // Never releases lock
-            Thread.yield();
-    }
+  public synchronized void f() {
+    while (true) // Never releases lock
+      Thread.yield();
+  }
 
-    public void run() {
-        print("Trying to call f()");
-        f();
-        print("Exiting SynchronizedBlocked.run()");
-    }
+  public void run() {
+    print("Trying to call f()");
+    f();
+    print("Exiting SynchronizedBlocked.run()");
+  }
 }
 
 public class Interrupting {
-    private static ExecutorService exec =
-            Executors.newCachedThreadPool();
+  private static ExecutorService exec =
+      Executors.newCachedThreadPool();
 
-    static void test(Runnable r) throws InterruptedException {
-        Future<?> f = exec.submit(r);
-        TimeUnit.MILLISECONDS.sleep(100);
-        print("Interrupting " + r.getClass().getName());
-        f.cancel(true); // Interrupts if running
-        print("Interrupt sent to " + r.getClass().getName());
-    }
+  static void test(Runnable r) throws InterruptedException {
+    Future<?> f = exec.submit(r);
+    TimeUnit.MILLISECONDS.sleep(100);
+    print("Interrupting " + r.getClass().getName());
+    f.cancel(true); // Interrupts if running
+    print("Interrupt sent to " + r.getClass().getName());
+  }
 
-    public static void main(String[] args) throws Exception {
-        test(new SleepBlocked());
-        test(new IOBlocked(System.in));
-        test(new SynchronizedBlocked());
-        TimeUnit.SECONDS.sleep(3);
-        print("Aborting with System.exit(0)");
-        System.exit(0); // ... since last 2 interrupts failed
-    }
+  public static void main(String[] args) throws Exception {
+    test(new SleepBlocked());
+    test(new IOBlocked(System.in));
+    test(new SynchronizedBlocked());
+    TimeUnit.SECONDS.sleep(3);
+    print("Aborting with System.exit(0)");
+    System.exit(0); // ... since last 2 interrupts failed
+  }
 } /* Output: (95% match)
 Interrupting SleepBlocked
 InterruptedException

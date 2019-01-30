@@ -5,104 +5,104 @@ package polymorphism;
 import static com.books.book03.net.mindview.util.Print.print;
 
 class Characteristic {
-    private String s;
+  private String s;
 
-    Characteristic(String s) {
-        this.s = s;
-        print("Creating Characteristic " + s);
-    }
+  Characteristic(String s) {
+    this.s = s;
+    print("Creating Characteristic " + s);
+  }
 
-    protected void dispose() {
-        print("disposing Characteristic " + s);
-    }
+  protected void dispose() {
+    print("disposing Characteristic " + s);
+  }
 }
 
 class Description {
-    private String s;
+  private String s;
 
-    Description(String s) {
-        this.s = s;
-        print("Creating Description " + s);
-    }
+  Description(String s) {
+    this.s = s;
+    print("Creating Description " + s);
+  }
 
-    protected void dispose() {
-        print("disposing Description " + s);
-    }
+  protected void dispose() {
+    print("disposing Description " + s);
+  }
 }
 
 class LivingCreature {
-    private Characteristic p =
-            new Characteristic("is alive");
-    private Description t =
-            new Description("Basic Living Creature");
+  private Characteristic p =
+      new Characteristic("is alive");
+  private Description t =
+      new Description("Basic Living Creature");
 
-    LivingCreature() {
-        print("LivingCreature()");
-    }
+  LivingCreature() {
+    print("LivingCreature()");
+  }
 
-    protected void dispose() {
-        print("LivingCreature dispose");
-        t.dispose();
-        p.dispose();
-    }
+  protected void dispose() {
+    print("LivingCreature dispose");
+    t.dispose();
+    p.dispose();
+  }
 }
 
 class Animal extends LivingCreature {
-    private Characteristic p =
-            new Characteristic("has heart");
-    private Description t =
-            new Description("Animal not Vegetable");
+  private Characteristic p =
+      new Characteristic("has heart");
+  private Description t =
+      new Description("Animal not Vegetable");
 
-    Animal() {
-        print("Animal()");
-    }
+  Animal() {
+    print("Animal()");
+  }
 
-    protected void dispose() {
-        print("Animal dispose");
-        t.dispose();
-        p.dispose();
-        super.dispose();
-    }
+  protected void dispose() {
+    print("Animal dispose");
+    t.dispose();
+    p.dispose();
+    super.dispose();
+  }
 }
 
 class Amphibian extends Animal {
-    private Characteristic p =
-            new Characteristic("can live in water");
-    private Description t =
-            new Description("Both water and land");
+  private Characteristic p =
+      new Characteristic("can live in water");
+  private Description t =
+      new Description("Both water and land");
 
-    Amphibian() {
-        print("Amphibian()");
-    }
+  Amphibian() {
+    print("Amphibian()");
+  }
 
-    protected void dispose() {
-        print("Amphibian dispose");
-        t.dispose();
-        p.dispose();
-        super.dispose();
-    }
+  protected void dispose() {
+    print("Amphibian dispose");
+    t.dispose();
+    p.dispose();
+    super.dispose();
+  }
 }
 
 public class Frog extends Amphibian {
-    private Characteristic p = new Characteristic("Croaks");
-    private Description t = new Description("Eats Bugs");
+  private Characteristic p = new Characteristic("Croaks");
+  private Description t = new Description("Eats Bugs");
 
-    public Frog() {
-        print("Frog()");
-    }
+  public Frog() {
+    print("Frog()");
+  }
 
-    public static void main(String[] args) {
-        Frog frog = new Frog();
-        print("Bye!");
-        frog.dispose();
-    }
+  public static void main(String[] args) {
+    Frog frog = new Frog();
+    print("Bye!");
+    frog.dispose();
+  }
 
-    protected void dispose() {
-        print("Frog dispose");
-        t.dispose();
-        p.dispose();
-        super.dispose();
-    }
+  protected void dispose() {
+    print("Frog dispose");
+    t.dispose();
+    p.dispose();
+    super.dispose();
+  }
 } /* Output:
 Creating Characteristic is alive
 Creating Description Basic Living Creature

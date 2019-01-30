@@ -6,6 +6,7 @@
  * 2、避免了强制转换的问题
  *
  * @author Bob
+ * @author Bob
  */
 /**
  * @author Bob

@@ -6,6 +6,7 @@ package com.bob.proxy.staticProxy;
 public interface Count {
   // Check the account method
   public void queryCount();
+
   // Modified method account
   public void updateCount();
 }

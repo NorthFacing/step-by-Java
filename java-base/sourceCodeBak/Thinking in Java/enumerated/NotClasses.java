@@ -5,27 +5,27 @@ package com.books.book03.enumerated;
 import static com.books.book03.net.mindview.util.Print.print;
 
 enum LikeClasses {
-    WINKEN {
-        void behavior() {
-            print("Behavior1");
-        }
-    },
-    BLINKEN {
-        void behavior() {
-            print("Behavior2");
-        }
-    },
-    NOD {
-        void behavior() {
-            print("Behavior3");
-        }
-    };
+  WINKEN {
+    void behavior() {
+      print("Behavior1");
+    }
+  },
+  BLINKEN {
+    void behavior() {
+      print("Behavior2");
+    }
+  },
+  NOD {
+    void behavior() {
+      print("Behavior3");
+    }
+  };
 
-    abstract void behavior();
+  abstract void behavior();
 }
 
 public class NotClasses {
-    // void f1(LikeClasses.WINKEN instance) {} // Nope
+  // void f1(LikeClasses.WINKEN instance) {} // Nope
 } /* Output:
 Compiled from "NotClasses.java"
 abstract class LikeClasses extends java.lang.Enum{

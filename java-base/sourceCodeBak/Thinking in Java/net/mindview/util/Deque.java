@@ -5,38 +5,38 @@ package com.books.book03.net.mindview.util;
 import java.util.LinkedList;
 
 public class Deque<T> {
-    private LinkedList<T> deque = new LinkedList<T>();
+  private LinkedList<T> deque = new LinkedList<T>();
 
-    public void addFirst(T e) {
-        deque.addFirst(e);
-    }
+  public void addFirst(T e) {
+    deque.addFirst(e);
+  }
 
-    public void addLast(T e) {
-        deque.addLast(e);
-    }
+  public void addLast(T e) {
+    deque.addLast(e);
+  }
 
-    public T getFirst() {
-        return deque.getFirst();
-    }
+  public T getFirst() {
+    return deque.getFirst();
+  }
 
-    public T getLast() {
-        return deque.getLast();
-    }
+  public T getLast() {
+    return deque.getLast();
+  }
 
-    public T removeFirst() {
-        return deque.removeFirst();
-    }
+  public T removeFirst() {
+    return deque.removeFirst();
+  }
 
-    public T removeLast() {
-        return deque.removeLast();
-    }
+  public T removeLast() {
+    return deque.removeLast();
+  }
 
-    public int size() {
-        return deque.size();
-    }
+  public int size() {
+    return deque.size();
+  }
 
-    public String toString() {
-        return deque.toString();
-    }
-    // And other methods as necessary...
+  public String toString() {
+    return deque.toString();
+  }
+  // And other methods as necessary...
 } ///:~

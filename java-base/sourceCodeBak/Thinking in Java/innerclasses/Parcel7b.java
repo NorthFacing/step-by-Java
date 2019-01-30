@@ -2,20 +2,20 @@
 // Expanded version of Parcel7.java
 
 public class Parcel7b {
-    public static void main(String[] args) {
-        Parcel7b p = new Parcel7b();
-        Contents c = p.contents();
-    }
+  public static void main(String[] args) {
+    Parcel7b p = new Parcel7b();
+    Contents c = p.contents();
+  }
 
-    public Contents contents() {
-        return new MyContents();
-    }
+  public Contents contents() {
+    return new MyContents();
+  }
 
-    class MyContents implements Contents {
-        private int i = 11;
+  class MyContents implements Contents {
+    private int i = 11;
 
-        public int value() {
-            return i;
-        }
+    public int value() {
+      return i;
     }
+  }
 } ///:~

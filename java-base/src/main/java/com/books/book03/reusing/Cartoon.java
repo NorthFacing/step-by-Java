@@ -14,25 +14,25 @@ import static com.books.book03.net.mindview.util.Print.print;
  * 没有手动声明不带参数的构造器，这样编译器就不会自动合成默认构造器了。
  */
 class Art {
-    Art() {
-        print("Art constructor");
-    }
+  Art() {
+    print("Art constructor");
+  }
 }
 
 class Drawing extends Art {
-    Drawing() {
-        print("Drawing constructor");
-    }
+  Drawing() {
+    print("Drawing constructor");
+  }
 }
 
 public class Cartoon extends Drawing {
-    public Cartoon() {
-        print("Cartoon constructor");
-    }
+  public Cartoon() {
+    print("Cartoon constructor");
+  }
 
-    public static void main(String[] args) {
-        Cartoon x = new Cartoon();
-    }
+  public static void main(String[] args) {
+    Cartoon x = new Cartoon();
+  }
 }
 
 /* Output:

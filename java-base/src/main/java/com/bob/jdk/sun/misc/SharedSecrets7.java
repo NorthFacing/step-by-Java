@@ -25,165 +25,165 @@ import javax.security.auth.kerberos.KeyTab;
 
 public class SharedSecrets7 {
 
-	private static final Unsafe unsafe = Unsafe.getUnsafe();
-	private static JavaUtilJarAccess javaUtilJarAccess;
-	private static JavaLangAccess7 javaLangAccess;
-	private static JavaIOAccess javaIOAccess;
-	private static JavaNetAccess javaNetAccess;
-	private static JavaNetHttpCookieAccess javaNetHttpCookieAccess;
-	private static JavaNioAccess javaNioAccess;
-	private static JavaIOFileDescriptorAccess javaIOFileDescriptorAccess;
-	private static JavaSecurityProtectionDomainAccess javaSecurityProtectionDomainAccess;
-	private static JavaSecurityAccess javaSecurityAccess;
-	private static JavaxSecurityAuthKerberosAccess7 javaxSecurityAuthKerberosAccess;
-	private static JavaUtilZipAccess7 javaUtilZipAccess;
-	private static JavaUtilZipFileAccess javaUtilZipFileAccess;
-	private static JavaAWTAccess javaAWTAccess;
+  private static final Unsafe unsafe = Unsafe.getUnsafe();
+  private static JavaUtilJarAccess javaUtilJarAccess;
+  private static JavaLangAccess7 javaLangAccess;
+  private static JavaIOAccess javaIOAccess;
+  private static JavaNetAccess javaNetAccess;
+  private static JavaNetHttpCookieAccess javaNetHttpCookieAccess;
+  private static JavaNioAccess javaNioAccess;
+  private static JavaIOFileDescriptorAccess javaIOFileDescriptorAccess;
+  private static JavaSecurityProtectionDomainAccess javaSecurityProtectionDomainAccess;
+  private static JavaSecurityAccess javaSecurityAccess;
+  private static JavaxSecurityAuthKerberosAccess7 javaxSecurityAuthKerberosAccess;
+  private static JavaUtilZipAccess7 javaUtilZipAccess;
+  private static JavaUtilZipFileAccess javaUtilZipFileAccess;
+  private static JavaAWTAccess javaAWTAccess;
 
-	public SharedSecrets7() {
-	}
+  public SharedSecrets7() {
+  }
 
-	public static JavaUtilJarAccess javaUtilJarAccess() {
-		if (javaUtilJarAccess == null) {
-			unsafe.ensureClassInitialized(JarFile.class);
-		}
+  public static JavaUtilJarAccess javaUtilJarAccess() {
+    if (javaUtilJarAccess == null) {
+      unsafe.ensureClassInitialized(JarFile.class);
+    }
 
-		return javaUtilJarAccess;
-	}
+    return javaUtilJarAccess;
+  }
 
-	public static void setJavaUtilJarAccess(JavaUtilJarAccess var0) {
-		javaUtilJarAccess = var0;
-	}
+  public static void setJavaUtilJarAccess(JavaUtilJarAccess var0) {
+    javaUtilJarAccess = var0;
+  }
 
-	public static void setJavaLangAccess(JavaLangAccess7 var0) {
-		javaLangAccess = var0;
-	}
+  public static void setJavaLangAccess(JavaLangAccess7 var0) {
+    javaLangAccess = var0;
+  }
 
-	public static JavaLangAccess7 getJavaLangAccess() {
-		return javaLangAccess;
-	}
+  public static JavaLangAccess7 getJavaLangAccess() {
+    return javaLangAccess;
+  }
 
-	public static void setJavaNetAccess(JavaNetAccess var0) {
-		javaNetAccess = var0;
-	}
+  public static void setJavaNetAccess(JavaNetAccess var0) {
+    javaNetAccess = var0;
+  }
 
-	public static JavaNetAccess getJavaNetAccess() {
-		return javaNetAccess;
-	}
+  public static JavaNetAccess getJavaNetAccess() {
+    return javaNetAccess;
+  }
 
-	public static void setJavaNetHttpCookieAccess(JavaNetHttpCookieAccess var0) {
-		javaNetHttpCookieAccess = var0;
-	}
+  public static void setJavaNetHttpCookieAccess(JavaNetHttpCookieAccess var0) {
+    javaNetHttpCookieAccess = var0;
+  }
 
-	public static JavaNetHttpCookieAccess getJavaNetHttpCookieAccess() {
-		if (javaNetHttpCookieAccess == null) {
-			unsafe.ensureClassInitialized(HttpCookie.class);
-		}
+  public static JavaNetHttpCookieAccess getJavaNetHttpCookieAccess() {
+    if (javaNetHttpCookieAccess == null) {
+      unsafe.ensureClassInitialized(HttpCookie.class);
+    }
 
-		return javaNetHttpCookieAccess;
-	}
+    return javaNetHttpCookieAccess;
+  }
 
-	public static void setJavaNioAccess(JavaNioAccess var0) {
-		javaNioAccess = var0;
-	}
+  public static void setJavaNioAccess(JavaNioAccess var0) {
+    javaNioAccess = var0;
+  }
 
-	public static JavaNioAccess getJavaNioAccess() {
-		if (javaNioAccess == null) {
-			unsafe.ensureClassInitialized(ByteOrder.class);
-		}
+  public static JavaNioAccess getJavaNioAccess() {
+    if (javaNioAccess == null) {
+      unsafe.ensureClassInitialized(ByteOrder.class);
+    }
 
-		return javaNioAccess;
-	}
+    return javaNioAccess;
+  }
 
-	public static void setJavaIOAccess(JavaIOAccess var0) {
-		javaIOAccess = var0;
-	}
+  public static void setJavaIOAccess(JavaIOAccess var0) {
+    javaIOAccess = var0;
+  }
 
-	public static JavaIOAccess getJavaIOAccess() {
-		if (javaIOAccess == null) {
-			unsafe.ensureClassInitialized(Console.class);
-		}
+  public static JavaIOAccess getJavaIOAccess() {
+    if (javaIOAccess == null) {
+      unsafe.ensureClassInitialized(Console.class);
+    }
 
-		return javaIOAccess;
-	}
+    return javaIOAccess;
+  }
 
-	public static void setJavaIOFileDescriptorAccess(JavaIOFileDescriptorAccess var0) {
-		javaIOFileDescriptorAccess = var0;
-	}
+  public static void setJavaIOFileDescriptorAccess(JavaIOFileDescriptorAccess var0) {
+    javaIOFileDescriptorAccess = var0;
+  }
 
-	public static JavaIOFileDescriptorAccess getJavaIOFileDescriptorAccess() {
-		if (javaIOFileDescriptorAccess == null) {
-			unsafe.ensureClassInitialized(FileDescriptor.class);
-		}
+  public static JavaIOFileDescriptorAccess getJavaIOFileDescriptorAccess() {
+    if (javaIOFileDescriptorAccess == null) {
+      unsafe.ensureClassInitialized(FileDescriptor.class);
+    }
 
-		return javaIOFileDescriptorAccess;
-	}
+    return javaIOFileDescriptorAccess;
+  }
 
-	public static void setJavaSecurityProtectionDomainAccess(JavaSecurityProtectionDomainAccess var0) {
-		javaSecurityProtectionDomainAccess = var0;
-	}
+  public static void setJavaSecurityProtectionDomainAccess(JavaSecurityProtectionDomainAccess var0) {
+    javaSecurityProtectionDomainAccess = var0;
+  }
 
-	public static JavaSecurityProtectionDomainAccess getJavaSecurityProtectionDomainAccess() {
-		if (javaSecurityProtectionDomainAccess == null) {
-			unsafe.ensureClassInitialized(ProtectionDomain.class);
-		}
+  public static JavaSecurityProtectionDomainAccess getJavaSecurityProtectionDomainAccess() {
+    if (javaSecurityProtectionDomainAccess == null) {
+      unsafe.ensureClassInitialized(ProtectionDomain.class);
+    }
 
-		return javaSecurityProtectionDomainAccess;
-	}
+    return javaSecurityProtectionDomainAccess;
+  }
 
-	public static void setJavaSecurityAccess(JavaSecurityAccess var0) {
-		javaSecurityAccess = var0;
-	}
+  public static void setJavaSecurityAccess(JavaSecurityAccess var0) {
+    javaSecurityAccess = var0;
+  }
 
-	public static JavaSecurityAccess getJavaSecurityAccess() {
-		if (javaSecurityAccess == null) {
-			unsafe.ensureClassInitialized(AccessController.class);
-		}
+  public static JavaSecurityAccess getJavaSecurityAccess() {
+    if (javaSecurityAccess == null) {
+      unsafe.ensureClassInitialized(AccessController.class);
+    }
 
-		return javaSecurityAccess;
-	}
+    return javaSecurityAccess;
+  }
 
-	public static void setJavaxSecurityAuthKerberosAccess(JavaxSecurityAuthKerberosAccess7 var0) {
-		javaxSecurityAuthKerberosAccess = var0;
-	}
+  public static void setJavaxSecurityAuthKerberosAccess(JavaxSecurityAuthKerberosAccess7 var0) {
+    javaxSecurityAuthKerberosAccess = var0;
+  }
 
-	public static JavaxSecurityAuthKerberosAccess7 getJavaxSecurityAuthKerberosAccess() {
-		if (javaxSecurityAuthKerberosAccess == null) {
-			unsafe.ensureClassInitialized(KeyTab.class);
-		}
+  public static JavaxSecurityAuthKerberosAccess7 getJavaxSecurityAuthKerberosAccess() {
+    if (javaxSecurityAuthKerberosAccess == null) {
+      unsafe.ensureClassInitialized(KeyTab.class);
+    }
 
-		return javaxSecurityAuthKerberosAccess;
-	}
+    return javaxSecurityAuthKerberosAccess;
+  }
 
-	public static void setJavaUtilZipAccess(JavaUtilZipAccess7 var0) {
-		javaUtilZipAccess = var0;
-	}
+  public static void setJavaUtilZipAccess(JavaUtilZipAccess7 var0) {
+    javaUtilZipAccess = var0;
+  }
 
-	public static JavaUtilZipAccess7 getJavaUtilZipAccess() {
-		if (javaUtilZipAccess == null) {
-			unsafe.ensureClassInitialized(Adler32.class);
-		}
+  public static JavaUtilZipAccess7 getJavaUtilZipAccess() {
+    if (javaUtilZipAccess == null) {
+      unsafe.ensureClassInitialized(Adler32.class);
+    }
 
-		return javaUtilZipAccess;
-	}
+    return javaUtilZipAccess;
+  }
 
-	public static JavaUtilZipFileAccess getJavaUtilZipFileAccess() {
-		if (javaUtilZipFileAccess == null) {
-			unsafe.ensureClassInitialized(ZipFile.class);
-		}
+  public static JavaUtilZipFileAccess getJavaUtilZipFileAccess() {
+    if (javaUtilZipFileAccess == null) {
+      unsafe.ensureClassInitialized(ZipFile.class);
+    }
 
-		return javaUtilZipFileAccess;
-	}
+    return javaUtilZipFileAccess;
+  }
 
-	public static void setJavaUtilZipFileAccess(JavaUtilZipFileAccess var0) {
-		javaUtilZipFileAccess = var0;
-	}
+  public static void setJavaUtilZipFileAccess(JavaUtilZipFileAccess var0) {
+    javaUtilZipFileAccess = var0;
+  }
 
-	public static void setJavaAWTAccess(JavaAWTAccess var0) {
-		javaAWTAccess = var0;
-	}
+  public static void setJavaAWTAccess(JavaAWTAccess var0) {
+    javaAWTAccess = var0;
+  }
 
-	public static JavaAWTAccess getJavaAWTAccess() {
-		return javaAWTAccess;
-	}
+  public static JavaAWTAccess getJavaAWTAccess() {
+    return javaAWTAccess;
+  }
 }

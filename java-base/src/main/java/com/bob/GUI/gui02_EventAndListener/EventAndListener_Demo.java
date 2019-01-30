@@ -18,40 +18,40 @@ import java.awt.event.WindowEvent;
  * @author Bob
  */
 public class EventAndListener_Demo {
-    public static void main(String[] args) {
-        Frame f = new Frame("My first awt");
-        f.setVisible(true);
-        f.setLocation(500, 200);
-        f.setSize(500, 300);
-        f.setLayout(new FlowLayout());
-        Button b = new Button("This is a button");
-        f.add(b);
-        /**
-         * 添加监听
-         */
-        //f.addWindowListener(new MyWinLis());
-        /**
-         * 添加监听的另一种方式：匿名内部类
-         */
-        f.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
+  public static void main(String[] args) {
+    Frame f = new Frame("My first awt");
+    f.setVisible(true);
+    f.setLocation(500, 200);
+    f.setSize(500, 300);
+    f.setLayout(new FlowLayout());
+    Button b = new Button("This is a button");
+    f.add(b);
+    /**
+     * 添加监听
+     */
+    //f.addWindowListener(new MyWinLis());
+    /**
+     * 添加监听的另一种方式：匿名内部类
+     */
+    f.addWindowListener(new WindowAdapter() {
+      public void windowClosing(WindowEvent e) {
+        System.exit(0);
+      }
 
-            public void windowActivated(WindowEvent e) {
-                System.out.println("windowActived.....");
-            }
+      public void windowActivated(WindowEvent e) {
+        System.out.println("windowActived.....");
+      }
 
-            public void windowOpened(WindowEvent e) {
-                System.out.println("windowOpened......");
-            }
-        });
-    }
+      public void windowOpened(WindowEvent e) {
+        System.out.println("windowOpened......");
+      }
+    });
+  }
 }
 
 class MyWinLis extends WindowAdapter {
-    public void windowClosing(WindowEvent e) {
-        System.exit(0);
-    }
+  public void windowClosing(WindowEvent e) {
+    System.exit(0);
+  }
 }
 

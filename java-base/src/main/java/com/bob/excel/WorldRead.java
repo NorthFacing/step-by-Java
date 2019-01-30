@@ -17,7 +17,7 @@ import java.util.TreeMap;
 
 public class WorldRead {
   public static void main(String[] args) {
-    readXml("M:/world1.xlsx");
+    readXml("/Users/adolphor/Downloads/aria2/20000_words调序完整版.xlsx");
   }
 
   public static void readXml(String fileName) {

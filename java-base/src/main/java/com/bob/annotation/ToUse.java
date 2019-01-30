@@ -7,20 +7,20 @@ package com.bob.annotation;
  */
 public class ToUse {
 
-    // 普通的方法
-    public void sayHiDefault(String name) {
-        System.out.println("Hi, " + name);
-    }
+  // 普通的方法
+  public void sayHiDefault(String name) {
+    System.out.println("Hi, " + name);
+  }
 
-    // 使用注解并传入参数的方法
-    @SayHiAnnotation(paramValue = "Jack")
-    public void sayHiAnnotation(String name) {
-        System.out.println("Hi, " + name);
-    }
+  // 使用注解并传入参数的方法
+  @SayHiAnnotation(paramValue = "Jack")
+  public void sayHiAnnotation(String name) {
+    System.out.println("Hi, " + name);
+  }
 
-    // 使用注解并使用默认参数的方法
-    @SayHiAnnotation
-    public void sayHiAnnotationDefault(String name) {
-        System.out.println("Hi, " + name);
-    }
+  // 使用注解并使用默认参数的方法
+  @SayHiAnnotation
+  public void sayHiAnnotationDefault(String name) {
+    System.out.println("Hi, " + name);
+  }
 }

@@ -3,7 +3,7 @@ package com.books.book03.net.mindview.simple;
 // Creating a package.
 
 public class Vector {
-    public Vector() {
-        System.out.println("net.mindview.simple.Vector");
-    }
+  public Vector() {
+    System.out.println("net.mindview.simple.Vector");
+  }
 } ///:~

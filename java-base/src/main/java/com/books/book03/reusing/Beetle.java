@@ -11,34 +11,34 @@ import static com.books.book03.net.mindview.util.Print.print;
  * 设置为默认值，对象引用被设为null——这是将对象内存设置为二进制零值而一举产生。
  */
 class Insect {
-    private static int x1 = printInit("static Insect.x1 initialized");
-    protected int j;
-    private int i = 9;
+  private static int x1 = printInit("static Insect.x1 initialized");
+  protected int j;
+  private int i = 9;
 
-    Insect() {
-        print("i = " + i + ", j = " + j);
-        j = 39;
-    }
+  Insect() {
+    print("i = " + i + ", j = " + j);
+    j = 39;
+  }
 
-    static int printInit(String s) {
-        print(s);
-        return 47;
-    }
+  static int printInit(String s) {
+    print(s);
+    return 47;
+  }
 }
 
 public class Beetle extends Insect {
-    private static int x2 = printInit("static Beetle.x2 initialized");
-    private int k = printInit("Beetle.k initialized");
+  private static int x2 = printInit("static Beetle.x2 initialized");
+  private int k = printInit("Beetle.k initialized");
 
-    public Beetle() {
-        print("k = " + k);
-        print("j = " + j);
-    }
+  public Beetle() {
+    print("k = " + k);
+    print("j = " + j);
+  }
 
-    public static void main(String[] args) {
-        print("Beetle constructor");
-        Beetle b = new Beetle();
-    }
+  public static void main(String[] args) {
+    print("Beetle constructor");
+    Beetle b = new Beetle();
+  }
 }
 
 /* Output:

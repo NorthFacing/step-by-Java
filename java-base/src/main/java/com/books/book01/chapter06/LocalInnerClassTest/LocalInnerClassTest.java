@@ -13,27 +13,27 @@ import javax.swing.Timer;
  * @version 1.00 2004-02-27
  */
 public class LocalInnerClassTest {
-    public static void main(String[] args) {
-        TalkingClock clock = new TalkingClock();
-        clock.start(1000, true);
+  public static void main(String[] args) {
+    TalkingClock clock = new TalkingClock();
+    clock.start(1000, true);
 
-        JOptionPane.showMessageDialog(null, "Quit program?");
-        System.exit(0);
-    }
+    JOptionPane.showMessageDialog(null, "Quit program?");
+    System.exit(0);
+  }
 }
 
 class TalkingClock {
-    public void start(int interval, final boolean beep) {
-        class TimePrinter implements ActionListener {
-            public void actionPerformed(ActionEvent event) {
-                Date now = new Date();
-                System.out.println("At the tone, the time is " + now);
-                if (beep)
-                    Toolkit.getDefaultToolkit().beep();
-            }
-        }
-        ActionListener listener = new TimePrinter();
-        Timer t = new Timer(interval, listener);
-        t.start();
+  public void start(int interval, final boolean beep) {
+    class TimePrinter implements ActionListener {
+      public void actionPerformed(ActionEvent event) {
+        Date now = new Date();
+        System.out.println("At the tone, the time is " + now);
+        if (beep)
+          Toolkit.getDefaultToolkit().beep();
+      }
     }
+    ActionListener listener = new TimePrinter();
+    Timer t = new Timer(interval, listener);
+    t.start();
+  }
 }

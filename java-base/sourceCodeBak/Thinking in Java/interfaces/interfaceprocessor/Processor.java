@@ -2,7 +2,7 @@
 package interfaces.interfaceprocessor;
 
 public interface Processor {
-    String name();
+  String name();
 
-    Object process(Object input);
+  Object process(Object input);
 } ///:~

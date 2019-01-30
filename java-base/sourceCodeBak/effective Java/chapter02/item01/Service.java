@@ -4,6 +4,6 @@ package com.books.book02.chapter02.item01;
 
 public interface Service {
 
-    // Service-specific methods go here
+  // Service-specific methods go here
 
 }

@@ -7,7 +7,7 @@ package com.books.book01.chapter03.FirstSample;
  * @version 1.01 1997-03-22
  */
 public class FirstSample {
-    public static void main(String[] args) {
-        System.out.println("We will not use 'Hello, World!'");
-    }
+  public static void main(String[] args) {
+    System.out.println("We will not use 'Hello, World!'");
+  }
 }

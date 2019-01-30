@@ -14,52 +14,52 @@ import static com.books.book03.net.mindview.util.Print.print;
  * 地方，并没有涉及到向上转型，所以并不是覆盖了基类的方法。）
  */
 class WithFinals {
-    // Identical to "private" alone:
-    private final void f() {
-        print("WithFinals.f()");
-    }
+  // Identical to "private" alone:
+  private final void f() {
+    print("WithFinals.f()");
+  }
 
-    // Also automatically "final":
-    private void g() {
-        print("WithFinals.g()");
-    }
+  // Also automatically "final":
+  private void g() {
+    print("WithFinals.g()");
+  }
 }
 
 class OverridingPrivate extends WithFinals {
-    private final void f() {
-        print("OverridingPrivate.f()");
-    }
+  private final void f() {
+    print("OverridingPrivate.f()");
+  }
 
-    private void g() {
-        print("OverridingPrivate.g()");
-    }
+  private void g() {
+    print("OverridingPrivate.g()");
+  }
 }
 
 class OverridingPrivate2 extends OverridingPrivate {
-    public final void f() {
-        print("OverridingPrivate2.f()");
-    }
+  public final void f() {
+    print("OverridingPrivate2.f()");
+  }
 
-    public void g() {
-        print("OverridingPrivate2.g()");
-    }
+  public void g() {
+    print("OverridingPrivate2.g()");
+  }
 }
 
 public class FinalOverridingIllusion {
-    public static void main(String[] args) {
-        OverridingPrivate2 op2 = new OverridingPrivate2();
-        op2.f();
-        op2.g();
-        // You can upcast:
-        OverridingPrivate op = op2;
-        // But you can't call the methods:
-        //! op.f();
-        //! op.g();
-        // Same here:
-        WithFinals wf = op2;
-        //! wf.f();
-        //! wf.g();
-    }
+  public static void main(String[] args) {
+    OverridingPrivate2 op2 = new OverridingPrivate2();
+    op2.f();
+    op2.g();
+    // You can upcast:
+    OverridingPrivate op = op2;
+    // But you can't call the methods:
+    //! op.f();
+    //! op.g();
+    // Same here:
+    WithFinals wf = op2;
+    //! wf.f();
+    //! wf.g();
+  }
 }
 
 

@@ -4,9 +4,9 @@
 import com.books.book03.net.mindview.util.*;
 
 public class OSExecuteDemo {
-    public static void main(String[] args) {
-        OSExecute.command("javap OSExecuteDemo");
-    }
+  public static void main(String[] args) {
+    OSExecute.command("javap OSExecuteDemo");
+  }
 } /* Output:
 Compiled from "OSExecuteDemo.java"
 public class OSExecuteDemo extends java.lang.Object{

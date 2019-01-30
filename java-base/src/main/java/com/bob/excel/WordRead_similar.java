@@ -173,13 +173,13 @@ public class WordRead_similar {
 
         }
         if (!totalAddHead.equals(headStr)
-                || !totalAddFoot.equals(footStr)
-                || !totalAddMiddle.equals(middleStr)
-                || !totalDifHead.equals(headDif)
-                || !totalDifFoot.equals(footDif)
-                || !totalDifMiddle.equals(middleDif)
-                || !totalStartWith.equals(startWith)
-                || !totalEndWith.equals(endWith)) {
+            || !totalAddFoot.equals(footStr)
+            || !totalAddMiddle.equals(middleStr)
+            || !totalDifHead.equals(headDif)
+            || !totalDifFoot.equals(footDif)
+            || !totalDifMiddle.equals(middleDif)
+            || !totalStartWith.equals(startWith)
+            || !totalEndWith.equals(endWith)) {
           System.out.println("【 [" + mainKey + "] " + worldMap.get(mainKey) + " 】");
           if (!totalDifHead.equals(headDif)) {
             System.out.println(totalDifHead);

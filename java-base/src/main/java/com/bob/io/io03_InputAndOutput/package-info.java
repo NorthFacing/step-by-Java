@@ -2,6 +2,7 @@
  * Stream doesn't need to flush,but must to close.
  *
  * @author Bob
+ * @author Bob
  */
 /**
  * @author Bob

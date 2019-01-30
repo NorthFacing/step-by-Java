@@ -2,7 +2,7 @@ package com.books.book03.typeinfo;
 //: typeinfo/Operation.java
 
 public interface Operation {
-    String description();
+  String description();
 
-    void command();
+  void command();
 } ///:~

@@ -5,38 +5,38 @@ package com.books.book03.polymorphism.music;
 import static com.books.book03.net.mindview.util.Print.print;
 
 class Stringed extends Instrument {
-    public void play(Note n) {
-        print("Stringed.play() " + n);
-    }
+  public void play(Note n) {
+    print("Stringed.play() " + n);
+  }
 }
 
 class Brass extends Instrument {
-    public void play(Note n) {
-        print("Brass.play() " + n);
-    }
+  public void play(Note n) {
+    print("Brass.play() " + n);
+  }
 }
 
 public class Music2 {
-    public static void tune(Wind i) {
-        i.play(Note.MIDDLE_C);
-    }
+  public static void tune(Wind i) {
+    i.play(Note.MIDDLE_C);
+  }
 
-    public static void tune(Stringed i) {
-        i.play(Note.MIDDLE_C);
-    }
+  public static void tune(Stringed i) {
+    i.play(Note.MIDDLE_C);
+  }
 
-    public static void tune(Brass i) {
-        i.play(Note.MIDDLE_C);
-    }
+  public static void tune(Brass i) {
+    i.play(Note.MIDDLE_C);
+  }
 
-    public static void main(String[] args) {
-        Wind flute = new Wind();
-        Stringed violin = new Stringed();
-        Brass frenchHorn = new Brass();
-        tune(flute); // No upcasting
-        tune(violin);
-        tune(frenchHorn);
-    }
+  public static void main(String[] args) {
+    Wind flute = new Wind();
+    Stringed violin = new Stringed();
+    Brass frenchHorn = new Brass();
+    tune(flute); // No upcasting
+    tune(violin);
+    tune(frenchHorn);
+  }
 } /* Output:
 Wind.play() MIDDLE_C
 Stringed.play() MIDDLE_C

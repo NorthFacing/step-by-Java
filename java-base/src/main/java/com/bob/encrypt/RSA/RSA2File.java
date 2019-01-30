@@ -16,141 +16,141 @@ import java.security.PublicKey;
  */
 public class RSA2File {
 
-	public static final String ALGORITHM = "RSA";
-	public static final String PRIVATE_KEY_FILE = System.getProperty("user.dir") + "/src/main/java/com/bob/encrypt/RSA/" + "private.key";
-	public static final String PUBLIC_KEY_FILE = System.getProperty("user.dir") + "/src/main/java/com/bob/encrypt/RSA/" + "public.key";
+  public static final String ALGORITHM = "RSA";
+  public static final String PRIVATE_KEY_FILE = System.getProperty("user.dir") + "/src/main/java/com/bob/encrypt/RSA/" + "private.key";
+  public static final String PUBLIC_KEY_FILE = System.getProperty("user.dir") + "/src/main/java/com/bob/encrypt/RSA/" + "public.key";
 
-	public static void generateKey() {
-		try {
-			final KeyPairGenerator keyGen = KeyPairGenerator.getInstance(ALGORITHM);
-			keyGen.initialize(1024);
-			final KeyPair key = keyGen.generateKeyPair();
+  public static void generateKey() {
+    try {
+      final KeyPairGenerator keyGen = KeyPairGenerator.getInstance(ALGORITHM);
+      keyGen.initialize(1024);
+      final KeyPair key = keyGen.generateKeyPair();
 
-			File privateKeyFile = new File(PRIVATE_KEY_FILE);
-			File publicKeyFile = new File(PUBLIC_KEY_FILE);
+      File privateKeyFile = new File(PRIVATE_KEY_FILE);
+      File publicKeyFile = new File(PUBLIC_KEY_FILE);
 
-			if (privateKeyFile.getParentFile() != null) {
-				privateKeyFile.getParentFile().mkdirs();
-			}
-			privateKeyFile.createNewFile();
+      if (privateKeyFile.getParentFile() != null) {
+        privateKeyFile.getParentFile().mkdirs();
+      }
+      privateKeyFile.createNewFile();
 
-			if (publicKeyFile.getParentFile() != null) {
-				publicKeyFile.getParentFile().mkdirs();
-			}
-			publicKeyFile.createNewFile();
+      if (publicKeyFile.getParentFile() != null) {
+        publicKeyFile.getParentFile().mkdirs();
+      }
+      publicKeyFile.createNewFile();
 
-			// Saving the Public key in a file
-			ObjectOutputStream publicKeyOS = new ObjectOutputStream(new FileOutputStream(publicKeyFile));
-			publicKeyOS.writeObject(key.getPublic());
-			publicKeyOS.close();
+      // Saving the Public key in a file
+      ObjectOutputStream publicKeyOS = new ObjectOutputStream(new FileOutputStream(publicKeyFile));
+      publicKeyOS.writeObject(key.getPublic());
+      publicKeyOS.close();
 
-			// Saving the Private key in a file
-			ObjectOutputStream privateKeyOS = new ObjectOutputStream(new FileOutputStream(privateKeyFile));
-			privateKeyOS.writeObject(key.getPrivate());
-			privateKeyOS.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+      // Saving the Private key in a file
+      ObjectOutputStream privateKeyOS = new ObjectOutputStream(new FileOutputStream(privateKeyFile));
+      privateKeyOS.writeObject(key.getPrivate());
+      privateKeyOS.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
-	}
+  }
 
-	/**
-	 * The method checks if the pair of public and private key has been generated.
-	 *
-	 * @return flag indicating if the pair of keys were generated.
-	 */
-	public static boolean areKeysPresent() {
+  /**
+   * The method checks if the pair of public and private key has been generated.
+   *
+   * @return flag indicating if the pair of keys were generated.
+   */
+  public static boolean areKeysPresent() {
 
-		File privateKey = new File(PRIVATE_KEY_FILE);
-		File publicKey = new File(PUBLIC_KEY_FILE);
+    File privateKey = new File(PRIVATE_KEY_FILE);
+    File publicKey = new File(PUBLIC_KEY_FILE);
 
-		if (privateKey.exists() && publicKey.exists()) {
-			return true;
-		}
-		return false;
-	}
+    if (privateKey.exists() && publicKey.exists()) {
+      return true;
+    }
+    return false;
+  }
 
-	/**
-	 * Encrypt the plain text using public key.
-	 *
-	 * @param text : original plain text
-	 * @param key  :The public key
-	 * @return Encrypted text
-	 * @throws java.lang.Exception
-	 */
-	public static byte[] encrypt(String text, PublicKey key) {
-		byte[] cipherText = null;
-		try {
-			// get an RSA cipher object and print the provider
-			final Cipher cipher = Cipher.getInstance(ALGORITHM);
-			// encrypt the plain text using the public key
-			cipher.init(Cipher.ENCRYPT_MODE, key);
-			cipherText = cipher.doFinal(text.getBytes());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return cipherText;
-	}
+  /**
+   * Encrypt the plain text using public key.
+   *
+   * @param text : original plain text
+   * @param key  :The public key
+   * @return Encrypted text
+   * @throws java.lang.Exception
+   */
+  public static byte[] encrypt(String text, PublicKey key) {
+    byte[] cipherText = null;
+    try {
+      // get an RSA cipher object and print the provider
+      final Cipher cipher = Cipher.getInstance(ALGORITHM);
+      // encrypt the plain text using the public key
+      cipher.init(Cipher.ENCRYPT_MODE, key);
+      cipherText = cipher.doFinal(text.getBytes());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return cipherText;
+  }
 
-	/**
-	 * Decrypt text using private key.
-	 *
-	 * @param text :encrypted text
-	 * @param key  :The private key
-	 * @return plain text
-	 * @throws java.lang.Exception
-	 */
-	public static String decrypt(byte[] text, PrivateKey key) {
-		byte[] dectyptedText = null;
-		try {
-			// get an RSA cipher object and print the provider
-			final Cipher cipher = Cipher.getInstance(ALGORITHM);
+  /**
+   * Decrypt text using private key.
+   *
+   * @param text :encrypted text
+   * @param key  :The private key
+   * @return plain text
+   * @throws java.lang.Exception
+   */
+  public static String decrypt(byte[] text, PrivateKey key) {
+    byte[] dectyptedText = null;
+    try {
+      // get an RSA cipher object and print the provider
+      final Cipher cipher = Cipher.getInstance(ALGORITHM);
 
-			// decrypt the text using the private key
-			cipher.init(Cipher.DECRYPT_MODE, key);
-			dectyptedText = cipher.doFinal(text);
+      // decrypt the text using the private key
+      cipher.init(Cipher.DECRYPT_MODE, key);
+      dectyptedText = cipher.doFinal(text);
 
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
 
-		return new String(dectyptedText);
-	}
+    return new String(dectyptedText);
+  }
 
-	/**
-	 * Test the RSA2File
-	 */
-	public static void main(String[] args) {
+  /**
+   * Test the RSA2File
+   */
+  public static void main(String[] args) {
 
-		try {
+    try {
 
-			// Check if the pair of keys are present else generate those.
-			if (!areKeysPresent()) {
-				// Method generates a pair of keys using the RSA algorithm and stores it
-				// in their respective files
-				generateKey();
-			}
+      // Check if the pair of keys are present else generate those.
+      if (!areKeysPresent()) {
+        // Method generates a pair of keys using the RSA algorithm and stores it
+        // in their respective files
+        generateKey();
+      }
 
-			final String originalText = "Text to be encrypted ";
-			ObjectInputStream inputStream = null;
+      final String originalText = "Text to be encrypted ";
+      ObjectInputStream inputStream = null;
 
-			// Encrypt the string using the public key
-			inputStream = new ObjectInputStream(new FileInputStream(PUBLIC_KEY_FILE));
-			final PublicKey publicKey = (PublicKey) inputStream.readObject();
-			final byte[] cipherText = encrypt(originalText, publicKey);
+      // Encrypt the string using the public key
+      inputStream = new ObjectInputStream(new FileInputStream(PUBLIC_KEY_FILE));
+      final PublicKey publicKey = (PublicKey) inputStream.readObject();
+      final byte[] cipherText = encrypt(originalText, publicKey);
 
-			// Decrypt the cipher text using the private key.
-			inputStream = new ObjectInputStream(new FileInputStream(PRIVATE_KEY_FILE));
-			final PrivateKey privateKey = (PrivateKey) inputStream.readObject();
-			final String plainText = decrypt(cipherText, privateKey);
+      // Decrypt the cipher text using the private key.
+      inputStream = new ObjectInputStream(new FileInputStream(PRIVATE_KEY_FILE));
+      final PrivateKey privateKey = (PrivateKey) inputStream.readObject();
+      final String plainText = decrypt(cipherText, privateKey);
 
-			// Printing the Original, Encrypted and Decrypted Text
-			System.out.println("Original: " + originalText);
-			System.out.println("Encrypted: " + cipherText.toString());
-			System.out.println("Decrypted: " + plainText);
+      // Printing the Original, Encrypted and Decrypted Text
+      System.out.println("Original: " + originalText);
+      System.out.println("Encrypted: " + cipherText.toString());
+      System.out.println("Decrypted: " + plainText);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }

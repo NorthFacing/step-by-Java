@@ -4,12 +4,12 @@ package com.books.book03.annotations;
 import com.books.book03.net.mindview.atunit.Test;
 
 public class Testable {
-    public void execute() {
-        System.out.println("Executing..");
-    }
+  public void execute() {
+    System.out.println("Executing..");
+  }
 
-    @Test
-    void testExecute() {
-        execute();
-    }
+  @Test
+  void testExecute() {
+    execute();
+  }
 } ///:~

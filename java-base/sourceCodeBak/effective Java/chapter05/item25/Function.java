@@ -2,5 +2,5 @@
 package org.effectivejava.examples.chapter05.item25;
 
 interface Function<T> {
-	T apply(T arg1, T arg2);
+  T apply(T arg1, T arg2);
 }

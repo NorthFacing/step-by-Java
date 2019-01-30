@@ -4,11 +4,11 @@ package com.books.book03.polymorphism.shape;
 import static com.books.book03.net.mindview.util.Print.print;
 
 public class Circle extends Shape {
-    public void draw() {
-        print("Circle.draw()");
-    }
+  public void draw() {
+    print("Circle.draw()");
+  }
 
-    public void erase() {
-        print("Circle.erase()");
-    }
+  public void erase() {
+    print("Circle.erase()");
+  }
 } ///:~

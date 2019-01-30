@@ -6,6 +6,7 @@
  * their original style.
  *
  * @author Bob
+ * @author Bob
  */
 /**
  * @author Bob

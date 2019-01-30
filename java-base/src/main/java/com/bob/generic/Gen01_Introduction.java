@@ -1,21 +1,21 @@
 package com.bob.generic;
 
 public class Gen01_Introduction {
-    @SuppressWarnings("unused")
-    public static void main(String[] args) {
-        /**
-         * Object
-         */
-        Tool t = new Tool();
-        t.setObj(new Student());
-        Worker w = (Worker) t.getObj();
-        /**
-         * Generic
-         */
-        Utils<Worker> u = new Utils<Worker>();
-        u.setGd(new Worker());
-        Worker wor = u.getGd();
-    }
+  @SuppressWarnings("unused")
+  public static void main(String[] args) {
+    /**
+     * Object
+     */
+    Tool t = new Tool();
+    t.setObj(new Student());
+    Worker w = (Worker) t.getObj();
+    /**
+     * Generic
+     */
+    Utils<Worker> u = new Utils<Worker>();
+    u.setGd(new Worker());
+    Worker wor = u.getGd();
+  }
 }
 
 /**
@@ -24,15 +24,15 @@ public class Gen01_Introduction {
  * @author Bob
  */
 class Tool {
-    private Object obj;
+  private Object obj;
 
-    public Object getObj() {
-        return obj;
-    }
+  public Object getObj() {
+    return obj;
+  }
 
-    public void setObj(Object obj) {
-        this.obj = obj;
-    }
+  public void setObj(Object obj) {
+    this.obj = obj;
+  }
 }
 
 /**
@@ -42,15 +42,15 @@ class Tool {
  * @author Bob
  */
 class Utils<GenericDemo> {
-    private GenericDemo gd;
+  private GenericDemo gd;
 
-    public GenericDemo getGd() {
-        return gd;
-    }
+  public GenericDemo getGd() {
+    return gd;
+  }
 
-    public void setGd(GenericDemo gd) {
-        this.gd = gd;
-    }
+  public void setGd(GenericDemo gd) {
+    this.gd = gd;
+  }
 }
 
 class Student {

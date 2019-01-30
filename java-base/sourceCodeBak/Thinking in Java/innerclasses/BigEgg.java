@@ -5,30 +5,30 @@ package com.books.book03.innerclasses;
 import static com.books.book03.net.mindview.util.Print.print;
 
 class Egg {
-    private Yolk y;
+  private Yolk y;
 
-    public Egg() {
-        print("New Egg()");
-        y = new Yolk();
-    }
+  public Egg() {
+    print("New Egg()");
+    y = new Yolk();
+  }
 
-    protected class Yolk {
-        public Yolk() {
-            print("Egg.Yolk()");
-        }
+  protected class Yolk {
+    public Yolk() {
+      print("Egg.Yolk()");
     }
+  }
 }
 
 public class BigEgg extends Egg {
-    public static void main(String[] args) {
-        new BigEgg();
-    }
+  public static void main(String[] args) {
+    new BigEgg();
+  }
 
-    public class Yolk {
-        public Yolk() {
-            print("BigEgg.Yolk()");
-        }
+  public class Yolk {
+    public Yolk() {
+      print("BigEgg.Yolk()");
     }
+  }
 } /* Output:
 New Egg()
 Egg.Yolk()

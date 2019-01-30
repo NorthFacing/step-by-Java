@@ -8,34 +8,34 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Services {
-    private Services() {
-    } // Prevents instantiation (Item 4)
+  private Services() {
+  } // Prevents instantiation (Item 4)
 
-    // Maps service names to services
-    private static final Map<String, Provider> providers = new ConcurrentHashMap<String, Provider>();
+  // Maps service names to services
+  private static final Map<String, Provider> providers = new ConcurrentHashMap<String, Provider>();
 
-    public static final String DEFAULT_PROVIDER_NAME = "<def>";
+  public static final String DEFAULT_PROVIDER_NAME = "<def>";
 
-    // Provider registration API
-    public static void registerDefaultProvider(Provider p) {
-        registerProvider(DEFAULT_PROVIDER_NAME, p);
-    }
+  // Provider registration API
+  public static void registerDefaultProvider(Provider p) {
+    registerProvider(DEFAULT_PROVIDER_NAME, p);
+  }
 
-    public static void registerProvider(String name, Provider p) {
-        providers.put(name, p);
-    }
+  public static void registerProvider(String name, Provider p) {
+    providers.put(name, p);
+  }
 
-    // Service access API
-    public static Service newInstance() {
-        return newInstance(DEFAULT_PROVIDER_NAME);
-    }
+  // Service access API
+  public static Service newInstance() {
+    return newInstance(DEFAULT_PROVIDER_NAME);
+  }
 
-    // Bob: 不仅父类，抽象类，实现类可以作为返回值类型，接口也可以作为返回值类型
-    public static Service newInstance(String name) {
-        Provider p = providers.get(name);
-        if (p == null)
-            throw new IllegalArgumentException(
-                    "No provider registered with name: " + name);
-        return p.newService();
-    }
+  // Bob: 不仅父类，抽象类，实现类可以作为返回值类型，接口也可以作为返回值类型
+  public static Service newInstance(String name) {
+    Provider p = providers.get(name);
+    if (p == null)
+      throw new IllegalArgumentException(
+          "No provider registered with name: " + name);
+    return p.newService();
+  }
 }
