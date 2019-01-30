@@ -118,7 +118,7 @@
         },
 
         disableSelection: function () {
-            return this.bind(( $.support.selectstart ? "selectstart" : "mousedown" ) +
+            return this.bind(($.support.selectstart ? "selectstart" : "mousedown") +
                 ".ui-disableSelection", function (event) {
                 event.preventDefault();
             });
@@ -186,12 +186,12 @@
             img = $("img[usemap=#" + mapName + "]")[0];
             return !!img && visible(img);
         }
-        return ( /input|select|textarea|button|object/.test(nodeName)
-                ? !element.disabled
-                : "a" == nodeName
+        return (/input|select|textarea|button|object/.test(nodeName)
+            ? !element.disabled
+            : "a" == nodeName
                 ? element.href || isTabIndexNotNaN
                 : isTabIndexNotNaN)
-                // the element and all of its ancestors must be visible
+            // the element and all of its ancestors must be visible
             && visible(element);
     }
 
@@ -214,7 +214,7 @@
         tabbable: function (element) {
             var tabIndex = $.attr(element, "tabindex"),
                 isTabIndexNaN = isNaN(tabIndex);
-            return ( isTabIndexNaN || tabIndex >= 0 ) && focusable(element, !isTabIndexNaN);
+            return (isTabIndexNaN || tabIndex >= 0) && focusable(element, !isTabIndexNaN);
         }
     });
 
@@ -267,8 +267,8 @@
         // will be deprecated when we switch to jQuery 1.4 - use jQuery.contains()
         contains: function (a, b) {
             return document.compareDocumentPosition ?
-            a.compareDocumentPosition(b) & 16 :
-            a !== b && a.contains(b);
+                a.compareDocumentPosition(b) & 16 :
+                a !== b && a.contains(b);
         },
 
         // only used by resizable
@@ -279,7 +279,7 @@
                 return false;
             }
 
-            var scroll = ( a && a === "left" ) ? "scrollLeft" : "scrollTop",
+            var scroll = (a && a === "left") ? "scrollLeft" : "scrollTop",
                 has = false;
 
             if (el[scroll] > 0) {
@@ -290,7 +290,7 @@
             // if the element doesn't have the scroll set, see if it's possible to
             // set the scroll
             el[scroll] = 1;
-            has = ( el[scroll] > 0 );
+            has = (el[scroll] > 0);
             el[scroll] = 0;
             return has;
         },
@@ -298,7 +298,7 @@
         // these are odd functions, fix the API or move into individual plugins
         isOverAxis: function (x, reference, size) {
             //Determines when x coordinate is over "b" element axis
-            return ( x > reference ) && ( x < ( reference + size ) );
+            return (x > reference) && (x < (reference + size));
         },
         isOver: function (y, x, top, left, height, width) {
             //Determines when x, y coordinates is over "b" element

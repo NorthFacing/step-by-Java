@@ -93,8 +93,7 @@
                     for (var k in options.data[n]) {
                         a.push({name: n, value: options.data[n][k]});
                     }
-                }
-                else {
+                } else {
                     v = options.data[n];
                     v = $.isFunction(v) ? v() : v; // if value is fn, invoke it
                     a.push({name: n, value: v});
@@ -120,8 +119,7 @@
         if (options.type.toUpperCase() == 'GET') {
             options.url += (options.url.indexOf('?') >= 0 ? '&' : '?') + q;
             options.data = null;  // data is null for 'get'
-        }
-        else {
+        } else {
             options.data = q; // data is the query string for 'post'
         }
 
@@ -140,13 +138,12 @@
         // perform a load on the target only if dataType is not provided
         if (!options.dataType && options.target) {
             var oldSuccess = options.success || function () {
-                };
+            };
             callbacks.push(function (data) {
                 var fn = options.replaceTarget ? 'replaceWith' : 'html';
                 $(options.target)[fn](data).each(oldSuccess, arguments);
             });
-        }
-        else if (options.success) {
+        } else if (options.success) {
             callbacks.push(options.success);
         }
 
@@ -171,12 +168,10 @@
                 $.get(options.closeKeepAlive, function () {
                     fileUpload(a);
                 });
-            }
-            else {
+            } else {
                 fileUpload(a);
             }
-        }
-        else {
+        } else {
             $.ajax(options);
         }
 
@@ -213,8 +208,7 @@
                     $io.attr('name', id);
                 else
                     id = n;
-            }
-            else {
+            } else {
                 $io = $('<iframe name="' + id + '" src="' + s.iframeSrc + '" />');
                 $io.css({position: 'absolute', top: '-1000px', left: '-1000px'});
             }
@@ -325,8 +319,7 @@
                         io.attachEvent ? io.attachEvent('onload', cb) : io.addEventListener('load', cb, false);
                     }
                     form.submit();
-                }
-                finally {
+                } finally {
                     // reset attrs and remove "extra" input elements
                     form.setAttribute('action', a);
                     if (t) {
@@ -340,8 +333,7 @@
 
             if (s.forceSync) {
                 doSubmit();
-            }
-            else {
+            } else {
                 setTimeout(doSubmit, 10); // this lets dom updates render
             }
 
@@ -411,32 +403,27 @@
                             // support for XHR 'status' & 'statusText' emulation :
                             xhr.status = Number(ta.getAttribute('status')) || xhr.status;
                             xhr.statusText = ta.getAttribute('statusText') || xhr.statusText;
-                        }
-                        else if (scr) {
+                        } else if (scr) {
                             // account for browsers injecting pre around json response
                             var pre = doc.getElementsByTagName('pre')[0];
                             var b = doc.getElementsByTagName('body')[0];
                             if (pre) {
                                 xhr.responseText = pre.textContent ? pre.textContent : pre.innerHTML;
-                            }
-                            else if (b) {
+                            } else if (b) {
                                 xhr.responseText = b.innerHTML;
                             }
                         }
-                    }
-                    else if (s.dataType == 'xml' && !xhr.responseXML && xhr.responseText != null) {
+                    } else if (s.dataType == 'xml' && !xhr.responseXML && xhr.responseText != null) {
                         xhr.responseXML = toXml(xhr.responseText);
                     }
 
                     try {
                         data = httpData(xhr, s.dataType, s);
-                    }
-                    catch (e) {
+                    } catch (e) {
                         status = 'parsererror';
                         xhr.error = errMsg = (e || status);
                     }
-                }
-                catch (e) {
+                } catch (e) {
                     log('error caught', e);
                     status = 'error';
                     xhr.error = errMsg = (e || status);
@@ -455,8 +442,7 @@
                 if (status === 'success') {
                     s.success && s.success.call(s.context, data, 'success', xhr);
                     g && $.event.trigger("ajaxSuccess", [xhr, s]);
-                }
-                else if (status) {
+                } else if (status) {
                     if (errMsg == undefined)
                         errMsg = xhr.statusText;
                     s.error && s.error.call(s.context, xhr, status, errMsg);
@@ -484,19 +470,18 @@
             }
 
             var toXml = $.parseXML || function (s, doc) { // use parseXML if available (jQuery 1.5+)
-                    if (window.ActiveXObject) {
-                        doc = new ActiveXObject('Microsoft.XMLDOM');
-                        doc.async = 'false';
-                        doc.loadXML(s);
-                    }
-                    else {
-                        doc = (new DOMParser()).parseFromString(s, 'text/xml');
-                    }
-                    return (doc && doc.documentElement && doc.documentElement.nodeName != 'parsererror') ? doc : null;
-                };
+                if (window.ActiveXObject) {
+                    doc = new ActiveXObject('Microsoft.XMLDOM');
+                    doc.async = 'false';
+                    doc.loadXML(s);
+                } else {
+                    doc = (new DOMParser()).parseFromString(s, 'text/xml');
+                }
+                return (doc && doc.documentElement && doc.documentElement.nodeName != 'parsererror') ? doc : null;
+            };
             var parseJSON = $.parseJSON || function (s) {
-                    return window['eval']('(' + s + ')');
-                };
+                return window['eval']('(' + s + ')');
+            };
 
             var httpData = function (xhr, type, s) { // mostly lifted from jq1.4.4
 
@@ -641,8 +626,7 @@
                 for (j = 0, jmax = v.length; j < jmax; j++) {
                     a.push({name: n, value: v[j]});
                 }
-            }
-            else if (v !== null && typeof v != 'undefined') {
+            } else if (v !== null && typeof v != 'undefined') {
                 a.push({name: n, value: v});
             }
         }
@@ -684,8 +668,7 @@
                 for (var i = 0, max = v.length; i < max; i++) {
                     a.push({name: n, value: v[i]});
                 }
-            }
-            else if (v !== null && typeof v != 'undefined') {
+            } else if (v !== null && typeof v != 'undefined') {
                 a.push({name: this.name, value: v});
             }
         });
@@ -807,11 +790,9 @@
             var t = this.type, tag = this.tagName.toLowerCase();
             if (t == 'text' || t == 'password' || tag == 'textarea') {
                 this.value = '';
-            }
-            else if (t == 'checkbox' || t == 'radio') {
+            } else if (t == 'checkbox' || t == 'radio') {
                 this.checked = false;
-            }
-            else if (tag == 'select') {
+            } else if (tag == 'select') {
                 this.selectedIndex = -1;
             }
         });
@@ -854,8 +835,7 @@
             var t = this.type;
             if (t == 'checkbox' || t == 'radio') {
                 this.checked = select;
-            }
-            else if (this.tagName.toLowerCase() == 'option') {
+            } else if (this.tagName.toLowerCase() == 'option') {
                 var $sel = $(this).parent('select');
                 if (select && $sel[0] && $sel[0].type == 'select-one') {
                     // deselect all other options
@@ -871,8 +851,7 @@
         var msg = '[jquery.form] ' + Array.prototype.join.call(arguments, '');
         if (window.console && window.console.log) {
             window.console.log(msg);
-        }
-        else if (window.opera && window.opera.postError) {
+        } else if (window.opera && window.opera.postError) {
             window.opera.postError(msg);
         }
     };

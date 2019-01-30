@@ -74,7 +74,7 @@
 
         _cookie: function () {
             var cookie = this.cookie ||
-                ( this.cookie = this.options.cookie.name || "ui-tabs-" + getNextListId() );
+                (this.cookie = this.options.cookie.name || "ui-tabs-" + getNextListId());
             return $.cookie.apply(null, [cookie].concat($.makeArray(arguments)));
         },
 
@@ -118,8 +118,8 @@
                 // Thus normalize href attribute...
                 var hrefBase = href.split("#")[0],
                     baseEl;
-                if (hrefBase && ( hrefBase === location.toString().split("#")[0] ||
-                    ( baseEl = $("base")[0]) && hrefBase === baseEl.href )) {
+                if (hrefBase && (hrefBase === location.toString().split("#")[0] ||
+                    (baseEl = $("base")[0]) && hrefBase === baseEl.href)) {
                     href = a.hash;
                     a.href = href;
                 }
@@ -182,13 +182,13 @@
                     if (typeof o.selected !== "number" && this.lis.filter(".ui-tabs-selected").length) {
                         o.selected = this.lis.index(this.lis.filter(".ui-tabs-selected"));
                     }
-                    o.selected = o.selected || ( this.lis.length ? 0 : -1 );
+                    o.selected = o.selected || (this.lis.length ? 0 : -1);
                 } else if (o.selected === null) { // usage of null is deprecated, TODO remove in next release
                     o.selected = -1;
                 }
 
                 // sanity check - default to first tab...
-                o.selected = ( ( o.selected >= 0 && this.anchors[o.selected] ) || o.selected < 0 )
+                o.selected = ((o.selected >= 0 && this.anchors[o.selected]) || o.selected < 0)
                     ? o.selected
                     : 0;
 
@@ -243,9 +243,9 @@
             }
 
             // disable tabs
-            for (var i = 0, li; ( li = this.lis[i] ); i++) {
+            for (var i = 0, li; (li = this.lis[i]); i++) {
                 $(li)[$.inArray(i, o.disabled) != -1 &&
-                    // TODO: use .toggleClass()
+                // TODO: use .toggleClass()
                 !$(li).hasClass("ui-tabs-selected") ? "addClass" : "removeClass"]("ui-state-disabled");
             }
 
@@ -303,34 +303,34 @@
             // Show a tab...
             var showTab = showFx
                 ? function (clicked, $show) {
-                $(clicked).closest("li").addClass("ui-tabs-selected ui-state-active");
-                $show.hide().removeClass("ui-tabs-hide") // avoid flicker that way
-                    .animate(showFx, showFx.duration || "normal", function () {
-                        resetStyle($show, showFx);
-                        self._trigger("show", null, self._ui(clicked, $show[0]));
-                    });
-            }
+                    $(clicked).closest("li").addClass("ui-tabs-selected ui-state-active");
+                    $show.hide().removeClass("ui-tabs-hide") // avoid flicker that way
+                        .animate(showFx, showFx.duration || "normal", function () {
+                            resetStyle($show, showFx);
+                            self._trigger("show", null, self._ui(clicked, $show[0]));
+                        });
+                }
                 : function (clicked, $show) {
-                $(clicked).closest("li").addClass("ui-tabs-selected ui-state-active");
-                $show.removeClass("ui-tabs-hide");
-                self._trigger("show", null, self._ui(clicked, $show[0]));
-            };
+                    $(clicked).closest("li").addClass("ui-tabs-selected ui-state-active");
+                    $show.removeClass("ui-tabs-hide");
+                    self._trigger("show", null, self._ui(clicked, $show[0]));
+                };
 
             // Hide a tab, $show is optional...
             var hideTab = hideFx
                 ? function (clicked, $hide) {
-                $hide.animate(hideFx, hideFx.duration || "normal", function () {
+                    $hide.animate(hideFx, hideFx.duration || "normal", function () {
+                        self.lis.removeClass("ui-tabs-selected ui-state-active");
+                        $hide.addClass("ui-tabs-hide");
+                        resetStyle($hide, hideFx);
+                        self.element.dequeue("tabs");
+                    });
+                }
+                : function (clicked, $hide, $show) {
                     self.lis.removeClass("ui-tabs-selected ui-state-active");
                     $hide.addClass("ui-tabs-hide");
-                    resetStyle($hide, hideFx);
                     self.element.dequeue("tabs");
-                });
-            }
-                : function (clicked, $hide, $show) {
-                self.lis.removeClass("ui-tabs-selected ui-state-active");
-                $hide.addClass("ui-tabs-hide");
-                self.element.dequeue("tabs");
-            };
+                };
 
             // attach tab event handler, unbind to avoid duplicates from former tabifying...
             this.anchors.bind(o.event + ".tabs", function () {
@@ -343,7 +343,7 @@
                 // or is already loading or click callback returns false stop here.
                 // Check if click handler returns false last so that it is not executed
                 // for a disabled or loading tab!
-                if (( $li.hasClass("ui-tabs-selected") && !o.collapsible) ||
+                if (($li.hasClass("ui-tabs-selected") && !o.collapsible) ||
                     $li.hasClass("ui-state-disabled") ||
                     $li.hasClass("ui-state-processing") ||
                     self.panels.filter(":animated").length ||
@@ -542,7 +542,7 @@
             // If selected tab was removed focus tab to the right or
             // in case the last tab was removed the tab to the left.
             if ($li.hasClass("ui-tabs-selected") && this.anchors.length > 1) {
-                this.select(index + ( index + 1 < this.anchors.length ? 1 : -1 ));
+                this.select(index + (index + 1 < this.anchors.length ? 1 : -1));
             }
 
             o.disabled = $.map(
@@ -642,8 +642,7 @@
                     self._trigger("load", null, self._ui(self.anchors[index], self.panels[index]));
                     try {
                         o.ajaxOptions.success(r, s);
-                    }
-                    catch (e) {
+                    } catch (e) {
                     }
                 },
                 error: function (xhr, s, e) {
@@ -657,8 +656,7 @@
                         // Pass the anchor that initiated this request allows
                         // loadError to manipulate the tab content panel via $(a.hash)
                         o.ajaxOptions.error(xhr, s, index, a);
-                    }
-                    catch (e) {
+                    } catch (e) {
                     }
                 }
             }));
@@ -716,25 +714,25 @@
             var self = this,
                 o = this.options;
 
-            var rotate = self._rotate || ( self._rotate = function (e) {
-                    clearTimeout(self.rotation);
-                    self.rotation = setTimeout(function () {
-                        var t = o.selected;
-                        self.select(++t < self.anchors.length ? t : 0);
-                    }, ms);
+            var rotate = self._rotate || (self._rotate = function (e) {
+                clearTimeout(self.rotation);
+                self.rotation = setTimeout(function () {
+                    var t = o.selected;
+                    self.select(++t < self.anchors.length ? t : 0);
+                }, ms);
 
-                    if (e) {
-                        e.stopPropagation();
-                    }
-                });
+                if (e) {
+                    e.stopPropagation();
+                }
+            });
 
-            var stop = self._unrotate || ( self._unrotate = !continuing
-                    ? function (e) {
+            var stop = self._unrotate || (self._unrotate = !continuing
+                ? function (e) {
                     if (e.clientX) { // in case of a true click
                         self.rotate(null);
                     }
                 }
-                    : function (e) {
+                : function (e) {
                     t = o.selected;
                     rotate();
                 });

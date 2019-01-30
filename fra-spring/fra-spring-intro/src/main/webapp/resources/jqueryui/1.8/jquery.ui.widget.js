@@ -177,8 +177,8 @@
                 .unbind("." + this.widgetName)
                 .removeAttr("aria-disabled")
                 .removeClass(
-                this.widgetBaseClass + "-disabled " +
-                "ui-state-disabled");
+                    this.widgetBaseClass + "-disabled " +
+                    "ui-state-disabled");
         },
 
         widget: function () {
@@ -238,9 +238,9 @@
             var callback = this.options[type];
 
             event = $.Event(event);
-            event.type = ( type === this.widgetEventPrefix ?
+            event.type = (type === this.widgetEventPrefix ?
                 type :
-            this.widgetEventPrefix + type ).toLowerCase();
+                this.widgetEventPrefix + type).toLowerCase();
             data = data || {};
 
             // copy original event properties over to the new event
@@ -255,9 +255,9 @@
 
             this.element.trigger(event, data);
 
-            return !( $.isFunction(callback) &&
-            callback.call(this.element[0], event, data) === false ||
-            event.isDefaultPrevented() );
+            return !($.isFunction(callback) &&
+                callback.call(this.element[0], event, data) === false ||
+                event.isDefaultPrevented());
         }
     };
 

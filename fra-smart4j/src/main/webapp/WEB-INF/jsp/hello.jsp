@@ -9,10 +9,10 @@
 
 <html>
 <head>
-    <title>Hello servlet</title>
+  <title>Hello servlet</title>
 </head>
 <body>
-  <div>当前时间是：</div>
-  <div>${currentTime}</div>
+<div>当前时间是：</div>
+<div>${currentTime}</div>
 </body>
 </html>

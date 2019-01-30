@@ -14,53 +14,53 @@ import java.util.Map;
  */
 public class CustomerServiceTest extends TestCase {
 
-    private final CustomerService customerService;
+  private final CustomerService customerService;
 
-    public CustomerServiceTest() {
-        customerService = new CustomerService();
-    }
+  public CustomerServiceTest() {
+    customerService = new CustomerService();
+  }
 
-    @Before
-    public void init() {
-        // TODO 初始化数据库
-    }
+  @Before
+  public void init() {
+    // TODO 初始化数据库
+  }
 
-    @Test
-    public void testGetCustomerList() throws Exception {
-        List<Customer> customerList = customerService.getCustomerList();
-        assertEquals(2, customerList);
-    }
+  @Test
+  public void testGetCustomerList() throws Exception {
+    List<Customer> customerList = customerService.getCustomerList();
+    assertEquals(2, customerList);
+  }
 
-    @Test
-    public void testGetCustomer() throws Exception {
-        Long id = 1l;
-        Customer customer = customerService.getCustomer(id);
-        assertNotNull(customer);
-    }
+  @Test
+  public void testGetCustomer() throws Exception {
+    Long id = 1l;
+    Customer customer = customerService.getCustomer(id);
+    assertNotNull(customer);
+  }
 
-    @Test
-    public void testCreateCustomer() throws Exception {
-        Map<String, Object> filedMap = new HashMap<String, Object>();
-        filedMap.put("name", "customer100");
-        filedMap.put("contact", "John");
-        filedMap.put("telephone", "13890909090");
-        Boolean result = customerService.createCustomer(filedMap);
-        assertTrue(result);
-    }
+  @Test
+  public void testCreateCustomer() throws Exception {
+    Map<String, Object> filedMap = new HashMap<String, Object>();
+    filedMap.put("name", "customer100");
+    filedMap.put("contact", "John");
+    filedMap.put("telephone", "13890909090");
+    Boolean result = customerService.createCustomer(filedMap);
+    assertTrue(result);
+  }
 
-    @Test
-    public void testUpdateCustomer() throws Exception {
-        Long id = 1l;
-        Map<String, Object> filedMap = new HashMap<String, Object>();
-        filedMap.put("contact", "Eric");
-        Boolean result = customerService.updateCustomer(id, filedMap);
-        assertTrue(result);
-    }
+  @Test
+  public void testUpdateCustomer() throws Exception {
+    Long id = 1l;
+    Map<String, Object> filedMap = new HashMap<String, Object>();
+    filedMap.put("contact", "Eric");
+    Boolean result = customerService.updateCustomer(id, filedMap);
+    assertTrue(result);
+  }
 
-    @Test
-    public void testDeleteCustomer() throws Exception {
-        Long id = 1l;
-        Boolean result = customerService.deleteCustomer(id);
-        assertTrue(result);
-    }
+  @Test
+  public void testDeleteCustomer() throws Exception {
+    Long id = 1l;
+    Boolean result = customerService.deleteCustomer(id);
+    assertTrue(result);
+  }
 }

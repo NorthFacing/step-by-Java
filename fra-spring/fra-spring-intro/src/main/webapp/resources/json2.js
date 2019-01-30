@@ -175,12 +175,12 @@ if (!this.JSON) {
         Date.prototype.toJSON = function (key) {
 
             return isFinite(this.valueOf()) ?
-            this.getUTCFullYear() + '-' +
-            f(this.getUTCMonth() + 1) + '-' +
-            f(this.getUTCDate()) + 'T' +
-            f(this.getUTCHours()) + ':' +
-            f(this.getUTCMinutes()) + ':' +
-            f(this.getUTCSeconds()) + 'Z' : null;
+                this.getUTCFullYear() + '-' +
+                f(this.getUTCMonth() + 1) + '-' +
+                f(this.getUTCDate()) + 'T' +
+                f(this.getUTCHours()) + ':' +
+                f(this.getUTCMinutes()) + ':' +
+                f(this.getUTCSeconds()) + 'Z' : null;
         };
 
         String.prototype.toJSON =
@@ -215,12 +215,12 @@ if (!this.JSON) {
 
         escapable.lastIndex = 0;
         return escapable.test(string) ?
-        '"' + string.replace(escapable, function (a) {
-            var c = meta[a];
-            return typeof c === 'string' ? c :
-            '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
-        }) + '"' :
-        '"' + string + '"';
+            '"' + string.replace(escapable, function (a) {
+                var c = meta[a];
+                return typeof c === 'string' ? c :
+                    '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+            }) + '"' :
+            '"' + string + '"';
     }
 
 
@@ -305,9 +305,9 @@ if (!this.JSON) {
 
                     v = partial.length === 0 ? '[]' :
                         gap ? '[\n' + gap +
-                        partial.join(',\n' + gap) + '\n' +
-                        mind + ']' :
-                        '[' + partial.join(',') + ']';
+                            partial.join(',\n' + gap) + '\n' +
+                            mind + ']' :
+                            '[' + partial.join(',') + ']';
                     gap = mind;
                     return v;
                 }
@@ -344,7 +344,7 @@ if (!this.JSON) {
 
                 v = partial.length === 0 ? '{}' :
                     gap ? '{\n' + gap + partial.join(',\n' + gap) + '\n' +
-                    mind + '}' : '{' + partial.join(',') + '}';
+                        mind + '}' : '{' + partial.join(',') + '}';
                 gap = mind;
                 return v;
         }
@@ -385,7 +385,7 @@ if (!this.JSON) {
             rep = replacer;
             if (replacer && typeof replacer !== 'function' &&
                 (typeof replacer !== 'object' ||
-                typeof replacer.length !== 'number')) {
+                    typeof replacer.length !== 'number')) {
                 throw new Error('JSON.stringify');
             }
 
@@ -455,10 +455,7 @@ if (!this.JSON) {
 // we look to see that the remaining characters are only whitespace or ']' or
 // ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.
 
-            if (/^[\],:{}\s]*$/.
-                    test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@').
-                        replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
-                        replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+            if (/^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
 // In the third stage we use the eval function to compile the text into a
 // JavaScript structure. The '{' operator is subject to a syntactic ambiguity
