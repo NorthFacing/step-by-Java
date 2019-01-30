@@ -1,12 +1,12 @@
 /*
  * Copyright 2013-2018 Lilinfeng.
- *  
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *  
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -43,10 +43,10 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
  * @date 2014年2月14日
  */
 public class HttpFileServerHandler extends
-        SimpleChannelInboundHandler<FullHttpRequest> {
+    SimpleChannelInboundHandler<FullHttpRequest> {
   private static final Pattern INSECURE_URI = Pattern.compile(".*[<>&\"].*");
   private static final Pattern ALLOWED_FILE_NAME = Pattern
-          .compile("[A-Za-z0-9][-_A-Za-z0-9\\.]*");
+      .compile("[A-Za-z0-9][-_A-Za-z0-9\\.]*");
   private final String url;
 
   public HttpFileServerHandler(String url) {
@@ -98,8 +98,8 @@ public class HttpFileServerHandler extends
   private static void sendError(ChannelHandlerContext ctx,
                                 HttpResponseStatus status) {
     FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1,
-            status, Unpooled.copiedBuffer("Failure: " + status.toString()
-            + "\r\n", CharsetUtil.UTF_8));
+        status, Unpooled.copiedBuffer("Failure: " + status.toString()
+        + "\r\n", CharsetUtil.UTF_8));
     response.headers().set(CONTENT_TYPE, "text/plain; charset=UTF-8");
     ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
   }
@@ -107,7 +107,7 @@ public class HttpFileServerHandler extends
   private static void setContentTypeHeader(HttpResponse response, File file) {
     MimetypesFileTypeMap mimeTypesMap = new MimetypesFileTypeMap();
     response.headers().set(CONTENT_TYPE,
-            mimeTypesMap.getContentType(file.getPath()));
+        mimeTypesMap.getContentType(file.getPath()));
   }
 
   @Override
@@ -161,7 +161,7 @@ public class HttpFileServerHandler extends
     ctx.write(response);
     ChannelFuture sendFileFuture;
     sendFileFuture = ctx.write(new ChunkedFile(randomAccessFile, 0,
-            fileLength, 8192), ctx.newProgressivePromise());
+        fileLength, 8192), ctx.newProgressivePromise());
     sendFileFuture.addListener(new ChannelProgressiveFutureListener() {
       @Override
       public void operationProgressed(ChannelProgressiveFuture future,
@@ -170,18 +170,18 @@ public class HttpFileServerHandler extends
           System.err.println("Transfer progress: " + progress);
         } else {
           System.err.println("Transfer progress: " + progress + " / "
-                  + total);
+              + total);
         }
       }
 
       @Override
       public void operationComplete(ChannelProgressiveFuture future)
-              throws Exception {
+          throws Exception {
         System.out.println("Transfer complete.");
       }
     });
     ChannelFuture lastContentFuture = ctx
-            .writeAndFlush(LastHttpContent.EMPTY_LAST_CONTENT);
+        .writeAndFlush(LastHttpContent.EMPTY_LAST_CONTENT);
     if (!isKeepAlive(request)) {
       lastContentFuture.addListener(ChannelFutureListener.CLOSE);
     }
@@ -189,7 +189,7 @@ public class HttpFileServerHandler extends
 
   @Override
   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
-          throws Exception {
+      throws Exception {
     cause.printStackTrace();
     if (ctx.channel().isActive()) {
       sendError(ctx, INTERNAL_SERVER_ERROR);
@@ -214,8 +214,8 @@ public class HttpFileServerHandler extends
     }
     uri = uri.replace('/', File.separatorChar);
     if (uri.contains(File.separator + '.')
-            || uri.contains('.' + File.separator) || uri.startsWith(".")
-            || uri.endsWith(".") || INSECURE_URI.matcher(uri).matches()) {
+        || uri.contains('.' + File.separator) || uri.startsWith(".")
+        || uri.endsWith(".") || INSECURE_URI.matcher(uri).matches()) {
       return null;
     }
     return System.getProperty("user.dir") + File.separator + uri;

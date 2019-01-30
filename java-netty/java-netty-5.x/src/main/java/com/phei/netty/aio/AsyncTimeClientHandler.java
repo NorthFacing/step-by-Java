@@ -1,12 +1,12 @@
 /*
  * Copyright 2013-2018 Lilinfeng.
- *  
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *  
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +29,7 @@ import java.util.concurrent.CountDownLatch;
  * @date 2014年2月16日
  */
 public class AsyncTimeClientHandler implements
-        CompletionHandler<Void, AsyncTimeClientHandler>, Runnable {
+    CompletionHandler<Void, AsyncTimeClientHandler>, Runnable {
 
   private AsynchronousSocketChannel client;
   private String host;
@@ -70,55 +70,55 @@ public class AsyncTimeClientHandler implements
     writeBuffer.put(req);
     writeBuffer.flip();
     client.write(writeBuffer, writeBuffer,
-            new CompletionHandler<Integer, ByteBuffer>() {
-              @Override
-              public void completed(Integer result, ByteBuffer buffer) {
-                if (buffer.hasRemaining()) {
-                  client.write(buffer, buffer, this);
-                } else {
-                  ByteBuffer readBuffer = ByteBuffer.allocate(1024);
-                  client.read(
-                          readBuffer,
-                          readBuffer,
-                          new CompletionHandler<Integer, ByteBuffer>() {
-                            @Override
-                            public void completed(Integer result, ByteBuffer buffer) {
-                              buffer.flip();
-                              byte[] bytes = new byte[buffer.remaining()];
-                              buffer.get(bytes);
-                              String body;
-                              try {
-                                body = new String(bytes, "UTF-8");
-                                System.out.println("Now is : " + body);
-                                latch.countDown();
-                              } catch (UnsupportedEncodingException e) {
-                                e.printStackTrace();
-                              }
-                            }
+        new CompletionHandler<Integer, ByteBuffer>() {
+          @Override
+          public void completed(Integer result, ByteBuffer buffer) {
+            if (buffer.hasRemaining()) {
+              client.write(buffer, buffer, this);
+            } else {
+              ByteBuffer readBuffer = ByteBuffer.allocate(1024);
+              client.read(
+                  readBuffer,
+                  readBuffer,
+                  new CompletionHandler<Integer, ByteBuffer>() {
+                    @Override
+                    public void completed(Integer result, ByteBuffer buffer) {
+                      buffer.flip();
+                      byte[] bytes = new byte[buffer.remaining()];
+                      buffer.get(bytes);
+                      String body;
+                      try {
+                        body = new String(bytes, "UTF-8");
+                        System.out.println("Now is : " + body);
+                        latch.countDown();
+                      } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                      }
+                    }
 
-                            @Override
-                            public void failed(Throwable exc, ByteBuffer attachment) {
-                              try {
-                                client.close();
-                                latch.countDown();
-                              } catch (IOException e) {
-                                // ingnore on close
-                              }
-                            }
-                          });
-                }
-              }
-
-              @Override
-              public void failed(Throwable exc, ByteBuffer attachment) {
-                try {
-                  client.close();
-                  latch.countDown();
-                } catch (IOException e) {
-                  // ingnore on close
-                }
-              }
+                    @Override
+                    public void failed(Throwable exc, ByteBuffer attachment) {
+                      try {
+                        client.close();
+                        latch.countDown();
+                      } catch (IOException e) {
+                        // ingnore on close
+                      }
+                    }
+                  });
             }
+          }
+
+          @Override
+          public void failed(Throwable exc, ByteBuffer attachment) {
+            try {
+              client.close();
+              latch.countDown();
+            } catch (IOException e) {
+              // ingnore on close
+            }
+          }
+        }
     );
   }
 

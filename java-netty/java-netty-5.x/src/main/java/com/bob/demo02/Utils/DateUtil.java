@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class DateUtil {
 
-  public static String getStrDate(){
+  public static String getStrDate() {
     return dateToStr(new Date());
   }
 

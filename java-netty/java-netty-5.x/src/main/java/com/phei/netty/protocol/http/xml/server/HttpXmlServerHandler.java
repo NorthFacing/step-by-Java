@@ -1,12 +1,12 @@
 /*
  * Copyright 2013-2018 Lilinfeng.
- *  
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *  
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -46,13 +46,13 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
  * @date 2014年2月14日
  */
 public class HttpXmlServerHandler extends
-        SimpleChannelInboundHandler<HttpXmlRequest> {
+    SimpleChannelInboundHandler<HttpXmlRequest> {
 
   private static void sendError(ChannelHandlerContext ctx,
                                 HttpResponseStatus status) {
     FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1,
-            status, Unpooled.copiedBuffer("失败: " + status.toString()
-            + "\r\n", CharsetUtil.UTF_8));
+        status, Unpooled.copiedBuffer("失败: " + status.toString()
+        + "\r\n", CharsetUtil.UTF_8));
     response.headers().set(CONTENT_TYPE, "text/plain; charset=UTF-8");
     ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
   }
@@ -65,7 +65,7 @@ public class HttpXmlServerHandler extends
     System.out.println("Http server receive request : " + order);
     dobusiness(order);
     ChannelFuture future = ctx.writeAndFlush(new HttpXmlResponse(null,
-            order));
+        order));
     if (!isKeepAlive(request)) {
       future.addListener(new GenericFutureListener<Future<? super Void>>() {
         public void operationComplete(Future future) throws Exception {
@@ -92,7 +92,7 @@ public class HttpXmlServerHandler extends
 
   @Override
   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
-          throws Exception {
+      throws Exception {
     cause.printStackTrace();
     if (ctx.channel().isActive()) {
       sendError(ctx, INTERNAL_SERVER_ERROR);

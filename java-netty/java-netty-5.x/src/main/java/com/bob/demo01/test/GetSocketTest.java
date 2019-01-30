@@ -13,11 +13,11 @@ import java.util.Date;
 public class GetSocketTest {
   public static void main(String[] args) {
     SocketKeep.initSocketKeep();
-    while(true){
+    while (true) {
       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
       try {
         Socket socket1 = CommonSocket.getSocketByName("socket1");
-        if(null != socket1){
+        if (null != socket1) {
           System.out.println(format.format(new Date()) + " " + socket1.toString());
           socket1.close();
         }
@@ -26,7 +26,7 @@ public class GetSocketTest {
       }
       try {
         Socket socket2 = CommonSocket.getSocketByName("socket2");
-        if(null != socket2){
+        if (null != socket2) {
           System.out.println(format.format(new Date()) + " " + socket2.toString());
           socket2.close();
         }

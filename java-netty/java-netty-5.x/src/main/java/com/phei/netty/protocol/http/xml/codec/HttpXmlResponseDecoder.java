@@ -1,12 +1,12 @@
 /*
  * Copyright 2013-2018 Lilinfeng.
- *  
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *  
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,7 +26,7 @@ import java.util.List;
  * @date 2014年3月1日
  */
 public class HttpXmlResponseDecoder extends
-        AbstractHttpXmlDecoder<DefaultFullHttpResponse> {
+    AbstractHttpXmlDecoder<DefaultFullHttpResponse> {
 
   public HttpXmlResponseDecoder(Class<?> clazz) {
     this(clazz, false);
@@ -40,7 +40,7 @@ public class HttpXmlResponseDecoder extends
   protected void decode(ChannelHandlerContext ctx,
                         DefaultFullHttpResponse msg, List<Object> out) throws Exception {
     HttpXmlResponse resHttpXmlResponse = new HttpXmlResponse(msg, decode0(
-            ctx, msg.content()));
+        ctx, msg.content()));
     out.add(resHttpXmlResponse);
   }
 

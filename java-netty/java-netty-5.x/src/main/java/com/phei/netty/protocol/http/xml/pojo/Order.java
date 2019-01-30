@@ -80,8 +80,8 @@ public class Order {
   @Override
   public String toString() {
     return "Order [orderNumber=" + orderNumber + ", customer=" + customer
-            + ", billTo=" + billTo + ", shipping=" + shipping.toString()
-            + ", shipTo=" + shipTo + ", total=" + total + "]";
+        + ", billTo=" + billTo + ", shipping=" + shipping.toString()
+        + ", shipTo=" + shipTo + ", total=" + total + "]";
   }
 
 }

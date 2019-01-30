@@ -1,12 +1,12 @@
 /*
  * Copyright 2013-2018 Lilinfeng.
- *  
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *  
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,7 @@ import java.nio.channels.CompletionHandler;
  * @date 2014年2月16日
  */
 public class ReadCompletionHandler implements
-        CompletionHandler<Integer, ByteBuffer> {
+    CompletionHandler<Integer, ByteBuffer> {
 
   private AsynchronousSocketChannel channel;
 
@@ -45,7 +45,7 @@ public class ReadCompletionHandler implements
       String req = new String(body, "UTF-8");
       System.out.println("The time server receive order : " + req);
       String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(req) ? new java.util.Date(
-              System.currentTimeMillis()).toString() : "BAD ORDER";
+          System.currentTimeMillis()).toString() : "BAD ORDER";
       doWrite(currentTime);
     } catch (UnsupportedEncodingException e) {
       e.printStackTrace();
@@ -59,23 +59,23 @@ public class ReadCompletionHandler implements
       writeBuffer.put(bytes);
       writeBuffer.flip();
       channel.write(writeBuffer, writeBuffer,
-              new CompletionHandler<Integer, ByteBuffer>() {
-                @Override
-                public void completed(Integer result, ByteBuffer buffer) {
-                  // 如果没有发送完成，继续发送
-                  if (buffer.hasRemaining())
-                    channel.write(buffer, buffer, this);
-                }
+          new CompletionHandler<Integer, ByteBuffer>() {
+            @Override
+            public void completed(Integer result, ByteBuffer buffer) {
+              // 如果没有发送完成，继续发送
+              if (buffer.hasRemaining())
+                channel.write(buffer, buffer, this);
+            }
 
-                @Override
-                public void failed(Throwable exc, ByteBuffer attachment) {
-                  try {
-                    channel.close();
-                  } catch (IOException e) {
-                    // ingnore on close
-                  }
-                }
-              });
+            @Override
+            public void failed(Throwable exc, ByteBuffer attachment) {
+              try {
+                channel.close();
+              } catch (IOException e) {
+                // ingnore on close
+              }
+            }
+          });
     }
   }
 

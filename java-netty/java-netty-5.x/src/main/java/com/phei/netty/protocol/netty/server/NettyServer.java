@@ -1,12 +1,12 @@
 /*
  * Copyright 2013-2018 Lilinfeng.
- *  
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *  
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -48,26 +48,26 @@ public class NettyServer {
     EventLoopGroup workerGroup = new NioEventLoopGroup();
     ServerBootstrap b = new ServerBootstrap();
     b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
-            .option(ChannelOption.SO_BACKLOG, 100)
-            .handler(new LoggingHandler(LogLevel.INFO))
-            .childHandler(new ChannelInitializer<SocketChannel>() {
-              @Override
-              public void initChannel(SocketChannel ch)
-                      throws IOException {
-                ch.pipeline().addLast(
-                        new NettyMessageDecoder(1024 * 1024, 4, 4));
-                ch.pipeline().addLast(new NettyMessageEncoder());
-                ch.pipeline().addLast("readTimeoutHandler",
-                        new ReadTimeoutHandler(50));
-                ch.pipeline().addLast(new LoginAuthRespHandler());
-                ch.pipeline().addLast("HeartBeatHandler",
-                        new HeartBeatRespHandler());
-              }
-            });
+        .option(ChannelOption.SO_BACKLOG, 100)
+        .handler(new LoggingHandler(LogLevel.INFO))
+        .childHandler(new ChannelInitializer<SocketChannel>() {
+          @Override
+          public void initChannel(SocketChannel ch)
+              throws IOException {
+            ch.pipeline().addLast(
+                new NettyMessageDecoder(1024 * 1024, 4, 4));
+            ch.pipeline().addLast(new NettyMessageEncoder());
+            ch.pipeline().addLast("readTimeoutHandler",
+                new ReadTimeoutHandler(50));
+            ch.pipeline().addLast(new LoginAuthRespHandler());
+            ch.pipeline().addLast("HeartBeatHandler",
+                new HeartBeatRespHandler());
+          }
+        });
 
     // 绑定端口，同步等待成功
     b.bind(NettyConstant.REMOTEIP, NettyConstant.PORT).sync();
     System.out.println("Netty server start ok : "
-            + (NettyConstant.REMOTEIP + " : " + NettyConstant.PORT));
+        + (NettyConstant.REMOTEIP + " : " + NettyConstant.PORT));
   }
 }

@@ -16,6 +16,7 @@ import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.HashedWheelTimer;
 
 import java.util.concurrent.TimeUnit;
+
 /**
  * Created by Bob on 2016/11/1.
  */
@@ -35,9 +36,9 @@ public class HeartBeatClient {
         .channel(NioSocketChannel.class)
         .handler(new LoggingHandler(LogLevel.INFO));
 
-    final ConnectionWatchdog watchdog = new ConnectionWatchdog(boot, timer, port,host, true) {
+    final ConnectionWatchdog watchdog = new ConnectionWatchdog(boot, timer, port, host, true) {
       public ChannelHandler[] handlers() {
-        return new ChannelHandler[] {
+        return new ChannelHandler[]{
             this,
             new IdleStateHandler(0, 4, 0, TimeUnit.SECONDS),
             idleStateTrigger,
@@ -60,7 +61,7 @@ public class HeartBeatClient {
           }
         });
 
-        future = boot.connect(host,port);
+        future = boot.connect(host, port);
       }
 
       // 以下代码在synchronized同步块外面是安全的

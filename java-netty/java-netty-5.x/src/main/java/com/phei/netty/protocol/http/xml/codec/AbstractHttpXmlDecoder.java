@@ -1,12 +1,12 @@
 /*
  * Copyright 2013-2018 Lilinfeng.
- *  
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *  
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,7 +33,7 @@ import java.nio.charset.Charset;
  * @date 2014年3月1日
  */
 public abstract class AbstractHttpXmlDecoder<T> extends
-        MessageToMessageDecoder<T> {
+    MessageToMessageDecoder<T> {
 
   private final static String CHARSET_NAME = "UTF-8";
   private final static Charset UTF_8 = Charset.forName(CHARSET_NAME);
@@ -52,7 +52,7 @@ public abstract class AbstractHttpXmlDecoder<T> extends
   }
 
   protected Object decode0(ChannelHandlerContext arg0, ByteBuf body)
-          throws Exception {
+      throws Exception {
     factory = BindingDirectory.getFactory(clazz);
     String content = body.toString(UTF_8);
     if (isPrint)
@@ -75,7 +75,7 @@ public abstract class AbstractHttpXmlDecoder<T> extends
   @Skip
   @Override
   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
-          throws Exception {
+      throws Exception {
     // 释放资源
     if (reader != null) {
       reader.close();

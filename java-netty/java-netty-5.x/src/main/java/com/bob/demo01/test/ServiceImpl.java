@@ -7,9 +7,11 @@ import java.net.Socket;
  */
 public class ServiceImpl implements Runnable {
   Socket socket = null;
+
   public ServiceImpl(Socket s) {
     this.socket = s;
   }
+
   public void run() {
     boolean isKeep = true;
     try {

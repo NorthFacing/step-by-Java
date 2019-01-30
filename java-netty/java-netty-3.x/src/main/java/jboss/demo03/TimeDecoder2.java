@@ -13,8 +13,8 @@ public class TimeDecoder2 extends ReplayingDecoder<VoidEnum> {
 
   @Override
   protected Object decode(
-          ChannelHandlerContext ctx, Channel channel,
-          ChannelBuffer buffer, VoidEnum state) {
+      ChannelHandlerContext ctx, Channel channel,
+      ChannelBuffer buffer, VoidEnum state) {
 
     return buffer.readBytes(4);
   }

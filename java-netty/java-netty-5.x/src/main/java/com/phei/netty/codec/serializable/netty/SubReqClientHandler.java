@@ -52,7 +52,7 @@ public class SubReqClientHandler extends ChannelHandlerAdapter {
 
   @Override
   public void channelRead(ChannelHandlerContext ctx, Object msg)
-          throws Exception {
+      throws Exception {
     System.out.println("Receive server response : [" + msg + "]");
   }
 

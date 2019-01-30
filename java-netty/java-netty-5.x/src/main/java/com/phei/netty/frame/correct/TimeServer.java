@@ -1,12 +1,12 @@
 /*
  * Copyright 2013-2018 Lilinfeng.
- *  
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *  
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -56,18 +56,18 @@ public class TimeServer {
     try {
       ServerBootstrap b = new ServerBootstrap();
       b.group(bossGroup, workerGroup)
-              .channel(NioServerSocketChannel.class)
-              .option(ChannelOption.SO_BACKLOG, 1024)
-              .childHandler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                protected void initChannel(SocketChannel sc) throws Exception {
-                  // LineBasedFrameDecoder是以换行符为标志的解码器，如果1024个字节仍然没有换行，就会抛出异常
-                  sc.pipeline().addLast(new LineBasedFrameDecoder(1024));
-                  // StringDecoder将接收到的字符转换成为字符串，handler中就不再需要解码
-                  sc.pipeline().addLast(new StringDecoder());
-                  sc.pipeline().addLast(new TimeServerHandler());
-                }
-              });
+          .channel(NioServerSocketChannel.class)
+          .option(ChannelOption.SO_BACKLOG, 1024)
+          .childHandler(new ChannelInitializer<SocketChannel>() {
+            @Override
+            protected void initChannel(SocketChannel sc) throws Exception {
+              // LineBasedFrameDecoder是以换行符为标志的解码器，如果1024个字节仍然没有换行，就会抛出异常
+              sc.pipeline().addLast(new LineBasedFrameDecoder(1024));
+              // StringDecoder将接收到的字符转换成为字符串，handler中就不再需要解码
+              sc.pipeline().addLast(new StringDecoder());
+              sc.pipeline().addLast(new TimeServerHandler());
+            }
+          });
       // 绑定端口，同步等待成功
       ChannelFuture f = b.bind(port).sync();
 

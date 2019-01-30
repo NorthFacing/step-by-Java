@@ -21,18 +21,18 @@ public class TimeClient {
     int port = 8080;
 
     ChannelFactory factory =
-            new NioClientSocketChannelFactory(
-                    Executors.newCachedThreadPool(),
-                    Executors.newCachedThreadPool());
+        new NioClientSocketChannelFactory(
+            Executors.newCachedThreadPool(),
+            Executors.newCachedThreadPool());
 
     ClientBootstrap bootstrap = new ClientBootstrap(factory);
 
     bootstrap.setPipelineFactory(new ChannelPipelineFactory() {
       public ChannelPipeline getPipeline() {
         return Channels.pipeline(
-                // 客户端需要解密编码
-                new TimeDecoderPojo(),
-                new TimeClientHandler()
+            // 客户端需要解密编码
+            new TimeDecoderPojo(),
+            new TimeClientHandler()
         );
       }
     });

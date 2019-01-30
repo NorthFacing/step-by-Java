@@ -30,7 +30,7 @@ import javax.net.ssl.SSLEngine;
  * Creates a newly configured {@link ChannelPipeline} for a new channel.
  */
 public class SecureChatClientInitializer extends
-        ChannelInitializer<SocketChannel> {
+    ChannelInitializer<SocketChannel> {
 
   private String tlsMode;
 
@@ -51,21 +51,21 @@ public class SecureChatClientInitializer extends
     SSLEngine engine = null;
     if (SSLMODE.CA.toString().equals(tlsMode)) {
       engine = SecureChatSslContextFactory
-              .getClientContext(
-                      tlsMode,
-                      null,
-                      System.getProperty("user.dir")
-                              + "/src/com/phei/netty/ssl/conf/client/cChat.jks")
-              .createSSLEngine();
+          .getClientContext(
+              tlsMode,
+              null,
+              System.getProperty("user.dir")
+                  + "/src/com/phei/netty/ssl/conf/client/cChat.jks")
+          .createSSLEngine();
     } else if (SSLMODE.CSA.toString().equals(tlsMode)) {
       engine = SecureChatSslContextFactory
-              .getClientContext(
-                      tlsMode,
-                      System.getProperty("user.dir")
-                              + "/src/com/phei/netty/ssl/conf/twoway/cChat.jks",
-                      System.getProperty("user.dir")
-                              + "/src/com/phei/netty/ssl/conf/twoway/cChat.jks")
-              .createSSLEngine();
+          .getClientContext(
+              tlsMode,
+              System.getProperty("user.dir")
+                  + "/src/com/phei/netty/ssl/conf/twoway/cChat.jks",
+              System.getProperty("user.dir")
+                  + "/src/com/phei/netty/ssl/conf/twoway/cChat.jks")
+          .createSSLEngine();
 
       // engine = SecureChatSslContextFactory
       // .getClientContext(
@@ -85,7 +85,7 @@ public class SecureChatClientInitializer extends
 
     // On top of the SSL handler, add the text line codec.
     pipeline.addLast("framer", new DelimiterBasedFrameDecoder(8192,
-            Delimiters.lineDelimiter()));
+        Delimiters.lineDelimiter()));
     pipeline.addLast("decoder", new StringDecoder());
     pipeline.addLast("encoder", new StringEncoder());
 

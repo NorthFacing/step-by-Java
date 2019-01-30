@@ -88,16 +88,16 @@ public final class SecureChatSslContextFactory {
           SERVER_CONTEXT.init(kmf.getKeyManagers(), null, null);
         else if (SSLMODE.CSA.toString().equals(tlsMode)) {
           SERVER_CONTEXT.init(kmf.getKeyManagers(),
-                  tf.getTrustManagers(), null);
+              tf.getTrustManagers(), null);
         } else {
           throw new Error(
-                  "Failed to initialize the server-side SSLContext"
-                          + tlsMode);
+              "Failed to initialize the server-side SSLContext"
+                  + tlsMode);
         }
       } catch (Exception e) {
         e.printStackTrace();
         throw new Error(
-                "Failed to initialize the server-side SSLContext", e);
+            "Failed to initialize the server-side SSLContext", e);
       } finally {
         if (in != null)
           try {
@@ -156,19 +156,19 @@ public final class SecureChatSslContextFactory {
         CLIENT_CONTEXT = SSLContext.getInstance(PROTOCOL);
         if (SSLMODE.CA.toString().equals(tlsMode))
           CLIENT_CONTEXT.init(null,
-                  tf == null ? null : tf.getTrustManagers(), null);
+              tf == null ? null : tf.getTrustManagers(), null);
         else if (SSLMODE.CSA.toString().equals(tlsMode)) {
           CLIENT_CONTEXT.init(kmf.getKeyManagers(),
-                  tf.getTrustManagers(), null);
+              tf.getTrustManagers(), null);
         } else {
           throw new Error(
-                  "Failed to initialize the client-side SSLContext"
-                          + tlsMode);
+              "Failed to initialize the client-side SSLContext"
+                  + tlsMode);
         }
       } catch (Exception e) {
         e.printStackTrace();
         throw new Error(
-                "Failed to initialize the client-side SSLContext", e);
+            "Failed to initialize the client-side SSLContext", e);
       } finally {
         if (in != null)
           try {

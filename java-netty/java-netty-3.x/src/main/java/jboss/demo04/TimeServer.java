@@ -18,9 +18,9 @@ public class TimeServer {
 
   public static void main(String[] args) throws Exception {
     ChannelFactory factory =
-            new NioServerSocketChannelFactory(
-                    Executors.newCachedThreadPool(),
-                    Executors.newCachedThreadPool());
+        new NioServerSocketChannelFactory(
+            Executors.newCachedThreadPool(),
+            Executors.newCachedThreadPool());
 
     ServerBootstrap bootstrap = new ServerBootstrap(factory);
 
@@ -28,9 +28,9 @@ public class TimeServer {
       @Override
       public ChannelPipeline getPipeline() {
         return Channels.pipeline(
-                // 服务端需要加密编码
-                new TimeEncoderPojo(),
-                new TimeServerHandler()
+            // 服务端需要加密编码
+            new TimeEncoderPojo(),
+            new TimeServerHandler()
         );
       }
     });

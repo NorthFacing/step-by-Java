@@ -20,9 +20,9 @@ public class DiscardServer {
     // ChannelFactory is a factory which creates and manages Channels
     // and its related resources
     ChannelFactory factory =
-            new NioServerSocketChannelFactory(
-                    Executors.newCachedThreadPool(),
-                    Executors.newCachedThreadPool());
+        new NioServerSocketChannelFactory(
+            Executors.newCachedThreadPool(),
+            Executors.newCachedThreadPool());
 
     // ServerBootstrap is a helper class that sets up a server.
     ServerBootstrap bootstrap = new ServerBootstrap(factory);

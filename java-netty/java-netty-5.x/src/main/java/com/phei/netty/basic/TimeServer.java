@@ -1,12 +1,12 @@
 /*
  * Copyright 2013-2018 Lilinfeng.
- *  
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *  
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -56,17 +56,17 @@ public class TimeServer {
       // ServerBootstrap是Netty启动NIO服务端的辅助启动类，降低服务端开发复杂度
       ServerBootstrap b = new ServerBootstrap();
       b.group(bossGroup, workerGroup)
-              // NioServerSocketChannel 对应JDK NIO中的ServerSocketChannel类
-              .channel(NioServerSocketChannel.class)
-              // 设置TCP参数：backlog=1024
-              .option(ChannelOption.SO_BACKLOG, 1024)
-              // ChildChannelHandler：事件处理类，作用类似于Reactor中的handler类
-              .childHandler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                public void initChannel(SocketChannel ch) throws Exception {
-                  ch.pipeline().addLast(new TimeServerHandler());
-                }
-              });
+          // NioServerSocketChannel 对应JDK NIO中的ServerSocketChannel类
+          .channel(NioServerSocketChannel.class)
+          // 设置TCP参数：backlog=1024
+          .option(ChannelOption.SO_BACKLOG, 1024)
+          // ChildChannelHandler：事件处理类，作用类似于Reactor中的handler类
+          .childHandler(new ChannelInitializer<SocketChannel>() {
+            @Override
+            public void initChannel(SocketChannel ch) throws Exception {
+              ch.pipeline().addLast(new TimeServerHandler());
+            }
+          });
 
       System.out.println("我是来打酱油的~");
 

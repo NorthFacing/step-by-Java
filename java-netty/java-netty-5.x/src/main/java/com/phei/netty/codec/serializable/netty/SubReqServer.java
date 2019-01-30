@@ -54,24 +54,24 @@ public class SubReqServer {
     try {
       ServerBootstrap b = new ServerBootstrap();
       b.group(bossGroup, workerGroup)
-              .channel(NioServerSocketChannel.class)
-              .option(ChannelOption.SO_BACKLOG, 100)
-              .handler(new LoggingHandler(LogLevel.INFO))
-              .childHandler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                public void initChannel(SocketChannel ch) {
-                  ch.pipeline().addLast(
-                          new ObjectDecoder(
-                                  1024 * 1024,
-                                  ClassResolvers.weakCachingConcurrentResolver(
-                                          this.getClass().getClassLoader()
-                                  )
-                          )
-                  );
-                  ch.pipeline().addLast(new ObjectEncoder());
-                  ch.pipeline().addLast(new SubReqServerHandler());
-                }
-              });
+          .channel(NioServerSocketChannel.class)
+          .option(ChannelOption.SO_BACKLOG, 100)
+          .handler(new LoggingHandler(LogLevel.INFO))
+          .childHandler(new ChannelInitializer<SocketChannel>() {
+            @Override
+            public void initChannel(SocketChannel ch) {
+              ch.pipeline().addLast(
+                  new ObjectDecoder(
+                      1024 * 1024,
+                      ClassResolvers.weakCachingConcurrentResolver(
+                          this.getClass().getClassLoader()
+                      )
+                  )
+              );
+              ch.pipeline().addLast(new ObjectEncoder());
+              ch.pipeline().addLast(new SubReqServerHandler());
+            }
+          });
 
       // 绑定端口，同步等待成功
       ChannelFuture f = b.bind(port).sync();

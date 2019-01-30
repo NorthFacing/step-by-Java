@@ -53,18 +53,18 @@ public class EchoServer {
     try {
       ServerBootstrap b = new ServerBootstrap();
       b.group(bossGroup, workerGroup)
-              .channel(NioServerSocketChannel.class)
-              .option(ChannelOption.SO_BACKLOG, 100)
-              .handler(new LoggingHandler(LogLevel.INFO))
-              .childHandler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                public void initChannel(SocketChannel ch) throws Exception {
-                  // 定长20
-                  ch.pipeline().addLast(new FixedLengthFrameDecoder(20));
-                  ch.pipeline().addLast(new StringDecoder());
-                  ch.pipeline().addLast(new EchoServerHandler());
-                }
-              });
+          .channel(NioServerSocketChannel.class)
+          .option(ChannelOption.SO_BACKLOG, 100)
+          .handler(new LoggingHandler(LogLevel.INFO))
+          .childHandler(new ChannelInitializer<SocketChannel>() {
+            @Override
+            public void initChannel(SocketChannel ch) throws Exception {
+              // 定长20
+              ch.pipeline().addLast(new FixedLengthFrameDecoder(20));
+              ch.pipeline().addLast(new StringDecoder());
+              ch.pipeline().addLast(new EchoServerHandler());
+            }
+          });
 
       // 绑定端口，同步等待成功
       ChannelFuture f = b.bind(port).sync();

@@ -31,11 +31,11 @@ public class SubReqServerHandler extends ChannelHandlerAdapter {
 
   @Override
   public void channelRead(ChannelHandlerContext ctx, Object msg)
-          throws Exception {
+      throws Exception {
     SubscribeReq req = (SubscribeReq) msg;
     if ("Lilinfeng".equalsIgnoreCase(req.getUserName())) {
       System.out.println("Service accept client subscrib req : ["
-              + req.toString() + "]");
+          + req.toString() + "]");
       ctx.writeAndFlush(resp(req.getSubReqID()));
     }
   }

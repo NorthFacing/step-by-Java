@@ -1,12 +1,12 @@
 /*
  * Copyright 2013-2018 Lilinfeng.
- *  
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *  
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -42,7 +42,7 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
  */
 public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> {
   private static final Logger logger = Logger
-          .getLogger(WebSocketServerHandler.class.getName());
+      .getLogger(WebSocketServerHandler.class.getName());
 
   private WebSocketServerHandshaker handshaker;
 
@@ -51,7 +51,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
     // 返回应答给客户端
     if (res.getStatus().code() != 200) {
       ByteBuf buf = Unpooled.copiedBuffer(res.getStatus().toString(),
-              CharsetUtil.UTF_8);
+          CharsetUtil.UTF_8);
       res.content().writeBytes(buf);
       buf.release();
       setContentLength(res, res.content().readableBytes());
@@ -66,7 +66,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
 
   @Override
   public void messageReceived(ChannelHandlerContext ctx, Object msg)
-          throws Exception {
+      throws Exception {
     // 传统的HTTP接入
     if (msg instanceof FullHttpRequest) {
       handleHttpRequest(ctx, (FullHttpRequest) msg);
@@ -87,19 +87,19 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
 
     // 如果HTTP解码失败，返回HHTP异常
     if (!req.getDecoderResult().isSuccess()
-            || (!"websocket".equals(req.headers().get("Upgrade")))) {
+        || (!"websocket".equals(req.headers().get("Upgrade")))) {
       sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1,
-              BAD_REQUEST));
+          BAD_REQUEST));
       return;
     }
 
     // 构造握手响应返回，本机测试
     WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
-            "ws://localhost:8080/websocket", null, false);
+        "ws://localhost:8080/websocket", null, false);
     handshaker = wsFactory.newHandshaker(req);
     if (handshaker == null) {
       WebSocketServerHandshakerFactory
-              .sendUnsupportedWebSocketVersionResponse(ctx.channel());
+          .sendUnsupportedWebSocketVersionResponse(ctx.channel());
     } else {
       handshaker.handshake(ctx.channel(), req);
     }
@@ -111,19 +111,19 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
     // 判断是否是关闭链路的指令
     if (frame instanceof CloseWebSocketFrame) {
       handshaker.close(ctx.channel(),
-              (CloseWebSocketFrame) frame.retain());
+          (CloseWebSocketFrame) frame.retain());
       return;
     }
     // 判断是否是Ping消息
     if (frame instanceof PingWebSocketFrame) {
       ctx.channel().write(
-              new PongWebSocketFrame(frame.content().retain()));
+          new PongWebSocketFrame(frame.content().retain()));
       return;
     }
     // 本例程仅支持文本消息，不支持二进制消息
     if (!(frame instanceof TextWebSocketFrame)) {
       throw new UnsupportedOperationException(String.format(
-              "%s frame types not supported", frame.getClass().getName()));
+          "%s frame types not supported", frame.getClass().getName()));
     }
 
     // 返回应答消息
@@ -132,14 +132,14 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
       logger.fine(String.format("%s received %s", ctx.channel(), request));
     }
     ctx.channel().write(
-            new TextWebSocketFrame(request
-                    + " , 欢迎使用Netty WebSocket服务，现在时刻："
-                    + new java.util.Date().toString()));
+        new TextWebSocketFrame(request
+            + " , 欢迎使用Netty WebSocket服务，现在时刻："
+            + new java.util.Date().toString()));
   }
 
   @Override
   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
-          throws Exception {
+      throws Exception {
     cause.printStackTrace();
     ctx.close();
   }

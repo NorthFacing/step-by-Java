@@ -33,12 +33,12 @@ import java.util.logging.Logger;
  * Handles a server-side channel.
  */
 public class SecureChatServerHandler extends
-        SimpleChannelInboundHandler<String> {
+    SimpleChannelInboundHandler<String> {
 
   static final ChannelGroup channels = new DefaultChannelGroup(
-          GlobalEventExecutor.INSTANCE);
+      GlobalEventExecutor.INSTANCE);
   private static final Logger logger = Logger
-          .getLogger(SecureChatServerHandler.class.getName());
+      .getLogger(SecureChatServerHandler.class.getName());
 
   @Override
   public void channelActive(final ChannelHandlerContext ctx) throws Exception {
@@ -46,31 +46,31 @@ public class SecureChatServerHandler extends
     // the global channel
     // list so the channel received the messages from others.
     ctx.pipeline().get(SslHandler.class).handshakeFuture()
-            .addListener(new GenericFutureListener<Future<Channel>>() {
-              @Override
-              public void operationComplete(Future<Channel> future)
-                      throws Exception {
-                ctx.writeAndFlush("Welcome to "
-                        + InetAddress.getLocalHost().getHostName()
-                        + " secure chat service!\n");
-                ctx.writeAndFlush("Your session is protected by "
-                        + ctx.pipeline().get(SslHandler.class).engine()
-                        .getSession().getCipherSuite()
-                        + " cipher suite.\n");
+        .addListener(new GenericFutureListener<Future<Channel>>() {
+          @Override
+          public void operationComplete(Future<Channel> future)
+              throws Exception {
+            ctx.writeAndFlush("Welcome to "
+                + InetAddress.getLocalHost().getHostName()
+                + " secure chat service!\n");
+            ctx.writeAndFlush("Your session is protected by "
+                + ctx.pipeline().get(SslHandler.class).engine()
+                .getSession().getCipherSuite()
+                + " cipher suite.\n");
 
-                channels.add(ctx.channel());
-              }
-            });
+            channels.add(ctx.channel());
+          }
+        });
   }
 
   @Override
   public void messageReceived(ChannelHandlerContext ctx, String msg)
-          throws Exception {
+      throws Exception {
     // Send the received message to all channels but the current one.
     for (Channel c : channels) {
       if (c != ctx.channel()) {
         c.writeAndFlush("[" + ctx.channel().remoteAddress() + "] "
-                + msg + '\n');
+            + msg + '\n');
       } else {
         c.writeAndFlush("[you] " + msg + '\n');
       }
@@ -84,10 +84,10 @@ public class SecureChatServerHandler extends
 
   @Override
   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
-          throws Exception {
+      throws Exception {
     cause.printStackTrace();
     logger.log(Level.WARNING, "Unexpected exception from downstream.",
-            cause);
+        cause);
     ctx.close();
   }
 }

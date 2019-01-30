@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 public class TimeClientHandler extends ChannelHandlerAdapter {
 
   private static final Logger logger = Logger
-          .getLogger(TimeClientHandler.class.getName());
+      .getLogger(TimeClientHandler.class.getName());
 
   private int counter;
 
@@ -55,7 +55,7 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
 
   @Override
   public void channelRead(ChannelHandlerContext ctx, Object msg)
-          throws Exception {
+      throws Exception {
     String body = (String) msg;
     System.out.println("Now is : " + body + " ; the counter is : " + ++counter);
   }

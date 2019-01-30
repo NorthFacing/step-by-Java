@@ -15,25 +15,27 @@ public class InitSocket implements Runnable {
   private static boolean isHave = false;
   private SocketEntity socketEntity = null;
   private String name;
-  public InitSocket(String name){
+
+  public InitSocket(String name) {
     this.name = name;
     // 检测是否有某个连接的配置信息
-    for(SocketEntity socketEntity : SocketKeep.socketEntityList){
-      if(null != socketEntity && socketEntity.isKeepConn()){
-        if(socketEntity.getName().equals(name)){
+    for (SocketEntity socketEntity : SocketKeep.socketEntityList) {
+      if (null != socketEntity && socketEntity.isKeepConn()) {
+        if (socketEntity.getName().equals(name)) {
           this.setSocketEntity(socketEntity);
           isHave = true;
         }
       }
     }
   }
+
   public void run() {
     boolean isError = true;
     SocketCui socket = null;
-    if(isHave){
-      while(isError){
+    if (isHave) {
+      while (isError) {
         try {
-          socket = new SocketCui(this.getSocketEntity().getIp(),this.getSocketEntity().getPort());
+          socket = new SocketCui(this.getSocketEntity().getIp(), this.getSocketEntity().getPort());
           socket.setSoTimeout(0);
           socket.setKeepAlive(true);
           socket.setName(this.name);
@@ -43,7 +45,7 @@ public class InitSocket implements Runnable {
           logger.error("建立资源连接时错误！资源：" + this.name, e);
           socket = null;
         }
-        if(null != socket){
+        if (null != socket) {
           SocketKeep.socketMap.put(this.getSocketEntity().getName(), socket);
           // 设置连接当前可用
           SocketKeep.socketIsLock.put(this.getSocketEntity().getName(), "0");
@@ -56,14 +58,16 @@ public class InitSocket implements Runnable {
         }
 
       }
-    }else{
+    } else {
       logger.error("没有发现指定资源的配置信息！资源名称：" + this.name);
     }
     logger.warn("初始化资源执行结束！资源名称：" + this.name);
   }
+
   public SocketEntity getSocketEntity() {
     return socketEntity;
   }
+
   public void setSocketEntity(SocketEntity socketEntity) {
     this.socketEntity = socketEntity;
   }

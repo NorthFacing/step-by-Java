@@ -29,18 +29,18 @@ public class SubReqServerHandler extends ChannelHandlerAdapter {
 
   @Override
   public void channelRead(ChannelHandlerContext ctx, Object msg)
-          throws Exception {
+      throws Exception {
     SubscribeReqProto.SubscribeReq req = (SubscribeReqProto.SubscribeReq) msg;
     if ("Lilinfeng".equalsIgnoreCase(req.getUserName())) {
       System.out.println("Service accept client subscribe req : ["
-              + req.toString() + "]");
+          + req.toString() + "]");
       ctx.writeAndFlush(resp(req.getSubReqID()));
     }
   }
 
   private SubscribeRespProto.SubscribeResp resp(int subReqID) {
     SubscribeRespProto.SubscribeResp.Builder builder = SubscribeRespProto.SubscribeResp
-            .newBuilder();
+        .newBuilder();
     builder.setSubReqID(subReqID);
     builder.setRespCode(0);
     builder.setDesc("Netty book order succeed, 3 days later, sent to the designated address");

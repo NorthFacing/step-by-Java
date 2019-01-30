@@ -18,9 +18,9 @@ public class TimeServer {
 
   public static void main(String[] args) throws Exception {
     ChannelFactory factory =
-            new NioServerSocketChannelFactory(
-                    Executors.newCachedThreadPool(),
-                    Executors.newCachedThreadPool());
+        new NioServerSocketChannelFactory(
+            Executors.newCachedThreadPool(),
+            Executors.newCachedThreadPool());
 
     ServerBootstrap bootstrap = new ServerBootstrap(factory);
 

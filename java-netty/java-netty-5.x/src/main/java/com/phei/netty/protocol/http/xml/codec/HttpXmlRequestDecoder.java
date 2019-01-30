@@ -1,12 +1,12 @@
 /*
  * Copyright 2013-2018 Lilinfeng.
- *  
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *  
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -36,7 +36,7 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
  * @date 2014年3月1日
  */
 public class HttpXmlRequestDecoder extends
-        AbstractHttpXmlDecoder<FullHttpRequest> {
+    AbstractHttpXmlDecoder<FullHttpRequest> {
 
   public HttpXmlRequestDecoder(Class<?> clazz) {
     this(clazz, false);
@@ -49,8 +49,8 @@ public class HttpXmlRequestDecoder extends
   private static void sendError(ChannelHandlerContext ctx,
                                 HttpResponseStatus status) {
     FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1,
-            status, Unpooled.copiedBuffer("Failure: " + status.toString()
-            + "\r\n", CharsetUtil.UTF_8));
+        status, Unpooled.copiedBuffer("Failure: " + status.toString()
+        + "\r\n", CharsetUtil.UTF_8));
     response.headers().set(CONTENT_TYPE, "text/plain; charset=UTF-8");
     ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
   }
@@ -63,7 +63,7 @@ public class HttpXmlRequestDecoder extends
       return;
     }
     HttpXmlRequest request = new HttpXmlRequest(arg1, decode0(arg0,
-            arg1.content()));
+        arg1.content()));
     arg2.add(request);
   }
 }

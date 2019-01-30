@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 public class SecureChatClientHandler extends SimpleChannelInboundHandler<String> {
 
   private static final Logger logger = Logger.getLogger(
-          SecureChatClientHandler.class.getName());
+      SecureChatClientHandler.class.getName());
 
   @Override
   public void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {
@@ -37,8 +37,8 @@ public class SecureChatClientHandler extends SimpleChannelInboundHandler<String>
   @Override
   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
     logger.log(
-            Level.WARNING,
-            "Unexpected exception from downstream.", cause);
+        Level.WARNING,
+        "Unexpected exception from downstream.", cause);
     ctx.close();
   }
 }

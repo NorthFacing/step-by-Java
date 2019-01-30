@@ -8,7 +8,7 @@ import java.net.InetAddress;
 import java.util.List;
 
 public class HttpXmlRequestEncoder extends
-        AbstractHttpXmlEncoder<HttpXmlRequest> {
+    AbstractHttpXmlEncoder<HttpXmlRequest> {
 
   @Override
   protected void encode(ChannelHandlerContext ctx, HttpXmlRequest msg,
@@ -17,21 +17,21 @@ public class HttpXmlRequestEncoder extends
     FullHttpRequest request = msg.getRequest();
     if (request == null) {
       request = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1,
-              HttpMethod.GET, "/do", body);
+          HttpMethod.GET, "/do", body);
       HttpHeaders headers = request.headers();
       headers.set(HttpHeaders.Names.HOST, InetAddress.getLocalHost()
-              .getHostAddress());
+          .getHostAddress());
       headers.set(HttpHeaders.Names.CONNECTION, HttpHeaders.Values.CLOSE);
       headers.set(HttpHeaders.Names.ACCEPT_ENCODING,
-              HttpHeaders.Values.GZIP.toString() + ','
-                      + HttpHeaders.Values.DEFLATE.toString());
+          HttpHeaders.Values.GZIP.toString() + ','
+              + HttpHeaders.Values.DEFLATE.toString());
       headers.set(HttpHeaders.Names.ACCEPT_CHARSET,
-              "ISO-8859-1,utf-8;q=0.7,*;q=0.7");
+          "ISO-8859-1,utf-8;q=0.7,*;q=0.7");
       headers.set(HttpHeaders.Names.ACCEPT_LANGUAGE, "zh");
       headers.set(HttpHeaders.Names.USER_AGENT,
-              "Netty xml Http Client side");
+          "Netty xml Http Client side");
       headers.set(HttpHeaders.Names.ACCEPT,
-              "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+          "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
     }
     HttpHeaders.setContentLength(request, body.readableBytes());
     out.add(request);
