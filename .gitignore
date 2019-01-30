@@ -8,6 +8,7 @@ target/
 /.idea/workspace.xml
 
 
+*/.idea
 */target/
 */.settings/
 */.classpath
