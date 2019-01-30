@@ -12,40 +12,40 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	Stage window;
-	Scene scene;
+  Stage window;
+  Scene scene;
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+  public static void main(String[] args) {
+    launch(args);
+  }
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		window = primaryStage;
-		window.setTitle("binding example");
+  @Override
+  public void start(Stage primaryStage) throws Exception {
+    window = primaryStage;
+    window.setTitle("binding example");
 
-		TextField input = new TextField();
-		input.setMaxWidth(300);
+    TextField input = new TextField();
+    input.setMaxWidth(300);
 
-		Label firstLabel = new Label("Welcome to site ");
-		Label secondLabel = new Label();
+    Label firstLabel = new Label("Welcome to site ");
+    Label secondLabel = new Label();
 
-		// 注意:
-		// 是 textProperty 而不是 getProperties
-		// 是 bind 而不是 addListener
-		secondLabel.textProperty().bind(input.textProperty());
+    // 注意:
+    // 是 textProperty 而不是 getProperties
+    // 是 bind 而不是 addListener
+    secondLabel.textProperty().bind(input.textProperty());
 
-		HBox hBox = new HBox();
-		hBox.setAlignment(Pos.CENTER);
-		hBox.getChildren().addAll(firstLabel, secondLabel);
+    HBox hBox = new HBox();
+    hBox.setAlignment(Pos.CENTER);
+    hBox.getChildren().addAll(firstLabel, secondLabel);
 
-		VBox layout = new VBox(10);
-		layout.setPadding(new Insets(20, 20, 20, 20));
-		layout.setAlignment(Pos.CENTER);
-		layout.getChildren().addAll(input, hBox);
+    VBox layout = new VBox(10);
+    layout.setPadding(new Insets(20, 20, 20, 20));
+    layout.setAlignment(Pos.CENTER);
+    layout.getChildren().addAll(input, hBox);
 
-		scene = new Scene(layout, 500, 300);
-		window.setScene(scene);
-		window.show();
-	}
+    scene = new Scene(layout, 500, 300);
+    window.setScene(scene);
+    window.show();
+  }
 }

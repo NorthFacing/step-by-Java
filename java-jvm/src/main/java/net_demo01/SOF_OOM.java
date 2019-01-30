@@ -7,15 +7,15 @@ package net_demo01;
  * @date 2015年2月5日 上午10:15:50
  */
 public class SOF_OOM {
-    // 无限递归调用
-    public void stackOverFlowMethod() {
-        stackOverFlowMethod();
-    }
+  // 无限递归调用
+  public void stackOverFlowMethod() {
+    stackOverFlowMethod();
+  }
 
-    public static void main(String... args) {
-        SOF_OOM oom = new SOF_OOM();
-        oom.stackOverFlowMethod();
-    }
+  public static void main(String... args) {
+    SOF_OOM oom = new SOF_OOM();
+    oom.stackOverFlowMethod();
+  }
 }
 
 // Demo Result:

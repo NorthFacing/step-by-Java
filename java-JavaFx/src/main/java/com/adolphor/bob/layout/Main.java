@@ -8,20 +8,20 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+  public static void main(String[] args) {
+    launch(args);
+  }
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
+  @Override
+  public void start(Stage primaryStage) throws Exception {
 
-		BorderPane root = new BorderPane();
+    BorderPane root = new BorderPane();
 
-		root.setBackground(Background.EMPTY);
+    root.setBackground(Background.EMPTY);
 
-		Scene scene = new Scene(root, 600, 450);
-		primaryStage.setScene(scene);
+    Scene scene = new Scene(root, 600, 450);
+    primaryStage.setScene(scene);
 
-		primaryStage.show();
-	}
+    primaryStage.show();
+  }
 }

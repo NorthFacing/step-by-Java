@@ -14,77 +14,77 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	Stage window;
-	BorderPane layout;
+  Stage window;
+  BorderPane layout;
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+  public static void main(String[] args) {
+    launch(args);
+  }
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		window = primaryStage;
-		window.setTitle("menu example");
+  @Override
+  public void start(Stage primaryStage) throws Exception {
+    window = primaryStage;
+    window.setTitle("menu example");
 
-		Menu fileMenu = new Menu("File");
+    Menu fileMenu = new Menu("File");
 
-		// normal menu
-		MenuItem newfile = new MenuItem("New...");
-		newfile.setOnAction(e -> System.out.println("Create a new file..."));
-		fileMenu.getItems().add(newfile);
+    // normal menu
+    MenuItem newfile = new MenuItem("New...");
+    newfile.setOnAction(e -> System.out.println("Create a new file..."));
+    fileMenu.getItems().add(newfile);
 
-		fileMenu.getItems().add(new MenuItem("Open..."));
-		fileMenu.getItems().add(new MenuItem("Save..."));
-		fileMenu.getItems().add(new SeparatorMenuItem());
-		fileMenu.getItems().add(new MenuItem("Settings..."));
-		fileMenu.getItems().add(new SeparatorMenuItem());
-		fileMenu.getItems().add(new MenuItem("Exist..."));
+    fileMenu.getItems().add(new MenuItem("Open..."));
+    fileMenu.getItems().add(new MenuItem("Save..."));
+    fileMenu.getItems().add(new SeparatorMenuItem());
+    fileMenu.getItems().add(new MenuItem("Settings..."));
+    fileMenu.getItems().add(new SeparatorMenuItem());
+    fileMenu.getItems().add(new MenuItem("Exist..."));
 
-		// disable menu
-		Menu editMenu = new Menu("Edit");
-		editMenu.getItems().add(new MenuItem("Cut"));
-		editMenu.getItems().add(new MenuItem("Copy"));
+    // disable menu
+    Menu editMenu = new Menu("Edit");
+    editMenu.getItems().add(new MenuItem("Cut"));
+    editMenu.getItems().add(new MenuItem("Copy"));
 
-		MenuItem paste = new MenuItem("Paste");
-		paste.setOnAction(e -> System.out.println("Pasting some crap..."));
-		paste.setDisable(true);
-		editMenu.getItems().add(paste);
+    MenuItem paste = new MenuItem("Paste");
+    paste.setOnAction(e -> System.out.println("Pasting some crap..."));
+    paste.setDisable(true);
+    editMenu.getItems().add(paste);
 
-		// checkbox menu
-		Menu helpMenu = new Menu("Help");
-		CheckMenuItem showlines = new CheckMenuItem("Show line numbers");
-		showlines.setOnAction(e -> {
-			if (showlines.isSelected()) {
-				System.out.println("Program will now display line numbers...");
-			} else {
-				System.out.println("Hiding line numbers...");
-			}
-		});
-		CheckMenuItem autoSave = new CheckMenuItem("Enable auto save");
-		autoSave.setSelected(true);
-		helpMenu.getItems().addAll(showlines, autoSave);
+    // checkbox menu
+    Menu helpMenu = new Menu("Help");
+    CheckMenuItem showlines = new CheckMenuItem("Show line numbers");
+    showlines.setOnAction(e -> {
+      if (showlines.isSelected()) {
+        System.out.println("Program will now display line numbers...");
+      } else {
+        System.out.println("Hiding line numbers...");
+      }
+    });
+    CheckMenuItem autoSave = new CheckMenuItem("Enable auto save");
+    autoSave.setSelected(true);
+    helpMenu.getItems().addAll(showlines, autoSave);
 
-		// difficulty menu
-		Menu difficultyMenu = new Menu("Difficulty");
-		ToggleGroup difficultyToggle = new ToggleGroup();
+    // difficulty menu
+    Menu difficultyMenu = new Menu("Difficulty");
+    ToggleGroup difficultyToggle = new ToggleGroup();
 
-		RadioMenuItem easy = new RadioMenuItem("Easy");
-		RadioMenuItem medium = new RadioMenuItem("Medium");
-		RadioMenuItem hard = new RadioMenuItem("Hard");
-		easy.setToggleGroup(difficultyToggle);
-		medium.setToggleGroup(difficultyToggle);
-		hard.setToggleGroup(difficultyToggle);
+    RadioMenuItem easy = new RadioMenuItem("Easy");
+    RadioMenuItem medium = new RadioMenuItem("Medium");
+    RadioMenuItem hard = new RadioMenuItem("Hard");
+    easy.setToggleGroup(difficultyToggle);
+    medium.setToggleGroup(difficultyToggle);
+    hard.setToggleGroup(difficultyToggle);
 
-		difficultyMenu.getItems().addAll(easy, medium, hard);
+    difficultyMenu.getItems().addAll(easy, medium, hard);
 
-		MenuBar menuBar = new MenuBar();
-		menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu, difficultyMenu);
+    MenuBar menuBar = new MenuBar();
+    menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu, difficultyMenu);
 
-		layout = new BorderPane();
-		layout.setTop(menuBar);
+    layout = new BorderPane();
+    layout.setTop(menuBar);
 
-		Scene scene = new Scene(layout, 500, 300);
-		window.setScene(scene);
-		window.show();
-	}
+    Scene scene = new Scene(layout, 500, 300);
+    window.setScene(scene);
+    window.show();
+  }
 }

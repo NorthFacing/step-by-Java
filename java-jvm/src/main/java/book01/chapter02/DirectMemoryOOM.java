@@ -9,14 +9,14 @@ package book01.chapter02;
  */
 public class DirectMemoryOOM {
 
-    // private static final into _1MB = 1024 * 1024;
+  // private static final into _1MB = 1024 * 1024;
 
-    public static void main(String[] args) throws Exception {
-        // FIELD UNSAFEFIELD = UNSAFE.CLASS.GETDECLAREDFIELDS()[0];
-        // UNSAFEFIELD.SETACCESSIBLE(TRUE);
-        // UNSAFE UNSAFE = (UNSAFE) UNSAFEFIELD.GET(NULL);
-        // WHILE (TRUE) {
-        // UNSAFE.ALLOCATEMEMORY(_1MB);
-        // }
-    }
+  public static void main(String[] args) throws Exception {
+    // FIELD UNSAFEFIELD = UNSAFE.CLASS.GETDECLAREDFIELDS()[0];
+    // UNSAFEFIELD.SETACCESSIBLE(TRUE);
+    // UNSAFE UNSAFE = (UNSAFE) UNSAFEFIELD.GET(NULL);
+    // WHILE (TRUE) {
+    // UNSAFE.ALLOCATEMEMORY(_1MB);
+    // }
+  }
 }

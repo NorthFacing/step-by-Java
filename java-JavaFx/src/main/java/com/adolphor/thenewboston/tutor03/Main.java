@@ -8,25 +8,25 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	Button button;
+  Button button;
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+  public static void main(String[] args) {
+    launch(args);
+  }
 
-	@Override
-	public void start(Stage primaryStage) {
+  @Override
+  public void start(Stage primaryStage) {
 
-		button = new Button("Clike me");
-		button.setOnAction(e-> System.out.println("Don't touch the button anymore, plz....."));
+    button = new Button("Clike me");
+    button.setOnAction(e -> System.out.println("Don't touch the button anymore, plz....."));
 
-		StackPane layout = new StackPane();
-		layout.getChildren().add(button);
+    StackPane layout = new StackPane();
+    layout.getChildren().add(button);
 
-		Scene scene = new Scene(layout,300,200);
-		primaryStage.setScene(scene);
+    Scene scene = new Scene(layout, 300, 200);
+    primaryStage.setScene(scene);
 
-		primaryStage.show();
-	}
+    primaryStage.show();
+  }
 
 }

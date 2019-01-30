@@ -52,13 +52,11 @@ public class Tree {
           textProperty().unbind();
           if (empty) {
             setText(null);
-            itemTypes.stream().map(Tree.this::asPseudoClass)
-                .forEach(pc -> pseudoClassStateChanged(pc, false));
+            itemTypes.stream().map(Tree.this::asPseudoClass).forEach(pc -> pseudoClassStateChanged(pc, false));
           } else {
             textProperty().bind(item.nameProperty());
             PseudoClass itemPC = asPseudoClass(item.getClass());
-            itemTypes.stream().map(Tree.this::asPseudoClass)
-                .forEach(pc -> pseudoClassStateChanged(pc, itemPC.equals(pc)));
+            itemTypes.stream().map(Tree.this::asPseudoClass).forEach(pc -> pseudoClassStateChanged(pc, itemPC.equals(pc)));
           }
         }
       };

@@ -8,14 +8,14 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-	@FXML
-	public void handleButtonClicked(){
-		System.out.println("handleButtonClicked...");
-	}
+  @FXML
+  public void handleButtonClicked() {
+    System.out.println("handleButtonClicked...");
+  }
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("View is now loaded!");
-	}
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    System.out.println("View is now loaded!");
+  }
 
 }

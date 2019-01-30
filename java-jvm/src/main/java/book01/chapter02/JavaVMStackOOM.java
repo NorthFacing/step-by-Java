@@ -9,27 +9,27 @@ package book01.chapter02;
  * @date 2015年2月3日 下午10:33:35
  */
 public class JavaVMStackOOM {
-    private void dontStop() {
-        while (true) {
-        }
+  private void dontStop() {
+    while (true) {
     }
+  }
 
-    public void stackLeakByThread() {
-        while (true) {
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    dontStop();
-                }
-            });
-            thread.start();
+  public void stackLeakByThread() {
+    while (true) {
+      Thread thread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+          dontStop();
         }
+      });
+      thread.start();
     }
+  }
 
-    public static void main(String[] args) {
-        JavaVMStackOOM oom = new JavaVMStackOOM();
-        oom.stackLeakByThread();
-    }
+  public static void main(String[] args) {
+    JavaVMStackOOM oom = new JavaVMStackOOM();
+    oom.stackLeakByThread();
+  }
 }
 
 // 这是跑了很久才出来的异常，而且跑程序过程中计算机可能卡顿出现假死

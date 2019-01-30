@@ -14,15 +14,15 @@ import java.util.List;
  * @date 2015年2月3日 下午9:04:31
  */
 public class HeapOOM {
-    static class OOMObject {
-    }
+  static class OOMObject {
+  }
 
-    public static void main(String[] args) {
-        List<OOMObject> list = new ArrayList<OOMObject>();
-        while (true) {
-            list.add(new OOMObject());
-        }
+  public static void main(String[] args) {
+    List<OOMObject> list = new ArrayList<OOMObject>();
+    while (true) {
+      list.add(new OOMObject());
     }
+  }
 }
 
 // This demo result is:

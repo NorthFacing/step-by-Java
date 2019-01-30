@@ -10,38 +10,38 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	Stage window;
+  Stage window;
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+  public static void main(String[] args) {
+    launch(args);
+  }
 
-	@Override
-	public void start(Stage primaryStage) {
+  @Override
+  public void start(Stage primaryStage) {
 
-		window = primaryStage;
-		window.setTitle("the new boston");
+    window = primaryStage;
+    window.setTitle("the new boston");
 
-		HBox topMenu = new HBox();
-		Button buttonA = new Button("File");
-		Button buttonB = new Button("Edit");
-		Button buttonC = new Button("View");
-		topMenu.getChildren().addAll(buttonA, buttonB, buttonC);
+    HBox topMenu = new HBox();
+    Button buttonA = new Button("File");
+    Button buttonB = new Button("Edit");
+    Button buttonC = new Button("View");
+    topMenu.getChildren().addAll(buttonA, buttonB, buttonC);
 
-		VBox leftMenu = new VBox();
-		Button buttonD = new Button("D");
-		Button buttonE = new Button("E");
-		Button buttonF = new Button("F");
-		leftMenu.getChildren().addAll(buttonD, buttonE, buttonF);
+    VBox leftMenu = new VBox();
+    Button buttonD = new Button("D");
+    Button buttonE = new Button("E");
+    Button buttonF = new Button("F");
+    leftMenu.getChildren().addAll(buttonD, buttonE, buttonF);
 
-		BorderPane borderPane = new BorderPane();
-		borderPane.setTop(topMenu);
-		borderPane.setLeft(leftMenu);
+    BorderPane borderPane = new BorderPane();
+    borderPane.setTop(topMenu);
+    borderPane.setLeft(leftMenu);
 
-		Scene scene = new Scene(borderPane, 300, 200);
-		window.setScene(scene);
+    Scene scene = new Scene(borderPane, 300, 200);
+    window.setScene(scene);
 
-		window.show();
-	}
+    window.show();
+  }
 
 }

@@ -8,32 +8,32 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	Stage window;
-	Button button;
+  Stage window;
+  Button button;
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+  public static void main(String[] args) {
+    launch(args);
+  }
 
-	@Override
-	public void start(Stage primaryStage) {
+  @Override
+  public void start(Stage primaryStage) {
 
-		window = primaryStage;
-		window.setTitle("the new boston");
+    window = primaryStage;
+    window.setTitle("the new boston");
 
-		button = new Button("Click me");
-		button.setOnAction(e -> {
-			boolean result = ConfirmBox.display("Title of the window", "Are you sure you want to send naked pics?");
-			System.out.println(result);
-		});
+    button = new Button("Click me");
+    button.setOnAction(e -> {
+      boolean result = ConfirmBox.display("Title of the window", "Are you sure you want to send naked pics?");
+      System.out.println(result);
+    });
 
-		StackPane layout = new StackPane();
-		layout.getChildren().add(button);
+    StackPane layout = new StackPane();
+    layout.getChildren().add(button);
 
-		Scene scene = new Scene(layout, 300, 200);
-		window.setScene(scene);
+    Scene scene = new Scene(layout, 300, 200);
+    window.setScene(scene);
 
-		window.show();
-	}
+    window.show();
+  }
 
 }

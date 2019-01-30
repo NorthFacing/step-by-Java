@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.UUID;
 
 public class PermGen_OOM {
-    public static void main(String... args) {
-        List<String> list = new ArrayList<String>();
-        while (true) {
-            String intern = UUID.randomUUID().toString().intern();
-            list.add(intern);
-        }
+  public static void main(String... args) {
+    List<String> list = new ArrayList<String>();
+    while (true) {
+      String intern = UUID.randomUUID().toString().intern();
+      list.add(intern);
     }
+  }
 }
 
 

@@ -69,6 +69,7 @@ public class Main extends Application {
   }
 
   private ObservableList<Account> createAccounts() {
+    //
     Account jake = new Account("Jake");
     Account mark = new Account("Mark");
     Account freshAcc = new Account("Fresh Account");

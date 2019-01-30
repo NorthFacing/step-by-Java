@@ -31,7 +31,7 @@ public abstract class GameObject<T extends GameObject<?>> {
   private final ObservableList<T> items = FXCollections.observableArrayList();
 
   public ObservableList<T> getItems() {
-    return items ;
+    return items;
   }
 
   public abstract void createAndAddChild(String name);
